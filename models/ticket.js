@@ -1,12 +1,12 @@
 /**
- * The data-layer for a Appointment
- * @module Appointment
+ * The data-layer for a Ticket
+ * @module Ticket
  */
 
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let TurnSchema = mongoose.Schema({
+let TicketSchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
     position: Number,
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
@@ -16,13 +16,13 @@ let TurnSchema = mongoose.Schema({
 });
 
 /**
- * Mongoose model for Turn.
+ * Mongoose model for Ticket.
  *
- * @class Turn
+ * @class Ticket
  * @memberof module:Appointments
- * @property {ObjectId}              id                            - Id of turn
+ * @property {ObjectId}              id                            - Id of ticket
  * @property {Number}                position                      - The position in the queue
  * @property {ObjectId}              client                        - Id of client
  * @property {ObjectId}              company                       - Id of the Company
  */
-module.exports = mongoose.model('Turn', TurnSchema);
+module.exports = mongoose.model('Ticket', TicketSchema);
