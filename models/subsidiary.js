@@ -5,6 +5,7 @@ let machine = require('./machine.js');
 
 let subsidiarySchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
+    code: String,
     description: String,
     appointments: [appointment.schema],
     machines: [machine.schema]
@@ -14,9 +15,11 @@ let subsidiarySchema = mongoose.Schema({
  * Mongoose model for Subsidiary.
  *
  * @class Subsidiary
- * @memberof module:Subsidiary
+ * @memberof module:Product
  * @property {ObjectId}             id               - Id of the subsidiary
- * @property {Number}               code             - Code of the subsidiary
+ * @property {String}               code             - Code to identify the subsidiary
  * @property {String}               description      - Description of the subsidiary
+ * @property {Array<Appointment>}   appointments     - List of subsidiary appointments
+ * @property {Array<Machine>}       machines         - List of subsidiary machines
  */
 module.exports = mongoose.model('Subsidiary', subsidiarySchema);

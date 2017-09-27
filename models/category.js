@@ -1,6 +1,6 @@
 /**
- * The data-layer for a Appointment
- * @module Appointment
+ * The data-layer for a Category
+ * @module Category
  */
 
 
@@ -15,12 +15,12 @@ let CategorySchema = mongoose.Schema({
 });
 
 /**
- * Mongoose model for Turn.
+ * Mongoose model for Category.
  *
- * @class Turn
- * @memberof module:Appointments
- * @property {ObjectId}              id                            - Id of turn
- * @property {Number}                description                   - Description for the category
- * @property {String}                shorthand                     - Abbreviation for the category (This appear in the turn ticket ex: "AA 1234")
+ * @class Category
+ * @memberof module:Product
+ * @property {ObjectId}              id                            - Id of Category
+ * @property {Number}                description                   - Description for the Category
+ * @property {String}                shorthand                     - Abbreviation for the Category (This appear in the ticket ex: "AA 1234")
  */
 module.exports = mongoose.model('Category', CategorySchema);

@@ -13,9 +13,9 @@ let clientSchema = mongoose.Schema({
 /**
  * Mongoose model for Client.
  *
- * @class Plan
- * @memberof module:Billing
- * @property {String}       id             - id of plan
- * @property {String}       description    - description of the plan
+ * @class Client
+ * @memberof module:Product
+ * @property {String}       id             - id of Client
+ * @property {String}       description    - description of the Client
  */
 module.exports = mongoose.model('Client', clientSchema);

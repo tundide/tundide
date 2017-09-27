@@ -11,7 +11,6 @@ let TicketSchema = mongoose.Schema({
     position: Number,
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
     client: { type: Schema.Types.ObjectId, ref: 'Client' },
-    company: { type: Schema.Types.ObjectId, ref: 'Company' },
     subsidiary: { type: Schema.Types.ObjectId, ref: 'Subsidiary' },
 });
 
@@ -19,10 +18,11 @@ let TicketSchema = mongoose.Schema({
  * Mongoose model for Ticket.
  *
  * @class Ticket
- * @memberof module:Appointments
+ * @memberof module:Product
  * @property {ObjectId}              id                            - Id of ticket
+ * @property {ObjectId}              category                      - Category of the ticket
  * @property {Number}                position                      - The position in the queue
  * @property {ObjectId}              client                        - Id of client
- * @property {ObjectId}              company                       - Id of the Company
+ * @property {ObjectId}              subsidiary                    - Id of the Subsidiary
  */
 module.exports = mongoose.model('Ticket', TicketSchema);

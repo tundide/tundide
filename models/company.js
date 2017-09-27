@@ -1,19 +1,22 @@
 let mongoose = require('mongoose');
 let user = require('./user.js');
+let client = require('./client.js');
 
 let companySchema = mongoose.Schema({
     id: String,
     description: String,
-    user: [user.schema]
+    users: [user.schema],
+    clients: [client.schema]
 });
 
-// TODO: Complete documantation
 /**
  * Mongoose model for Company.
  *
  * @class Company
- * @memberof module:Billing
- * @property {String}       id             - id of plan
- * @property {String}       description    - description of the plan
+ * @memberof module:Product
+ * @property {String}        id             - id of company
+ * @property {String}        description    - description of the company
+ * @property {Array<User>}   users          - List of company users
+ * @property {Array<Client>} clients        - List of company clients
  */
 module.exports = mongoose.model('Company', companySchema);
