@@ -31,8 +31,7 @@ let AppointmentSchema = mongoose.Schema({
  *
  * @class Appointment
  * @memberof module:Appointments
- * @property {Date}                  dateOfExpiration              - Indicates the expiration of the publication
- * @property {String}                description                   - Descriptio nof publication
+ * @property {String}                description                   - Description of Appointment
  * @property {ObjectId}              id                            - Id of publication
  * @property {Caegory}               category                      - Category of publication
  * @property {Array.<ObjectId>}      images                        - Images of publication
