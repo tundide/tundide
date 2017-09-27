@@ -1,0 +1,21 @@
+@import "../_custom.scss";
+.card {
+    background: $gray-200;
+    padding: 10px;
+    line-height: 1.5em;
+}
+
+.animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+}
+
+.star {
+    font-size: 1.5rem;
+    color: #EEE8AA;
+}
+
+.filled {
+    color: #F5CD00;
+}

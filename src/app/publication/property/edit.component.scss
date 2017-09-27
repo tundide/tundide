@@ -1,0 +1,22 @@
+@import "../../_custom.scss";
+.card {
+    margin: 25px 20px 20px 20px;
+    background: $gray-200;
+    padding: 1em;
+    line-height: 1.5em;
+}
+
+.sebm-google-map-container {
+    height: 100%;
+}
+
+.row {
+    margin: 10px;
+}
+
+.facility {
+    position: relative;
+    margin: 10px;
+    width: 200px;
+    float: left;
+}

@@ -1,0 +1,51 @@
+@import "../_custom.scss";
+.container {
+    margin: 2em;
+}
+
+.card {
+    margin: 5px;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+.checked,
+.price span {
+    color: #ff9f1a;
+}
+
+.star {
+    font-size: 1.5rem;
+    color: $gray-200;
+}
+
+.filled {
+    color: #F5CD00;
+}
+
+.separator {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.section-box hr {
+    margin-top: 0;
+    margin-bottom: 5px;
+    border: 0;
+    border-top: 1px solid rgb(199, 199, 199);
+}
+
+.section-box h2 {
+    margin-top: 0px;
+}
+
+.section-box h2 a {
+    font-size: 20px;
+}
+
+.img-thumbnail {
+    width: 150px;
+    height: 150px;
+}

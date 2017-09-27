@@ -1,0 +1,23 @@
+<div class="row" [formGroup]="whatGroup" *ngIf="whatGroup" data-toggle="buttons">
+    <div [hidden]="whatSelected && whatSelected != pub.type" *ngFor="let pub of publicationTypes" class="col-md-3">
+        <main class="cardType btn btn-default" formControlName="type" ngDefaultControl (click)="onTypeClick(pub.type)">
+            <input type="radio" name="rent">
+            <h2><i *ngIf="whatSelected" class="fa fa-backward" aria-hidden="true"></i> {{ pub.title }}</h2>
+            <div class="img-wrapper">
+                <img class="rounded-circle" [src]="pub.image" [alt]="pub.title">
+            </div>
+        </main>
+    </div>
+
+    <div *ngIf="categories" class="col-md-3">
+        <select size="14" name="category" (click)="onCategorySelected()" formControlName="category" class="form-control">
+            <option *ngFor="let cat of categories" [ngValue]="cat.id">{{cat.description}}</option>
+        </select>
+    </div>
+
+    <div *ngIf="subcategories" class="col-md-3">
+        <select size="14" name="subcategory" formControlName="subcategory" class="form-control">
+            <option *ngFor="let subcat of subcategories" [ngValue]="subcat.id">{{subcat.description}}</option>
+        </select>
+    </div>
+</div>

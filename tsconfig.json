@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "outDir": "dist/app",
+        "module": "commonjs",
+        "target": "es5",
+        "lib": ["es2015", "dom"],
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "watch": true,
+        "allowJs": true
+    },
+    "exclude": [
+        "docs",
+        "node_modules",
+        "**/*.aot.ts"
+    ],
+    "filesGlob": [
+        "src/**/*.ts"
+    ]
+}

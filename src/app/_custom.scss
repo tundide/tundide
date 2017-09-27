@@ -1,0 +1,26 @@
+$white: #fff !default;
+$gray-100: #A8CABA;
+$gray-200: #95B18E;
+$gray-300: #96A582;
+$gray-400: #979976;
+$gray-500: #8D826B;
+$gray-600: #816A60;
+$gray-700: #755556;
+$gray-800: #694B57;
+$gray-900: #5D4157;
+$black: #000 !default;
+$grays: ( 100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $gray-500, 600: $gray-600, 700: $gray-700, 800: $gray-800, 900: $gray-900) !default;
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+$colors: ( blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600, gray-dark: $gray-800) !default;
+$theme-colors: ( primary: $blue, secondary: $gray-600, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-100, dark: $gray-800) !default;
+// Set a specific jump point for requesting color jumps
+$theme-color-interval: 8% !default;

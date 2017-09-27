@@ -1,0 +1,122 @@
+<div class="card">
+    <div class="container-fliud">
+        <div class="wrapper row">
+            <div class="preview col-md-6">
+                <ngb-carousel *ngIf="property.images.length > 0">
+                    <ng-template *ngFor="let img of property.images; let i = img" ngbSlide>
+                        <img class="mx-auto" src="/files/{{img}}" alt="Random first slide">
+                    </ng-template>
+                </ngb-carousel>
+            </div>
+            <div class="details col-md-6">
+                <small>Pub: {{ property.shortId }} / Fecha de publicaci&oacute;n: {{ property.publishedDate | date: 'dd/MM/yyyy hh:mm:ss' }}</small>
+                <h3 class="product-title">{{property.title}}</h3>
+                <div>
+                    <div>
+                        <ngb-rating [readonly]="true" [max]="5" [rate]="publicationAverage.score">
+                            <ng-template let-fill="fill">
+                                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                            </ng-template>
+                        </ngb-rating>
+                    </div>
+                    <span class="review-no">{{ property.reviews.length }} rese&ntilde;as</span>
+                </div>
+                <h4 class="price">Precio: <span>${{property.price}}</span></h4>
+                <p class="vote"><strong>{{publicationAverage.like | number : '1.0-0'}}%</strong> de personas le gusto este lugar! <strong>({{ property.reviews.length }} votos)</strong>
+                </p>
+                <h5 class="sizes">Tama&ntilde;o:
+                    <span class="size" data-toggle="tooltip" title="Metros Cuadrados">40 m2</span>
+                </h5>
+                <div class="action">
+                    <div class="btn-group" role="group" aria-label="Third group">
+                        <button *ngIf="user && !myPublication" class="add-to-cart btn btn-default" (click)="Reserve()" type="button">Reservar</button>
+                        <button *ngIf="user && !myPublication" class="btn btn-danger" (click)="favoriteChange(favorite)" type="button">
+                        <span *ngIf="!favorite && user" class="fa fa-heart-o"></span>
+                        <span *ngIf="favorite && user" class="fa fa-heart"></span>
+                    </button>
+                        <button class="btn btn-primary" *ngIf="myPublication" [routerLink]="['/publication/edit',property._id]" type="button"><span class="fa fa-pencil-square-o"></span>
+                    </button>
+                        <button *ngIf="!myPublication" class="btn btn-warning" type="button"><span class="fa fa-times"></span> Denunciar</button>
+                        <button *ngIf="user&& !myPublication" (click)="onContactAdvertiser()" class="btn btn-success" title="Escribile al due&ntilde;o" type="button"><span class="fa fa-share"></span>
+                    </button>
+                        <button dropdown="" class="btn btn-info dropdown-toggle" data-toggle="dropdown" type="button"><span class="fa fa-share-alt"></span>
+                    </button>
+                        <ul aria-labelledby="single-button" class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" ceiboShare [facebook]="{u: publicationUrl + property._id}"><i class="fa fa-fw fa-facebook"></i> Facebook</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" ceiboShare [twitter]="{url:publicationUrl + property._id, text:'Mira esta publicacion', hashtags:'angular2, social, ceiboIT'}"><i class="fa fa-fw fa-twitter"></i> Twitter</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" ceiboShare [linkedIn]="{url:publicationUrl  + property._id}"><i class="fa fa-fw fa-linkedin"></i> Linkedin</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" ceiboShare [pinterest]="{url:publicationUrl + property._id, media: imageUrl, description:'property.title'}"><i class="fa fa-fw fa-pinterest"></i> Pinterest</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" ceiboShare [googlePlus]="{u: publicationUrl + property._id}"><i class="fa fa-fw fa-google-plus"></i> Google+</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 col-lg-4">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Comodidades</h4>
+                <div *ngIf="property.facilities">
+                    <p *ngFor="let f of propertyFacilities" class="card-text">
+                        <span>
+                            <i class="fa fa-check" aria-hidden="true"></i>{{f.description}}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-8">
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Descripcion</h4>
+                <p class="card-text" [innerHTML]="property.description">
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title">Direcci&oacute;n</h4>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <agm-map [zoom]="16" [latitude]="property.location.latitude" [longitude]="property.location.longitude">
+                            <agm-marker [latitude]="property.location.latitude" [longitude]="property.location.longitude" [iconUrl]="'/images/marker.png'">
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            {{ property.location.street }} {{ property.location.number }}
+                        </p>
+                        <p class="card-text" *ngIf="property.location.placeDescription && property.location.provinceDescription">
+                            {{ property.location.placeDescription | camelCase }}, {{ property.location.provinceDescription | camelCase }}
+                        </p>
+                        <p class="card-text">
+                            Móvil: 1555555555
+                        </p>
+                        <p class="card-text">
+                            Teléfono: 47555555
+                        </p>
+                        <p class="card-text">
+                            <a href="http://www.pepe.com">http://www.pepe.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

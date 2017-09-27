@@ -1,0 +1,64 @@
+<div class="card">
+    <div class="card-block">
+        <form (ngSubmit)="submitForm(formGroupSignout.value)" novalidate [formGroup]="formGroupSignout">
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="inputMail">E-mail</label>
+                    <input type="email" formControlName="email" [class.errors]="email.hasError('*', ['dirty'])" name="email" class="form-control" id="inputMail">
+                    <div ngxErrors="email" #email="ngxErrors">
+                        <div class="error" ngxError="required">
+                            El Email es requerido
+                        </div>
+                        <div class="error" ngxError="pattern">
+                            El formato del email es inv&aacute;lido
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="inputContrasena">Contrase&ntilde;a</label>
+                    <input name="password" [class.errors]="password.hasError('*', ['dirty'])" formControlName="password" name="password" class="form-control" promptLabel="Por favor ingrese una contrase&ntilde;a" weakLabel="Facil" type="password" pPassword />
+                    <div ngxErrors="password" #password="ngxErrors">
+                        <div class="error" ngxError="required">
+                            La contrase&ntilde;a es requerida
+                        </div>
+                        <div class="error" ngxError="pattern">
+                            La contrase&ntilde;a debe tener las siguientes caracteristicas
+                            <ul>
+                                <li>Minimo de 8 caracteres</li>
+                                <li>Una mayuscula</li>
+                                <li>Una minuscula</li>
+                                <li>Un numero</li>
+                                <li>Un caracter especial (@ $ ! % * # ? &)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="inputRepetirContrasena">Repetir Contrase&ntilde;a</label>
+                    <input name="confirmpassword" [class.errors]="confirmpassword.hasError('*', ['dirty'])" ngModel formControlName="confirmpassword" name="confirmpassword" class="form-control" type="password" pPassword />
+                    <div ngxErrors="confirmpassword" #confirmpassword="ngxErrors">
+                        <div class="error" ngxError="required">
+                            El Titulo es requerido
+                        </div>
+                        <div class="error" ngxError="MatchPassword">
+                            La contrase&ntilde;a no coincide
+                        </div>
+                        <div class="error" ngxError="pattern">
+                            La contrase&ntilde;a debe contar con un minimo de 8 caracteres, debe contener al menos una minuscula, una mayuscula y un numero o simbolo
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" site_key="6LftYysUAAAAABcYK_HTu1FFJcgB5boNNHr7C402"></re-captcha>
+                </div>
+            </div>
+            <button type="submit" [disabled]="!formGroupSignout.valid" class="btn btn-primary">Registrarme</button>
+        </form>
+    </div>
+</div>

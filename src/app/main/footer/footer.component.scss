@@ -1,0 +1,41 @@
+@import "../../_custom.scss";
+.bg-primary {
+    background-color: $gray-900 !important;
+}
+
+.bg-circle {
+    display: inline-block;
+    background-color: $gray-100;
+    width: 60px;
+    height: 60px;
+    padding: 14px 4px;
+    color: $gray-900;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.bg-circle-outline {
+    width: 50px;
+    height: 50px;
+    color: $gray-200;
+    padding: 8px 2px;
+    border: 2px solid;
+    border-color: $gray-200;
+    border-radius: 50%;
+}
+
+.bg-circle a,
+a:hover,
+.media a:focus {
+    text-decoration: none !important;
+    outline: none;
+    color: #ececec;
+}
+
+.bg-circle-outline a,
+a:hover,
+.media a:focus {
+    text-decoration: none !important;
+    outline: none;
+    color: #ececec;
+}

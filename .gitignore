@@ -1,0 +1,7 @@
+/aot/*
+/docs/*
+/public/js/*
+/node_modules/*
+/.vscode/chrome
+/routes/files/data
+.env

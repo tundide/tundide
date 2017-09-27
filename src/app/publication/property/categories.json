@@ -1,0 +1,299 @@
+[{
+        "id": 1,
+        "name": "Cochera",
+        "facilities": [{
+                "model": "elevator",
+                "description": "Ascensor"
+            },
+            {
+                "model": "security",
+                "description": "Seguridad Privada"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Oficina",
+        "facilities": [{
+                "model": "elevator",
+                "description": "Ascensor"
+            },
+            {
+                "model": "security",
+                "description": "Seguridad Privada"
+            },
+            {
+                "model": "internet",
+                "description": "Internet"
+            },
+            {
+                "model": "airconditioning",
+                "description": "Aire Acondicionado"
+            },
+            {
+                "model": "heating",
+                "description": "Calefaccion"
+            },
+            {
+                "model": "reception",
+                "description": "Recepcion"
+            },
+            {
+                "model": "powerunit",
+                "description": "Grupo Electrogeno"
+            },
+            {
+                "model": "phone",
+                "description": "Telefono"
+            },
+            {
+                "model": "gas",
+                "description": "Gas Natural"
+            },
+            {
+                "model": "water",
+                "description": "Agua Corriente"
+            },
+            {
+                "model": "lobby",
+                "description": "Sala de Espera"
+            },
+            {
+                "model": "buffet",
+                "description": "Cafeteria"
+            },
+            {
+                "model": "ramp",
+                "description": "Rampa de Acceso"
+            },
+            {
+                "model": "openingtothestreet",
+                "description": "Apertura a la calle"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Quinta",
+        "facilities": [{
+                "model": "security",
+                "description": "Seguridad Privada"
+            },
+            {
+                "model": "internet",
+                "description": "Internet"
+            },
+            {
+                "model": "airconditioning",
+                "description": "Aire Acondicionado"
+            },
+            {
+                "model": "heating",
+                "description": "Calefaccion"
+            },
+            {
+                "model": "powerunit",
+                "description": "Grupo Electrogeno"
+            },
+            {
+                "model": "phone",
+                "description": "Telefono"
+            },
+            {
+                "model": "gas",
+                "description": "Gas Natural"
+            },
+            {
+                "model": "water",
+                "description": "Agua Corriente"
+            },
+            {
+                "model": "buffet",
+                "description": "Cafeteria"
+            },
+            {
+                "model": "ramp",
+                "description": "Rampa de Acceso"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Consultorio",
+        "facilities": [{
+                "model": "security",
+                "description": "Seguridad Privada"
+            },
+            {
+                "model": "internet",
+                "description": "Internet"
+            },
+            {
+                "model": "airconditioning",
+                "description": "Aire Acondicionado"
+            },
+            {
+                "model": "heating",
+                "description": "Calefaccion"
+            },
+            {
+                "model": "powerunit",
+                "description": "Grupo Electrogeno"
+            },
+            {
+                "model": "phone",
+                "description": "Telefono"
+            },
+            {
+                "model": "gas",
+                "description": "Gas Natural"
+            },
+            {
+                "model": "water",
+                "description": "Agua Corriente"
+            },
+            {
+                "model": "buffet",
+                "description": "Cafeteria"
+            },
+            {
+                "model": "ramp",
+                "description": "Rampa de Acceso"
+            },
+            {
+                "model": "enabled",
+                "description": "Habilitado por Ministerio de Salud"
+            },
+            {
+                "model": "spaceformaterial",
+                "description": "Espacio para material"
+            },
+            {
+                "model": "stretcher",
+                "description": "Camilla"
+            }
+        ],
+        "subcategories": [{
+                "id": 1,
+                "description": "Psicologicos",
+                "facilities": [{
+                        "model": "couch",
+                        "description": "Divan"
+                    },
+                    {
+                        "model": "aptchildcare",
+                        "description": "Apto atención niños"
+                    },
+                    {
+                        "model": "aptcareofadolescents",
+                        "description": "Apto atención de adolecentes"
+                    },
+                    {
+                        "model": "aptcareofadult",
+                        "description": "Apto atención de adultos"
+                    },
+                    {
+                        "model": "aptcareofgroups",
+                        "description": "Apto atención de grupos"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "description": "Odontologico",
+                "facilities": [{
+                        "model": "dentalchair",
+                        "description": "Sillon odontologico"
+                    },
+                    {
+                        "model": "drystoveforsterilization",
+                        "description": "Estufa en seco para esterilizacion"
+                    },
+                    {
+                        "model": "dispenserofshortstabbinginstruments",
+                        "description": "Descartador de instrumental corto punzante"
+                    },
+                    {
+                        "model": "contractwithbiopwastecompany",
+                        "description": "Contrato con empresa de residuos biop"
+                    },
+                    {
+                        "model": "radiologyequipment",
+                        "description": "Equipamiento de Radiología"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Salon de fiesta",
+        "facilities": [{
+                "model": "security",
+                "description": "Seguridad Privada"
+            },
+            {
+                "model": "internet",
+                "description": "Internet"
+            },
+            {
+                "model": "airconditioning",
+                "description": "Aire Acondicionado"
+            },
+            {
+                "model": "heating",
+                "description": "Calefaccion"
+            },
+            {
+                "model": "powerunit",
+                "description": "Grupo Electrogeno"
+            },
+            {
+                "model": "gas",
+                "description": "Gas Natural"
+            },
+            {
+                "model": "water",
+                "description": "Agua Corriente"
+            },
+            {
+                "model": "buffet",
+                "description": "Cafeteria"
+            },
+            {
+                "model": "ramp",
+                "description": "Rampa de Acceso"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Sala de reunion",
+        "facilities": [{
+                "model": "internet",
+                "description": "Internet"
+            },
+            {
+                "model": "airconditioning",
+                "description": "Aire Acondicionado"
+            },
+            {
+                "model": "heating",
+                "description": "Calefaccion"
+            },
+            {
+                "model": "powerunit",
+                "description": "Grupo Electrogeno"
+            },
+            {
+                "model": "projector",
+                "description": "Proyector"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Otras Propiedades",
+        "facilities": []
+    }
+]
