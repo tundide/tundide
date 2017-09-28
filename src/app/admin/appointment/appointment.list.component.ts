@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ReservationService } from '../../publication/reservation.service';
 import { CalendarComponent } from '../../shared/components/calendar/calendar.component';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -47,7 +46,7 @@ interface IReservation {
     selector: 'schedule',
     templateUrl: 'schedule.component.html'
 })
-export class ScheduleComponent implements OnInit {
+export class AppointmentListComponent implements OnInit {
     public isActive = false;
     public showMenu = '';
     @ViewChild('calendar') calendar: CalendarComponent;
@@ -57,22 +56,22 @@ export class ScheduleComponent implements OnInit {
     public cancelButton = {
         label: '<i class="fa fa-fw fa-times" title="Cancelar turno"></i>',
         onClick: ({ event }: { event: CalendarEvent }): void => {
-            this.reservationService.cancel(event.meta.publication, { 'reservation': event.meta.reservation }).subscribe(res => {
-                if (event.meta.myPub) {
-                    event.actions = [];
-                    event.color = colors.red;
-                } else {
-                    event.actions = [];
-                    event.color = colors.red;
-                }
-                this.toastyService.success({
-                    msg: 'Se cancelo el turno solicitado',
-                    showClose: true,
-                    theme: 'bootstrap',
-                    timeout: 5000,
-                    title: 'Solicitud de cancelacion de turno.'
-                });
-            });
+            // this.reservationService.cancel(event.meta.publication, { 'reservation': event.meta.reservation }).subscribe(res => {
+            //     if (event.meta.myPub) {
+            //         event.actions = [];
+            //         event.color = colors.red;
+            //     } else {
+            //         event.actions = [];
+            //         event.color = colors.red;
+            //     }
+            //     this.toastyService.success({
+            //         msg: 'Se cancelo el turno solicitado',
+            //         showClose: true,
+            //         theme: 'bootstrap',
+            //         timeout: 5000,
+            //         title: 'Solicitud de cancelacion de turno.'
+            //     });
+            // });
         }
     };
 
@@ -86,15 +85,15 @@ export class ScheduleComponent implements OnInit {
                 event.actions = [this.changeReservationButton, this.cancelButton];
                 event.color = colors.green;
             }
-            this.reservationService.approve(event.meta.publication, { 'reservation': event.meta.reservation }).subscribe(res => {
-                this.toastyService.success({
-                    msg: 'Se aprobo el turno',
-                    showClose: true,
-                    theme: 'bootstrap',
-                    timeout: 5000,
-                    title: 'Solicitud de turno aprobada.'
-                });
-            });
+            // this.reservationService.approve(event.meta.publication, { 'reservation': event.meta.reservation }).subscribe(res => {
+            //     this.toastyService.success({
+            //         msg: 'Se aprobo el turno',
+            //         showClose: true,
+            //         theme: 'bootstrap',
+            //         timeout: 5000,
+            //         title: 'Solicitud de turno aprobada.'
+            //     });
+            // });
         }
     };
 
@@ -123,8 +122,7 @@ export class ScheduleComponent implements OnInit {
         }
     };
 
-    constructor(private reservationService: ReservationService,
-        private router: Router,
+    constructor(private router: Router,
         private toastyService: ToastyService,
         private modalService: NgbModal,
         private toastyConfig: ToastyConfig) {
@@ -136,112 +134,112 @@ export class ScheduleComponent implements OnInit {
     }
 
     eventTimesChanged(event) {
-        this.reservationService.change(event.meta.publication, {
-            'endDate': event.end,
-            'id': event.meta.reservation,
-            'startDate': event.start
-        }).subscribe(res => {
-            if (res.status === 200) {
-                event.actions = [this.cancelButton];
-                event.color = colors.yellow;
-                this.toastyService.info({
-                    msg: res.data.message,
-                    showClose: true,
-                    theme: 'bootstrap',
-                    timeout: 10000,
-                    title: 'Solicitud de cambio de turno generada.'
-                });
-            }
-        });
+        // this.reservationService.change(event.meta.publication, {
+        //     'endDate': event.end,
+        //     'id': event.meta.reservation,
+        //     'startDate': event.start
+        // }).subscribe(res => {
+        //     if (res.status === 200) {
+        //         event.actions = [this.cancelButton];
+        //         event.color = colors.yellow;
+        //         this.toastyService.info({
+        //             msg: res.data.message,
+        //             showClose: true,
+        //             theme: 'bootstrap',
+        //             timeout: 10000,
+        //             title: 'Solicitud de cambio de turno generada.'
+        //         });
+        //     }
+        // });
     }
 
     ngOnInit() {
-        this.reservationService.list()
-            .subscribe(res => {
-                if (res) {
-                    _.forEach(<Array<IReservation>>res.data, (reservation, key) => {
-                        let startDate = moment(reservation.startDate);
-                        let endDate = moment(reservation.endDate);
+        // this.reservationService.list()
+        //     .subscribe(res => {
+        //         if (res) {
+        //             _.forEach(<Array<IReservation>>res.data, (reservation, key) => {
+        //                 let startDate = moment(reservation.startDate);
+        //                 let endDate = moment(reservation.endDate);
 
-                        let evento = {
-                            actions: [],
-                            color: colors.green,
-                            draggable: true,
-                            end: endDate.toDate(),
-                            meta: {
-                                myPub: reservation.myPub,
-                                publication: reservation.publicationId,
-                                reservation: reservation._id
-                            },
-                            resizable: {
-                                afterEnd: true,
-                                beforeStart: true
-                            },
-                            start: startDate.toDate(),
-                            title: reservation.shortId + ' - (' + startDate.format('HH:mm') + '-'
-                            + endDate.format('HH:mm') + ') ' + reservation.title
-                        };
-                        switch (reservation.status) {
-                            case 0:
-                                if (reservation.myPub) {
-                                    evento.actions = [this.approveButton, this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.blue;
-                                } else {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.yellow;
-                                }
-                                break;
-                            case 1:
-                                if (reservation.myPub) {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                } else {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                }
-                                break;
-                            case 2:
-                                if (reservation.myPub) {
-                                    evento.actions = [this.cancelButton];
-                                    evento.color = colors.yellow;
-                                } else {
-                                    evento.actions = [this.approveButton, this.cancelButton];
-                                    evento.color = colors.blue;
-                                }
-                                break;
-                            case 3:
-                                if (reservation.myPub) {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                } else {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                }
-                                break;
-                            case 4:
-                                evento.actions = [];
-                                evento.color = colors.red;
-                                evento.resizable = {
-                                    afterEnd: false,
-                                    beforeStart: false
-                                };
-                                evento.draggable = false;
-                                break;
-                            case 5:
-                                evento.actions = [];
-                                evento.color = colors.red;
-                                evento.resizable = {
-                                    afterEnd: false,
-                                    beforeStart: false
-                                };
-                                evento.draggable = false;
-                                break;
-                        }
+        //                 let evento = {
+        //                     actions: [],
+        //                     color: colors.green,
+        //                     draggable: true,
+        //                     end: endDate.toDate(),
+        //                     meta: {
+        //                         myPub: reservation.myPub,
+        //                         publication: reservation.publicationId,
+        //                         reservation: reservation._id
+        //                     },
+        //                     resizable: {
+        //                         afterEnd: true,
+        //                         beforeStart: true
+        //                     },
+        //                     start: startDate.toDate(),
+        //                     title: reservation.shortId + ' - (' + startDate.format('HH:mm') + '-'
+        //                     + endDate.format('HH:mm') + ') ' + reservation.title
+        //                 };
+        //                 switch (reservation.status) {
+        //                     case 0:
+        //                         if (reservation.myPub) {
+        //                             evento.actions = [this.approveButton, this.changeReservationButton, this.cancelButton];
+        //                             evento.color = colors.blue;
+        //                         } else {
+        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
+        //                             evento.color = colors.yellow;
+        //                         }
+        //                         break;
+        //                     case 1:
+        //                         if (reservation.myPub) {
+        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
+        //                             evento.color = colors.green;
+        //                         } else {
+        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
+        //                             evento.color = colors.green;
+        //                         }
+        //                         break;
+        //                     case 2:
+        //                         if (reservation.myPub) {
+        //                             evento.actions = [this.cancelButton];
+        //                             evento.color = colors.yellow;
+        //                         } else {
+        //                             evento.actions = [this.approveButton, this.cancelButton];
+        //                             evento.color = colors.blue;
+        //                         }
+        //                         break;
+        //                     case 3:
+        //                         if (reservation.myPub) {
+        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
+        //                             evento.color = colors.green;
+        //                         } else {
+        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
+        //                             evento.color = colors.green;
+        //                         }
+        //                         break;
+        //                     case 4:
+        //                         evento.actions = [];
+        //                         evento.color = colors.red;
+        //                         evento.resizable = {
+        //                             afterEnd: false,
+        //                             beforeStart: false
+        //                         };
+        //                         evento.draggable = false;
+        //                         break;
+        //                     case 5:
+        //                         evento.actions = [];
+        //                         evento.color = colors.red;
+        //                         evento.resizable = {
+        //                             afterEnd: false,
+        //                             beforeStart: false
+        //                         };
+        //                         evento.draggable = false;
+        //                         break;
+        //                 }
 
-                        this.calendar.addEvent(evento);
-                    });
-                }
-            });
+        //                 this.calendar.addEvent(evento);
+        //             });
+        //         }
+        //     });
     }
 
     eventCalled() {

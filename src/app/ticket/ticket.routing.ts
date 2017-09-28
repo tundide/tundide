@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
-import { TicketComponent } from './ticket.component';
+import { TicketNewComponent } from './ticket.new.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 
 const routes: Routes = [
     {
         canActivate: [AuthGuard],
-        component: TicketComponent,
+        component: TicketNewComponent,
         path: ''
     }
 ];

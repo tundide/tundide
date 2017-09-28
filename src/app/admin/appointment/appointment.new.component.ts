@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import * as _ from 'lodash';
 
 @Component({
@@ -8,7 +8,7 @@ import * as _ from 'lodash';
     templateUrl: 'appointment.component.html'
 })
 
-export class AppointmentComponent implements OnInit {
+export class AppointmentNewComponent implements OnInit {
     private roles: Array<String>;
 
     constructor(private authService: AuthService) { }

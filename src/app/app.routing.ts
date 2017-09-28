@@ -7,7 +7,6 @@ export const routes: Routes = [
         component: HomeComponent, path: '', pathMatch: 'full'
     },
     { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
-    { path: 'publication', loadChildren: './publication/publication.module#PublicationModule' },
     {
         canActivate: [AuthGuard],
         loadChildren: './admin/admin.module#AdminModule',
@@ -23,8 +22,7 @@ export const routes: Routes = [
     {
         loadChildren: './message/message.module#MessageModule',
         path: 'message'
-    },
-    { path: 'search', loadChildren: './search/search.module#SearchModule' }
+    }
 ];
 
 export const routing = RouterModule.forRoot(routes, { useHash: true });
