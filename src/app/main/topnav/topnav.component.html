@@ -18,12 +18,6 @@
                 <a class="nav-link disabled" [routerLink]="['/aboutus']" href="#">Acerca de</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" #f="ngForm" [formGroup]="formGroupSearch" (ngSubmit)="search(); f.reset()">
-            <div class="input-group">
-                <input required class="form-control" formControlName="search" type="text" name="searchSpace" [(ngModel)]="searchWord" placeholder="Busca lo que necesitas">
-                <button class="input-group-addon input-lg btn btn-default my-2 my-sm-0" [disabled]="!formGroupSearch.valid" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </div>
-        </form>
         <ul class="navbar-nav mr-auto">
             <li *ngIf="user" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="javascript:;" id="dropdownMenu4">

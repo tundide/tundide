@@ -27,10 +27,6 @@ export class TopNavComponent implements OnInit {
         this.messages = new Array();
     }
 
-    search() {
-        this.router.navigate(['/search', { b: this.searchWord }]);
-    }
-
     logout() {
         this.authService.logout();
         this.router.navigate(['/']);
