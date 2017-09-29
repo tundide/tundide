@@ -6,7 +6,7 @@ import { AdminComponent } from './admin.component';
 import { routing } from './admin.routing';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
-import { SocketService } from './shared/socket.service';
+import { SocketService } from '../shared/socket.service';
 import { ErrorService } from './errors/error.service';
 import { MainModule } from './main/main.module';
 import { ToastyModule } from 'ng2-toasty';

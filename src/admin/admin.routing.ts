@@ -18,7 +18,6 @@ export const routes: Routes = [
         path: 'price'
     },
     { path: 'budget', loadChildren: './budget/budget.module#BudgetModule' },
-    { path: 'ticket', loadChildren: './ticket/ticket.module#TicketModule' },
     {
         loadChildren: './message/message.module#MessageModule',
         path: 'message'
