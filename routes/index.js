@@ -6,6 +6,14 @@ router.get('/', function(req, res, next) {
     res.render('index', { user: req.user });
 });
 
+router.get('/admin', function(req, res, next) {
+    res.render('admin', { user: req.user });
+});
+
+router.get('/terminal', function(req, res, next) {
+    res.render('terminal', { user: req.user });
+});
+
 router.get('/logout', session.authorize(), function(req, res) {
     req.logout();
     res.redirect('/');

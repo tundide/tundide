@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppComponent } from './app.component';
-import { routing } from './app.routing';
+import { AdminComponent } from './admin.component';
+import { routing } from './admin.routing';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { SocketService } from './shared/socket.service';
 import { ErrorService } from './errors/error.service';
 import { MainModule } from './main/main.module';
 import { ToastyModule } from 'ng2-toasty';
-import { APP_CONFIG, AppConfig } from './app.config';
+import { APP_CONFIG, AppConfig } from '../app.config';
 
 @NgModule({
-    bootstrap: [AppComponent],
-    declarations: [AppComponent],
+    bootstrap: [AdminComponent],
+    declarations: [AdminComponent],
     imports: [BrowserModule,
         BrowserAnimationsModule,
         routing,
@@ -31,4 +31,4 @@ import { APP_CONFIG, AppConfig } from './app.config';
     ]
 })
 
-export class AppModule { }
+export class AdminModule { }

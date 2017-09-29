@@ -12,11 +12,11 @@ import * as $S from 'scriptjs';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
-    selector: 'app',
-    styleUrls: ['app.component.scss'],
-    templateUrl: 'app.component.html'
+    selector: 'admin',
+    styleUrls: ['admin.component.scss'],
+    templateUrl: 'admin.component.html'
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AdminComponent implements OnInit, OnDestroy {
     @ViewChild('contactus') contactusModal: NgbModal;
 
     private subscription: Subscription;

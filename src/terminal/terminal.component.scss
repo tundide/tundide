@@ -1,0 +1,36 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+@import "/node_modules/angular2-busy/build/style/busy.css";
+
+/*** Hack para tener el <a> como link sin tener href ***/
+
+a:not([href]) {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+.error {
+    background: #B52D30;
+    color: #fff;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-radius: 0 0 3px 3px;
+    line-height: 1;
+    padding: 6px 10px;
+    margin-top: -1px;
+}
+
+.errors {
+    border: 1px solid #B52D30;
+}
+
+body {
+    font-family: 'Roboto';
+}
+
+h3 {
+    color: #555;
+}
