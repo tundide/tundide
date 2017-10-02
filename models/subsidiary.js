@@ -1,14 +1,12 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-let appointment = require('./appointment.js');
-let machine = require('./machine.js');
 
 let subsidiarySchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
     code: String,
     description: String,
-    appointments: [appointment.schema],
-    machines: [machine.schema]
+    appointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
+    machines: [{type: Schema.Types.ObjectId, ref: 'Machine'}]
 });
 
 /**

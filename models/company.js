@@ -1,12 +1,10 @@
 let mongoose = require('mongoose');
-let user = require('./user.js');
-let client = require('./client.js');
 
 let companySchema = mongoose.Schema({
     id: String,
     description: String,
-    users: [user.schema],
-    clients: [client.schema]
+    users: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    clients: [{type: Schema.Types.ObjectId, ref: 'Client'}]
 });
 
 /**

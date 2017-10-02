@@ -20,8 +20,8 @@ let TicketSchema = mongoose.Schema({
  * @class Ticket
  * @memberof module:Product
  * @property {ObjectId}              id                            - Id of ticket
- * @property {ObjectId}              category                      - Category of the ticket
- * @property {Number}                position                      - The position in the queue
+ * @property {ObjectId}              category                      - Category of the ticket (Ex: AA 0000)
+ * @property {Number}                position                      - The position in the queue (Ex: AA 0000)
  * @property {ObjectId}              client                        - Id of client
  * @property {ObjectId}              subsidiary                    - Id of the Subsidiary
  */

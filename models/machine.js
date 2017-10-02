@@ -1,11 +1,10 @@
 let mongoose = require('mongoose');
-let ticket = require('./ticket.js');
 
 let machineSchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
     code: String,
     description: String,
-    tickets: [ticket.schema]
+    tickets: [{type: Schema.Types.ObjectId, ref: 'Ticket'}]
 });
 
 /**
