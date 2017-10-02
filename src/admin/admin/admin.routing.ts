@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { AlertComponent } from './settings/alert.component';
 import { AdminComponent } from './admin.component';
-import { AuthGuard } from '../auth/auth-guard.service';
+import { AuthGuard } from '../../auth/auth-guard.service';
 
 const routes: Routes = [
     {

@@ -4,10 +4,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routing } from './price.routing';
 import { PriceComponent } from './price.component';
-import { AuthService } from '../auth/auth.service';
-import { ErrorService } from '../errors/error.service';
-import { SocketService } from '../shared/socket.service';
-import { AuthGuard } from '../auth/auth-guard.service';
+import { AuthService } from '../../auth/auth.service';
+import { ErrorService } from '../../shared/errors/error.service';
+import { SocketService } from '../../shared/socket.service';
+import { AuthGuard } from '../../auth/auth-guard.service';
 
 @NgModule({
     declarations: [PriceComponent],

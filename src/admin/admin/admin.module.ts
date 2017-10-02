@@ -6,14 +6,14 @@ import { AdminComponent } from './admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AlertComponent } from './settings/alert.component';
 import { routing } from './admin.routing';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { DataTableModule } from 'angular2-datatable';
-import { ErrorService } from '../errors/error.service';
-import { SocketService } from '../shared/socket.service';
-import { AuthGuard } from '../auth/auth-guard.service';
+import { ErrorService } from '../../shared/errors/error.service';
+import { SocketService } from '../../shared/socket.service';
+import { AuthGuard } from '../../auth/auth-guard.service';
 import { BusyModule } from 'angular2-busy';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 
 @NgModule({
     declarations: [AdminComponent,

@@ -1,8 +1,8 @@
 import { Http, Response, Headers } from '@angular/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ErrorService } from '../errors/error.service';
-import { SocketService } from '../shared/socket.service';
+import { ErrorService } from '../../shared/errors/error.service';
+import { SocketService } from '../../shared/socket.service';
 
 /**
  * Manage advertiser.

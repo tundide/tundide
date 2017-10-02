@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarComponent } from '../../shared/components/calendar/calendar.component';
+import { CalendarComponent } from '../../../shared/components/calendar/calendar.component';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 

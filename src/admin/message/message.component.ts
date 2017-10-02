@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
-import { SocketService } from '../shared/socket.service';
+import { AuthService } from '../../auth/auth.service';
+import { SocketService } from '../../shared/socket.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 declare var $: JQueryStatic;

@@ -2,7 +2,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { User } from './user.model';
-import { ErrorService } from '../errors/error.service';
+import { ErrorService } from '../shared/errors/error.service';
 import { SocketService } from '../shared/socket.service';
 import { Md5 } from 'ts-md5/dist/md5';
 

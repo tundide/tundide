@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routing } from './budget.routing';
-import { AuthGuard } from '../auth/auth-guard.service';
+import { AuthGuard } from '../../auth/auth-guard.service';
 import { BudgetComponent } from './budget.component';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

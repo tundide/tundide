@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Message } from './message.model';
-import { ErrorService } from '../errors/error.service';
+import { ErrorService } from '../../shared/errors/error.service';
 import { Observable } from 'rxjs';
 
 /**

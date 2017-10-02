@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { CacheService, CacheStoragesEnum } from 'ng2-cache/ng2-cache';
-import { ErrorService } from '../errors/error.service';
+import { ErrorService } from './errors/error.service';
 import { Observable } from 'rxjs';
 
 @Injectable()

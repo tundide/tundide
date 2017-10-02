@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgxVirtualKeyboardModule }  from 'ngx-virtual-keyboard';
 import { routing } from './ticket.routing';
-import { AuthGuard } from '../auth/auth-guard.service';
+import { AuthGuard } from '../../auth/auth-guard.service';
 import { TicketNewComponent } from './ticket.new.component';
 import { TicketViewComponent } from './ticket.view.component';
 import { ToastyModule } from 'ng2-toasty';

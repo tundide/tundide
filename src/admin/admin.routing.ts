@@ -1,12 +1,12 @@
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './main/home/home.component';
-import { AuthGuard } from './auth/auth-guard.service';
+import { AuthGuard } from '../auth/auth-guard.service';
 
 export const routes: Routes = [
     {
         component: HomeComponent, path: '', pathMatch: 'full'
     },
-    { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
+    { path: 'auth', loadChildren: '../auth/auth.module#AuthModule' },
     {
         canActivate: [AuthGuard],
         loadChildren: './admin/admin.module#AdminModule',

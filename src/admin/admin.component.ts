@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { AuthService } from './auth/auth.service';
-import { ErrorService } from './errors/error.service';
+import { AuthService } from './../auth/auth.service';
+import { ErrorService } from '../shared/errors/error.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { Subscription } from 'rxjs/Rx';
-import { User } from './auth/user.model';
-import { SocketService } from './shared/socket.service';
+import { User } from '../auth/user.model';
+import { SocketService } from '../shared/socket.service';
 declare var $: JQueryStatic;
 import * as $S from 'scriptjs';
 

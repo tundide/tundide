@@ -6,7 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
-import { SocketService } from '../shared/socket.service';
+import { SocketService } from '../../shared/socket.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
