@@ -10,8 +10,7 @@ let TicketSchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
     position: Number,
     category: { type: Schema.Types.ObjectId, ref: 'Category' },
-    client: { type: Schema.Types.ObjectId, ref: 'Client' },
-    subsidiary: { type: Schema.Types.ObjectId, ref: 'Subsidiary' },
+    client: { type: Schema.Types.ObjectId, ref: 'Client' }
 });
 
 /**

@@ -10,8 +10,7 @@ let Schema = mongoose.Schema;
 let CategorySchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
     description: String,
-    shorthand: String,
-    company: { type: Schema.Types.ObjectId, ref: 'Company' }
+    shorthand: String
 });
 
 /**

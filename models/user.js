@@ -48,14 +48,6 @@ let userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     lastAccess: Date,
-    favorites: [{ type: Schema.Types.ObjectId, ref: 'Publication' }],
-    reservations: [{
-        publication: { type: Schema.Types.ObjectId, ref: 'Publication' },
-        pendingtoqualify: Boolean
-    }],
-    reviews: {
-        score: Number
-    },
     plan: {
         type: Number,
         testMonth: Boolean,

@@ -7,8 +7,8 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let AppointmentSchema = mongoose.Schema({
-    description: String,
     id: { type: Schema.Types.ObjectId },
+    description: String,
     configuration: {
         category: Number,
         subcategory: Number,
@@ -21,8 +21,6 @@ let AppointmentSchema = mongoose.Schema({
     shortId: String,
     status: { type: Number, default: 1 },
     title: String,
-    company: { type: Schema.Types.ObjectId, ref: 'Company' },
-    subsidiary: { type: Schema.Types.ObjectId, ref: 'Subsidiary' },
     client: { type: Schema.Types.ObjectId, ref: 'Client' }
 });
 // TODO: Acomodar la documentacion

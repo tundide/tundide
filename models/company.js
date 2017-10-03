@@ -3,8 +3,9 @@ let mongoose = require('mongoose');
 let companySchema = mongoose.Schema({
     id: String,
     description: String,
-    users: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    clients: [{type: Schema.Types.ObjectId, ref: 'Client'}]
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    clients: [{ type: Schema.Types.ObjectId, ref: 'Client' }],
+    subsidiaries: [{ type: Schema.Types.ObjectId, ref: 'Subsidiary' }]
 });
 
 /**
