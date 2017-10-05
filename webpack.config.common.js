@@ -6,6 +6,7 @@ module.exports = {
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
         'admin': './src/admin.ts',
+        'index': './src/index.ts',
         'terminal': './src/terminal.ts'
     },
 
