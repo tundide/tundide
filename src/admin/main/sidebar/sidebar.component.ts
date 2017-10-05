@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import * as _ from 'lodash';
 
 @Component({
-    selector: 'admin',
-    styleUrls: ['admin.component.scss'],
-    templateUrl: 'admin.component.html'
+    selector: 'sidebar',
+    styleUrls: ['sidebar.component.scss'],
+    templateUrl: 'sidebar.component.html'
 })
 
-export class AdminComponent implements OnInit {
+export class SidebarComponent implements OnInit {
     private roles: Array<String>;
 
     constructor(private authService: AuthService) { }
