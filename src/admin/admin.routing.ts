@@ -15,7 +15,7 @@ export const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './admin/admin.module#AdminModule',
+        loadChildren: './admin.module#AdminModule',
         path: 'admin'
     },
     {
@@ -32,6 +32,10 @@ export const routes: Routes = [
     {
         loadChildren: './message/message.module#MessageModule',
         path: 'message'
+    },
+    {
+        loadChildren: './appointment/appointment.module#AppointmentModule',
+        path: 'appointment'
     }
 ];
 

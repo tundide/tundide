@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminComponent } from './admin.component';
+import { ProfileComponent } from './profile/profile.component';
 import { routing } from './admin.routing';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth-guard.service';
@@ -14,7 +15,7 @@ import { APP_CONFIG, AppConfig } from '../app.config';
 
 @NgModule({
     bootstrap: [AdminComponent],
-    declarations: [AdminComponent],
+    declarations: [AdminComponent, ProfileComponent],
     imports: [BrowserModule,
         BrowserAnimationsModule,
         routing,

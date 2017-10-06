@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import * as _ from 'lodash';
 
 @Component({
     selector: 'appointment',
-    styleUrls: ['appointment.component.scss'],
-    templateUrl: 'appointment.component.html'
+    styleUrls: ['appointment.new.component.scss'],
+    templateUrl: 'appointment.new.component.html'
 })
 
 export class AppointmentNewComponent implements OnInit {

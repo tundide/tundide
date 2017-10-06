@@ -5,7 +5,7 @@ import { PaymentMethodsComponent } from './paymentmethods.component';
 import { PlansComponent } from './plans.component';
 import { SuscriptionsComponent } from './suscriptions.component';
 import { PlanComponent } from './plan/plan.component';
-import { AuthGuard } from '../../../auth/auth-guard.service';
+import { AuthGuard } from '../../auth/auth-guard.service';
 
 const routes: Routes = [
     {
