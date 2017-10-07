@@ -1,7 +1,7 @@
 /aot/*
 /docs/*
-/public/js/*
 /node_modules/*
 /.vscode/chrome
+/public/js/app/*
 /routes/files/data
 .env
