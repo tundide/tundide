@@ -467,6 +467,9 @@
 		countersAnimate();
 		contactAnimate();
 		
+		document.getElementById("login").onclick = function () {
+    		location.href = "/auth/#/signin";
+		};
 
 	});
 

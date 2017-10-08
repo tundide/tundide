@@ -7,7 +7,10 @@ export const routes: Routes = [
     {
         component: HomeComponent, path: '', pathMatch: 'full'
     },
-    { path: 'auth', loadChildren: '../auth/auth.module#AuthModule' },
+    {
+        loadChildren: '../auth/auth.module#AuthModule',
+        path: 'auth'
+    },
     {
         canActivate: [AuthGuard],
         component: ProfileComponent, // TODO: Sacar esto y llevarlo al modulo de Profile
@@ -28,7 +31,10 @@ export const routes: Routes = [
         loadChildren: './price/price.module#PriceModule',
         path: 'price'
     },
-    { path: 'budget', loadChildren: './budget/budget.module#BudgetModule' },
+    {
+        loadChildren: './budget/budget.module#BudgetModule',
+        path: 'budget'
+    },
     {
         loadChildren: './message/message.module#MessageModule',
         path: 'message'

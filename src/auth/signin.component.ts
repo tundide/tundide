@@ -12,7 +12,7 @@ export class SigninComponent {
   submitForm(form: any): void {
     this.authService.signin(form.email, form.password).subscribe(
         data => {
-                window.location.href = '/';
+                window.location.href = '/admin';
               }
     );
   }

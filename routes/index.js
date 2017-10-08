@@ -10,6 +10,10 @@ router.get('/admin', function(req, res, next) {
     res.render('admin', { user: req.user });
 });
 
+router.get('/auth', function(req, res, next) {
+    res.render('auth');
+});
+
 router.get('/terminal', function(req, res, next) {
     res.render('terminal', { user: req.user });
 });
