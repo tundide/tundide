@@ -17,7 +17,7 @@
 #sidebar .list-group-item {
     border-radius: 0;
     background-color: $gray-500;
-    color: $gray-100;
+    color: $white;
     border-left: 0;
     border-right: 0;
     border-color: #2c2c2c;
@@ -28,7 +28,7 @@
 /* highlight active menu */
 
 #sidebar .list-group-item:not(.collapsed) {
-    color: $gray-500;
+    color: $gray-800;
     background-color: #FFF;
 }
 

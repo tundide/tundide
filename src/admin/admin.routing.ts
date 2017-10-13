@@ -32,16 +32,29 @@ export const routes: Routes = [
         path: 'price'
     },
     {
+        canActivate: [AuthGuard],
         loadChildren: './budget/budget.module#BudgetModule',
         path: 'budget'
     },
     {
+        canActivate: [AuthGuard],
         loadChildren: './message/message.module#MessageModule',
         path: 'message'
     },
     {
+        canActivate: [AuthGuard],
         loadChildren: './appointment/appointment.module#AppointmentModule',
         path: 'appointment'
+    },
+    {
+        canActivate: [AuthGuard],
+        loadChildren: './phonebook/phonebook.module#PhonebookModule',
+        path: 'phonebook'
+    },
+    {
+        canActivate: [AuthGuard],
+        loadChildren: './dashboard/dashboard.module#DashboardModule',
+        path: 'dashboard'
     }
 ];
 

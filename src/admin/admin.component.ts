@@ -7,6 +7,7 @@ import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { Subscription } from 'rxjs/Rx';
 import { User } from '../auth/user.model';
 import { SocketService } from '../shared/socket.service';
+import { AnalyticsService } from '../@core/utils/analytics.service';
 declare var $: JQueryStatic;
 import * as $S from 'scriptjs';
 
@@ -25,6 +26,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     constructor(elm: ElementRef,
         public router: Router,
         public route: ActivatedRoute,
+        private analytics: AnalyticsService,
         private modalService: NgbModal,
         private toastyService: ToastyService,
         private toastyConfig: ToastyConfig,
@@ -78,6 +80,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.analytics.trackPageViews();
+
         this.errorService.errorOccurred.subscribe((error) => {
             let toastOptions: ToastOptions = {
                 msg: error.message,

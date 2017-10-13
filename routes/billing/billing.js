@@ -103,7 +103,7 @@ router.delete('/card/delete/:cardId', session.authorize(), function(req, res) {
 /**
  * @api {post} / Create plan
  * @apiName createPlan
- * @apiDescription Create plan (Only for Pomaci Administrator)
+ * @apiDescription Create plan (Only for Tundide Administrator)
  * @apiGroup Billing
  * 
  * @apiSuccess {Object} Success Message.
@@ -150,7 +150,7 @@ router.post('/plan/', session.authorize("administrator"), function(req, res) {
 /**
  * @api {get} / Get plan
  * @apiName getPlan
- * @apiDescription Get plan (Only for Pomaci Administrator)
+ * @apiDescription Get plan (Only for Tundide Administrator)
  * @apiGroup Billing
  * 
  * @apiSuccess {Object} Success Message.
@@ -180,7 +180,7 @@ router.get('/plan/:id', session.authorize("administrator"), function(req, res) {
 /**
  * @api {put} / Update plan
  * @apiName updatePlan
- * @apiDescription Update plan (Only for Pomaci Administrator)
+ * @apiDescription Update plan (Only for Tundide Administrator)
  * @apiGroup Billing
  * 
  * @apiSuccess {Object} Success Message.
@@ -216,7 +216,7 @@ router.put('/plan/:id', session.authorize("administrator"), function(req, res) {
 /**
  * @api {get} / Get all plans
  * @apiName getAllPlans
- * @apiDescription Get All plans (Only for Pomaci Administrator)
+ * @apiDescription Get All plans (Only for Tundide Administrator)
  * @apiGroup Billing
  * 
  * @apiSuccess {Object} Success Message.

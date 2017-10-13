@@ -21,12 +21,12 @@
         "hardwrap": true
     },
     "tsdoc": {
-        "source": "/TeamProjects/pomaci/src/",
-        "destination": "/TeamProjects/pomaci/docs",
+        "source": "/TeamProjects/tundide/src/",
+        "destination": "/TeamProjects/tundide/docs",
         "tutorials": "",
-        "systemName": "pomaci",
+        "systemName": "tundide",
         "footer": "",
-        "copyright": "pomaci Copyright © 2017 mpani.",
+        "copyright": "tundide Copyright © 2017 mpani.",
         "outputSourceFiles": true,
         "commentsOnly": true
     }

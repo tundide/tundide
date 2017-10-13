@@ -6,7 +6,7 @@
 
 let app = require('../app');
 let socket = require('../socket');
-let debug = require('debug')('pomaci:server');
+let debug = require('debug')('tundide:server');
 let http = require('http');
 
 /**

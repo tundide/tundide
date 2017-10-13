@@ -99,7 +99,7 @@ module.exports = function() {
                         Email.signoutConfirmSend({
                             name: email,
                             userid: newUser.shortId,
-                            from: 'no-reply@mail.pomaci.com',
+                            from: 'no-reply@mail.tundide.com',
                             to: newUser.email,
                             subject: 'Por favor confirme su direccion de correo electronico'
                         }, (error) => {

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from '../../shared/components/calendar/calendar.component';
+import { AppointmentService } from './appointment.service';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -43,7 +44,8 @@ interface IReservation {
 }
 
 @Component({
-    selector: 'appointment',
+    selector: 'appointments',
+    styleUrls: ['appointment.list.component.scss'],
     templateUrl: 'appointment.list.component.html'
 })
 export class AppointmentListComponent implements OnInit {
@@ -124,9 +126,24 @@ export class AppointmentListComponent implements OnInit {
 
     constructor(private router: Router,
         private toastyService: ToastyService,
+        private appointmentService: AppointmentService,
         private modalService: NgbModal,
         private toastyConfig: ToastyConfig) {
         this.toastyConfig.theme = 'bootstrap';
+    }
+
+    changeReservation() {
+        this.modalService.open(this.modal).result.then((result) => {
+            if (result) {
+                this.toastyService.success({
+                    msg: 'Se solicito el cambio de horario',
+                    showClose: true,
+                    theme: 'bootstrap',
+                    timeout: 5000,
+                    title: 'Solicitud de cambio de turno.'
+                });
+            }
+        });
     }
 
     eventClick(event) {
@@ -154,92 +171,92 @@ export class AppointmentListComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.reservationService.list()
-        //     .subscribe(res => {
-        //         if (res) {
-        //             _.forEach(<Array<IReservation>>res.data, (reservation, key) => {
-        //                 let startDate = moment(reservation.startDate);
-        //                 let endDate = moment(reservation.endDate);
+        this.appointmentService.list()
+            .subscribe(res => {
+                if (res) {
+                    _.forEach(<Array<IReservation>>res.data, (appointment, key) => {
+                        let startDate = moment(appointment.startDate);
+                        let endDate = moment(appointment.endDate);
 
-        //                 let evento = {
-        //                     actions: [],
-        //                     color: colors.green,
-        //                     draggable: true,
-        //                     end: endDate.toDate(),
-        //                     meta: {
-        //                         myPub: reservation.myPub,
-        //                         publication: reservation.publicationId,
-        //                         reservation: reservation._id
-        //                     },
-        //                     resizable: {
-        //                         afterEnd: true,
-        //                         beforeStart: true
-        //                     },
-        //                     start: startDate.toDate(),
-        //                     title: reservation.shortId + ' - (' + startDate.format('HH:mm') + '-'
-        //                     + endDate.format('HH:mm') + ') ' + reservation.title
-        //                 };
-        //                 switch (reservation.status) {
-        //                     case 0:
-        //                         if (reservation.myPub) {
-        //                             evento.actions = [this.approveButton, this.changeReservationButton, this.cancelButton];
-        //                             evento.color = colors.blue;
-        //                         } else {
-        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
-        //                             evento.color = colors.yellow;
-        //                         }
-        //                         break;
-        //                     case 1:
-        //                         if (reservation.myPub) {
-        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
-        //                             evento.color = colors.green;
-        //                         } else {
-        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
-        //                             evento.color = colors.green;
-        //                         }
-        //                         break;
-        //                     case 2:
-        //                         if (reservation.myPub) {
-        //                             evento.actions = [this.cancelButton];
-        //                             evento.color = colors.yellow;
-        //                         } else {
-        //                             evento.actions = [this.approveButton, this.cancelButton];
-        //                             evento.color = colors.blue;
-        //                         }
-        //                         break;
-        //                     case 3:
-        //                         if (reservation.myPub) {
-        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
-        //                             evento.color = colors.green;
-        //                         } else {
-        //                             evento.actions = [this.changeReservationButton, this.cancelButton];
-        //                             evento.color = colors.green;
-        //                         }
-        //                         break;
-        //                     case 4:
-        //                         evento.actions = [];
-        //                         evento.color = colors.red;
-        //                         evento.resizable = {
-        //                             afterEnd: false,
-        //                             beforeStart: false
-        //                         };
-        //                         evento.draggable = false;
-        //                         break;
-        //                     case 5:
-        //                         evento.actions = [];
-        //                         evento.color = colors.red;
-        //                         evento.resizable = {
-        //                             afterEnd: false,
-        //                             beforeStart: false
-        //                         };
-        //                         evento.draggable = false;
-        //                         break;
-        //                 }
+                        let evento = {
+                            actions: [],
+                            color: colors.green,
+                            draggable: true,
+                            end: endDate.toDate(),
+                            meta: {
+                                myPub: appointment.myPub,
+                                publication: appointment.publicationId,
+                                reservation: appointment._id
+                            },
+                            resizable: {
+                                afterEnd: true,
+                                beforeStart: true
+                            },
+                            start: startDate.toDate(),
+                            title: appointment.shortId + ' - (' + startDate.format('HH:mm') + '-'
+                            + endDate.format('HH:mm') + ') ' + appointment.title
+                        };
+                        switch (appointment.status) {
+                            case 0:
+                                if (appointment.myPub) {
+                                    evento.actions = [this.approveButton, this.changeReservationButton, this.cancelButton];
+                                    evento.color = colors.blue;
+                                } else {
+                                    evento.actions = [this.changeReservationButton, this.cancelButton];
+                                    evento.color = colors.yellow;
+                                }
+                                break;
+                            case 1:
+                                if (appointment.myPub) {
+                                    evento.actions = [this.changeReservationButton, this.cancelButton];
+                                    evento.color = colors.green;
+                                } else {
+                                    evento.actions = [this.changeReservationButton, this.cancelButton];
+                                    evento.color = colors.green;
+                                }
+                                break;
+                            case 2:
+                                if (appointment.myPub) {
+                                    evento.actions = [this.cancelButton];
+                                    evento.color = colors.yellow;
+                                } else {
+                                    evento.actions = [this.approveButton, this.cancelButton];
+                                    evento.color = colors.blue;
+                                }
+                                break;
+                            case 3:
+                                if (appointment.myPub) {
+                                    evento.actions = [this.changeReservationButton, this.cancelButton];
+                                    evento.color = colors.green;
+                                } else {
+                                    evento.actions = [this.changeReservationButton, this.cancelButton];
+                                    evento.color = colors.green;
+                                }
+                                break;
+                            case 4:
+                                evento.actions = [];
+                                evento.color = colors.red;
+                                evento.resizable = {
+                                    afterEnd: false,
+                                    beforeStart: false
+                                };
+                                evento.draggable = false;
+                                break;
+                            case 5:
+                                evento.actions = [];
+                                evento.color = colors.red;
+                                evento.resizable = {
+                                    afterEnd: false,
+                                    beforeStart: false
+                                };
+                                evento.draggable = false;
+                                break;
+                        }
 
-        //                 this.calendar.addEvent(evento);
-        //             });
-        //         }
-        //     });
+                        this.calendar.addEvent(evento);
+                    });
+                }
+            });
     }
 
     eventCalled() {

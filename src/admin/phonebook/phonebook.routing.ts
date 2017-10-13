@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
-import { AppointmentListComponent } from './appointment.list.component';
+import { PhonebookListComponent } from './phonebook.list.component';
 import { AuthGuard } from '../../auth/auth-guard.service';
 
 const routes: Routes = [
     {
         canActivate: [AuthGuard],
-        component: AppointmentListComponent,
+        component: PhonebookListComponent,
         path: 'list'
     }
 ];

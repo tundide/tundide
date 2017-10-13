@@ -6,7 +6,7 @@ module.exports = function() {
         /**
          * File paths
          */
-        publishdirectory: '/opt/bitnami/apps/pomaci',
+        publishdirectory: '/opt/bitnami/apps/tundide',
         ssh: {
             host: '132.148.65.67',
             port: 22,
@@ -18,7 +18,7 @@ module.exports = function() {
             port: 22,
             username: 'strumentit',
             password: 'Strumentit34518147*',
-            publishdirectory: '/opt/bitnami/apps/pomaci'
+            publishdirectory: '/opt/bitnami/apps/tundide'
         },
         build: './public/',
         publish: './dist/',

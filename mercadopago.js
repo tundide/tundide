@@ -80,7 +80,7 @@ suscriptions.then(function(customer) {
 module.exports = {
     // let preapprovalData = {
     //     "payer_email": "mpanichella@live.com",
-    //     "back_url": "http://www.pomaci.com",
+    //     "back_url": "http://www.tundide.com",
     //     "reason": "Suscripcion mensual de Plata",
     //     "external_reference": "Plata-123456",
     //     "auto_recurring": {
@@ -180,7 +180,7 @@ module.exports = {
 
     // let preapprovalData = {
     //     "payer_email": "mpanichella@live.com",
-    //     "back_url": "http://www.pomaci.com",
+    //     "back_url": "http://www.tundide.com",
     //     "reason": "Suscripcion mensual de Plata",
     //     "external_reference": "Plata-123456",
     //     "auto_recurring": {

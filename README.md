@@ -1,4 +1,4 @@
-# Pomaci
+# Tundide
 
 Proyecto para la administracion y gestion de alquileres por hora. 
 
@@ -56,7 +56,7 @@ La subida a produccion se realiza Provisionando el entorno de *Produccion* desde
 
 ## Authors
 
-* **Pomaci Team** - [Pomaci](http://www.pomaci.com)
+* **Tundide Team** - [Tundide](http://www.tundide.com)
 
 ## License
 

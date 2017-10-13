@@ -1,24 +1,41 @@
 <div class="row">
     <div class="col-md-12">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button type="button" (click)="changeReservation()" class="btn btn-secondary"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-secondary">2</button>
+                <button type="button" class="btn btn-secondary">3</button>
+                <button type="button" class="btn btn-secondary">4</button>
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <button type="button" class="btn btn-secondary">5</button>
+                <button type="button" class="btn btn-secondary">6</button>
+                <button type="button" class="btn btn-secondary">7</button>
+            </div>
+            <div class="btn-group" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">8</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <div class="card">
             <calendar #calendar (eventclick)="eventClick($event)" (eventtimechange)="eventTimesChanged($event)" [events]="events" day="true" week="true" month="true" default="day"></calendar>
         </div>
     </div>
 </div>
 
-
 <ng-template ngbModalContainer #changeReservationModal let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Confirmar</h4>
+        <h4 class="modal-title">Confirmar Reserva</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
+        <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-    <div class="modal-body">
-        <p>Esta seguro que quiere descartar la publicaci&oacute;n actual?</p>
-    </div>
+    <appointment (change)="changeReservation($event)"></appointment>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="c(true)">Si</button>
-        <button type="button" class="btn btn-secondary" (click)="c(false)">No</button>
+        <button type="button" class="btn btn-secondary" (click)="c(true)">Confirmar Reserva</button>
+        <button type="button" class="btn btn-secondary" (click)="c(false)">Cancelar</button>
     </div>
 </ng-template>
