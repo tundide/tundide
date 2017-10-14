@@ -3,17 +3,23 @@ import { AuthService } from './auth.service';
 
 @Component({
   selector: 'signin',
-  styleUrls: [ 'signin.component.scss' ],
+  styleUrls: ['signin.component.scss'],
   templateUrl: 'signin.component.html'
 })
 export class SigninComponent {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    let token = localStorage.getItem('token');
+
+    if (token != null) {
+      window.location.href = '/admin/#/dashboard';
+    }
+  }
 
   submitForm(form: any): void {
     this.authService.signin(form.email, form.password).subscribe(
-        data => {
-                window.location.href = '/admin';
-              }
+      data => {
+        window.location.href = '/admin/#/dashboard';
+      }
     );
   }
 }
