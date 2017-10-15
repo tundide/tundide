@@ -22,7 +22,7 @@ export class AppointmentService {
     list() {
         let token = localStorage.getItem('token');
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.get(this.host + '/appointments/list', { headers: headers }) // TODO: Listar los turnos del usuario
+        return this.http.get(this.host + '/appointment/list', { headers: headers }) // TODO: Listar los turnos del usuario
             .map((response: Response) => {
                 const result = response.json();
                 return result;

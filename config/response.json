@@ -89,20 +89,20 @@
             "default": { "code": 2500, "error": "Unespected Error", "message": "Ocurrio un error inesperado" }
         }
     },
-    "publication": {
+    "appointment": {
         "code": 3000,
         "success": {
             "status": 200,
             "retrievedSuccessfully": {
                 "status": "accepted",
-                "message": "Publicaci&oacute;n recuperada correctamente"
+                "message": "Cita recuperada correctamente"
             }
         },
         "successcreated": {
             "status": 201,
-            "publicatedSuccessfully": {
+            "appointmentSuccessfully": {
                 "status": "accepted",
-                "message": "Publicaci&oacute;n creada correctamente"
+                "message": "Cita creada correctamente"
             }
         },
         "successnocontent": {
@@ -110,14 +110,18 @@
 
             "updatedSuccessfully": {
                 "status": "accepted",
-                "message": "Publicaci&oacute;n actualizada correctamente"
+                "message": "Cita actualizada correctamente"
             }
         },
         "notfound": {
             "status": 404,
-            "publicationNotExist": {
+            "appointmentsNotExist": {
                 "status": "accepted",
-                "message": "Publicaci&oacute;n no encontrada"
+                "message": "Actualmente no hay citas registradas"
+            },
+            "appointmentNotExist": {
+                "status": "accepted",
+                "message": "Cita no encontrada"
             }
         },
         "badrequest": {
