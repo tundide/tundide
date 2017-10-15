@@ -29,7 +29,7 @@ export class TopNavComponent implements OnInit {
 
     logout() {
         this.authService.logout();
-        this.router.navigate(['/']);
+        window.location.href = '/';
     }
 
     ngOnInit() {
