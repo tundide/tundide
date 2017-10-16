@@ -9,18 +9,11 @@ let Schema = mongoose.Schema;
 let AppointmentSchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
     description: String,
-    configuration: {
-        category: Number,
-        subcategory: Number,
-        showCalendar: Boolean,
-        showContactInformation: Boolean,
-        subcategory: Number
-    },
     endDate: { type: Date, default: Date.now },
     startDate: { type: Date, default: Date.now },
     shortId: String,
     status: { type: Number, default: 1 },
-    title: String,
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
     client: { type: Schema.Types.ObjectId, ref: 'Client' }
 });
 // TODO: Acomodar la documentacion

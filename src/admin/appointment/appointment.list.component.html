@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="btn-toolbar" role="toolbar" aria-label="Barra de acciones">
             <div class="btn-group mr-2" role="group" aria-label="Acciones principales sobre las citas">
-                <button type="button" ngbTooltip="Agregar cita" (click)="changeReservation()" class="btn btn-secondary"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></button>
+                <button type="button" ngbTooltip="Agregar cita" (click)="addReservation()" class="btn btn-secondary"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i></button>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <appointment (change)="changeReservation($event)"></appointment>
+    <appointment (changeAppointment)="changeAppointment($event)"></appointment>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="c(true)">Confirmar Reserva</button>
         <button type="button" class="btn btn-secondary" (click)="c(false)">Cancelar</button>

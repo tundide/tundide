@@ -1,4 +1,4 @@
-export class Reservation {
+export class Appointment {
     id: string;
     client: string;
     endDate: Date;

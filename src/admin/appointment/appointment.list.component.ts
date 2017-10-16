@@ -4,6 +4,7 @@ import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from '../../shared/components/calendar/calendar.component';
 import { AppointmentService } from './appointment.service';
+import { Appointment } from './appointment.model';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
@@ -32,14 +33,13 @@ const colors: any = {
     }
 };
 
-interface IReservation {
+interface IAppointment {
     _id: string;
     startDate: Date;
     endDate: Date;
-    myPub: any;
-    publicationId: string;
+    appointmentId: string;
     shortId: string;
-    title: string;
+    description: string;
     status: number;
 }
 
@@ -87,15 +87,6 @@ export class AppointmentListComponent implements OnInit {
                 event.actions = [this.changeReservationButton, this.cancelButton];
                 event.color = colors.green;
             }
-            // this.reservationService.approve(event.meta.publication, { 'reservation': event.meta.reservation }).subscribe(res => {
-            //     this.toastyService.success({
-            //         msg: 'Se aprobo el turno',
-            //         showClose: true,
-            //         theme: 'bootstrap',
-            //         timeout: 5000,
-            //         title: 'Solicitud de turno aprobada.'
-            //     });
-            // });
         }
     };
 
@@ -105,24 +96,27 @@ export class AppointmentListComponent implements OnInit {
 
             this.modalService.open(this.modal).result.then((result) => {
                 if (result) {
-                    if (event.meta.myPub) {
-                        event.actions = [this.changeReservationButton, this.cancelButton];
-                        event.color = colors.yellow;
-                    } else {
-                        event.actions = [this.approveButton, this.cancelButton];
-                        event.color = colors.blue;
-                    }
-                    this.toastyService.success({
-                        msg: 'Se solicito el cambio de horario',
-                        showClose: true,
-                        theme: 'bootstrap',
-                        timeout: 5000,
-                        title: 'Solicitud de cambio de turno.'
-                    });
+                    this.appointmentService.update(event.meta.appointment._id, {
+                        'description': event.meta.appointment.description,
+                        'endDate': event.end,
+                        'id': event.meta.appointment._id,
+                        'startDate': event.start
+                    })
+                        .subscribe(data => {
+                            this.toastyService.success({
+                                msg: data.message,
+                                showClose: true,
+                                theme: 'bootstrap',
+                                timeout: 5000,
+                                title: 'Reserva solicitada con exito.'
+                            });
+                        });
                 }
             });
         }
     };
+
+    private appointment: Appointment;
 
     constructor(private router: Router,
         private toastyService: ToastyService,
@@ -132,16 +126,20 @@ export class AppointmentListComponent implements OnInit {
         this.toastyConfig.theme = 'bootstrap';
     }
 
-    changeReservation() {
+    addReservation() {
+        this.appointment = new Appointment();
         this.modalService.open(this.modal).result.then((result) => {
             if (result) {
-                this.toastyService.success({
-                    msg: 'Se solicito el cambio de horario',
-                    showClose: true,
-                    theme: 'bootstrap',
-                    timeout: 5000,
-                    title: 'Solicitud de cambio de turno.'
-                });
+                this.appointmentService.save(this.appointment)
+                    .subscribe(data => {
+                        this.toastyService.success({
+                            msg: data.message,
+                            showClose: true,
+                            theme: 'bootstrap',
+                            timeout: 5000,
+                            title: 'Reserva solicitada con exito.'
+                        });
+                    });
             }
         });
     }
@@ -151,30 +149,31 @@ export class AppointmentListComponent implements OnInit {
     }
 
     eventTimesChanged(event) {
-        // this.reservationService.change(event.meta.publication, {
-        //     'endDate': event.end,
-        //     'id': event.meta.reservation,
-        //     'startDate': event.start
-        // }).subscribe(res => {
-        //     if (res.status === 200) {
-        //         event.actions = [this.cancelButton];
-        //         event.color = colors.yellow;
-        //         this.toastyService.info({
-        //             msg: res.data.message,
-        //             showClose: true,
-        //             theme: 'bootstrap',
-        //             timeout: 10000,
-        //             title: 'Solicitud de cambio de turno generada.'
-        //         });
-        //     }
-        // });
+        this.appointmentService.update(event.meta.appointment._id, {
+            'description': event.meta.appointment.description,
+            'endDate': event.end,
+            'id': event.meta.appointment._id,
+            'startDate': event.start
+        }).subscribe(res => {
+            if (res.status === 200) {
+                event.actions = [this.cancelButton];
+                event.color = colors.yellow;
+                this.toastyService.info({
+                    msg: res.data.message,
+                    showClose: true,
+                    theme: 'bootstrap',
+                    timeout: 10000,
+                    title: 'Solicitud de cambio de turno generada.'
+                });
+            }
+        });
     }
 
     ngOnInit() {
         this.appointmentService.list()
             .subscribe(res => {
                 if (res) {
-                    _.forEach(<Array<IReservation>>res.data, (appointment, key) => {
+                    _.forEach(<Array<IAppointment>>res.data, (appointment, key) => {
                         let startDate = moment(appointment.startDate);
                         let endDate = moment(appointment.endDate);
 
@@ -184,9 +183,7 @@ export class AppointmentListComponent implements OnInit {
                             draggable: true,
                             end: endDate.toDate(),
                             meta: {
-                                myPub: appointment.myPub,
-                                publication: appointment.publicationId,
-                                reservation: appointment._id
+                                appointment: appointment
                             },
                             resizable: {
                                 afterEnd: true,
@@ -194,64 +191,10 @@ export class AppointmentListComponent implements OnInit {
                             },
                             start: startDate.toDate(),
                             title: appointment.shortId + ' - (' + startDate.format('HH:mm') + '-'
-                            + endDate.format('HH:mm') + ') ' + appointment.title
+                            + endDate.format('HH:mm') + ') ' + appointment.description
                         };
-                        switch (appointment.status) {
-                            case 0:
-                                if (appointment.myPub) {
-                                    evento.actions = [this.approveButton, this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.blue;
-                                } else {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.yellow;
-                                }
-                                break;
-                            case 1:
-                                if (appointment.myPub) {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                } else {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                }
-                                break;
-                            case 2:
-                                if (appointment.myPub) {
-                                    evento.actions = [this.cancelButton];
-                                    evento.color = colors.yellow;
-                                } else {
-                                    evento.actions = [this.approveButton, this.cancelButton];
-                                    evento.color = colors.blue;
-                                }
-                                break;
-                            case 3:
-                                if (appointment.myPub) {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                } else {
-                                    evento.actions = [this.changeReservationButton, this.cancelButton];
-                                    evento.color = colors.green;
-                                }
-                                break;
-                            case 4:
-                                evento.actions = [];
-                                evento.color = colors.red;
-                                evento.resizable = {
-                                    afterEnd: false,
-                                    beforeStart: false
-                                };
-                                evento.draggable = false;
-                                break;
-                            case 5:
-                                evento.actions = [];
-                                evento.color = colors.red;
-                                evento.resizable = {
-                                    afterEnd: false,
-                                    beforeStart: false
-                                };
-                                evento.draggable = false;
-                                break;
-                        }
+                        evento.actions = [this.approveButton, this.changeReservationButton, this.cancelButton];
+                        evento.color = colors.blue;
 
                         this.calendar.addEvent(evento);
                     });
@@ -259,6 +202,9 @@ export class AppointmentListComponent implements OnInit {
             });
     }
 
+    changeAppointment(appointment: Appointment) {
+        this.appointment = appointment;
+    }
     eventCalled() {
         this.isActive = !this.isActive;
     }

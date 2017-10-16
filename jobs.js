@@ -6,13 +6,12 @@
 
 let CronJob = require('cron').CronJob;
 
-let jobSendMailPendingToQualify = new CronJob('5 * * * * *', function() {
+let jobSendMailAppointmentToExpire = new CronJob('5 * * * * *', function() {
 
-    console.log('Se enviaron 10 emails para calificar publicacion');
+    console.log('Se avisaron a 10 clientes que su cita se acerca.');
 }, null, true);
 
-jobSendMailPendingToQualify.start();
-
+jobSendMailAppointmentToExpire.start();
 
 let jobLockExpiredUser = new CronJob('5 * * * * *', function() {
     console.log('Se bloquearon 10 usuarios vencidos');
@@ -32,14 +31,9 @@ let jobDeleteExpiredPublications = new CronJob('5 * * * * *', function() {
 
 jobDeleteExpiredPublications.start();
 
-let jobCalculateUserScore = new CronJob('5 * * * * *', function() {
-    console.log('Se calcularon los scores de los usuarios');
-}, null, true);
-
-jobCalculateUserScore.start();
-
 let jobCalculatePublicationScore = new CronJob('5 * * * * *', function() {
     console.log('Se calcularon los scores de las publicaciones');
 }, null, true);
 
 jobCalculatePublicationScore.start();
+// TODO: Enviar email sobre encuesta de como te atendieron.
