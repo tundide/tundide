@@ -70,4 +70,21 @@ export class AppointmentService {
                 return Observable.throw(error.json());
             });
     }
+    
+    /**
+    * Delete the appointment
+    */
+    delete(id: string) {
+        let token = localStorage.getItem('token');
+        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
+        return this.http.delete(this.host + '/appointment/' + id, { headers: headers })
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    }
 }

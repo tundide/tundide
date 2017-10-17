@@ -111,6 +111,10 @@
             "updatedSuccessfully": {
                 "status": "accepted",
                 "message": "Cita actualizada correctamente"
+            },
+            "deletedSuccessfully": {
+                "status": "accepted",
+                "message": "Cita eliminada correctamente"
             }
         },
         "notfound": {

@@ -58,35 +58,23 @@ export class AppointmentListComponent implements OnInit {
     public cancelButton = {
         label: '<i class="fa fa-fw fa-times" title="Cancelar turno"></i>',
         onClick: ({ event }: { event: CalendarEvent }): void => {
-            // this.reservationService.cancel(event.meta.publication, { 'reservation': event.meta.reservation }).subscribe(res => {
-            //     if (event.meta.myPub) {
-            //         event.actions = [];
-            //         event.color = colors.red;
-            //     } else {
-            //         event.actions = [];
-            //         event.color = colors.red;
-            //     }
-            //     this.toastyService.success({
-            //         msg: 'Se cancelo el turno solicitado',
-            //         showClose: true,
-            //         theme: 'bootstrap',
-            //         timeout: 5000,
-            //         title: 'Solicitud de cancelacion de turno.'
-            //     });
-            // });
-        }
-    };
-
-    public approveButton = {
-        label: '<i class="fa fa-fw fa-check" title="Aprobar turno"></i>',
-        onClick: ({ event }: { event: CalendarEvent }): void => {
-            if (event.meta.myPub) {
-                event.actions = [this.changeReservationButton, this.cancelButton];
-                event.color = colors.green;
-            } else {
-                event.actions = [this.changeReservationButton, this.cancelButton];
-                event.color = colors.green;
-            }
+            // TODO: id o _id ???????
+            this.appointmentService.delete(event.meta.appointment._id).subscribe(res => {
+                if (event.meta.myPub) {
+                    event.actions = [];
+                    event.color = colors.red;
+                } else {
+                    event.actions = [];
+                    event.color = colors.red;
+                }
+                this.toastyService.success({
+                    msg: 'Se cancelo el turno solicitado',
+                    showClose: true,
+                    theme: 'bootstrap',
+                    timeout: 5000,
+                    title: 'Solicitud de cancelacion de turno.'
+                });
+            });
         }
     };
 
@@ -108,7 +96,7 @@ export class AppointmentListComponent implements OnInit {
                                 showClose: true,
                                 theme: 'bootstrap',
                                 timeout: 5000,
-                                title: 'Reserva solicitada con exito.'
+                                title: 'Reserva modificada con exito.'
                             });
                         });
                 }
@@ -193,7 +181,7 @@ export class AppointmentListComponent implements OnInit {
                             title: appointment.shortId + ' - (' + startDate.format('HH:mm') + '-'
                             + endDate.format('HH:mm') + ') ' + appointment.description
                         };
-                        evento.actions = [this.approveButton, this.changeReservationButton, this.cancelButton];
+                        evento.actions = [this.changeReservationButton, this.cancelButton];
                         evento.color = colors.blue;
 
                         this.calendar.addEvent(evento);
