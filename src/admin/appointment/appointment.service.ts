@@ -39,7 +39,6 @@ export class AppointmentService {
     */
     save(appointment: Appointment) {
         const body = JSON.stringify(appointment);
-        console.log(body);
         let token = localStorage.getItem('token');
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
         return this.http.post(this.host + '/appointment/', body, { headers: headers })
@@ -70,7 +69,7 @@ export class AppointmentService {
                 return Observable.throw(error.json());
             });
     }
-    
+
     /**
     * Delete the appointment
     */

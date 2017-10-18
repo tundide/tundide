@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routing } from './phonebook.routing';
 import { AuthGuard } from '../../auth/auth-guard.service';
-import { PhonebookNewComponent } from './phonebook.new.component';
+import { ClientNewComponent } from './client.new.component';
 import { PhonebookListComponent } from './phonebook.list.component';
 import { PhonebookService } from './phonebook.service';
 import { SharedModule } from '../../shared/shared.module';
@@ -12,8 +12,8 @@ import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    declarations: [PhonebookNewComponent, PhonebookListComponent],
-    exports: [PhonebookNewComponent, PhonebookListComponent],
+    declarations: [ClientNewComponent, PhonebookListComponent],
+    exports: [ClientNewComponent, PhonebookListComponent],
     imports: [routing,
         FormsModule,
         RouterModule,

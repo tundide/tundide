@@ -1,0 +1,20 @@
+<div class="form-group row">
+    <label for="formName" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control form-control-sm" id="formName" aria-describedby="nameHelp" place-holder="Nombre" required (change)="clientChange()" [(ngModel)]="client.firstName">
+    </div>
+    <label for="formLastName" class="col-sm-2 col-form-label col-form-label-sm">Apellido</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control form-control-sm" id="formLastName" aria-describedby="lastNameHelp" place-holder="Apellido" required (change)="clientChange()" [(ngModel)]="client.lastName">
+    </div>
+</div>
+<div class="form-group row">
+    <label for="formDocumento" class="col-sm-2 col-form-label col-form-label-sm">Documento</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control form-control-sm" id="formDocumento" aria-describedby="documentHelp" place-holder="Documento" required (change)="clientChange()" [(ngModel)]="client.documment">
+    </div>
+    <label for="formEmail" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control form-control-sm" id="formEmail" aria-describedby="emailHelp" place-holder="Documento" required (change)="clientChange()" [(ngModel)]="client.email">
+    </div>
+</div>

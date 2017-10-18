@@ -58,15 +58,7 @@ export class AppointmentListComponent implements OnInit {
     public cancelButton = {
         label: '<i class="fa fa-fw fa-times" title="Cancelar turno"></i>',
         onClick: ({ event }: { event: CalendarEvent }): void => {
-            // TODO: id o _id ???????
             this.appointmentService.delete(event.meta.appointment._id).subscribe(res => {
-                if (event.meta.myPub) {
-                    event.actions = [];
-                    event.color = colors.red;
-                } else {
-                    event.actions = [];
-                    event.color = colors.red;
-                }
                 this.toastyService.success({
                     msg: 'Se cancelo el turno solicitado',
                     showClose: true,
@@ -74,6 +66,16 @@ export class AppointmentListComponent implements OnInit {
                     timeout: 5000,
                     title: 'Solicitud de cancelacion de turno.'
                 });
+
+                _.remove(this.calendar.events, {
+                    meta: {
+                        appointment: {
+                            _id: event.meta.appointment._id
+                        }
+                    }
+                });
+
+                this.calendar.refresh.next();
             });
         }
     };
@@ -85,9 +87,9 @@ export class AppointmentListComponent implements OnInit {
             this.modalService.open(this.modal).result.then((result) => {
                 if (result) {
                     this.appointmentService.update(event.meta.appointment._id, {
+                        '_id': event.meta.appointment._id,
                         'description': event.meta.appointment.description,
                         'endDate': event.end,
-                        'id': event.meta.appointment._id,
                         'startDate': event.start
                     })
                         .subscribe(data => {
@@ -119,14 +121,40 @@ export class AppointmentListComponent implements OnInit {
         this.modalService.open(this.modal).result.then((result) => {
             if (result) {
                 this.appointmentService.save(this.appointment)
-                    .subscribe(data => {
+                    .subscribe(response => {
                         this.toastyService.success({
-                            msg: data.message,
+                            msg: response.message,
                             showClose: true,
                             theme: 'bootstrap',
                             timeout: 5000,
                             title: 'Reserva solicitada con exito.'
                         });
+
+                        this.appointment._id = response.data._id;
+
+                        let startDate = moment(this.appointment.startDate);
+                        let endDate = moment(this.appointment.endDate);
+
+                        let evento = {
+                            actions: [],
+                            color: colors.green,
+                            draggable: true,
+                            end: endDate.toDate(),
+                            meta: {
+                                appointment: this.appointment
+                            },
+                            resizable: {
+                                afterEnd: true,
+                                beforeStart: true
+                            },
+                            start: startDate.toDate(),
+                            title: '(' + startDate.format('HH:mm') + '-'
+                            + endDate.format('HH:mm') + ') ' + this.appointment.description
+                        };
+                        evento.actions = [this.changeReservationButton, this.cancelButton];
+                        evento.color = colors.blue;
+
+                        this.calendar.addEvent(evento);
                     });
             }
         });
@@ -138,9 +166,9 @@ export class AppointmentListComponent implements OnInit {
 
     eventTimesChanged(event) {
         this.appointmentService.update(event.meta.appointment._id, {
+            '_id': event.meta.appointment._id,
             'description': event.meta.appointment.description,
             'endDate': event.end,
-            'id': event.meta.appointment._id,
             'startDate': event.start
         }).subscribe(res => {
             if (res.status === 200) {
@@ -178,7 +206,7 @@ export class AppointmentListComponent implements OnInit {
                                 beforeStart: true
                             },
                             start: startDate.toDate(),
-                            title: appointment.shortId + ' - (' + startDate.format('HH:mm') + '-'
+                            title: '(' + startDate.format('HH:mm') + '-'
                             + endDate.format('HH:mm') + ') ' + appointment.description
                         };
                         evento.actions = [this.changeReservationButton, this.cancelButton];

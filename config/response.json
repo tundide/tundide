@@ -139,69 +139,54 @@
             "database": { "code": 3501, "error": "Mongoose error", "message": "Ocurrio un error de conexion con la base de datos" }
         }
     },
-    "reservation": {
+    "client": {
         "code": 4000,
         "success": {
             "status": 200,
             "retrievedSuccessfully": {
                 "status": "accepted",
-                "message": "Reservaci&oacute;n recuperada correctamente"
-            },
-            "updatedSuccessfully": {
-                "status": "accepted",
-                "message": "Reservaci&oacute;n actualizada correctamente"
-            },
-            "approvedSuccessfully": {
-                "status": "approved",
-                "message": "Reservaci&oacute;n aprobada correctamente"
-            },
-            "changedSuccessfully": {
-                "status": "changed",
-                "message": "Reservaci&oacute;n modificada correctamente. Recuerde que el cambio no se hara efectivo hasta que la otra parte apruebe el cambio."
-            },
-            "canceledSuccessfully": {
-                "status": "canceled",
-                "message": "Reservaci&oacute;n cancelada correctamente"
+                "message": "Cliente recuperado correctamente"
             }
         },
         "successcreated": {
             "status": 201,
-            "reservedSuccessfully": {
+            "clientSuccessfully": {
                 "status": "accepted",
-                "message": "Reservaci&oacute;n realizada correctamente"
-            },
-            "reservedPendingApprove": {
-                "status": "pending",
-                "message": "Reserva pendiente de aprovacion del anunciante"
+                "message": "Cliente creado correctamente"
             }
         },
         "successnocontent": {
             "status": 204,
-            "reservationNotChanged": {
+
+            "updatedSuccessfully": {
                 "status": "accepted",
-                "message": "No hay cambios en la Reservaci&oacute;n"
+                "message": "Cliente actualizado correctamente"
+            },
+            "deletedSuccessfully": {
+                "status": "accepted",
+                "message": "Cliente eliminado correctamente"
             }
         },
         "notfound": {
             "status": 404,
-            "reservationNotExist": {
+            "clientsNotExist": {
                 "status": "accepted",
-                "message": "Reservaci&oacute;n no encontrada"
+                "message": "Actualmente no hay clientes registrados"
+            },
+            "clientNotExist": {
+                "status": "accepted",
+                "message": "Cliente no encontrado"
             }
         },
         "badrequest": {
             "status": 400,
-            "invalidData": { "code": 4401, "error": "invalid data", "message": "Los datos proporcionados son inv&aacute;lidos" },
-            "reservationEmpty": { "code": 4402, "error": "parameter reservation can not be null/empty", "message": "El campo 'Reservacion' no puede estar vacio" }
-        },
-        "unprocessableentity": {
-            "status": 422,
-            "alreadyBooked": { "code": 4401, "error": "Schedule already booked", "message": "Ya existe una reserva realizada en este horario" }
+            "titleEmpty": { "code": 3401, "error": "parameter title can not be null/empty", "message": "El campo 'Titulo' no puede estar vacio" },
+            "descriptionEmpty": { "code": 3402, "error": "parameter description can not be null/empty", "message": "El campo 'Descripci&oacute;n' no puede estar vacio" }
         },
         "internalservererror": {
             "status": 500,
-            "default": { "code": 4500, "error": "Unespected Error", "message": "Ocurrio un error inesperado" },
-            "database": { "code": 4501, "error": "Mongoose error", "message": "Ocurrio un error de conexion con la base de datos" }
+            "default": { "code": 3500, "error": "Unespected Error", "message": "Ocurrio un error inesperado" },
+            "database": { "code": 3501, "error": "Mongoose error", "message": "Ocurrio un error de conexion con la base de datos" }
         }
     },
     "review": {

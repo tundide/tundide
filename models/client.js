@@ -1,10 +1,10 @@
 let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 let clientSchema = mongoose.Schema({
-    id: String,
     firstName: String,
     lastName: String,
-    dni: Number,
+    document: Number,
     email: String,
     cellPhone: String,
     company: { type: Schema.Types.ObjectId, ref: 'Company' }

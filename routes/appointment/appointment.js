@@ -40,8 +40,8 @@ router.post('/', session.authorize(), function(req, res) {
     app.endDate = req.body.endDate;
     app.shortId = 'AP-' + shortid.generate();
 
-    app.save().then(function(doc) { // TODO: Corregir las respuestas ya que no son mas publicaciones
-            EnviarEmail(app);
+    app.save().then(function(doc) {
+            // EnviarEmail(app);
             res.status(appointmentResponse.successcreated.status).json(
                 new Response(appointmentResponse.successcreated.appointmentSuccessfully, doc)
             );
@@ -157,7 +157,9 @@ router.patch('/:id', session.authorize(), function(req, res) {
  * 
  */
 router.delete('/:id', session.authorize(), function(req, res) {
-    Appointment.remove({ _id: req.body.id }, function(err) {
+    let appointmentId = new mongoose.Types.ObjectId(req.params.id);
+
+    Appointment.remove({ _id: appointmentId }, function(err) {
         if (err) {
             res.status(appointmentResponse.internalservererror.status).json(
                 new Response(appointmentResponse.internalservererror.database, err)

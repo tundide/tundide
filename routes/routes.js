@@ -2,6 +2,7 @@ module.exports = function(app, passport, mongoose) {
     let auth = require('./auth/auth.js')();
     let location = require('./shared/location.js');
     let appointment = require('./appointment/appointment.js');
+    let client = require('./client/client.js');
     let favorite = require('./user/favorite.js');
     let message = require('./user/message.js');
     let notifications = require('./billing/notifications.js');
@@ -10,6 +11,7 @@ module.exports = function(app, passport, mongoose) {
     let index = require('./index');
 
     app.use('/appointment', appointment);
+    app.use('/client', client);
     app.use('/favorite', favorite);
     app.use('/message', message);
     app.use('/notifications', notifications);
