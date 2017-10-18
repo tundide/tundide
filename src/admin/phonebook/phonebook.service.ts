@@ -18,12 +18,12 @@ export class PhonebookService {
     ) { }
 
     /**
-     * Get phonebook
+     * Get client
      */
     list() {
         let token = localStorage.getItem('token');
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.get(this.host + '/client/list', { headers: headers }) // TODO: Listar los turnos del usuario
+        return this.http.get(this.host + '/client/list', { headers: headers }) // TODO: Listar los clientes del usuario
             .map((response: Response) => {
                 const result = response.json();
                 return result;
