@@ -37,7 +37,7 @@ router.get('/', cache.cache, function(req, res) {
             );
         };
         if (provinces) {
-            client.set(req.baseUrl, JSON.stringify(provinces), 'EX', 86400);
+            // client.set(req.baseUrl, JSON.stringify(provinces), 'EX', 86400); // TODO: Corregir el cache
             return res.status(locationResponse.success.status).json(
                 new Response(locationResponse.success.retrievedSuccessfully, provinces)
             );

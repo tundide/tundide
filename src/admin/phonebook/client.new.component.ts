@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { AuthService } from '../../auth/auth.service';
 import { PhonebookService } from './phonebook.service';
+import { LocationService } from '../../shared/location.service';
 import { Client } from './client.model';
 import * as _ from 'lodash';
 
@@ -12,19 +14,37 @@ import * as _ from 'lodash';
 })
 
 export class ClientNewComponent implements OnInit {
+    public provinces = [];
+
     private roles: Array<String>;
     private client: Client;
+    private clientGroup: FormGroup;
 
     constructor(private authService: AuthService,
+        private locationService: LocationService,
+        private formBuilder: FormBuilder,
         private toastyService: ToastyService,
         private toastyConfig: ToastyConfig,
         private phonebookService: PhonebookService) {
         this.toastyConfig.theme = 'bootstrap';
+
+        this.clientGroup = this.formBuilder.group({
+            firstName: this.formBuilder.control('', [Validators.required]),
+            location: this.formBuilder.group({
+                province: this.formBuilder.control('', [Validators.required])
+            })
+        });
     }
 
     ngOnInit() {
         this.client = new Client();
         this.roles = this.authService.getUserCredentials().roles;
+
+        this.locationService.list().subscribe(
+            res => {
+                this.provinces = res.data;
+            }
+        );
     }
 
     hasRole(role) {
