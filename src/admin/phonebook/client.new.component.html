@@ -15,19 +15,19 @@
                     <label for="formName" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
                     <div class="col-sm-4">
                         <input type="text" formControlName="firstName" class="form-control form-control-sm" id="formName" aria-describedby="nameHelp" place-holder="Nombre" required>
-                    </div>
-                    <div ngxErrors="firstName">
-                        <div class="error" ngxError="required">
-                            El nombre es requerido
+                        <div ngxErrors="firstName">
+                            <div class="error" ngxError="required">
+                                El nombre es requerido
+                            </div>
                         </div>
                     </div>
                     <label for="formLastName" class="col-sm-2 col-form-label col-form-label-sm">Apellido</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="formLastName" aria-describedby="lastNameHelp" place-holder="Apellido" required>
-                    </div>
-                    <div ngxErrors="lastName">
-                        <div class="error" ngxError="required">
-                            El apellido es requerido
+                        <input type="text" formControlName="lastName" class="form-control form-control-sm" id="formLastName" aria-describedby="lastNameHelp" place-holder="Apellido" required>
+                        <div ngxErrors="lastName">
+                            <div class="error" ngxError="required">
+                                El apellido es requerido
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,11 +55,11 @@
                     </div>
                     <label for="formPlace" class="col-sm-2 col-form-label col-form-label-sm">Localidad</label>
                     <div class="col-sm-4">
-                        <!-- <ng-template #rt let-r="result" let-t="term">
+                        <ng-template #rt let-r="result" let-t="term">
                             {{ r.description}} - ({{ r.zip}})
                         </ng-template>
                         <input id="inputPlace" formControlName="place" name="place" [class.errors]="place.hasError('*', ['dirty'])" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="placeChange($event)"
-                            [ngbTypeahead]="searchLocation" /> -->
+                            [ngbTypeahead]="searchLocation" />
                     </div>
                 </div>
                 <div class="form-group row">

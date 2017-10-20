@@ -30,7 +30,9 @@ export class ClientNewComponent implements OnInit {
 
         this.clientGroup = this.formBuilder.group({
             firstName: this.formBuilder.control('', [Validators.required]),
+            lastName: this.formBuilder.control('', [Validators.required]),
             location: this.formBuilder.group({
+                place: this.formBuilder.control('', [Validators.required]),
                 province: this.formBuilder.control('', [Validators.required])
             })
         });
