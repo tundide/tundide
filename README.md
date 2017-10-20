@@ -9,7 +9,7 @@ Para comenzar a utilizar el proyecto debe realizar la instalacion basica del pro
 ### Prerequisites
 
 Node 8.1.3
-MongoDB
+MongoDB 3.4.2
 
 ### Installing
 

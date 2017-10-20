@@ -157,7 +157,10 @@
         },
         "successnocontent": {
             "status": 204,
-
+            "clientsNotFound": {
+                "status": "accepted",
+                "message": "Actualmente no hay clientes registrados"
+            },
             "updatedSuccessfully": {
                 "status": "accepted",
                 "message": "Cliente actualizado correctamente"
@@ -169,10 +172,6 @@
         },
         "notfound": {
             "status": 404,
-            "clientsNotExist": {
-                "status": "accepted",
-                "message": "Actualmente no hay clientes registrados"
-            },
             "clientNotExist": {
                 "status": "accepted",
                 "message": "Cliente no encontrado"

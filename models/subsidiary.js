@@ -5,8 +5,8 @@ let subsidiarySchema = mongoose.Schema({
     id: { type: Schema.Types.ObjectId },
     code: String,
     description: String,
-    appointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
-    machines: [{type: Schema.Types.ObjectId, ref: 'Machine'}]
+    appointments: [{ type: Schema.Types.ObjectId, ref: 'Appointment' }],
+    terminals: [{ type: Schema.Types.ObjectId, ref: 'Terminal' }]
 });
 
 /**
@@ -18,6 +18,6 @@ let subsidiarySchema = mongoose.Schema({
  * @property {String}               code             - Code to identify the subsidiary
  * @property {String}               description      - Description of the subsidiary
  * @property {Array<Appointment>}   appointments     - List of subsidiary appointments
- * @property {Array<Machine>}       machines         - List of subsidiary machines
+ * @property {Array<Terminal>}      terminals        - List of subsidiary terminals
  */
 module.exports = mongoose.model('Subsidiary', subsidiarySchema);

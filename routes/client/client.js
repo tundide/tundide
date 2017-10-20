@@ -141,8 +141,8 @@ router.get('/list', session.authorize(), function(req, res) {
                 new Response(clientResponse.success.retrievedSuccessfully, clients)
             );
         } else {
-            return res.status(clientResponse.notfound.status).json(
-                new Response(clientResponse.notfound.clientsNotExist)
+            return res.status(clientResponse.successnocontent.status).json(
+                new Response(clientResponse.successnocontent.clientsNotFound)
             );
         }
     });
