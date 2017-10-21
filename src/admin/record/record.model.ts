@@ -1,4 +1,4 @@
-export class Client {
+export class Record {
     _id: string;
     firstName: string;
     lastName: string;

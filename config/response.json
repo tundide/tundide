@@ -107,7 +107,10 @@
         },
         "successnocontent": {
             "status": 204,
-
+            "appointmentsNotFound": {
+                "status": "accepted",
+                "message": "Actualmente no hay citas registradas"
+            },
             "updatedSuccessfully": {
                 "status": "accepted",
                 "message": "Cita actualizada correctamente"
@@ -119,10 +122,6 @@
         },
         "notfound": {
             "status": 404,
-            "appointmentsNotExist": {
-                "status": "accepted",
-                "message": "Actualmente no hay citas registradas"
-            },
             "appointmentNotExist": {
                 "status": "accepted",
                 "message": "Cita no encontrada"
@@ -139,42 +138,42 @@
             "database": { "code": 3501, "error": "Mongoose error", "message": "Ocurrio un error de conexion con la base de datos" }
         }
     },
-    "client": {
+    "contact": {
         "code": 4000,
         "success": {
             "status": 200,
             "retrievedSuccessfully": {
                 "status": "accepted",
-                "message": "Cliente recuperado correctamente"
+                "message": "Contacto recuperado correctamente"
             }
         },
         "successcreated": {
             "status": 201,
-            "clientSuccessfully": {
+            "contactSuccessfully": {
                 "status": "accepted",
-                "message": "Cliente creado correctamente"
+                "message": "Contacto creado correctamente"
             }
         },
         "successnocontent": {
             "status": 204,
-            "clientsNotFound": {
+            "contactsNotFound": {
                 "status": "accepted",
-                "message": "Actualmente no hay clientes registrados"
+                "message": "Actualmente no hay contactos registrados"
             },
             "updatedSuccessfully": {
                 "status": "accepted",
-                "message": "Cliente actualizado correctamente"
+                "message": "Contacto actualizado correctamente"
             },
             "deletedSuccessfully": {
                 "status": "accepted",
-                "message": "Cliente eliminado correctamente"
+                "message": "Contacto eliminado correctamente"
             }
         },
         "notfound": {
             "status": 404,
-            "clientNotExist": {
+            "contactNotExist": {
                 "status": "accepted",
-                "message": "Cliente no encontrado"
+                "message": "contacto no encontrado"
             }
         },
         "badrequest": {

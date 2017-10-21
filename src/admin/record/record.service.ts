@@ -3,14 +3,14 @@ import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ErrorService } from '../../shared/errors/error.service';
 import { SocketService } from '../../shared/socket.service';
-import { Contact } from './contact.model';
+import { Record } from './record.model';
 
 /**
  * Manage phonebook.
- * @module PhonebookService
+ * @module RecordService
  */
 @Injectable()
-export class PhonebookService {
+export class RecordService {
     private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
     constructor(public http: Http,
@@ -37,7 +37,7 @@ export class PhonebookService {
     /**
     * Save the contact
     */
-    save(contact: Contact) {
+    save(contact: Record) {
         const body = JSON.stringify(contact);
         let token = localStorage.getItem('token');
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });

@@ -1,10 +1,10 @@
 let express = require('express');
 let mongoose = require('mongoose');
 let router = express.Router();
-let Client = require('../../models/client');
+let Contact = require('../../models/contact');
 let shortid = require('shortid');
 let session = require('../auth/session');
-let clientResponse = require('../../config/response').client;
+let contactResponse = require('../../config/response').contact;
 let authenticationResponse = require('../../config/response').authentication;
 let Response = require('../shared/response.js');
 let Validators = require('../../lib/Validators/ObjectId.js');
@@ -12,9 +12,9 @@ let _ = require('lodash');
 
 // TODO:Completar ejemplos
 /**
- * @api {post} / Save client
- * @apiName saveclient
- * @apiGroup Client
+ * @api {post} / Save contact
+ * @apiName savecontact
+ * @apiGroup Contact
  * @apiExample {js} Service Example
  * {
  * 	"type":"service"
@@ -29,17 +29,27 @@ let _ = require('lodash');
  * 
  */
 router.post('/', session.authorize(), function(req, res) {
-    let cli = new Client();
+    let cli = new Contact();
     cli.user = req.user._id;
+    cli.firstName = req.body.firstName;
+    cli.lastName = req.body.lastName;
+    cli.document = req.body.document;
+    cli.contact.email = req.body.contact.email;
+    cli.contact.cellPhone = req.body.contact.cellPhone;
+    cli.contact.phone = req.body.contact.phone;
+    cli.location.province = req.body.location.province;
+    cli.location.place = req.body.location.place.code;
+    cli.location.street = req.body.location.street;
+    cli.location.number = req.body.location.number;
 
     cli.save().then(function(doc) {
-            res.status(clientResponse.successcreated.status).json(
-                new Response(clientResponse.successcreated.clientSuccessfully, doc)
+            res.status(contactResponse.successcreated.status).json(
+                new Response(contactResponse.successcreated.contactSuccessfully, doc)
             );
         },
         function(err) {
-            res.status(clientResponse.internalservererror.status).json(
-                new Response(clientResponse.internalservererror.database, err)
+            res.status(contactResponse.internalservererror.status).json(
+                new Response(contactResponse.internalservererror.database, err)
             );
         });
 });
@@ -63,22 +73,22 @@ router.post('/', session.authorize(), function(req, res) {
  * 
  */
 router.patch('/:id', session.authorize(), function(req, res) {
-    let client = {
+    let contact = {
         endDate: Date.parse(req.body.endDate),
         startDate: Date.parse(req.body.startDate),
         description: req.body.description,
-        client: req.client._id
+        contact: req.contact._id
     };
 
-    Client.findOneAndUpdate({ _id: req.body.id }, client, { upsert: true }, function(err, doc) {
+    Contact.findOneAndUpdate({ _id: req.body.id }, contact, { upsert: true }, function(err, doc) {
         if (err) {
-            res.status(clientResponse.internalservererror.status).json(
-                new Response(clientResponse.internalservererror.database, err)
+            res.status(contactResponse.internalservererror.status).json(
+                new Response(contactResponse.internalservererror.database, err)
             );
         };
 
-        return res.status(clientResponse.successnocontent.status).json(
-            new Response(clientResponse.successnocontent.updatedSuccessfully, doc)
+        return res.status(contactResponse.successnocontent.status).json(
+            new Response(contactResponse.successnocontent.updatedSuccessfully, doc)
         );
     });
 });
@@ -102,17 +112,17 @@ router.patch('/:id', session.authorize(), function(req, res) {
  * 
  */
 router.delete('/:id', session.authorize(), function(req, res) {
-    let clientId = new mongoose.Types.ObjectId(req.params.id);
+    let contactId = new mongoose.Types.ObjectId(req.params.id);
 
-    Client.remove({ _id: clientId }, function(err) {
+    Contact.remove({ _id: contactId }, function(err) {
         if (err) {
-            res.status(clientResponse.internalservererror.status).json(
-                new Response(clientResponse.internalservererror.database, err)
+            res.status(contactResponse.internalservererror.status).json(
+                new Response(contactResponse.internalservererror.database, err)
             );
         };
 
-        return res.status(clientResponse.successnocontent.status).json(
-            new Response(clientResponse.successnocontent.deletedSuccessfully)
+        return res.status(contactResponse.successnocontent.status).json(
+            new Response(contactResponse.successnocontent.deletedSuccessfully)
         );
     });
 });
@@ -130,19 +140,19 @@ router.delete('/:id', session.authorize(), function(req, res) {
  * 
  */
 router.get('/list', session.authorize(), function(req, res) {
-    Client.find({ user: req.user._id }, function(err, clients) {
+    Contact.find({ user: req.user._id }, function(err, contacts) {
         if (err) {
-            return res.status(clientResponse.internalservererror.status).json(
-                new Response(clientResponse.internalservererror.database, err)
+            return res.status(contactResponse.internalservererror.status).json(
+                new Response(contactResponse.internalservererror.database, err)
             );
         };
-        if (clients.length > 0) {
-            return res.status(clientResponse.success.status).json(
-                new Response(clientResponse.success.retrievedSuccessfully, clients)
+        if (contacts.length > 0) {
+            return res.status(contactResponse.success.status).json(
+                new Response(contactResponse.success.retrievedSuccessfully, contacts)
             );
         } else {
-            return res.status(clientResponse.successnocontent.status).json(
-                new Response(clientResponse.successnocontent.clientsNotFound)
+            return res.status(contactResponse.successnocontent.status).json(
+                new Response(contactResponse.successnocontent.contactsNotFound)
             );
         }
     });

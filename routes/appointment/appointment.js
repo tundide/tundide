@@ -16,15 +16,15 @@ let ical = require('ical-generator');
 
 // TODO:Completar ejemplos
 /**
- * @api {post} / Save publication
- * @apiName savepublication
- * @apiGroup Publication
+ * @api {post} / Save appointment
+ * @apiName saveappointment
+ * @apiGroup Appointment
  * @apiExample {js} Service Example
  * {
  * 	"type":"service"
  * }
  * 
- * @apiSuccess {Object} Publication Model.
+ * @apiSuccess {Object} Appointment Model.
  * @apiSuccessExample {json} Success-Response:
  * { 
  *    "status": "200",
@@ -101,15 +101,15 @@ function EnviarEmail(app) {
 }
 // TODO:Completar ejemplos
 /**
- * @api {patch} / Update publication
- * @apiName updatepublication
- * @apiGroup Publication
+ * @api {patch} / Update appointment
+ * @apiName updateappointment
+ * @apiGroup Appointment
  * @apiExample {js} Service Example
  * {
  * 	"type":"service"
  * }
  * 
- * @apiSuccess {Object} Publication Model.
+ * @apiSuccess {Object} Appointment Model.
  * @apiSuccessExample {json} Success-Response:
  * { 
  *    "status": "200",
@@ -140,15 +140,15 @@ router.patch('/:id', session.authorize(), function(req, res) {
 
 // TODO:Completar ejemplos
 /**
- * @api {delete} / Delete publication
- * @apiName deletepublication
- * @apiGroup Publication
+ * @api {delete} / Delete appointment
+ * @apiName deleteappointment
+ * @apiGroup Appointment
  * @apiExample {js} Service Example
  * {
  * 	"type":"service"
  * }
  * 
- * @apiSuccess {Object} Publication Model.
+ * @apiSuccess {Object} Appointment Model.
  * @apiSuccessExample {json} Success-Response:
  * { 
  *    "status": "200",
@@ -173,14 +173,14 @@ router.delete('/:id', session.authorize(), function(req, res) {
 });
 
 /** // TODO: Completar la documentacion
- * @api {get} /list List publication
- * @apiName getpublicationbystatus
- * @apiGroup Publication
+ * @api {get} /list List appointments
+ * @apiName getappointmentsbystatus
+ * @apiGroup Appointment
  * 
  * @apiParam {int} status Status to get ()
- * @apiParamExample {int} Active publication example:
+ * @apiParamExample {int} Active appointment example:
  *    id:1
- * @apiParamExample {int} Paused publication example:
+ * @apiParamExample {int} Paused appointment example:
  *    id:2
  * 
  */
@@ -196,8 +196,8 @@ router.get('/list', session.authorize(), function(req, res) {
                 new Response(appointmentResponse.success.retrievedSuccessfully, appointments)
             );
         } else {
-            return res.status(appointmentResponse.notfound.status).json(
-                new Response(appointmentResponse.notfound.appointmentsNotExist)
+            return res.status(appointmentResponse.successnocontent.status).json(
+                new Response(appointmentResponse.successnocontent.appointmentsNotFound)
             );
         }
     });

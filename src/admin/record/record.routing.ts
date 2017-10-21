@@ -1,17 +1,17 @@
 import { Routes, RouterModule } from '@angular/router';
-import { PhonebookListComponent } from './phonebook.list.component';
-import { ContactNewComponent } from './contact.new.component';
+import { RecordListComponent } from './record.list.component';
+import { RecordNewComponent } from './record.new.component';
 import { AuthGuard } from '../../auth/auth-guard.service';
 
 const routes: Routes = [
     {
         canActivate: [AuthGuard],
-        component: PhonebookListComponent,
+        component: RecordListComponent,
         path: 'list'
     },
     {
         canActivate: [AuthGuard],
-        component: ContactNewComponent,
+        component: RecordNewComponent,
         path: 'new'
     }
 ];

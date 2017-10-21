@@ -21,19 +21,14 @@ let AppointmentSchema = mongoose.Schema({
  * Mongoose model for Appointment.
  *
  * @class Appointment
- * @memberof module:Appointments
- * @property {String}                description                   - Description of Appointment
+ * @memberof module:Product
  * @property {ObjectId}              id                            - Id of publication
- * @property {Caegory}               category                      - Category of publication
- * @property {Array.<ObjectId>}      images                        - Images of publication
- * @property {Number}                price                         - Price per hour of publication
- * @property {Configuration}         configuration                 - Custom configuration of publication
- * @property {Date}                  publishedDate=Now             - Date of publication
- * @property {Array.<Review>}        review                        - Reviews of publication
- * @property {Array.<Reservation>}   reservations                  - Reservations of publication
+ * @property {String}                description                   - Description of Appointment
+ * @property {Date}                  endDate                       - End date of appointment
+ * @property {Date}                  startDate                     - Start date of appointment
  * @property {String}                shortId                       - Short ID to identify the publication
- * @property {Number}                status=1                      - Status of publication (1 - Active, 2 - Paused)
- * @property {String}                title                         - Title of publication
- * @property {ObjectId}              user                          - Id the owner of the publication
+ * @property {Number}                status=1                      - Status of publication (1 - Active, 2 - Canceled)
+ * @property {ObjectId}              user                          - Id of the owner of the appointment
+ * @property {ObjectId}              client                        - Id of the client of the appointment
  */
 module.exports = mongoose.model('Appointment', AppointmentSchema);
