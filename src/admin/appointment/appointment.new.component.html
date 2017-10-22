@@ -12,6 +12,8 @@
         <div class="row">
             <div class="col-md-6 cod-lg-6">
                 <label for="formReason">Desde</label>
+                <!-- Thursday, October 12th 2017, 10:57:18 pm -->
+                <date-picker ngModel mode="datetime" lang="es" format="dddd, MMMM Do YYYY, h:mm:ss a" name="date"></date-picker>
                 <date-time-picker [(date)]="appointment.startDate" (dateChange)="appointmentChange()" placeholder="No Establecido">
                 </date-time-picker>
             </div>

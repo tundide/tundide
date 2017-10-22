@@ -16,8 +16,20 @@ export class AppointmentNewComponent implements OnInit {
 
     private appointment: Appointment;
     private roles: Array<String>;
+    private datepickerOpts = {
+        assumeNearbyYear: true,
+        autoclose: true,
+        format: 'D, d MM yyyy',
+        startDate: new Date(2016, 5, 10),
+        todayBtn: 'linked',
+        todayHighlight: true,
+    };
 
     constructor(private authService: AuthService) {
+        // TODO: Verificar con una pc en espaniol
+//         let locale = window.navigator.language;
+//         moment.locale(locale);
+// alert(locale);
         this.appointment = new Appointment();
     }
 
@@ -33,7 +45,7 @@ export class AppointmentNewComponent implements OnInit {
         });
     }
 
-    appointmentChange() {
+    appointmentChange(date) {
         this.changeAppointment.emit(this.appointment);
     }
 }

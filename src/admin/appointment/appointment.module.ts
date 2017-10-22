@@ -10,17 +10,23 @@ import { AppointmentService } from './appointment.service';
 import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OverlayModule } from 'angular-io-overlay';
+import { DatePickerModule } from 'angular-io-datepicker';
 
 @NgModule({
     declarations: [AppointmentNewComponent, AppointmentListComponent],
     exports: [AppointmentNewComponent, AppointmentListComponent],
-    imports: [routing,
+    imports: [
+        CommonModule,
+        OverlayModule,
+        routing,
         FormsModule,
         RouterModule,
-        CommonModule,
         NgbModule,
+        DatePickerModule,
         SharedModule.forRoot(),
-        ToastyModule.forRoot()],
+        ToastyModule.forRoot()
+    ],
     providers: [
         AuthGuard,
         AppointmentService]
