@@ -1,9 +1,9 @@
-import { Http, Response, Headers } from '@angular/http';
+import { Response, Headers } from '@angular/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ErrorService } from '../../shared/errors/error.service';
 import { SocketService } from '../../shared/socket.service';
 import { Appointment } from './appointment.model';
+import { HttpService } from '../../@core/utils/http.service';
 
 /**
  * Manage appointment.
@@ -11,26 +11,19 @@ import { Appointment } from './appointment.model';
  */
 @Injectable()
 export class AppointmentService {
-    private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
-
-    constructor(public http: Http,
-        private errorService: ErrorService
+    constructor(private httpService: HttpService
     ) { }
 
     /**
      * Get appointments
      */
     list() {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.get(this.host + '/appointment/list', { headers: headers }) // TODO: Listar los turnos del usuario
+        return this.httpService.get('/appointment/list')
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -38,17 +31,12 @@ export class AppointmentService {
     * Save the appointment
     */
     save(appointment: Appointment) {
-        const body = JSON.stringify(appointment);
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.post(this.host + '/appointment/', body, { headers: headers })
+        return this.httpService.post('/appointment/', appointment)
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -56,17 +44,12 @@ export class AppointmentService {
     * Update the appointment
     */
     update(id: string, appointment: any) {
-        const body = JSON.stringify(appointment);
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.patch(this.host + '/appointment/' + id, body, { headers: headers })
+        return this.httpService.patch('/appointment/' + id, appointment)
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -74,16 +57,12 @@ export class AppointmentService {
     * Delete the appointment
     */
     delete(id: string) {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.delete(this.host + '/appointment/' + id, { headers: headers })
+        return this.httpService.delete('/appointment/' + id)
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 }

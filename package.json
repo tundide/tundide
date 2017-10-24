@@ -58,6 +58,7 @@
         "graceful-fs": "^4.1.11",
         "gridfs-stream": "^1.1.1",
         "gulp-apidoc": "^0.2.6",
+        "gulp-docco": "0.0.4",
         "gulp-util": "^3.0.8",
         "har-schema": "^2.0.0",
         "har-validator": "^5.0.3",

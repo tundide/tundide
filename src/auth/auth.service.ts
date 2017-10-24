@@ -2,7 +2,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { User } from './user.model';
-import { ErrorService } from '../shared/errors/error.service';
+import { HttpService } from '../@core/utils/http.service';
 import { SocketService } from '../shared/socket.service';
 import { Md5 } from 'ts-md5/dist/md5';
 
@@ -33,7 +33,7 @@ export class AuthService {
     private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
     constructor(public http: Http,
-        private errorService: ErrorService,
+        private httpService: HttpService,
         private socketService: SocketService,
     ) { }
 
@@ -61,12 +61,12 @@ export class AuthService {
 
         return this.http.get(this.host + '/auth/userdata', { headers: headers })
             .map((response: Response) => {
+                // TODO: Revisar este response para unificarlo con el servicio httpService
                 const result = response.json();
                 return new User(result.data.name, result.data.username, result.data.shortId, result.data.id, result.data.roles);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -78,11 +78,10 @@ export class AuthService {
 
         return this.http.patch(this.host + '/auth/confirm', { 'userid': userid }, { headers: headers })
             .map((response: Response) => {
-                return response.json();
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -113,11 +112,10 @@ export class AuthService {
             .map((response: Response) => {
                 const result = response.json();
                 localStorage.setItem('token', result.data);
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -138,12 +136,10 @@ export class AuthService {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post(this.host + '/auth/signout', body, { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 

@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
-import { ErrorService } from '../shared/errors/error.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { Subscription } from 'rxjs/Rx';
 import { User } from '../auth/user.model';
 import { SocketService } from '../shared/socket.service';
 import { AnalyticsService } from '../@core/utils/analytics.service';
+import { HttpService } from '../@core/utils/http.service';
 declare var $: JQueryStatic;
 import * as $S from 'scriptjs';
 
@@ -27,10 +27,10 @@ export class AdminComponent implements OnInit, OnDestroy {
         public router: Router,
         public route: ActivatedRoute,
         private analytics: AnalyticsService,
+        private httpService: HttpService,
         private modalService: NgbModal,
         private toastyService: ToastyService,
         private toastyConfig: ToastyConfig,
-        private errorService: ErrorService,
         private authService: AuthService,
         private socketService: SocketService) {
         this.toastyConfig.theme = 'bootstrap';
@@ -82,7 +82,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.analytics.trackPageViews();
 
-        this.errorService.errorOccurred.subscribe((error) => {
+        this.httpService.errorOccurred.subscribe((error) => {
             let toastOptions: ToastOptions = {
                 msg: error.message,
                 showClose: true,

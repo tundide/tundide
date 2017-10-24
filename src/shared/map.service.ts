@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { ErrorService } from './errors/error.service';
 import { Observable } from 'rxjs';
+import { HttpService } from '../@core/utils/http.service';
 
 @Injectable()
 export class MapService {
 
-    constructor(private http: Http, private errorService: ErrorService) {
+    constructor(private http: Http,
+        private httpService: HttpService) {
     }
 
     /**
@@ -16,12 +17,10 @@ export class MapService {
     getGeocodeFromAddress(address) {
         return this.http.get('http://maps.google.com/maps/api/geocode/json?address=' + address, null)
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -32,12 +31,10 @@ export class MapService {
     getGeocodeFromLatLon(lat, lon) {
         return this.http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true', null)
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 }

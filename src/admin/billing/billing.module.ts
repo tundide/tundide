@@ -9,7 +9,6 @@ import { PlansComponent } from './plans.component';
 import { SuscriptionsComponent } from './suscriptions.component';
 import { PlanComponent } from './plan/plan.component';
 import { BillingService } from './billing.service';
-import { ErrorService } from '../../shared/errors/error.service';
 import { SocketService } from '../../shared/socket.service';
 import { AuthGuard } from '../../auth/auth-guard.service';
 import { BusyModule } from 'angular2-busy';
@@ -33,7 +32,6 @@ import { routing } from './billing.routing';
         })],
     providers: [AuthGuard,
         BillingService,
-        ErrorService,
         SocketService]
 })
 

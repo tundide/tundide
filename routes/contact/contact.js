@@ -151,9 +151,7 @@ router.get('/list', session.authorize(), function(req, res) {
                 new Response(contactResponse.success.retrievedSuccessfully, contacts)
             );
         } else {
-            return res.status(contactResponse.successnocontent.status).json(
-                new Response(contactResponse.successnocontent.contactsNotFound)
-            );
+            return res.status(contactResponse.successnocontent.status);
         }
     });
 });

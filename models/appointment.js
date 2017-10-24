@@ -1,6 +1,6 @@
 /**
  * The data-layer for a Appointment
- * @module Appointment
+ * @module AppointmentCenter
  */
 
 let mongoose = require('mongoose');
@@ -21,7 +21,7 @@ let AppointmentSchema = mongoose.Schema({
  * Mongoose model for Appointment.
  *
  * @class Appointment
- * @memberof module:Product
+ * @memberof module:AppointmentCenter
  * @property {ObjectId}              id                            - Id of publication
  * @property {String}                description                   - Description of Appointment
  * @property {Date}                  endDate                       - End date of appointment

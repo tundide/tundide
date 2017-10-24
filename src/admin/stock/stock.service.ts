@@ -1,7 +1,7 @@
 import { Http, Response, Headers } from '@angular/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ErrorService } from '../../shared/errors/error.service';
+import { HttpService } from '../../@core/utils/http.service';
 import { SocketService } from '../../shared/socket.service';
 
 /**
@@ -13,7 +13,7 @@ export class StockService {
     private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
     constructor(public http: Http,
-        private errorService: ErrorService
+        private httpService: HttpService
     ) { }
 
     /**
@@ -24,12 +24,10 @@ export class StockService {
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
         return this.http.get(this.host + '/stock/list', { headers: headers }) // TODO: Listar los stocks del usuario
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 }

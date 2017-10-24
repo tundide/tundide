@@ -14,7 +14,7 @@ import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import { SocketService } from '../shared/socket.service';
-import { ErrorService } from '../shared/errors/error.service';
+import { CoreModule } from '../@core/core.module';
 import { APP_CONFIG, AppConfig } from '../app.config';
 
 @NgModule({
@@ -29,14 +29,14 @@ import { APP_CONFIG, AppConfig } from '../app.config';
         ReCaptchaModule,
         NgxErrorsModule,
         FormsModule,
-        ReactiveFormsModule],
-        providers: [
-            AuthGuard,
-            AuthService,
-            SocketService,
-            ErrorService,
-            { provide: APP_CONFIG, useValue: AppConfig }
-        ]
+        ReactiveFormsModule,
+        CoreModule],
+    providers: [
+        AuthGuard,
+        AuthService,
+        SocketService,
+        { provide: APP_CONFIG, useValue: AppConfig }
+    ]
 })
 
 export class AuthModule { }

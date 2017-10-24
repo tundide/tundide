@@ -10,7 +10,7 @@ let paidSchema = mongoose.Schema({
  * Mongoose model for Paid.
  *
  * @class Paid
- * @memberof module:Billing
+ * @memberof module:BillingCenter
  * @property {String}       id                      - id of pay
  * @property {String}       topic                   - Identifica de qué se trata. Puede ser: // TODO: Completar que es este parametro
  * @property {Date}         notificationDate=Now    - Date and time of the notification

@@ -16,7 +16,7 @@ let terminalSchema = mongoose.Schema({
  * Mongoose model for Terminal.
  *
  * @class Terminal
- * @memberof module:Product
+ * @memberof module:TerminalCenter
  * @property {ObjectId}       id             - id of terminal
  * @property {String}         code           - Code to identify the terminal
  * @property {String}         type           - The type of the Terminal, for example tickets machine.

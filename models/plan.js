@@ -9,7 +9,7 @@ let planSchema = mongoose.Schema({
  * Mongoose model for Plan.
  *
  * @class Plan
- * @memberof module:Billing
+ * @memberof module:BillingCenter
  * @property {String}       id             - id of plan
  * @property {String}       description    - description of the plan
  */

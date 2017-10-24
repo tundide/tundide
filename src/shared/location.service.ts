@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { CacheService, CacheStoragesEnum } from 'ng2-cache/ng2-cache';
-import { ErrorService } from './errors/error.service';
+import { HttpService } from '../@core/utils/http.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class LocationService {
 
     constructor(private http: Http,
         private _cacheService: CacheService,
-        private errorService: ErrorService) {
+        private httpService: HttpService) {
         this._cacheService.useStorage(CacheStoragesEnum.LOCAL_STORAGE);
     }
 
@@ -32,8 +32,7 @@ export class LocationService {
                 return result;
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 

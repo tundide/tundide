@@ -171,11 +171,11 @@ export class AppointmentListComponent implements OnInit {
             'endDate': event.end,
             'startDate': event.start
         }).subscribe(res => {
-            if (res.status === 200) {
+            if (res.status === 204) {
                 event.actions = [this.cancelButton];
                 event.color = colors.yellow;
                 this.toastyService.info({
-                    msg: res.data.message,
+                    msg: 'Contacto actualizado correctamente',
                     showClose: true,
                     theme: 'bootstrap',
                     timeout: 10000,

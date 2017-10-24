@@ -12,7 +12,7 @@ let locationSchema = mongoose.Schema({
  * Mongoose model for Province.
  *
  * @class Province
- * @memberof module:Province
+ * @memberof module:AppointmentCenter
  * @property {ObjectId}             id               - Id of the location
  * @property {Number}               code             - Code of the location
  * @property {String}               description      - Description of the location

@@ -8,7 +8,6 @@ import { routing } from './admin.routing';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { SocketService } from '../shared/socket.service';
-import { ErrorService } from '../shared/errors/error.service';
 import { MainModule } from './main/main.module';
 import { CoreModule } from '../@core/core.module';
 import { ToastyModule } from 'ng2-toasty';
@@ -29,7 +28,6 @@ import { APP_CONFIG, AppConfig } from '../app.config';
         AuthGuard,
         AuthService,
         SocketService,
-        ErrorService,
         { provide: APP_CONFIG, useValue: AppConfig }
     ]
 })

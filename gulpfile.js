@@ -5,6 +5,7 @@ const $ = require('gulp-load-plugins')({ lazy: true });
 const runSequence = require('run-sequence');
 const install = require("gulp-install");
 const jsdoc = require('gulp-jsdoc3');
+const docco = require("gulp-docco");
 const apidoc = require('gulp-apidoc');
 const compodoc = require('@compodoc/gulp-compodoc');
 const webpack = require("webpack");
@@ -21,6 +22,12 @@ gulp.task('jsdoc', function(cb) {
     let config = require('./config/jsdoc.json');
     gulp.src(['./**/*.js', '!**/node_modules/**/*.*', '!**/public/**/*.*'], { read: true })
         .pipe(jsdoc(config, cb));
+});
+
+gulp.task('docco', function() {
+    gulp.src("'./**/*.js")
+        .pipe(docco())
+        .pipe(gulp.dest('./docs/docco/'));
 });
 
 gulp.task('apidoc', function(done) {

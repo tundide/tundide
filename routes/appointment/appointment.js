@@ -14,21 +14,42 @@ let _ = require('lodash');
 let nodemailer = require("nodemailer");
 let ical = require('ical-generator');
 
-// TODO:Completar ejemplos
 /**
  * @api {post} / Save appointment
  * @apiName saveappointment
  * @apiGroup Appointment
- * @apiExample {js} Service Example
+ * 
+ * @apiExample {json} Service Example
  * {
- * 	"type":"service"
+ *     "description": "Ejemplo de cita",
+ *     "endDate": "2017-10-24T03:17:53.548Z",
+ *     "startDate": "2017-10-24T02:17:53.548Z"
  * }
  * 
- * @apiSuccess {Object} Appointment Model.
- * @apiSuccessExample {json} Success-Response:
- * { 
- *    "status": "200",
- *    "message": "OK"
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 201 Created
+ * 
+ * {
+ *     "data": {
+ *         "__v": 0,
+ *         "_id": "59eea2ddbb9bfb2cd4649bc4",
+ *         "description": "Ejemplo de cita",
+ *         "endDate": "2017-10-24T03:17:53.548Z",
+ *         "shortId": "AP-ByUymm2TZ",
+ *         "startDate": "2017-10-24T02:17:53.548Z",
+ *         "status": 1,
+ *         "user": "59851a6a12693920c86416ac"
+ *     },
+ *     "message": "Cita creada correctamente"
+ * }
+ * 
+ * @apiErrorExample {json} Error
+ * HTTP/1.1 500 Internal Server Error
+ *
+ * {
+ *   "code": 3501,
+ *   "error": "Mongoose error",
+ *   "message": "Ocurrio un error de conexion con la base de datos"
  * }
  * 
  */
@@ -99,21 +120,31 @@ function EnviarEmail(app) {
         }
     });
 }
-// TODO:Completar ejemplos
+
 /**
- * @api {patch} / Update appointment
+ * @api {patch} /:id Update appointment
  * @apiName updateappointment
  * @apiGroup Appointment
- * @apiExample {js} Service Example
+ * @apiParam {string} id The id of the appointment
+ * 
+ * @apiExample {json} Service Example
  * {
- * 	"type":"service"
+ *     "_id": "59ee8f065c55242350fa5f42",
+ *     "description": "Ejemplo de cita",
+ *     "endDate": "2017-10-24T00:53:24.278Z",
+ *     "startDate": "2017-10-23T23:53:24.278Z"
  * }
  * 
- * @apiSuccess {Object} Appointment Model.
- * @apiSuccessExample {json} Success-Response:
- * { 
- *    "status": "200",
- *    "message": "OK"
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 No Content
+ * 
+ * @apiErrorExample {json} Error
+ * HTTP/1.1 500 Internal Server Error
+ *
+ * {
+ *   "code": 3501,
+ *   "error": "Mongoose error",
+ *   "message": "Ocurrio un error de conexion con la base de datos"
  * }
  * 
  */
@@ -125,64 +156,84 @@ router.patch('/:id', session.authorize(), function(req, res) {
         client: req.client._id
     };
 
-    Appointment.findOneAndUpdate({ _id: req.body.id }, appointment, { upsert: true }, function(err, doc) {
+    Appointment.findOneAndUpdate({ _id: req.body._id }, appointment, { upsert: true }, function(err, doc) {
         if (err) {
             res.status(appointmentResponse.internalservererror.status).json(
                 new Response(appointmentResponse.internalservererror.database, err)
             );
         };
 
-        return res.status(appointmentResponse.successnocontent.status).json(
-            new Response(appointmentResponse.successnocontent.updatedSuccessfully, doc)
-        );
+        return res.status(appointmentResponse.successnocontent.status).send();
     });
 });
 
-// TODO:Completar ejemplos
 /**
- * @api {delete} / Delete appointment
+ * @api {delete} /:id Delete appointment
  * @apiName deleteappointment
  * @apiGroup Appointment
- * @apiExample {js} Service Example
+ * @apiParam {string} id The id of the appointment
+ * 
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 204 No Content
+ * 
+ * @apiErrorExample {json} Error
+ * HTTP/1.1 500 Internal Server Error
+ *
  * {
- * 	"type":"service"
+ *   "code": 3501,
+ *   "error": "Mongoose error",
+ *   "message": "Ocurrio un error de conexion con la base de datos"
  * }
- * 
- * @apiSuccess {Object} Appointment Model.
- * @apiSuccessExample {json} Success-Response:
- * { 
- *    "status": "200",
- *    "message": "OK"
- * }
- * 
  */
 router.delete('/:id', session.authorize(), function(req, res) {
     let appointmentId = new mongoose.Types.ObjectId(req.params.id);
 
+    return res.status(appointmentResponse.internalservererror.status).send(appointmentResponse.internalservererror.database);
+
     Appointment.remove({ _id: appointmentId }, function(err) {
         if (err) {
-            res.status(appointmentResponse.internalservererror.status).json(
-                new Response(appointmentResponse.internalservererror.database, err)
-            );
+            return res.status(appointmentResponse.internalservererror.status).send(appointmentResponse.internalservererror.database);
         };
 
-        return res.status(appointmentResponse.successnocontent.status).json(
-            new Response(appointmentResponse.successnocontent.deletedSuccessfully)
-        );
+        return res.status(appointmentResponse.successnocontent.status).send();
     });
 });
 
-/** // TODO: Completar la documentacion
+/**
  * @api {get} /list List appointments
- * @apiName getappointmentsbystatus
+ * @apiName getappointments
  * @apiGroup Appointment
  * 
- * @apiParam {int} status Status to get ()
- * @apiParamExample {int} Active appointment example:
- *    id:1
- * @apiParamExample {int} Paused appointment example:
- *    id:2
+ * @apiSuccessExample {json} Success with result
+ * HTTP/1.1 200 OK
  * 
+ * {
+ *     "data": [
+ *         {
+ *             "__v": 0,
+ *             "_id": "59ee8f065c55242350fa5f42",
+ *             "description": "Ejemplo de cita",
+ *             "endDate": "2017-10-24T01:53:24.278Z",
+ *             "shortId": "AP-BkA-yG2TW",
+ *             "startDate": "2017-10-24T00:53:24.278Z",
+ *             "status": 1,
+ *             "user": "59851a6a12693920c86416ac"
+ *         }
+ *     ],
+ *     "message": "Cita recuperada correctamente",
+ * }
+ *
+ * @apiSuccessExample {json} Success without result
+ * HTTP/1.1 204 No Content
+ * 
+ * @apiErrorExample {json} Error
+ * HTTP/1.1 500 Internal Server Error
+ *
+ * {
+ *   "code": 3501,
+ *   "error": "Mongoose error",
+ *   "message": "Ocurrio un error de conexion con la base de datos"
+ * }
  */
 router.get('/list', session.authorize(), function(req, res) {
     Appointment.find({ user: req.user._id }, function(err, appointments) {
@@ -196,9 +247,7 @@ router.get('/list', session.authorize(), function(req, res) {
                 new Response(appointmentResponse.success.retrievedSuccessfully, appointments)
             );
         } else {
-            return res.status(appointmentResponse.successnocontent.status).json(
-                new Response(appointmentResponse.successnocontent.appointmentsNotFound)
-            );
+            return res.status(appointmentResponse.successnocontent.status).send();
         }
     });
 });

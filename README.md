@@ -24,6 +24,7 @@ npm i -g eslint
 npm i -g tslint
 npm i -g apidoc
 npm i -g jsdoc
+npm i -g docco
 npm i -g @compodoc/compodoc
 npm i -g npm-check-updates
 ```

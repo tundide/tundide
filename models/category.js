@@ -1,9 +1,3 @@
-/**
- * The data-layer for a Category
- * @module Category
- */
-
-
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
@@ -17,7 +11,7 @@ let CategorySchema = mongoose.Schema({
  * Mongoose model for Category.
  *
  * @class Category
- * @memberof module:Product
+ * @memberof module:AppointmentCenter
  * @property {ObjectId}              id                            - Id of Category
  * @property {Number}                description                   - Description for the Category
  * @property {String}                shorthand                     - Abbreviation for the Category (This appear in the ticket ex: "AA 1234")

@@ -1,8 +1,3 @@
-/**
- * The data-layer for a Product
- * @module Product
- */
-
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
@@ -15,7 +10,7 @@ let ProductSchema = mongoose.Schema({
  * Mongoose model for Product.
  *
  * @class Product
- * @memberof module:Product
+ * @memberof module:AppointmentCenter
  * @property {ObjectId}              id                            - Id of ticket
  * @property {Number}                barCode                       - The bar codeof the product
  */

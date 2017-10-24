@@ -17,7 +17,7 @@ let TicketSchema = mongoose.Schema({
  * Mongoose model for Ticket.
  *
  * @class Ticket
- * @memberof module:Product
+ * @memberof module:AppointmentCenter
  * @property {ObjectId}              id                            - Id of ticket
  * @property {ObjectId}              category                      - Category of the ticket (Ex: AA 0000)
  * @property {Number}                position                      - The position in the queue (Ex: AA 0000)

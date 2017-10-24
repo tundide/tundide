@@ -13,7 +13,7 @@ let subsidiarySchema = mongoose.Schema({
  * Mongoose model for Subsidiary.
  *
  * @class Subsidiary
- * @memberof module:Product
+ * @memberof module:AppointmentCenter
  * @property {ObjectId}             id               - Id of the subsidiary
  * @property {String}               code             - Code to identify the subsidiary
  * @property {String}               description      - Description of the subsidiary

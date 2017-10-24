@@ -1,26 +1,22 @@
 <div class="modal-body">
     <div class="form-group">
         <label for="formReason">Raz&oacute;n de la reserva</label>
-        <input type="text" class="form-control" id="formReason" aria-describedby="reasonHelp" place-holder="Titulo" required (change)="appointmentChange()" [(ngModel)]="appointment.description">
+        <input type="text" class="form-control form-control-sm" id="formReason" aria-describedby="reasonHelp" place-holder="Titulo" required (change)="appointmentChange()" [(ngModel)]="appointment.description">
         <small id="reasonHelp" class="form-text text-muted">Este mensaje lo vera el cliente en el mail de aviso de turno.</small>
 
         <label for="formClient">Cliente</label>
-        <input type="text" class="form-control" id="formClient" aria-describedby="clientHelp" place-holder="Cliente" required (change)="appointmentChange()" [(ngModel)]="appointment.client">
+        <input type="text" class="form-control form-control-sm" id="formClient" aria-describedby="clientHelp" place-holder="Cliente" required (change)="appointmentChange()" [(ngModel)]="appointment.client">
     </div>
 
     <div class="form-group">
         <div class="row">
             <div class="col-md-6 cod-lg-6">
                 <label for="formReason">Desde</label>
-                <!-- Thursday, October 12th 2017, 10:57:18 pm -->
-                <date-picker ngModel mode="datetime" lang="es" format="dddd, MMMM Do YYYY, h:mm:ss a" name="date"></date-picker>
-                <date-time-picker [(date)]="appointment.startDate" (dateChange)="appointmentChange()" placeholder="No Establecido">
-                </date-time-picker>
+                <date-picker [(ngModel)]="appointment.startDate" [showClearButton]="false" (change)="appointmentChange()" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
             </div>
             <div class="col-md-6 cod-lg-6">
                 <label for="formReason">Hasta</label>
-                <date-time-picker [(date)]="appointment.endDate" (dateChange)="appointmentChange()" placeholder="No Establecido">
-                </date-time-picker>
+                <date-picker [(ngModel)]="appointment.endDate" [showClearButton]="false" (change)="appointmentChange()" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
             </div>
         </div>
     </div>

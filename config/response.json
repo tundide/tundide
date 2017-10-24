@@ -55,13 +55,6 @@
                 "message": "Provincias recuperadas correctamente"
             }
         },
-        "successnocontent": {
-            "status": 204,
-            "provincesNotExist": {
-                "status": "accepted",
-                "message": "Provincias no encontradas"
-            }
-        },
         "internalservererror": {
             "status": 500,
             "database": { "code": 1500, "error": "Mongoose error", "message": "Ocurrio un error de conexion con la base de datos" }
@@ -94,31 +87,17 @@
         "success": {
             "status": 200,
             "retrievedSuccessfully": {
-                "status": "accepted",
                 "message": "Cita recuperada correctamente"
             }
         },
         "successcreated": {
             "status": 201,
             "appointmentSuccessfully": {
-                "status": "accepted",
                 "message": "Cita creada correctamente"
             }
         },
         "successnocontent": {
-            "status": 204,
-            "appointmentsNotFound": {
-                "status": "accepted",
-                "message": "Actualmente no hay citas registradas"
-            },
-            "updatedSuccessfully": {
-                "status": "accepted",
-                "message": "Cita actualizada correctamente"
-            },
-            "deletedSuccessfully": {
-                "status": "accepted",
-                "message": "Cita eliminada correctamente"
-            }
+            "status": 204
         },
         "notfound": {
             "status": 404,
@@ -154,21 +133,6 @@
                 "message": "Contacto creado correctamente"
             }
         },
-        "successnocontent": {
-            "status": 204,
-            "contactsNotFound": {
-                "status": "accepted",
-                "message": "Actualmente no hay contactos registrados"
-            },
-            "updatedSuccessfully": {
-                "status": "accepted",
-                "message": "Contacto actualizado correctamente"
-            },
-            "deletedSuccessfully": {
-                "status": "accepted",
-                "message": "Contacto eliminado correctamente"
-            }
-        },
         "notfound": {
             "status": 404,
             "contactNotExist": {
@@ -198,13 +162,6 @@
             "updatedSuccessfully": {
                 "status": "accepted",
                 "message": "Rese&ntilde;a actualizada correctamente"
-            }
-        },
-        "successnocontent": {
-            "status": 204,
-            "reviewNotExist": {
-                "status": "accepted",
-                "message": "Rese&ntilde;a no encontrada"
             }
         },
         "badrequest": {
@@ -238,17 +195,6 @@
                 "message": "Favorito actualizado correctamente"
             }
         },
-        "successnocontent": {
-            "status": 204,
-            "favoriteNotExist": {
-                "status": "accepted",
-                "message": "Favorito no encontrado"
-            },
-            "favoriteDeleted": {
-                "status": "accepted",
-                "message": "Favorito eliminado correctamente"
-            }
-        },
         "badrequest": {
             "status": 400,
             "titleEmpty": { "code": 4401, "error": "parameter title can not be null/empty", "message": "El campo 'Titulo' no puede estar vacio" },
@@ -274,17 +220,6 @@
             "savedSuccessfully": {
                 "status": "accepted",
                 "message": "Mensaje creado correctamente"
-            }
-        },
-        "successnocontent": {
-            "status": 204,
-            "messageNotExist": {
-                "status": "accepted",
-                "message": "Mensaje no encontrado"
-            },
-            "messageDeleted": {
-                "status": "accepted",
-                "message": "Mensaje eliminado correctamente"
             }
         },
         "badrequest": {

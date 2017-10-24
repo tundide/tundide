@@ -1,7 +1,7 @@
 import { Http, Response, Headers } from '@angular/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ErrorService } from '../../shared/errors/error.service';
+import { HttpService } from '../../@core/utils/http.service';
 import { SocketService } from '../../shared/socket.service';
 
 /**
@@ -13,7 +13,7 @@ export class BillingService {
     private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
     constructor(public http: Http,
-        private errorService: ErrorService
+        private httpService: HttpService
     ) { }
 
     /**
@@ -24,12 +24,10 @@ export class BillingService {
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
         return this.http.post(this.host + '/billing/card/associate/', { 'cardId': cardId }, { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -41,12 +39,10 @@ export class BillingService {
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
         return this.http.get(this.host + '/billing/card/list/', { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -58,12 +54,10 @@ export class BillingService {
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
         return this.http.delete(this.host + '/billing/card/delete/' + cardId, { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -75,12 +69,10 @@ export class BillingService {
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
         return this.http.get(this.host + '/billing/plan/', { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 
@@ -92,12 +84,10 @@ export class BillingService {
         const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
         return this.http.put(this.host + '/billing/plan/' + id, plan, { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return this.httpService.response(response);
             })
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
-                return Observable.throw(error.json());
+                return this.httpService.catch(error);
             });
     }
 }

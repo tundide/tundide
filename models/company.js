@@ -17,7 +17,7 @@ let companySchema = mongoose.Schema({
  * Mongoose model for Company.
  *
  * @class Company
- * @memberof module:Product
+ * @memberof module:AppointmentCenter
  * @property {String}        id             - id of company
  * @property {String}        description    - description of the company
  * @property {String}        type           - define the type of the company, for example Hospital.

@@ -26,10 +26,6 @@ export class AppointmentNewComponent implements OnInit {
     };
 
     constructor(private authService: AuthService) {
-        // TODO: Verificar con una pc en espaniol
-//         let locale = window.navigator.language;
-//         moment.locale(locale);
-// alert(locale);
         this.appointment = new Appointment();
     }
 

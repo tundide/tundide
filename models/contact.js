@@ -25,7 +25,7 @@ let contactSchema = mongoose.Schema({
  * Mongoose model for Contact.
  *
  * @class Contact
- * @memberof module:Product
+ * @memberof module:AppointmentCenter
  * @property {String}       id             - id of Contact
  * @property {String}       description    - description of the Contact
  */

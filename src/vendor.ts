@@ -11,3 +11,8 @@ import 'rxjs';
 import 'bootstrap/dist/js/bootstrap.js';
 
 import 'lodash';
+
+import * as moment from 'moment';
+
+let locale = window.navigator.language;
+moment.locale(locale);

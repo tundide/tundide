@@ -9,7 +9,7 @@ let suscriptionSchema = mongoose.Schema({
  * Mongoose model for Suscription.
  *
  * @class Suscription
- * @memberof module:Billing
+ * @memberof module:BillingCenter
  * @property {String}       id             - id of the suscription
  * @property {String}       description    - description of the suscription
  */
