@@ -12,24 +12,27 @@ const webpack = require("webpack");
 const gutil = require('gulp-util');
 
 gulp.task('doc', function(done) {
-    runSequence('compodoc', 'jsdoc', 'apidoc', function() {
+    runSequence('compodoc', 'jsdoc', 'apidoc', 'docco', function() {
         log('Documentation Complete');
         done();
     });
 });
 
+// Generate backend documentation
 gulp.task('jsdoc', function(cb) {
     let config = require('./config/jsdoc.json');
     gulp.src(['./**/*.js', '!**/node_modules/**/*.*', '!**/public/**/*.*'], { read: true })
         .pipe(jsdoc(config, cb));
 });
 
+// Generate backend documentation details
 gulp.task('docco', function() {
-    gulp.src("'./**/*.js")
+    gulp.src("./**/*.js")
         .pipe(docco())
-        .pipe(gulp.dest('./docs/docco/'));
+        .pipe(gulp.dest('./docs/details/'));
 });
 
+// Generate documentation for the APIs
 gulp.task('apidoc', function(done) {
     apidoc({
         src: "./",
@@ -40,6 +43,7 @@ gulp.task('apidoc', function(done) {
     }, done);
 });
 
+// Generate client documentation
 gulp.task('compodoc', () => {
     gulp.src('src/**/*.ts')
         .pipe(compodoc({
@@ -55,7 +59,6 @@ webpackConfig = require('./webpack.config.prod.js'),
         myConfig.plugins = myConfig.plugins.concat(
             new webpack.DefinePlugin({
                 'process.env': {
-                    // This has effect on the react lib size
                     'NODE_ENV': JSON.stringify('production')
                 }
             }),
@@ -81,9 +84,7 @@ webpackConfig = require('./webpack.config.prod.js'),
 
         webpack(myConfig, function(err, stats) {
             if (err) throw new gutil.PluginError("webpack", err);
-            gutil.log("[webpack]", stats.toString({
-                // output options
-            }));
+            gutil.log("[webpack]", stats.toString({}));
             done();
         });
     });
