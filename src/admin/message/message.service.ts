@@ -10,10 +10,7 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class MessageService {
-    private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
-
-    constructor(private http: Http,
-        private httpService: HttpService) {
+    constructor(private httpService: HttpService) {
     }
 
     /**
@@ -21,10 +18,7 @@ export class MessageService {
      * @param  {Message} message The message object
      */
     send(message: Message) {
-        const body = JSON.stringify(Message);
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.post(this.host + '/message', body, { headers: headers })
+        return this.httpService.post('/message', message)
             .map((response: Response) => {
                 return this.httpService.response(response);
             })

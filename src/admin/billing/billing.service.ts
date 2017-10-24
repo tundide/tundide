@@ -10,19 +10,14 @@ import { SocketService } from '../../shared/socket.service';
  */
 @Injectable()
 export class BillingService {
-    private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
-
-    constructor(public http: Http,
-        private httpService: HttpService
+    constructor(private httpService: HttpService
     ) { }
 
     /**
      * Associate card to customer
      */
     associateCard(cardId: string) {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.post(this.host + '/billing/card/associate/', { 'cardId': cardId }, { headers: headers })
+        return this.httpService.post('/billing/card/associate/', { 'cardId': cardId })
             .map((response: Response) => {
                 return this.httpService.response(response);
             })
@@ -35,9 +30,7 @@ export class BillingService {
      * Get customer cards
      */
     getCards() {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.get(this.host + '/billing/card/list/', { headers: headers })
+        return this.httpService.get('/billing/card/list/')
             .map((response: Response) => {
                 return this.httpService.response(response);
             })
@@ -50,9 +43,7 @@ export class BillingService {
      * Delete customer card
      */
     deleteCard(cardId) {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.delete(this.host + '/billing/card/delete/' + cardId, { headers: headers })
+        return this.httpService.delete('/billing/card/delete/' + cardId)
             .map((response: Response) => {
                 return this.httpService.response(response);
             })
@@ -65,9 +56,7 @@ export class BillingService {
      * Get plans
      */
     getPlans() {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.get(this.host + '/billing/plan/', { headers: headers })
+        return this.httpService.get('/billing/plan/')
             .map((response: Response) => {
                 return this.httpService.response(response);
             })
@@ -80,9 +69,7 @@ export class BillingService {
      * Update plan
      */
     updatePlan(id, plan) {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.put(this.host + '/billing/plan/' + id, plan, { headers: headers })
+        return this.httpService.patch('/billing/plan/' + id, plan)
             .map((response: Response) => {
                 return this.httpService.response(response);
             })

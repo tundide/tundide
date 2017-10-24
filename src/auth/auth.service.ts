@@ -57,11 +57,8 @@ export class AuthService {
      * @returns       Objet "User" with UserId - Name - Email - Token.
      */
     loadUserData(token: string): Observable<User> {
-        let headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-
-        return this.http.get(this.host + '/auth/userdata', { headers: headers })
+        return this.httpService.get('/auth/userdata')
             .map((response: Response) => {
-                // TODO: Revisar este response para unificarlo con el servicio httpService
                 const result = response.json();
                 return new User(result.data.name, result.data.username, result.data.shortId, result.data.id, result.data.roles);
             })
