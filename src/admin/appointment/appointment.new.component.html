@@ -1,26 +1,74 @@
-<div class="modal-body">
-    <div class="form-group">
-        <label for="formReason">Raz&oacute;n de la reserva</label>
-        <input type="text" class="form-control form-control-sm" id="formReason" aria-describedby="reasonHelp" place-holder="Titulo" required (change)="appointmentChange()" [(ngModel)]="appointment.description">
-        <small id="reasonHelp" class="form-text text-muted">Este mensaje lo vera el cliente en el mail de aviso de turno.</small>
-
-        <label for="formClient">Cliente</label>
-        <ng-template #rt let-r="result" let-t="term">
-            {{ r.firstName}} {{r.lastName}} - (DNI: {{ r.document }})
-        </ng-template>
-        <input id="inputPlace" name="contact" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="appointmentChange($event)" [ngbTypeahead]="searchContact" [(ngModel)]="appointment.client" />
-
-    </div>
-
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-6 cod-lg-6">
-                <label for="formReason">Desde</label>
-                <date-picker [(ngModel)]="appointment.startDate" [showClearButton]="false" (change)="appointmentChange()" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
+<div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="btn-toolbar" role="toolbar" aria-label="Base Bar">
+                <div class="btn-group mr-2" role="group" aria-label="Acciones principales sobre las citas">
+                    <button type="button" ngbTooltip="Guardar cita" (click)="saveAppointment()" class="btn btn-secondary"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                </div>
             </div>
-            <div class="col-md-6 cod-lg-6">
-                <label for="formReason">Hasta</label>
-                <date-picker [(ngModel)]="appointment.endDate" [showClearButton]="false" (change)="appointmentChange()" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-md-8 col-lg-8">
+            <div class="card">
+                <div class="card-block" [formGroup]="appointmentGroup">
+                    <div class="form-group row">
+                        <label for="inputReason" class="col-sm-2 col-form-label col-form-label-sm">Raz&oacute;n de la reserva</label>
+                        <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="inputReason"  formControlName="reason" aria-describedby="reasonHelp" place-holder="Razon" required>
+                                <small id="reasonHelp" class="form-text text-muted">Este mensaje lo vera el cliente en el mail de aviso de turno.</small>
+
+                            <div ngxErrors="reason">
+                                <div class="error" ngxError="required">
+                                    La raz&oacute;n es requerida
+                                </div>
+                            </div>
+                        </div>
+
+                        <label for="inputContact" class="col-sm-2 col-form-label col-form-label-sm">Cliente</label>
+                        <div class="col-sm-4">
+                            <ng-template #rt let-r="result" let-t="term">
+                                    {{ r.firstName}} {{r.lastName}} - (DNI: {{ r.document }})
+                            </ng-template>
+                            
+                            <input id="inputContact" formControlName="contact" name="contact" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="appointmentChange($event)" [ngbTypeahead]="searchContact"/>
+
+                            <div ngxErrors="client">
+                                <div class="error" ngxError="required">
+                                    El cliente es requerido
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <label for="inputDoctor" class="col-sm-2 col-form-label col-form-label-sm">Doctor</label>
+                        <div class="col-sm-4">
+                            <ng-template #rt let-r="result" let-t="term">
+                                    {{ r.firstName}} {{r.lastName}} - (DNI: {{ r.document }})
+                            </ng-template>
+                            
+                            <input id="inputDoctor" formControlName="doctor" name="doctor" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="appointmentChange($event)" [ngbTypeahead]="searchDoctor"/>
+
+                            <div ngxErrors="doctor">
+                                <div class="error" ngxError="required">
+                                    El doctor es requerido
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <label for="inputstartDate" class="col-sm-2 col-form-label col-form-label-sm">Desde</label>
+                            
+                            <div class="col-sm-4">
+                                <date-picker formControlName="startDate" class="form-control form-control-sm" [showClearButton]="false" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
+                            </div>
+                            
+                            <label for="inputendDate" class="col-sm-2 col-form-label col-form-label-sm">Hasta</label>
+                                
+                            <div class="col-sm-4">
+                                <date-picker formControlName="endDate" class="form-control form-control-sm" [showClearButton]="false" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
