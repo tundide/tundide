@@ -5,6 +5,7 @@
 // TODO: Armar los jobs
 
 let CronJob = require('cron').CronJob;
+let http = require('http');
 
 let jobSendMailAppointmentToExpire = new CronJob('5 * * * * *', function() {
 
@@ -36,4 +37,16 @@ let jobCalculatePublicationScore = new CronJob('5 * * * * *', function() {
 }, null, true);
 
 jobCalculatePublicationScore.start();
+
+// let jobRefreshHerokuSleepingTime = new CronJob('5 * * * * *', function() {
+//     http.request({
+//         host: 'http://www.tundide.com',
+//         path: '/',
+//         port: 80
+//     }, function(response) {
+//         console.log(response);
+//     }).end();
+// }, null, true);
+
+// jobRefreshHerokuSleepingTime.start();
 // TODO: Enviar email sobre encuesta de como te atendieron.

@@ -28,6 +28,19 @@ export class PhonebookService {
     }
 
     /**
+     * Find appointments
+     */
+    find(search: string) {
+        return this.httpService.get('/contact/find?search=' + search)
+            .map((response: Response) => {
+                return this.httpService.response(response).data;
+            })
+            .catch((error: Response) => {
+                return this.httpService.catch(error);
+            });
+    }
+
+    /**
     * Save the contact
     */
     save(contact: Contact) {

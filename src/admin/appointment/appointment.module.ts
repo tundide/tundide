@@ -7,6 +7,7 @@ import { AuthGuard } from '../../auth/auth-guard.service';
 import { AppointmentNewComponent } from './appointment.new.component';
 import { AppointmentListComponent } from './appointment.list.component';
 import { AppointmentService } from './appointment.service';
+import { PhonebookService } from '../phonebook/phonebook.service';
 import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -29,7 +30,8 @@ import { DatePickerModule } from 'angular-io-datepicker';
     ],
     providers: [
         AuthGuard,
-        AppointmentService]
+        AppointmentService,
+        PhonebookService]
 })
 
 export class AppointmentModule { }

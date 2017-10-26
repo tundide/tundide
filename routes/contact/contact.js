@@ -156,4 +156,40 @@ router.get('/list', session.authorize(), function(req, res) {
     });
 });
 
+/** // TODO: Completar la documentacion
+ * @api {get} /find/:search Find contact by firstName and lastName
+ * @apiName findcontactbysearchdata
+ * @apiGroup AppointmentCenter
+ * 
+ * @apiParam {string} search Find contact by search data
+ * @apiParamExample {string} firstName example:
+ *    search:Jorge Ross
+ * 
+ */
+router.get('/find', session.authorize(), function(req, res) {
+    Contact.find({
+        $and: [{
+            user: req.user._id
+        }, {
+            $or: [
+                { "firstName": { "$regex": req.query.search, "$options": "i" } },
+                { "lastName": { "$regex": req.query.search, "$options": "i" } }
+            ]
+        }]
+    }, function(err, contacts) {
+        if (err) {
+            return res.status(contactResponse.internalservererror.status).json(
+                new Response(contactResponse.internalservererror.database, err)
+            );
+        };
+        if (contacts.length > 0) {
+            return res.status(contactResponse.success.status).json(
+                new Response(contactResponse.success.retrievedSuccessfully, contacts)
+            );
+        } else {
+            return res.status(contactResponse.successnocontent.status).send();
+        }
+    });
+});
+
 module.exports = router;

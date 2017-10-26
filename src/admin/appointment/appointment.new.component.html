@@ -5,7 +5,11 @@
         <small id="reasonHelp" class="form-text text-muted">Este mensaje lo vera el cliente en el mail de aviso de turno.</small>
 
         <label for="formClient">Cliente</label>
-        <input type="text" class="form-control form-control-sm" id="formClient" aria-describedby="clientHelp" place-holder="Cliente" required (change)="appointmentChange()" [(ngModel)]="appointment.client">
+        <ng-template #rt let-r="result" let-t="term">
+            {{ r.firstName}} {{r.lastName}} - (DNI: {{ r.document }})
+        </ng-template>
+        <input id="inputPlace" name="contact" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="appointmentChange($event)" [ngbTypeahead]="searchContact" [(ngModel)]="appointment.client" />
+
     </div>
 
     <div class="form-group">

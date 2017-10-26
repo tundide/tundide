@@ -133,6 +133,9 @@
                 "message": "Contacto creado correctamente"
             }
         },
+        "successnocontent": {
+            "status": 204
+        },
         "notfound": {
             "status": 404,
             "contactNotExist": {

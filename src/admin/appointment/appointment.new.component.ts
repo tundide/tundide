@@ -1,6 +1,11 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
+import { PhonebookService } from '../phonebook/phonebook.service';
 import { Appointment } from './appointment.model';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
@@ -25,7 +30,16 @@ export class AppointmentNewComponent implements OnInit {
         todayHighlight: true,
     };
 
-    constructor(private authService: AuthService) {
+    searchContact = (text$: Observable<string>) =>
+        text$
+            .debounceTime(200)
+            .distinctUntilChanged()
+            .switchMap(term => this.phonebookService.find(term))
+
+    formatter = (x: { firstName: string, lastName: string }) => x.firstName + ' ' + x.lastName;
+
+    constructor(private authService: AuthService,
+        private phonebookService: PhonebookService) {
         this.appointment = new Appointment();
     }
 

@@ -57,8 +57,7 @@
                         <ng-template #rt let-r="result" let-t="term">
                             {{ r.description}} - ({{ r.zip}})
                         </ng-template>
-                        <input id="inputPlace" formControlName="place" name="place" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="placeChange($event)" [ngbTypeahead]="searchLocation"
-                        />
+                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="placeChange($event)" [ngbTypeahead]="searchLocation" />
                         <div ngxErrors="location.place">
                             <div class="error" ngxError="required">
                                 La Localidad es requerida
