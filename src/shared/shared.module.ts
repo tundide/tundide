@@ -1,4 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -27,6 +28,7 @@ import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache
         DateTimePickerComponent,
         FileUploadComponent],
     imports: [
+        BrowserAnimationsModule,
         CommonModule,
         HttpModule,
         RouterModule,

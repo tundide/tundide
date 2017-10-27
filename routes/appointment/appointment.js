@@ -56,6 +56,7 @@ let ical = require('ical-generator');
 router.post('/', session.authorize(), function(req, res) {
     let app = new Appointment();
     app.user = req.user._id;
+    app.client = req.body.contact;
     app.description = req.body.description;
     app.startDate = req.body.startDate;
     app.endDate = req.body.endDate;

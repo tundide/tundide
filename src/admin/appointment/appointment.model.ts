@@ -1,7 +1,7 @@
 export class Appointment {
     _id: string;
     shortId: string;
-    client: string;
+    contact: string;
     endDate: Date;
     startDate: Date;
     description: string;

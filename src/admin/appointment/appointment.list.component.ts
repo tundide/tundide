@@ -40,6 +40,7 @@ interface IAppointment {
     appointmentId: string;
     shortId: string;
     description: string;
+    contact: string;
     status: number;
 }
 
@@ -116,50 +117,6 @@ export class AppointmentListComponent implements OnInit {
         this.toastyConfig.theme = 'bootstrap';
     }
 
-    addReservation() {
-        this.appointment = new Appointment();
-        this.modalService.open(this.modal).result.then((result) => {
-            if (result) {
-                this.appointmentService.save(this.appointment)
-                    .subscribe(response => {
-                        this.toastyService.success({
-                            msg: response.message,
-                            showClose: true,
-                            theme: 'bootstrap',
-                            timeout: 5000,
-                            title: 'Reserva solicitada con exito.'
-                        });
-
-                        this.appointment._id = response.data._id;
-
-                        let startDate = moment(this.appointment.startDate);
-                        let endDate = moment(this.appointment.endDate);
-
-                        let evento = {
-                            actions: [],
-                            color: colors.green,
-                            draggable: true,
-                            end: endDate.toDate(),
-                            meta: {
-                                appointment: this.appointment
-                            },
-                            resizable: {
-                                afterEnd: true,
-                                beforeStart: true
-                            },
-                            start: startDate.toDate(),
-                            title: '(' + startDate.format('HH:mm') + '-'
-                            + endDate.format('HH:mm') + ') ' + this.appointment.description
-                        };
-                        evento.actions = [this.changeReservationButton, this.cancelButton];
-                        evento.color = colors.blue;
-
-                        this.calendar.addEvent(evento);
-                    });
-            }
-        });
-    }
-
     eventClick(event) {
         this.router.navigate(['/view', event.meta.publication]);
     }
@@ -209,6 +166,7 @@ export class AppointmentListComponent implements OnInit {
                             title: '(' + startDate.format('HH:mm') + '-'
                             + endDate.format('HH:mm') + ') ' + appointment.description
                         };
+
                         evento.actions = [this.changeReservationButton, this.cancelButton];
                         evento.color = colors.blue;
 

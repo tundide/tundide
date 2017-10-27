@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routing } from './appointment.routing';
@@ -22,6 +22,7 @@ import { DatePickerModule } from 'angular-io-datepicker';
         OverlayModule,
         routing,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         NgbModule,
         DatePickerModule,
