@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminComponent } from './admin.component';
@@ -16,10 +15,10 @@ import { APP_CONFIG, AppConfig } from '../app.config';
 @NgModule({
     bootstrap: [AdminComponent],
     declarations: [AdminComponent, ProfileComponent],
-    imports: [BrowserModule,
-        BrowserAnimationsModule,
+    imports: [
         routing,
         MainModule,
+        BrowserAnimationsModule,
         NgbModule.forRoot(),
         ToastyModule.forRoot(),
         CoreModule

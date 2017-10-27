@@ -5,6 +5,7 @@ import { AuthService } from '../../auth/auth.service';
 import { PhonebookService } from '../phonebook/phonebook.service';
 import { AppointmentService } from './appointment.service';
 import { Appointment } from './appointment.model';
+import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
@@ -21,6 +22,7 @@ import * as moment from 'moment';
 export class AppointmentNewComponent implements OnInit {
     private roles: Array<String>;
     private appointmentGroup: FormGroup;
+    private subsidiaryOptions: IMultiSelectOption[];
 
     private datepickerOpts = {
         assumeNearbyYear: true,
@@ -29,6 +31,28 @@ export class AppointmentNewComponent implements OnInit {
         startDate: new Date(2016, 5, 10),
         todayBtn: 'linked',
         todayHighlight: true,
+    };
+
+    private selectSettings: IMultiSelectSettings = {
+        autoUnselect: true,
+        buttonClasses: 'form-control form-control-sm',
+        checkedStyle: 'fontawesome',
+        displayAllSelectedText: true,
+        dynamicTitleMaxItems: 3,
+        enableSearch: true,
+        selectionLimit: 1
+    };
+
+    private selectTexts: IMultiSelectTexts = {
+        allSelected: 'Todo seleccionado',
+        checkAll: 'Seleccionar todo',
+        checked: 'item seleccionado',
+        checkedPlural: 'items seleccionados',
+        defaultTitle: 'Seleccionar',
+        searchEmptyResult: 'No se encontraron resultados...',
+        searchNoRenderText: 'Escriba para realizar una busqueda...',
+        searchPlaceholder: 'Buscar',
+        uncheckAll: 'Deseleccionar todo'
     };
 
     searchContact = (text$: Observable<string>) =>
@@ -66,6 +90,10 @@ export class AppointmentNewComponent implements OnInit {
 
     ngOnInit() {
         this.roles = this.authService.getUserCredentials().roles;
+        this.subsidiaryOptions = [
+            { id: 1, name: 'Ballester' },
+            { id: 2, name: 'San Martin' },
+        ];
     }
 
     hasRole(role) {

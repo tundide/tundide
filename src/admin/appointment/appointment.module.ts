@@ -13,6 +13,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverlayModule } from 'angular-io-overlay';
 import { DatePickerModule } from 'angular-io-datepicker';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 @NgModule({
     declarations: [AppointmentNewComponent, AppointmentListComponent],
@@ -26,6 +27,7 @@ import { DatePickerModule } from 'angular-io-datepicker';
         RouterModule,
         NgbModule,
         DatePickerModule,
+        MultiselectDropdownModule,
         SharedModule.forRoot(),
         ToastyModule.forRoot()
     ],
