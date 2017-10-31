@@ -31,7 +31,8 @@
                             {{ r.firstName}} {{r.lastName}} - (DNI: {{ r.document }})
                         </ng-template>
 
-                        <input id="inputContact" formControlName="contact" name="contact" type="text" class="form-control form-control-sm" [editable]="false" [inputFormatter]="formatterContact" [resultTemplate]="rt" [ngbTypeahead]="searchContact" />
+                        <input id="inputContact" placeholder="Escriba el Nombre, Apellido o DNI" formControlName="contact" name="contact" type="text" class="form-control form-control-sm" [editable]="false" [inputFormatter]="formatterContact" [resultTemplate]="rt" [ngbTypeahead]="searchContact"
+                        />
 
                         <div ngxErrors="client">
                             <div class="error" ngxError="required">

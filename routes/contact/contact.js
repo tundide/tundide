@@ -173,7 +173,8 @@ router.get('/find', session.authorize(), function(req, res) {
         }, {
             $or: [
                 { "firstName": { "$regex": req.query.search, "$options": "i" } },
-                { "lastName": { "$regex": req.query.search, "$options": "i" } }
+                { "lastName": { "$regex": req.query.search, "$options": "i" } },
+                { $where: "/^.*" + req.query.search + ".*/.test(this.document)" }
             ]
         }]
     }, function(err, contacts) {
