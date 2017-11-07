@@ -6,4 +6,5 @@ export class Appointment {
     startDate: Date;
     description: string;
     approved: boolean;
+    subsidiary: any;
 }

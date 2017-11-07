@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { PhonebookService } from '../phonebook/phonebook.service';
 import { AppointmentService } from './appointment.service';
+import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { Appointment } from './appointment.model';
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 import { Observable } from 'rxjs';
@@ -12,6 +13,12 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+
+interface ISubsidiary {
+    _id: string;
+    code: string;
+    description: string;
+}
 
 @Component({
     selector: 'appointment',
@@ -75,6 +82,7 @@ export class AppointmentNewComponent implements OnInit {
         private router: Router,
         private authService: AuthService,
         private appointmentService: AppointmentService,
+        private subsidiaryService: SubsidiaryService,
         private phonebookService: PhonebookService) {
 
         this.appointmentGroup = this.formBuilder.group({
@@ -85,15 +93,26 @@ export class AppointmentNewComponent implements OnInit {
             startDate: this.formBuilder.control(moment().toDate()),
             subsidiary: this.formBuilder.control('')
         });
-
     }
 
     ngOnInit() {
         this.roles = this.authService.getUserCredentials().roles;
-        this.subsidiaryOptions = [
-            { id: 1, name: 'Ballester' },
-            { id: 2, name: 'San Martin' },
-        ];
+        // this.subsidiaryOptions = [
+        //     { id: '59851a6a12693920c86416ac', name: 'Ballester' },
+        //     { id: '59851a6a12693920c86416ac', name: 'San Martin' },
+        // ];
+
+        this.subsidiaryService.list().subscribe(
+            res => {
+                this.subsidiaryOptions = new Array();
+                _.forEach(<Array<ISubsidiary>>res.data, (subsidiary, key) => {
+                    this.subsidiaryOptions.push({
+                        id: subsidiary._id,
+                        name: subsidiary.code + ' - ' + subsidiary.description
+                    });
+                });
+            }
+        );
     }
 
     hasRole(role) {
@@ -108,6 +127,7 @@ export class AppointmentNewComponent implements OnInit {
         app.description = this.appointmentGroup.get('description').value;
         app.startDate = this.appointmentGroup.get('startDate').value;
         app.endDate = this.appointmentGroup.get('endDate').value;
+        app.subsidiary = this.appointmentGroup.get('subsidiary').value[0];
 
         this.appointmentService.save(app)
             .subscribe(response => {

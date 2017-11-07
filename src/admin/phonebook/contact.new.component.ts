@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { AuthService } from '../../auth/auth.service';
 import { PhonebookService } from './phonebook.service';
@@ -53,20 +54,14 @@ export class ContactNewComponent implements OnInit {
 
     saveContact() {
         this.phonebookService.save(this.contactGroup.value).subscribe(response => {
-            this.toastyService.success({
-                msg: response.message,
-                showClose: true,
-                theme: 'bootstrap',
-                timeout: 5000,
-                title: 'Contacto guardado con exito.'
-            });
-
+            this.router.navigate(['/phonebook/list']);
         });
     }
 
     constructor(private authService: AuthService,
         private locationService: LocationService,
         private formBuilder: FormBuilder,
+        private router: Router,
         private toastyService: ToastyService,
         private toastyConfig: ToastyConfig,
         private phonebookService: PhonebookService) {

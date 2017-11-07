@@ -6,7 +6,8 @@ let subsidiarySchema = mongoose.Schema({
     code: String,
     description: String,
     appointments: [{ type: Schema.Types.ObjectId, ref: 'Appointment' }],
-    terminals: [{ type: Schema.Types.ObjectId, ref: 'Terminal' }]
+    terminals: [{ type: Schema.Types.ObjectId, ref: 'Terminal' }],
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 /**

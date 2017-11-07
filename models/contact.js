@@ -17,7 +17,7 @@ let contactSchema = mongoose.Schema({
         number: Number
     },
     company: { type: Schema.Types.ObjectId, ref: 'Company' },
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 // TODO: Completar documentacion

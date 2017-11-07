@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="btn-toolbar" role="toolbar" aria-label="Base Bar">
+            <div class="btn-group mr-2" role="group" aria-label="Acciones principales sobre las sucursales">
+                <button type="button" ngbTooltip="Guardar sucursal" (click)="save()" class="btn btn-secondary"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-block" [formGroup]="subsidiaryGroup">
+                <div class="form-group row">
+                    <label for="inputCode" class="col-sm-2 col-form-label col-form-label-sm">Codigo</label>
+                    <div class="col-sm-4">
+                        <input type="text" formControlName="code" class="form-control form-control-sm" id="inputcode" aria-describedby="codeHelp" place-holder="Codigo" required>
+                        <div ngxErrors="code">
+                            <div class="error" ngxError="required">
+                                Elcodigo es requerido
+                            </div>
+                        </div>
+                    </div>
+                    <label for="inputDescription" class="col-sm-2 col-form-label col-form-label-sm">Descripcion</label>
+                    <div class="col-sm-4">
+                        <input type="text" formControlName="description" class="form-control form-control-sm" id="inputDescription" aria-describedby="sescriptionHelp" place-holder="Descripcion" required>
+                        <div ngxErrors="description">
+                            <div class="error" ngxError="required">
+                                La descripcion es requerida
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

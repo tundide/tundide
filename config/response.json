@@ -273,5 +273,42 @@
             "default": { "code": 4500, "error": "Unespected Error", "message": "Ocurrio un error inesperado" },
             "database": { "code": 4501, "error": "Mongoose error", "message": "Ocurrio un error de conexion con la base de datos" }
         }
+    },
+    "subsidiary": {
+        "code": 9000,
+        "success": {
+            "status": 200,
+            "retrievedSuccessfully": {
+                "status": "accepted",
+                "message": "Sucursal recuperada correctamente"
+            }
+        },
+        "successcreated": {
+            "status": 201,
+            "subsidiarySuccessfully": {
+                "status": "accepted",
+                "message": "Sucursal creada correctamente"
+            }
+        },
+        "successnocontent": {
+            "status": 204
+        },
+        "notfound": {
+            "status": 404,
+            "subsidiaryNotExist": {
+                "status": "accepted",
+                "message": "sucursal no encontrada"
+            }
+        },
+        "badrequest": {
+            "status": 400,
+            "titleEmpty": { "code": 3401, "error": "parameter title can not be null/empty", "message": "El campo 'Titulo' no puede estar vacio" },
+            "descriptionEmpty": { "code": 3402, "error": "parameter description can not be null/empty", "message": "El campo 'Descripci&oacute;n' no puede estar vacio" }
+        },
+        "internalservererror": {
+            "status": 500,
+            "default": { "code": 3500, "error": "Unespected Error", "message": "Ocurrio un error inesperado" },
+            "database": { "code": 3501, "error": "Mongoose error", "message": "Ocurrio un error de conexion con la base de datos" }
+        }
     }
 }

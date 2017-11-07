@@ -2,7 +2,6 @@ let express = require('express');
 let mongoose = require('mongoose');
 let router = express.Router();
 let Appointment = require('../../models/appointment');
-let Province = require('../../models/province');
 let shortid = require('shortid');
 let session = require('../auth/session');
 let appointmentResponse = require('../../config/response').appointment;
@@ -55,6 +54,7 @@ let ical = require('ical-generator');
  */
 router.post('/', session.authorize(), function(req, res) {
     let app = new Appointment();
+    app.subsidiary = req.body.subsidiary;
     app.user = req.user._id;
     app.client = req.body.contact;
     app.description = req.body.description;
@@ -62,8 +62,9 @@ router.post('/', session.authorize(), function(req, res) {
     app.endDate = req.body.endDate;
     app.shortId = 'AP-' + shortid.generate();
 
+    app.populate();
     app.save().then(function(doc) {
-            // EnviarEmail(app);
+            EnviarEmail(app);
             res.status(appointmentResponse.successcreated.status).json(
                 new Response(appointmentResponse.successcreated.appointmentSuccessfully, doc)
             );
@@ -94,19 +95,19 @@ function EnviarEmail(app) {
     cal.createEvent({
         start: app.startDate,
         end: app.endDate,
-        summary: app.description,
+        summary: 'Usted tiene un turno asignado',
         description: app.description,
-        location: 'Ubicacion Prueba',
+        location: 'Sucursal: ' + app.subsidiary,
         url: 'http://tundide.com/'
     });
 
 
     transport.sendMail({
-        from: 'marcos.panichella@gmail.com',
-        to: 'mpanichella@outlook.com',
+        from: 'marcos.panichella@tundide.com',
+        to: 'mpanichella@live.com',
         subject: 'Meeting',
-        html: "Hola",
-        text: "Hola!!",
+        html: app.description,
+        text: app.description,
         alternatives: [{
             contentType: "text/calendar; charset=\"utf-8\"; method=REQUEST",
             content: new Buffer(cal.toString())
@@ -157,7 +158,7 @@ router.patch('/:id', session.authorize(), function(req, res) {
         client: req.client._id
     };
 
-    Appointment.findOneAndUpdate({ _id: req.body._id }, appointment, { upsert: true }, function(err, doc) {
+    Appointment.findOneAndUpdate({ _id: req.body._id }, appointment, { upsert: true }, function(err) {
         if (err) {
             res.status(appointmentResponse.internalservererror.status).json(
                 new Response(appointmentResponse.internalservererror.database, err)

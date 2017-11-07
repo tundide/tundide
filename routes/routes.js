@@ -3,6 +3,7 @@
       let location = require('./shared/location.js');
       let appointment = require('./appointment/appointment.js');
       let contact = require('./contact/contact.js');
+      let subsidiary = require('./subsidiary/subsidiary.js');
       let favorite = require('./user/favorite.js');
       let message = require('./user/message.js');
       let notifications = require('./billing/notifications.js');
@@ -12,6 +13,7 @@
 
       app.use('/appointment', appointment);
       app.use('/contact', contact);
+      app.use('/subsidiary', subsidiary);
       app.use('/favorite', favorite);
       app.use('/message', message);
       app.use('/notifications', notifications);
