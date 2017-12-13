@@ -21,7 +21,7 @@ export class PayComponent implements OnInit {
 
     ngOnInit() {
         $S('https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js', () => {
-            Mercadopago.setPublishableKey(process.env.publickey.mercadopago);
+            Mercadopago.setPublishableKey(process.env.mercadopago);
             Mercadopago.getIdentificationTypes(function (status, data) {
                 $.each(data, function (i, item) {
                     $('#docType').append($('<option>', {

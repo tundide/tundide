@@ -21,7 +21,7 @@
             "port": 9222,
             "url": "http://localhost:3000/#/",
             "sourceMaps": true,
-            "userDataDir": "${workspaceRoot}/.vscode/chrome",
+            "userDataDir": false,
             "webRoot": "${workspaceRoot}"
         }
     ],

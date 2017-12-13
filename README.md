@@ -18,6 +18,7 @@ Pasos para la instalacion y utilizacion del proyecto
 Instalar las siguientes librerias desde npm
 
 ```
+npm i -g --production windows-build-tools
 npm i -g typescript
 npm i -g gulp
 npm i -g eslint

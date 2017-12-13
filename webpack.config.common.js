@@ -39,6 +39,10 @@ module.exports = {
                 loaders: ['raw-loader', 'sass-loader']
             },
             {
+                test: /\.css$/,
+                loaders: ['raw-loader']
+            },
+            {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
                     'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
@@ -87,8 +91,8 @@ module.exports = {
             Util: "exports-loader?Util!bootstrap/js/dist/util"
         }),
         new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)@angular/,
-            path.resolve(__dirname, '../src')
+            /angular(\\|\/)core(\\|\/)/,
+            path.resolve(__dirname, './src')
         ),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['vendor', 'polyfills']

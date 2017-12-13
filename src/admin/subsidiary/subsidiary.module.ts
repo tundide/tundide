@@ -10,6 +10,7 @@ import { SubsidiaryService } from './subsidiary.service';
 import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DataTableModule } from 'angular2-datatable';
 
 @NgModule({
     declarations: [SubsidiaryNewComponent, SubsidiaryListComponent],
@@ -20,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         RouterModule,
         CommonModule,
         NgbModule,
+        DataTableModule,
         SharedModule.forRoot(),
         ToastyModule.forRoot()],
     providers: [

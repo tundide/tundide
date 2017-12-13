@@ -10,21 +10,39 @@
 </div>
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        <table class="table">
+        <table class="table table-striped" [mfData]="subsidiarys" #mf="mfDataTable" [mfRowsOnPage]="5">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Codigo</th>
-                    <th>Descripci&oacute;n</th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="status">#</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                        <mfDefaultSorter by="code">Codigo</mfDefaultSorter>
+                    </th>
+                    <th style="width: 60%">
+                        <mfDefaultSorter by="description">Descripcion</mfDefaultSorter>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let sub of subsidiarys;  let i = index">
-                    <th scope="row">{{i}}</th>
-                    <td>{{sub.code}}</td>
-                    <td>{{sub.description}}</td>
+                <tr *ngFor="let item of mf.data">
+                    <td>
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" />
+                            <span class="custom-control-indicator"></span>
+                        </label>
+                    </td>
+                    <td>{{item.code}}</td>
+                    <td>{{item.description}}</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

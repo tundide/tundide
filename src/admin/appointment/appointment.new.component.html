@@ -66,13 +66,15 @@
                     <label for="inputstartDate" class="col-sm-2 col-form-label col-form-label-sm">Desde</label>
 
                     <div class="col-sm-4">
-                        <date-picker formControlName="startDate" [showClearButton]="false" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
+                        <input formControlName="startDate" class="form-control form-control-sm" type="text" />
+                        <!-- <datetime formControlName="startDate"></datetime> -->
                     </div>
 
                     <label for="inputendDate" class="col-sm-2 col-form-label col-form-label-sm">Hasta</label>
 
                     <div class="col-sm-4">
-                        <date-picker formControlName="endDate" [showClearButton]="false" mode="datetime" lang="es" format="DD/MM/YYYY HH:mm:ss" name="date"></date-picker>
+                        <input formControlName="endDate" class="form-control form-control-sm" type="text" />
+                        <!-- <datetime formControlName="endDate"></datetime> -->
                     </div>
                 </div>
             </div>

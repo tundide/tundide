@@ -7,6 +7,7 @@ import { AppointmentService } from './appointment.service';
 import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { Appointment } from './appointment.model';
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
+import { ElementRef, ComponentRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';

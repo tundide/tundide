@@ -5,10 +5,10 @@ import '@angular/common';
 import '@angular/http';
 import '@angular/router';
 
+import 'bootstrap/dist/js/bootstrap.js';
+
 // RxJS
 import 'rxjs';
-
-import 'bootstrap/dist/js/bootstrap.js';
 
 import 'lodash';
 

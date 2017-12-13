@@ -15,7 +15,6 @@ import { AuthGuard } from '../auth/auth-guard.service';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import { SocketService } from '../shared/socket.service';
 import { CoreModule } from '../@core/core.module';
-import { APP_CONFIG, AppConfig } from '../app.config';
 
 @NgModule({
     bootstrap: [AuthComponent],
@@ -34,8 +33,7 @@ import { APP_CONFIG, AppConfig } from '../app.config';
     providers: [
         AuthGuard,
         AuthService,
-        SocketService,
-        { provide: APP_CONFIG, useValue: AppConfig }
+        SocketService
     ]
 })
 

@@ -12,8 +12,6 @@ import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OverlayModule } from 'angular-io-overlay';
-import { DatePickerModule } from 'angular-io-datepicker';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 @NgModule({
@@ -21,13 +19,11 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
     exports: [AppointmentNewComponent, AppointmentListComponent],
     imports: [
         CommonModule,
-        OverlayModule,
         routing,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
         NgbModule,
-        DatePickerModule,
         MultiselectDropdownModule,
         SharedModule.forRoot(),
         ToastyModule.forRoot()

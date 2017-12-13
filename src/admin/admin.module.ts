@@ -10,7 +10,6 @@ import { SocketService } from '../shared/socket.service';
 import { MainModule } from './main/main.module';
 import { CoreModule } from '../@core/core.module';
 import { ToastyModule } from 'ng2-toasty';
-import { APP_CONFIG, AppConfig } from '../app.config';
 
 @NgModule({
     bootstrap: [AdminComponent],
@@ -26,8 +25,7 @@ import { APP_CONFIG, AppConfig } from '../app.config';
     providers: [
         AuthGuard,
         AuthService,
-        SocketService,
-        { provide: APP_CONFIG, useValue: AppConfig }
+        SocketService
     ]
 })
 

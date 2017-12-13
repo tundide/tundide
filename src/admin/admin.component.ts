@@ -94,7 +94,7 @@ export class AdminComponent implements OnInit, OnDestroy {
             this.toastyService.error(toastOptions);
         });
 
-        if (process.env.ENV === 'development') {
+        if (process.env.environment === 'development') {
             $S('http://localhost:35729/livereload.js', function () {
                 console.log('Debug Habilitado');
             });

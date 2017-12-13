@@ -14,8 +14,6 @@ let cors = require('cors');
 let User = require('./models/user');
 let env = require('node-env-file');
 
-process.setMaxListeners(0);
-
 env(__dirname + '/.env', { raise: false });
 
 let strategies = require("./routes/auth/strategies.js")();
