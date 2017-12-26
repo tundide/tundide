@@ -31,7 +31,6 @@ export class AppointmentNewComponent implements OnInit {
     private roles: Array<String>;
     private appointmentGroup: FormGroup;
     private subsidiaryOptions: IMultiSelectOption[];
-
     private datepickerOpts = {
         assumeNearbyYear: true,
         autoclose: true,
@@ -86,12 +85,21 @@ export class AppointmentNewComponent implements OnInit {
         private subsidiaryService: SubsidiaryService,
         private phonebookService: PhonebookService) {
 
+
+        let date = new Date();
+        let ngbDateStruct = {
+            day: date.getUTCDay(), month: date.getUTCMonth(), year: date.getUTCFullYear(),
+            hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds()
+        };
+
         this.appointmentGroup = this.formBuilder.group({
             contact: this.formBuilder.control(''),
             description: this.formBuilder.control(''),
             doctor: this.formBuilder.control(''),
-            endDate: this.formBuilder.control(moment().add(1, 'hours').toDate()),
-            startDate: this.formBuilder.control(moment().toDate()),
+            endDate: this.formBuilder.control(ngbDateStruct),
+            endTime: this.formBuilder.control(''),
+            startDate: this.formBuilder.control(ngbDateStruct),
+            startTime: this.formBuilder.control(''),
             subsidiary: this.formBuilder.control('')
         });
     }
@@ -126,7 +134,13 @@ export class AppointmentNewComponent implements OnInit {
         let app = new Appointment();
         app.contact = this.appointmentGroup.get('contact').value._id;
         app.description = this.appointmentGroup.get('description').value;
-        app.startDate = this.appointmentGroup.get('startDate').value;
+
+        let ngbDateStart = this.appointmentGroup.get('startDate').value;
+        let ngbTimeStart = this.appointmentGroup.get('startTime').value;
+
+        app.startDate = new Date(ngbDateStart.year, ngbDateStart.month, ngbDateStart.day,
+            ngbTimeStart.hour, ngbTimeStart.minute, ngbTimeStart.second);
+
         app.endDate = this.appointmentGroup.get('endDate').value;
         app.subsidiary = this.appointmentGroup.get('subsidiary').value[0];
 
