@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'dashboard',
@@ -6,9 +7,26 @@ import { Component } from '@angular/core';
     templateUrl: 'dashboard.component.html'
 })
 
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+    @ViewChild('firstincome') firstincomeModal: NgbModal;
     isActive = false;
     showMenu = '';
+
+    constructor(
+        private modalService: NgbModal) {
+    }
+
+    ngOnInit() {
+        setTimeout(() => {
+            this.modalService.open(this.firstincomeModal, { size: 'lg' }).result.then((result) => {
+                if (result) {
+                    alert('primer ingreso');
+                }
+            });
+        });
+
+    }
+
     eventCalled() {
         this.isActive = !this.isActive;
     }

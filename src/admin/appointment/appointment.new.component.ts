@@ -70,13 +70,13 @@ export class AppointmentNewComponent implements OnInit {
 
     formatterContact = (x: { firstName: string, lastName: string }) => x.firstName + ' ' + x.lastName;
 
-    searchDoctor = (text$: Observable<string>) =>
+    searchParticipant = (text$: Observable<string>) =>
         text$
             .debounceTime(200)
             .distinctUntilChanged()
             .switchMap(term => this.phonebookService.find(term))
 
-    formatterDoctor = (x: { firstName: string, lastName: string }) => x.firstName + ' ' + x.lastName;
+    formatterParticipant = (x: { firstName: string, lastName: string }) => x.firstName + ' ' + x.lastName;
 
     constructor(private formBuilder: FormBuilder,
         private router: Router,
@@ -95,7 +95,7 @@ export class AppointmentNewComponent implements OnInit {
         this.appointmentGroup = this.formBuilder.group({
             contact: this.formBuilder.control(''),
             description: this.formBuilder.control(''),
-            doctor: this.formBuilder.control(''),
+            participant: this.formBuilder.control(''),
             endDate: this.formBuilder.control(ngbDateStruct),
             endTime: this.formBuilder.control(''),
             startDate: this.formBuilder.control(ngbDateStruct),
@@ -106,10 +106,6 @@ export class AppointmentNewComponent implements OnInit {
 
     ngOnInit() {
         this.roles = this.authService.getUserCredentials().roles;
-        // this.subsidiaryOptions = [
-        //     { id: '59851a6a12693920c86416ac', name: 'Ballester' },
-        //     { id: '59851a6a12693920c86416ac', name: 'San Martin' },
-        // ];
 
         this.subsidiaryService.list().subscribe(
             res => {
@@ -141,7 +137,12 @@ export class AppointmentNewComponent implements OnInit {
         app.startDate = new Date(ngbDateStart.year, ngbDateStart.month, ngbDateStart.day,
             ngbTimeStart.hour, ngbTimeStart.minute, ngbTimeStart.second);
 
-        app.endDate = this.appointmentGroup.get('endDate').value;
+        let ngbDateEnd = this.appointmentGroup.get('endDate').value;
+        let ngbTimeEnd = this.appointmentGroup.get('endTime').value;
+
+        app.endDate = new Date(ngbDateEnd.year, ngbDateEnd.month, ngbDateEnd.day,
+            ngbTimeEnd.hour, ngbTimeEnd.minute, ngbTimeEnd.second);
+
         app.subsidiary = this.appointmentGroup.get('subsidiary').value[0];
 
         this.appointmentService.save(app)

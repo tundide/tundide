@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StockService } from './stock.service';
 import * as moment from 'moment';
 import * as _ from 'lodash';
@@ -15,7 +14,6 @@ export class StockListComponent implements OnInit {
     constructor(private router: Router,
         private toastyService: ToastyService,
         private stockService: StockService,
-        private modalService: NgbModal,
         private toastyConfig: ToastyConfig) {
         this.toastyConfig.theme = 'bootstrap';
     }

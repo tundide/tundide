@@ -12,12 +12,12 @@
         <div class="card">
             <div class="card-block" [formGroup]="appointmentGroup">
                 <div class="form-group row">
-                    <label for="inputReason" class="col-sm-2 col-form-label col-form-label-sm">Raz&oacute;n de la reserva</label>
+                    <label for="inputDescription" class="col-sm-2 col-form-label col-form-label-sm">Raz&oacute;n de la reserva</label>
                     <div class="col-sm-10">
-                        <input type="text" ngbTooltip="Este mensaje lo vera el cliente en el mail de aviso de turno." class="form-control form-control-sm" id="inputReason" formControlName="description" aria-describedby="reasonHelp" place-holder="Razon" required>
+                        <input type="text" ngbTooltip="Este mensaje lo vera el cliente en el mail de aviso de turno." class="form-control form-control-sm" id="inputDescription" formControlName="description" aria-describedby="descriptionHelp" place-holder="Description" required>
 
-                        <div ngxErrors="reason">
-                            <div class="error" ngxError="required">
+                        <div ngxErrors="description">
+                            <div class="error" ngxError="required" when="dirty">
                                 La raz&oacute;n es requerida
                             </div>
                         </div>
@@ -41,17 +41,18 @@
                         </div>
                     </div>
 
-                    <label for="inputDoctor" class="col-sm-2 col-form-label col-form-label-sm">Doctor</label>
+                    <label for="inputParticipant" class="col-sm-2 col-form-label col-form-label-sm">Participante</label>
                     <div class="col-sm-4">
-                        <ng-template #doctorTemplate let-r="result" let-t="term">
+                        <ng-template #participantTemplate let-r="result" let-t="term">
                             {{ r.firstName}} {{r.lastName}} - (DNI: {{ r.document }})
                         </ng-template>
 
-                        <input id="inputDoctor" formControlName="doctor" name="doctor" type="text" class="form-control form-control-sm" [editable]="false" [inputFormatter]="formatterDoctor" [resultTemplate]="doctorTemplate" [ngbTypeahead]="searchDoctor" />
+                        <input id="inputParticipant" placeholder="Escriba el Nombre, Apellido o DNI" formControlName="participant" name="participant" type="text" class="form-control form-control-sm" [editable]="false" [inputFormatter]="formatterParticipant" [resultTemplate]="participantTemplate"
+                            [ngbTypeahead]="searchParticipant" />
 
-                        <div ngxErrors="doctor">
+                        <div ngxErrors="participant">
                             <div class="error" ngxError="required">
-                                El doctor es requerido
+                                El participante es requerido
                             </div>
                         </div>
                     </div>

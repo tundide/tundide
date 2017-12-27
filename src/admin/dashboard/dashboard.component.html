@@ -68,3 +68,51 @@
         </div>
     </div>
 </div>
+
+<ng-template #firstincome let-close="close">
+    <div class="modal-header">
+        <h5 class="modal-title">Bienvenido a Tundide</h5>
+        <button type="button" class="close" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <wizard #wizard>
+            <wizard-step stepTitle="Bienvenido">
+                <div class="centered-content">
+                    <div>
+                        Hola! Vemos que este es tu primer ingreso, configuremos algunas cosas para que puedas usar todas nuestras funcionalidades.
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step stepTitle="Informacion de la empresa">
+                <div class="centered-content">
+                    <div>
+                        Content: Step 2
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
+                        <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step stepTitle="Ya casi terminamos">
+                <div class="centered-content">
+                    <div>
+                        Content: Step 3
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
+                        <button type="button" class="btn btn-secondary" endWizard>Finalizar</button>
+                    </div>
+                </div>
+            </wizard-step>
+        </wizard>
+    </div>
+</ng-template>

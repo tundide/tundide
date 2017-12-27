@@ -68,6 +68,11 @@ export const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        loadChildren: './settings/settings.module#SettingsModule',
+        path: 'settings'
+    },
+    {
+        canActivate: [AuthGuard],
         loadChildren: './dashboard/dashboard.module#DashboardModule',
         path: 'dashboard'
     }

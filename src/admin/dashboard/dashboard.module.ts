@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArchwizardModule } from 'ng2-archwizard';
 
 @NgModule({
     declarations: [DashboardComponent],
@@ -17,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         RouterModule,
         CommonModule,
         NgbModule,
+        ArchwizardModule,
         SharedModule.forRoot(),
         ToastyModule.forRoot()],
     providers: [
