@@ -48,6 +48,7 @@ let userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     lastAccess: Date,
+    firstIncome: Boolean,
     plan: {
         type: Number,
         testMonth: Boolean,

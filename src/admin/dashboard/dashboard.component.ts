@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
     selector: 'dashboard',
@@ -13,18 +14,19 @@ export class DashboardComponent implements OnInit {
     showMenu = '';
 
     constructor(
+        private authService: AuthService,
         private modalService: NgbModal) {
     }
 
     ngOnInit() {
-        setTimeout(() => {
+        if (this.authService.getUserCredentials().firstIncome) {
             this.modalService.open(this.firstincomeModal, { size: 'lg' }).result.then((result) => {
                 if (result) {
+                    this.authService.complete();
                     alert('primer ingreso');
                 }
             });
-        });
-
+        }
     }
 
     eventCalled() {

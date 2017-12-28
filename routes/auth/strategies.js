@@ -306,7 +306,7 @@ module.exports = function() {
 
             return done(null, newUser);
         };
-
+        newUser.firstIncome = true;
         mp.post("/v1/customers", {
             "email": newUser.email,
             "first_name": newUser.firstName,

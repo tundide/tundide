@@ -54,13 +54,14 @@ export class AuthService {
 
     /**
      * Load User Data on start page
-     * @returns       Objet "User" with UserId - Name - Email - Token.
+     * @returns       Objet "User" with UserId - Name - Email - Token - First Income.
      */
     loadUserData(token: string): Observable<User> {
         return this.httpService.get('/auth/userdata')
             .map((response: Response) => {
                 const result = response.json();
-                return new User(result.data.name, result.data.username, result.data.shortId, result.data.id, result.data.roles);
+                return new User(result.data.name, result.data.username, result.data.shortId, result.data.id,
+                    result.data.roles, result.data.firstIncome);
             })
             .catch((error: Response) => {
                 return this.httpService.catch(error);
@@ -74,6 +75,21 @@ export class AuthService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
 
         return this.http.patch(this.host + '/auth/confirm', { 'userid': userid }, { headers: headers })
+            .map((response: Response) => {
+                return this.httpService.response(response);
+            })
+            .catch((error: Response) => {
+                return this.httpService.catch(error);
+            });
+    }
+
+    /**
+     * Complete user registration
+     */
+    complete(userid: string): Observable<User> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+
+        return this.http.patch(this.host + '/auth/complete', { 'userid': userid }, { headers: headers })
             .map((response: Response) => {
                 return this.httpService.response(response);
             })
