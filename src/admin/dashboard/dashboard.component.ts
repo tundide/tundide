@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../auth/auth.service';
 
@@ -12,10 +13,28 @@ export class DashboardComponent implements OnInit {
     @ViewChild('firstincome') firstincomeModal: NgbModal;
     isActive = false;
     showMenu = '';
-
+    private firstIncomeGroup: FormGroup;
+    
     constructor(
         private authService: AuthService,
+        private formBuilder: FormBuilder,
         private modalService: NgbModal) {
+            
+            this.firstIncomeGroup = this.formBuilder.group({
+                company: this.formBuilder.group({
+                    description: this.formBuilder.control('', [Validators.required]),
+                    type:  this.formBuilder.control('', [Validators.required])
+                }),
+                document: this.formBuilder.control(''),
+                firstName: this.formBuilder.control('', [Validators.required]),
+                lastName: this.formBuilder.control('', [Validators.required]),
+                location: this.formBuilder.group({
+                    number: this.formBuilder.control(''),
+                    place: this.formBuilder.control({ value: '', disabled: true }),
+                    province: this.formBuilder.control(''),
+                    street: this.formBuilder.control('')
+                })
+            });
     }
 
     ngOnInit() {

@@ -77,7 +77,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <wizard #wizard>
+        <wizard #wizard [formGroup]="firstIncomeGroup">
             <wizard-step stepTitle="Bienvenido">
                 <div class="centered-content">
                     <div>
@@ -92,9 +92,45 @@
             <wizard-step stepTitle="Informacion de la empresa">
                 <div class="centered-content">
                     <div>
-                        Content: Step 2
+                        Contanos sobre tu empresa
                     </div>
-
+                    <div class="card-block" formGroupName="company">
+                        <div class="form-group row">
+                            <label for="inputname" class="col-sm-4 col-form-label col-form-label-sm">Nombre</label>
+                            <div class="col-sm-8">
+                                <input type="text" formControlName="name" class="form-control form-control-sm" id="inputname" aria-describedby="nameHelp" place-holder="Nombre" required>
+                                <div ngxErrors="name">
+                                    <div class="error" ngxError="required">
+                                        El nombre es requerido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputdescription" class="col-sm-4 col-form-label col-form-label-sm">Descripci&oaucte;n</label>
+                            <div class="col-sm-8">
+                                <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
+                                <div ngxErrors="description">
+                                    <div class="error" ngxError="required">
+                                        La descripcion es requerida
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputType" class="col-sm-4 col-form-label col-form-label-sm">Tipo de empresa</label>
+                            <div class="col-sm-8">
+                                <select id="inputType" formControlName="type" (change)="provinceChange($event)" [(ngModel)]="contact.location.province" name="type" class="form-control">
+                                        <option *ngFor="let t of types" [ngValue]="t.code">{{t.description}}</option>
+                                </select>
+                                <div ngxErrors="type">
+                                    <div class="error" ngxError="required">
+                                        El tipo de empresa es requerido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
                         <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
@@ -104,12 +140,35 @@
             <wizard-step stepTitle="Ya casi terminamos">
                 <div class="centered-content">
                     <div>
-                        Content: Step 3
+                        Completa la inforamci&oacute;n de la sucursal o casa matriz.
                     </div>
-
+                    <div class="card-block" formGroupName="subsidiary">
+                        <div class="form-group row">
+                            <label for="inputcode" class="col-sm-4 col-form-label col-form-label-sm">Podes asignarle un codigo que la identifique</label>
+                            <div class="col-sm-8">
+                                <input type="text" formControlName="code" class="form-control form-control-sm" id="inputcode" aria-describedby="nameHelp" place-holder="Codigo" required>
+                                <div ngxErrors="code">
+                                    <div class="error" ngxError="required">
+                                        El codigo es requerido
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputdescription" class="col-sm-4 col-form-label col-form-label-sm">Descripci&oacute;n</label>
+                            <div class="col-sm-8">
+                                <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="nameHelp" place-holder="Descripcion" required>
+                                <div ngxErrors="description">
+                                    <div class="error" ngxError="required">
+                                        La descripcion es requerida
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
-                        <button type="button" class="btn btn-secondary" endWizard>Finalizar</button>
+                        <button type="button" class="btn btn-secondary" endWizard (click)="c('Close click')">Finalizar</button>
                     </div>
                 </div>
             </wizard-step>
