@@ -84,7 +84,7 @@
                         Hola! Vemos que este es tu primer ingreso, configuremos algunas cosas para que puedas usar todas nuestras funcionalidades.
                     </div>
 
-                    <div class="btn-group">
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputdescription" class="col-sm-4 col-form-label col-form-label-sm">Descripci&oaucte;n</label>
+                            <label for="inputdescription" class="col-sm-4 col-form-label col-form-label-sm">Descripci&oacute;n</label>
                             <div class="col-sm-8">
                                 <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
                                 <div ngxErrors="description">
@@ -120,7 +120,7 @@
                         <div class="form-group row">
                             <label for="inputType" class="col-sm-4 col-form-label col-form-label-sm">Tipo de empresa</label>
                             <div class="col-sm-8">
-                                <select id="inputType" formControlName="type" (change)="provinceChange($event)" [(ngModel)]="contact.location.province" name="type" class="form-control">
+                                <select id="inputType" formControlName="type" (change)="provinceChange($event)" name="type" class="form-control">
                                         <option *ngFor="let t of types" [ngValue]="t.code">{{t.description}}</option>
                                 </select>
                                 <div ngxErrors="type">
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="btn-group">
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
                         <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
                     </div>
@@ -166,9 +166,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="btn-group">
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
-                        <button type="button" class="btn btn-secondary" endWizard (click)="c('Close click')">Finalizar</button>
+                        <button type="button" class="btn btn-secondary" endWizard (click)="close('Close click')">Finalizar</button>
                     </div>
                 </div>
             </wizard-step>

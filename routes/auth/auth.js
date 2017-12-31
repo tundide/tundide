@@ -51,7 +51,8 @@ module.exports = function() {
                 'token': '',
                 'username': '',
                 'roles': fulluser.roles,
-                'shortId': fulluser.shortId
+                'shortId': fulluser.shortId,
+                'firstIncome': fulluser.firstIncome
             };
 
             if (fulluser.google) {

@@ -14,36 +14,44 @@ export class DashboardComponent implements OnInit {
     isActive = false;
     showMenu = '';
     private firstIncomeGroup: FormGroup;
-    
+
     constructor(
         private authService: AuthService,
         private formBuilder: FormBuilder,
         private modalService: NgbModal) {
-            
-            this.firstIncomeGroup = this.formBuilder.group({
-                company: this.formBuilder.group({
-                    description: this.formBuilder.control('', [Validators.required]),
-                    type:  this.formBuilder.control('', [Validators.required])
-                }),
-                document: this.formBuilder.control(''),
-                firstName: this.formBuilder.control('', [Validators.required]),
-                lastName: this.formBuilder.control('', [Validators.required]),
-                location: this.formBuilder.group({
-                    number: this.formBuilder.control(''),
-                    place: this.formBuilder.control({ value: '', disabled: true }),
-                    province: this.formBuilder.control(''),
-                    street: this.formBuilder.control('')
-                })
-            });
+
+        this.firstIncomeGroup = this.formBuilder.group({
+            company: this.formBuilder.group({
+                name: this.formBuilder.control('', [Validators.required]),
+                description: this.formBuilder.control('', [Validators.required]),
+                type: this.formBuilder.control('', [Validators.required])
+            }),
+            subsidiary: this.formBuilder.group({
+                code: this.formBuilder.control('', [Validators.required]),
+                description: this.formBuilder.control('', [Validators.required])
+            }),
+            document: this.formBuilder.control(''),
+            firstName: this.formBuilder.control('', [Validators.required]),
+            lastName: this.formBuilder.control('', [Validators.required]),
+            location: this.formBuilder.group({
+                number: this.formBuilder.control(''),
+                place: this.formBuilder.control({ value: '', disabled: true }),
+                province: this.formBuilder.control(''),
+                street: this.formBuilder.control('')
+            })
+        });
     }
 
     ngOnInit() {
         if (this.authService.getUserCredentials().firstIncome) {
-            this.modalService.open(this.firstincomeModal, { size: 'lg' }).result.then((result) => {
-                if (result) {
-                    this.authService.complete();
-                    alert('primer ingreso');
-                }
+            setTimeout(() => {
+                this.modalService.open(this.firstincomeModal, { size: 'lg' }).result.then((result) => {
+                    if (result) {
+                        this.authService.complete('1');
+                    }
+                }, (reason) => {
+                    alert(reason);
+                  });
             });
         }
     }

@@ -60,6 +60,7 @@ export class AuthService {
         return this.httpService.get('/auth/userdata')
             .map((response: Response) => {
                 const result = response.json();
+                console.log(result.data);
                 return new User(result.data.name, result.data.username, result.data.shortId, result.data.id,
                     result.data.roles, result.data.firstIncome);
             })

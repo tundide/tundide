@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routing } from './dashboard.routing';
@@ -15,6 +15,7 @@ import { ArchwizardModule } from 'ng2-archwizard';
     exports: [DashboardComponent],
     imports: [routing,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         CommonModule,
         NgbModule,
