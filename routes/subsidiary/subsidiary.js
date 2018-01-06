@@ -4,9 +4,7 @@ let router = express.Router();
 let Subsidiary = require('../../models/subsidiary');
 let shortid = require('shortid');
 let session = require('../auth/session');
-let subsidiaryResponse = require('../../config/response').subsidiary;
-let authenticationResponse = require('../../config/response').authentication;
-let Response = require('../shared/response.js');
+let httpstatus = require('../../config/response').httpstatus;
 let Validators = require('../../lib/Validators/ObjectId.js');
 let _ = require('lodash');
 
@@ -35,14 +33,10 @@ router.post('/', session.authorize(), function(req, res) {
     sub.description = req.body.description;
 
     sub.save().then(function(doc) {
-            res.status(subsidiaryResponse.successcreated.status).json(
-                new Response(subsidiaryResponse.successcreated.subsidiarySuccessfully, doc)
-            );
+            return res.status(httpstatus.successcreated).json(doc);
         },
         function(err) {
-            res.status(subsidiaryResponse.internalservererror.status).json(
-                new Response(subsidiaryResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         });
 });
 
@@ -74,14 +68,10 @@ router.patch('/:id', session.authorize(), function(req, res) {
 
     Subsidiary.findOneAndUpdate({ _id: req.body.id }, subsidiary, { upsert: true }, function(err, doc) {
         if (err) {
-            res.status(subsidiaryResponse.internalservererror.status).json(
-                new Response(subsidiaryResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
 
-        return res.status(subsidiaryResponse.successnocontent.status).json(
-            new Response(subsidiaryResponse.successnocontent.updatedSuccessfully, doc)
-        );
+        return res.status(httpstatus.successnocontent).send();
     });
 });
 
@@ -108,14 +98,10 @@ router.delete('/:id', session.authorize(), function(req, res) {
 
     Subsidiary.remove({ _id: subsidiaryId }, function(err) {
         if (err) {
-            res.status(subsidiaryResponse.internalservererror.status).json(
-                new Response(subsidiaryResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
 
-        return res.status(subsidiaryResponse.successnocontent.status).json(
-            new Response(subsidiaryResponse.successnocontent.deletedSuccessfully)
-        );
+        return res.status(httpstatus.success).send();
     });
 });
 
@@ -134,16 +120,12 @@ router.delete('/:id', session.authorize(), function(req, res) {
 router.get('/list', session.authorize(), function(req, res) {
     Subsidiary.find({ user: req.user._id }, function(err, subsidiaries) {
         if (err) {
-            return res.status(subsidiaryResponse.internalservererror.status).json(
-                new Response(subsidiaryResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
         if (subsidiaries.length > 0) {
-            return res.status(subsidiaryResponse.success.status).json(
-                new Response(subsidiaryResponse.success.retrievedSuccessfully, subsidiaries)
-            );
+            return res.status(httpstatus.success).json(subsidiaries);
         } else {
-            return res.status(subsidiaryResponse.successnocontent.status);
+            return res.status(httpstatus.nocontent).send();
         }
     });
 });
@@ -171,16 +153,12 @@ router.get('/find', session.authorize(), function(req, res) {
         }]
     }, function(err, subsidiaries) {
         if (err) {
-            return res.status(subsidiaryResponse.internalservererror.status).json(
-                new Response(subsidiaryResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
         if (subsidiaries.length > 0) {
-            return res.status(subsidiaryResponse.success.status).json(
-                new Response(subsidiaryResponse.success.retrievedSuccessfully, subsidiaries)
-            );
+            return res.status(httpstatus.success).json(subsidiaries);
         } else {
-            return res.status(subsidiaryResponse.successnocontent.status).send();
+            return res.status(httpstatus.nocontent).send();
         }
     });
 });

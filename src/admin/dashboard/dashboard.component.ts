@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
             setTimeout(() => {
                 this.modalService.open(this.firstincomeModal, { size: 'lg' }).result.then((result) => {
                     if (result) {
-                        this.authService.complete('1');
+                        // TODO: Terminar proceso de firstIncome this.authService.complete('1');
                     }
                 }, (reason) => {
                     alert(reason);

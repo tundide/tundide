@@ -49,7 +49,7 @@ export class PayComponent implements OnInit {
                             this.busy = this.billingService.associateCard(response.id).subscribe(
                                 res => {
                                     this.toastyService.success({
-                                        msg: 'La tarjeta ' + res.data.first_six_digits +
+                                        msg: 'La tarjeta ' + res.first_six_digits +
                                         'XXXXXXXX fue asociada correctamente a la cuenta.',
                                         showClose: true,
                                         theme: 'bootstrap',

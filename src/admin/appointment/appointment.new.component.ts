@@ -1,6 +1,8 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { GrowlService } from '../../@core/utils/growl.service';
 import { AuthService } from '../../auth/auth.service';
 import { PhonebookService } from '../phonebook/phonebook.service';
 import { AppointmentService } from './appointment.service';
@@ -83,6 +85,7 @@ export class AppointmentNewComponent implements OnInit {
         private authService: AuthService,
         private appointmentService: AppointmentService,
         private subsidiaryService: SubsidiaryService,
+        private growlService: GrowlService,
         private phonebookService: PhonebookService) {
 
 
@@ -108,14 +111,20 @@ export class AppointmentNewComponent implements OnInit {
         this.roles = this.authService.getUserCredentials().roles;
 
         this.subsidiaryService.list().subscribe(
-            res => {
+            data => {
                 this.subsidiaryOptions = new Array();
-                _.forEach(<Array<ISubsidiary>>res.data, (subsidiary, key) => {
+                _.forEach(data, (subsidiary, key) => {
                     this.subsidiaryOptions.push({
                         id: subsidiary._id,
                         name: subsidiary.code + ' - ' + subsidiary.description
                     });
                 });
+            }, (error: HttpErrorResponse) => {
+                if (error.status === 400) {
+                    this.growlService.badRequest();
+                } else if (error.status === 500) {
+                    this.growlService.internalServerError();
+                }
             }
         );
     }
@@ -147,6 +156,10 @@ export class AppointmentNewComponent implements OnInit {
 
         this.appointmentService.save(app)
             .subscribe(response => {
+                this.growlService.success({
+                    title: 'Alta de turno.',
+                    msg: 'Se dio de alta el turno exitosamente.'
+                });
                 this.router.navigate(['/appointment/list']);
             });
     }

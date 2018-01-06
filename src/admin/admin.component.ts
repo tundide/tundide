@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs/Rx';
 import { User } from '../auth/user.model';
 import { SocketService } from '../shared/socket.service';
 import { AnalyticsService } from '../@core/utils/analytics.service';
-import { HttpService } from '../@core/utils/http.service';
 declare var $: JQueryStatic;
 import * as $S from 'scriptjs';
 
@@ -20,6 +19,9 @@ import * as $S from 'scriptjs';
 export class AdminComponent implements OnInit, OnDestroy {
     @ViewChild('contactus') contactusModal: NgbModal;
 
+    // TODO: Agregar manejo de errores a traves del EventEmitter
+    // @Output() errorOccurred = new EventEmitter();
+
     private subscription: Subscription;
     private user: User;
 
@@ -27,7 +29,6 @@ export class AdminComponent implements OnInit, OnDestroy {
         public router: Router,
         public route: ActivatedRoute,
         private analytics: AnalyticsService,
-        private httpService: HttpService,
         private modalService: NgbModal,
         private toastyService: ToastyService,
         private toastyConfig: ToastyConfig,
@@ -56,6 +57,8 @@ export class AdminComponent implements OnInit, OnDestroy {
                 if (token) {
                     this.authService.loadUserData(token).subscribe(
                         (user) => {
+                            let u = new User(user.name, user.username, user.shortId, user.id,
+                                user.roles, user.firstIncome);
                             sessionStorage.setItem('user', JSON.stringify(user));
                             this.user = user;
                             this.socketService.connectSocket(user.shortId);
@@ -81,18 +84,18 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.analytics.trackPageViews();
+// TODO: Agregar manejo de errores a traves del EventEmitter
+        // this.http.errorOccurred.subscribe((error) => {
+        //     let toastOptions: ToastOptions = {
+        //         msg: error.message,
+        //         showClose: true,
+        //         theme: 'bootstrap',
+        //         timeout: 5000,
+        //         title: 'Ocurrio un error'
+        //     };
 
-        this.httpService.errorOccurred.subscribe((error) => {
-            let toastOptions: ToastOptions = {
-                msg: error.message,
-                showClose: true,
-                theme: 'bootstrap',
-                timeout: 5000,
-                title: 'Ocurrio un error'
-            };
-
-            this.toastyService.error(toastOptions);
-        });
+        //     this.toastyService.error(toastOptions);
+        // });
 
         if (process.env.environment === 'development') {
             $S('http://localhost:35729/livereload.js', function () {

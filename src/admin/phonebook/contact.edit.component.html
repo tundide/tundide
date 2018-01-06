@@ -17,8 +17,8 @@
                 <div class="form-group row">
                     <label for="inputfirstName" class="col-sm-2 col-form-label col-form-label-sm">Nombre</label>
                     <div class="col-sm-4">
-                        <input type="text" formControlName="firstName" class="form-control form-control-sm" id="inputfirstName" aria-describedby="nameHelp" place-holder="Nombre" required>
-                        <div ngxErrors="firstName">
+                        <input type="text" name="firstName" [class.errors]="firstName.hasError('*', ['dirty'])" formControlName="firstName" class="form-control form-control-sm" id="inputfirstName" aria-describedby="nameHelp" place-holder="Nombre" required>
+                        <div ngxErrors="firstName" #firstName="ngxErrors">
                             <div class="error" ngxError="required">
                                 El nombre es requerido
                             </div>
@@ -43,7 +43,7 @@
                 <div class="form-group row" formGroupName="location">
                     <label for="inputProvince" class="col-sm-2 col-form-label col-form-label-sm">Provincia</label>
                     <div class="col-sm-4">
-                        <select id="inputProvince" formControlName="province" (change)="provinceChange($event)" [(ngModel)]="contact.location.province" name="province" class="form-control">
+                        <select id="inputProvince" formControlName="province" name="province" class="form-control">
                                 <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
                         </select>
                         <div ngxErrors="location.province">
@@ -57,7 +57,7 @@
                         <ng-template #rt let-r="result" let-t="term">
                             {{ r.description}} - ({{ r.zip}})
                         </ng-template>
-                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchLocation" />
+                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="placeChange($event)" [ngbTypeahead]="searchLocation" />
                         <div ngxErrors="location.place">
                             <div class="error" ngxError="required">
                                 La Localidad es requerida
@@ -83,23 +83,25 @@
             <div class="card-header">
                 Datos de contacto
             </div>
-            <div class="card-block" formGroupName="contact">
-                <div class="form-group row">
-                    <label for="inputPhone" class="col-sm-4 col-form-label col-form-label-sm">Telefono</label>
-                    <div class="col-sm-8">
-                        <input type="tel" formControlName="phone" class="form-control form-control-sm" id="inputPhone" aria-describedby="phoneHelp" place-holder="Telefono">
+            <div class="card-block">
+                <div formGroupName="contact">
+                    <div class="form-group row">
+                        <label for="inputPhone" class="col-sm-4 col-form-label col-form-label-sm">Telefono</label>
+                        <div class="col-sm-8">
+                            <input type="tel" formControlName="phone" class="form-control form-control-sm" id="inputPhone" aria-describedby="phoneHelp" place-holder="Telefono">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputCellPhone" class="col-sm-4 col-form-label col-form-label-sm">Celular</label>
-                    <div class="col-sm-8">
-                        <input type="tel" formControlName="cellPhone" class="form-control form-control-sm" id="inputCellPhone" aria-describedby="cellphoneHelp" place-holder="Celular">
+                    <div class="form-group row">
+                        <label for="inputCellPhone" class="col-sm-4 col-form-label col-form-label-sm">Celular</label>
+                        <div class="col-sm-8">
+                            <input type="tel" formControlName="cellPhone" class="form-control form-control-sm" id="inputCellPhone" aria-describedby="cellphoneHelp" place-holder="Celular">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-4 col-form-label col-form-label-sm">Email</label>
-                    <div class="col-sm-8">
-                        <input type="email" formControlName="email" class="form-control form-control-sm" id="inputEmail" aria-describedby="emailHelp" place-holder="Email">
+                    <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-4 col-form-label col-form-label-sm">Email</label>
+                        <div class="col-sm-8">
+                            <input type="email" formControlName="email" class="form-control form-control-sm" id="inputEmail" aria-describedby="emailHelp" place-holder="Email">
+                        </div>
                     </div>
                 </div>
             </div>

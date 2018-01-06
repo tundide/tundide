@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HttpService } from '../@core/utils/http.service';
 
 @Injectable()
 export class MapService {
 
-    constructor(private http: Http,
-        private httpService: HttpService) {
+    constructor(private http: HttpClient) {
     }
 
     /**
@@ -15,13 +13,7 @@ export class MapService {
      * @param  {String} address The address to get geocode
      */
     getGeocodeFromAddress(address) {
-        return this.http.get('http://maps.google.com/maps/api/geocode/json?address=' + address, null)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get('http://maps.google.com/maps/api/geocode/json?address=' + address, null);
     }
 
     /**
@@ -29,12 +21,6 @@ export class MapService {
      * @param  {String} address The address to get geocode
      */
     getGeocodeFromLatLon(lat, lon) {
-        return this.http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true', null)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true', null);
     }
 }

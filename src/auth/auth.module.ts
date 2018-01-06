@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -20,7 +19,7 @@ import { CoreModule } from '../@core/core.module';
     bootstrap: [AuthComponent],
     declarations: [AuthComponent, SigninComponent, SignoutComponent, ConfirmComponent],
     exports: [AuthComponent, SigninComponent, SignoutComponent, ConfirmComponent],
-    imports: [HttpModule,
+    imports: [
         routing,
         RouterModule,
         CommonModule,

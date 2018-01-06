@@ -1,7 +1,6 @@
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { HttpService } from '../../@core/utils/http.service';
 import { SocketService } from '../../shared/socket.service';
 
 /**
@@ -19,9 +18,7 @@ export class AdvertiserService {
     private socketService: SocketService;
     private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
-    constructor(public http: Http,
-        private httpService: HttpService
-    ) {
+    constructor(public http: HttpClient) {
         this.onContactAdvertiser = new EventEmitter();
 
         this.socketService = new SocketService();
@@ -31,17 +28,9 @@ export class AdvertiserService {
      * Send Messageto the advertiser
      */
     sendMessage(message: string) {
-        let token = localStorage.getItem('token');
-        const headers = new Headers({ 'Authorization': token, 'Content-Type': 'application/json' });
-        return this.http.patch(this.host + '/message/', {}, { headers: headers })
-            .map((response: Response) => {
-                // TODO: Ver de unificar la respuesta con httpService
-                this.socketService.socket.emit('create', 'crear mensaje');
-
-                return response;
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.patch(this.host + '/message/', {});
+        // WebSocket
+        // TODO: Revisar el manejo de WebSockets
+        // this.socketService.socket.emit('create', 'crear mensaje');
     }
 }

@@ -54,7 +54,7 @@ export class RecordNewComponent implements OnInit {
     saveContact() {
         this.recordService.save(this.contactGroup.value).subscribe(response => {
             this.toastyService.success({
-                msg: response.message,
+                msg: 'algo', // FIXME: De donde mierda sale el message response.message,
                 showClose: true,
                 theme: 'bootstrap',
                 timeout: 5000,
@@ -113,7 +113,7 @@ export class RecordNewComponent implements OnInit {
         this.recordService.save(this.contactGroup.value)
             .subscribe(response => {
                 this.toastyService.success({
-                    msg: response.message,
+                    msg: 'algo', // FIXME: De donde mierda sale el message response.message,
                     showClose: true,
                     theme: 'bootstrap',
                     timeout: 5000,

@@ -23,9 +23,9 @@ export class RecordListComponent implements OnInit {
 
     ngOnInit() {
         this.recordService.list()
-            .subscribe(res => {
-                if (res) {
-                    this.contacts = res.data;
+            .subscribe(data => {
+                if (data) {
+                    this.contacts = data;
                 }
             });
     }

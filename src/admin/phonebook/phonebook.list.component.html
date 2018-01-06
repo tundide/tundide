@@ -21,12 +21,12 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="input-group">
                             <span class="input-group-addon" id="inputSearch">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </span>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </span>
                             <input type="text" class="form-control" placeholder="Buscar" aria-describedby="inputSearch">
                             <span class="input-group-btn">
-                                      <button class="btn btn-secondary" type="button">Buscar</button>
-                                    </span>
+                                <button class="btn btn-secondary" type="button">Buscar</button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div ngbDropdown class="d-inline-block">
                         <button class="btn btn-secondary" id="dropdownoptions" ngbDropdownToggle><i class="fa fa-cog" aria-hidden="true"></i></button>
                         <div ngbDropdownMenu aria-labelledby="dropdownoptions">
-                            <button class="dropdown-item">Modificar</button>
+                            <button [routerLink]="['/phonebook/edit', con._id]" class="dropdown-item">Modificar</button>
                             <button class="dropdown-item">Borrar</button>
                             <hr />
                             <button class="dropdown-item"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Crear cita</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
+import { GrowlService } from '../../@core/utils/growl.service';
 import { PhonebookService } from './phonebook.service';
 import { Contact } from './contact.model';
 import * as moment from 'moment';
@@ -15,17 +15,17 @@ export class PhonebookListComponent implements OnInit {
     private contacts: Array<Contact>;
 
     constructor(private router: Router,
-        private toastyService: ToastyService,
-        private phonebookService: PhonebookService,
-        private toastyConfig: ToastyConfig) {
-        this.toastyConfig.theme = 'bootstrap';
+        private growlService: GrowlService,
+        private phonebookService: PhonebookService) {
     }
 
     ngOnInit() {
         this.phonebookService.list()
-            .subscribe(res => {
-                if (res) {
-                    this.contacts = res.data;
+            .subscribe(contacts => {
+                if (contacts) {
+                    this.contacts = contacts;
+                } else {
+                    this.growlService.noContent();
                 }
             });
     }

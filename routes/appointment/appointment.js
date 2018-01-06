@@ -5,7 +5,7 @@ let Appointment = require('../../models/appointment');
 let shortid = require('shortid');
 let session = require('../auth/session');
 let appointmentResponse = require('../../config/response').appointment;
-let authenticationResponse = require('../../config/response').authentication;
+let httpstatus = require('../../config/response').httpstatus;
 let Response = require('../shared/response.js');
 let Validators = require('../../lib/Validators/ObjectId.js');
 let _ = require('lodash');
@@ -150,7 +150,7 @@ function EnviarEmail(app) {
  * }
  * 
  */
-router.patch('/:id', session.authorize(), function(req, res) {
+router.patch('/', session.authorize(), function(req, res) {
     let appointment = {
         endDate: Date.parse(req.body.endDate),
         startDate: Date.parse(req.body.startDate),
@@ -190,14 +190,12 @@ router.patch('/:id', session.authorize(), function(req, res) {
 router.delete('/:id', session.authorize(), function(req, res) {
     let appointmentId = new mongoose.Types.ObjectId(req.params.id);
 
-    return res.status(appointmentResponse.internalservererror.status).send(appointmentResponse.internalservererror.database);
-
     Appointment.remove({ _id: appointmentId }, function(err) {
         if (err) {
-            return res.status(appointmentResponse.internalservererror.status).send(appointmentResponse.internalservererror.database);
+            next(new Error('An unexpected error occurred'));
         };
 
-        return res.status(appointmentResponse.successnocontent.status).send();
+        res.status(httpstatus.successcreated).send();
     });
 });
 
@@ -240,16 +238,12 @@ router.delete('/:id', session.authorize(), function(req, res) {
 router.get('/list', session.authorize(), function(req, res) {
     Appointment.find({ user: req.user._id }, function(err, appointments) {
         if (err) {
-            return res.status(appointmentResponse.internalservererror.status).json(
-                new Response(appointmentResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
         if (appointments.length > 0) {
-            return res.status(appointmentResponse.success.status).json(
-                new Response(appointmentResponse.success.retrievedSuccessfully, appointments)
-            );
+            return res.status(httpstatus.success).json(appointments);
         } else {
-            return res.status(appointmentResponse.successnocontent.status).send();
+            return res.status(httpstatus.nocontent).send();
         }
     });
 });

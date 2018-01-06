@@ -18,6 +18,7 @@ export class SigninComponent {
   submitForm(form: any): void {
     this.authService.signin(form.email, form.password).subscribe(
       data => {
+        localStorage.setItem('token', JSON.stringify(data));
         window.location.href = '/admin/#/dashboard';
       }
     );

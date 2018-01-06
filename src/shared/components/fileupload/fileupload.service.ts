@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { HttpService } from '../../../@core/utils/http.service';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 /**
@@ -9,8 +8,7 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class FileUploadService {
-    constructor(private http: Http,
-                private httpService: HttpService) {}
+    constructor(private http: HttpClient) { }
 
     // TODO: Corregir documentacion
     /**
@@ -22,13 +20,7 @@ export class FileUploadService {
         input.append('file', fileToUpload);
 
         return this.http
-            .post('/files', input)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+            .post('/files', input);
     }
 
     /**
@@ -37,12 +29,6 @@ export class FileUploadService {
      */
     delete(id: string) {
         return this.http
-            .delete('/files/' + id)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+            .delete('/files/' + id);
     }
 }

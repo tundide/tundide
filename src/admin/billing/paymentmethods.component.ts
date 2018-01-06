@@ -24,7 +24,7 @@ export class PaymentMethodsComponent implements OnInit {
 
     ngOnInit() {
         this.busy = this.billingService.getCards().subscribe(
-            res => {
+            data => {
                 this.toastyService.success({
                     msg: 'Tarjetas recuperadas correctamente.',
                     showClose: true,
@@ -32,7 +32,7 @@ export class PaymentMethodsComponent implements OnInit {
                     timeout: 5000,
                     title: 'Obtencion de metodos de pagos.'
                 });
-                this.cards = res.data;
+                this.cards = data;
             }
         );
     }

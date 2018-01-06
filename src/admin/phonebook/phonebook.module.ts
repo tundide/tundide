@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { routing } from './phonebook.routing';
 import { AuthGuard } from '../../auth/auth-guard.service';
 import { ContactNewComponent } from './contact.new.component';
+import { ContactEditComponent } from './contact.edit.component';
 import { PhonebookListComponent } from './phonebook.list.component';
 import { PhonebookService } from './phonebook.service';
 import { LocationService } from '../../shared/location.service';
@@ -14,8 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
 @NgModule({
-    declarations: [ContactNewComponent, PhonebookListComponent],
-    exports: [ContactNewComponent, PhonebookListComponent],
+    declarations: [ContactNewComponent, ContactEditComponent, PhonebookListComponent],
+    exports: [ContactNewComponent, ContactEditComponent, PhonebookListComponent],
     imports: [routing,
         FormsModule,
         ReactiveFormsModule,

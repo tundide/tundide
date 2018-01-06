@@ -4,9 +4,7 @@ let router = express.Router();
 let Contact = require('../../models/contact');
 let shortid = require('shortid');
 let session = require('../auth/session');
-let contactResponse = require('../../config/response').contact;
-let authenticationResponse = require('../../config/response').authentication;
-let Response = require('../shared/response.js');
+let httpstatus = require('../../config/response').httpstatus;
 let Validators = require('../../lib/Validators/ObjectId.js');
 let _ = require('lodash');
 
@@ -28,7 +26,7 @@ let _ = require('lodash');
  * }
  * 
  */
-router.post('/', session.authorize(), function(req, res) {
+router.post('/', session.authorize(), function(req, res, next) {
     let cli = new Contact();
     cli.user = req.user._id;
     cli.firstName = req.body.firstName;
@@ -42,16 +40,21 @@ router.post('/', session.authorize(), function(req, res) {
     cli.location.street = req.body.location.street;
     cli.location.number = req.body.location.number;
 
-    cli.save().then(function(doc) {
-            res.status(contactResponse.successcreated.status).json(
-                new Response(contactResponse.successcreated.contactSuccessfully, doc)
-            );
-        },
-        function(err) {
-            res.status(contactResponse.internalservererror.status).json(
-                new Response(contactResponse.internalservererror.database, err)
-            );
-        });
+    cli.validate(function(err) {
+        if (err) {
+            res.status(httpstatus.badrequest).json({
+                message: 'Error ocurred.',
+                errors: err.errors
+            });
+        } else {
+            cli.save().then(function(doc) {
+                    res.status(httpstatus.successcreated).send();
+                },
+                function(err) {
+                    next(new Error('An unexpected error occurred'));
+                });
+        }
+    });
 });
 
 // TODO:Completar ejemplos
@@ -72,24 +75,19 @@ router.post('/', session.authorize(), function(req, res) {
  * }
  * 
  */
-router.patch('/:id', session.authorize(), function(req, res) {
-    let contact = {
-        endDate: Date.parse(req.body.endDate),
-        startDate: Date.parse(req.body.startDate),
-        description: req.body.description,
-        contact: req.contact._id
-    };
-
-    Contact.findOneAndUpdate({ _id: req.body.id }, contact, { upsert: true }, function(err, doc) {
+router.patch('/', session.authorize(), function(req, res) {
+    Contact.findOneAndUpdate({ _id: req.body._id }, req.body, { runValidators: true, context: 'query' }, function(err, doc) {
         if (err) {
-            res.status(contactResponse.internalservererror.status).json(
-                new Response(contactResponse.internalservererror.database, err)
-            );
+            return res.status(httpstatus.badrequest).json({
+                message: 'Error ocurred.',
+                errors: [err.message]
+            });
         };
 
-        return res.status(contactResponse.successnocontent.status).json(
-            new Response(contactResponse.successnocontent.updatedSuccessfully, doc)
-        );
+        return res.status(httpstatus.success).json({
+            message: 'Contact created correctly',
+            data: doc
+        });
     });
 });
 
@@ -116,14 +114,10 @@ router.delete('/:id', session.authorize(), function(req, res) {
 
     Contact.remove({ _id: contactId }, function(err) {
         if (err) {
-            res.status(contactResponse.internalservererror.status).json(
-                new Response(contactResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
 
-        return res.status(contactResponse.successnocontent.status).json(
-            new Response(contactResponse.successnocontent.deletedSuccessfully)
-        );
+        res.status(httpstatus.successcreated).send();
     });
 });
 
@@ -139,19 +133,40 @@ router.delete('/:id', session.authorize(), function(req, res) {
  *    id:2
  * 
  */
-router.get('/list', session.authorize(), function(req, res) {
+router.get('/list', session.authorize(), function(req, res, next) {
     Contact.find({ user: req.user._id }, function(err, contacts) {
         if (err) {
-            return res.status(contactResponse.internalservererror.status).json(
-                new Response(contactResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
         if (contacts.length > 0) {
-            return res.status(contactResponse.success.status).json(
-                new Response(contactResponse.success.retrievedSuccessfully, contacts)
-            );
+            return res.status(httpstatus.success).json(contacts);
         } else {
-            return res.status(contactResponse.successnocontent.status);
+            return res.status(httpstatus.nocontent).send();
+        }
+    });
+});
+
+/** // TODO: Completar la documentacion
+ * @api {get} /list List publication
+ * @apiName getpublicationbystatus
+ * @apiGroup Publication
+ * 
+ * @apiParam {int} status Status to get ()
+ * @apiParamExample {int} Active publication example:
+ *    id:1
+ * @apiParamExample {int} Paused publication example:
+ *    id:2
+ * 
+ */
+router.get('/id/:id', session.authorize(), function(req, res, next) {
+    Contact.findById(req.params.id, function(err, contact) {
+        if (err) {
+            next(new Error('An unexpected error occurred'));
+        };
+        if (contact) {
+            return res.status(httpstatus.success).json(contact);
+        } else {
+            return res.status(httpstatus.notfound).send();
         }
     });
 });
@@ -179,16 +194,12 @@ router.get('/find', session.authorize(), function(req, res) {
         }]
     }, function(err, contacts) {
         if (err) {
-            return res.status(contactResponse.internalservererror.status).json(
-                new Response(contactResponse.internalservererror.database, err)
-            );
+            next(new Error('An unexpected error occurred'));
         };
         if (contacts.length > 0) {
-            return res.status(contactResponse.success.status).json(
-                new Response(contactResponse.success.retrievedSuccessfully, contacts)
-            );
+            return res.status(httpstatus.success).json(contacts);
         } else {
-            return res.status(contactResponse.successnocontent.status).send();
+            return res.status(httpstatus.nocontent).send();
         }
     });
 });

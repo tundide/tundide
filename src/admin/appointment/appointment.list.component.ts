@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
+import { HttpErrorResponse } from '@angular/common/http';
+import { GrowlService } from '../../@core/utils/growl.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from '../../shared/components/calendar/calendar.component';
 import { AppointmentService } from './appointment.service';
@@ -32,17 +33,17 @@ const colors: any = {
         secondary: '#FDF1BA'
     }
 };
-
-interface IAppointment {
-    _id: string;
-    startDate: Date;
-    endDate: Date;
-    appointmentId: string;
-    shortId: string;
-    description: string;
-    contact: string;
-    status: number;
-}
+// FIXME: No se usa mas creo
+// interface IAppointment {
+//     _id: string;
+//     startDate: Date;
+//     endDate: Date;
+//     appointmentId: string;
+//     shortId: string;
+//     description: string;
+//     contact: string;
+//     status: number;
+// }
 
 @Component({
     selector: 'appointments',
@@ -60,12 +61,9 @@ export class AppointmentListComponent implements OnInit {
         label: '<i class="fa fa-fw fa-times" title="Cancelar turno"></i>',
         onClick: ({ event }: { event: CalendarEvent }): void => {
             this.appointmentService.delete(event.meta.appointment._id).subscribe(res => {
-                this.toastyService.success({
-                    msg: 'Se cancelo el turno solicitado',
-                    showClose: true,
-                    theme: 'bootstrap',
-                    timeout: 5000,
-                    title: 'Solicitud de cancelacion de turno.'
+                this.growlService.success({
+                    title: 'Solicitud de cancelaci&oacute;n de turno.',
+                    msg: 'Se cancelo el turno solicitado.'
                 });
 
                 _.remove(this.calendar.events, {
@@ -87,20 +85,24 @@ export class AppointmentListComponent implements OnInit {
 
             this.modalService.open(this.modal).result.then((result) => {
                 if (result) {
-                    this.appointmentService.update(event.meta.appointment._id, {
-                        '_id': event.meta.appointment._id,
-                        'description': event.meta.appointment.description,
-                        'endDate': event.end,
-                        'startDate': event.start
-                    })
+                    let app = new Appointment();
+                    app._id = event.meta.appointment._id;
+                    app.description = event.meta.appointment.description;
+                    app.endDate = event.end;
+                    app.startDate = event.start;
+
+                    this.appointmentService.update(app)
                         .subscribe(data => {
-                            this.toastyService.success({
-                                msg: data.message,
-                                showClose: true,
-                                theme: 'bootstrap',
-                                timeout: 5000,
-                                title: 'Reserva modificada con exito.'
+                            this.growlService.success({
+                                title: 'Solicitud de modificaci&oacute;n de turno.',
+                                msg: 'Se modifico el turno solicitado.'
                             });
+                        }, (error: HttpErrorResponse) => {
+                            if (error.status === 400) {
+                                this.growlService.badRequest();
+                            } else if (error.status === 500) {
+                                this.growlService.internalServerError();
+                            }
                         });
                 }
             });
@@ -110,11 +112,10 @@ export class AppointmentListComponent implements OnInit {
     private appointment: Appointment;
 
     constructor(private router: Router,
-        private toastyService: ToastyService,
         private appointmentService: AppointmentService,
         private modalService: NgbModal,
-        private toastyConfig: ToastyConfig) {
-        this.toastyConfig.theme = 'bootstrap';
+        private growlService: GrowlService) {
+
     }
 
     eventClick(event) {
@@ -122,22 +123,24 @@ export class AppointmentListComponent implements OnInit {
     }
 
     eventTimesChanged(event) {
-        this.appointmentService.update(event.meta.appointment._id, {
-            '_id': event.meta.appointment._id,
-            'description': event.meta.appointment.description,
-            'endDate': event.end,
-            'startDate': event.start
-        }).subscribe(res => {
-            if (res.status === 204) {
-                event.actions = [this.cancelButton];
-                event.color = colors.yellow;
-                this.toastyService.info({
-                    msg: 'Contacto actualizado correctamente',
-                    showClose: true,
-                    theme: 'bootstrap',
-                    timeout: 10000,
-                    title: 'Solicitud de cambio de turno generada.'
-                });
+        let app = new Appointment();
+        app._id = event.meta.appointment._id;
+        app.description = event.meta.appointment.description;
+        app.endDate = event.end;
+        app.startDate = event.start;
+
+        this.appointmentService.update(app).subscribe(res => {
+            event.actions = [this.cancelButton];
+            event.color = colors.yellow;
+            this.growlService.success({
+                title: 'Solicitud de cambio de turno generada.',
+                msg: 'Se solicito un cambio de turno correctamente.'
+            });
+        }, (error: HttpErrorResponse) => {
+            if (error.status === 400) {
+                this.growlService.badRequest();
+            } else if (error.status === 500) {
+                this.growlService.internalServerError();
             }
         });
     }
@@ -146,7 +149,7 @@ export class AppointmentListComponent implements OnInit {
         this.appointmentService.list()
             .subscribe(res => {
                 if (res) {
-                    _.forEach(<Array<IAppointment>>res.data, (appointment, key) => {
+                    _.forEach(res, (appointment, key) => {
                         let startDate = moment(appointment.startDate);
                         let endDate = moment(appointment.endDate);
 
@@ -164,7 +167,7 @@ export class AppointmentListComponent implements OnInit {
                             },
                             start: startDate.toDate(),
                             title: '(' + startDate.format('HH:mm') + '-'
-                            + endDate.format('HH:mm') + ') ' + appointment.description
+                                + endDate.format('HH:mm') + ') ' + appointment.description
                         };
 
                         evento.actions = [this.changeReservationButton, this.cancelButton];

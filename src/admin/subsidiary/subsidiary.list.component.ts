@@ -23,9 +23,9 @@ export class SubsidiaryListComponent implements OnInit {
 
     ngOnInit() {
         this.subsidiaryService.list()
-            .subscribe(res => {
-                if (res) {
-                    this.subsidiarys = res.data;
+            .subscribe(data => {
+                if (data) {
+                    this.subsidiarys = data;
                 }
             });
     }

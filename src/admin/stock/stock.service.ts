@@ -1,7 +1,6 @@
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { HttpService } from '../../@core/utils/http.service';
 import { SocketService } from '../../shared/socket.service';
 
 /**
@@ -10,19 +9,12 @@ import { SocketService } from '../../shared/socket.service';
  */
 @Injectable()
 export class StockService {
-    constructor(private httpService: HttpService
-    ) { }
+    constructor(private http: HttpClient) { }
 
     /**
      * Get stock
      */
     list() {
-        return this.httpService.get('/stock/list')
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get('/stock/list');
     }
 }

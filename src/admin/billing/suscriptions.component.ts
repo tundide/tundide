@@ -24,7 +24,7 @@ export class SuscriptionsComponent implements OnInit {
 
     ngOnInit() {
         this.busy = this.billingService.getPlans().subscribe(
-            res => {
+            data => {
                 this.toastyService.success({
                     msg: 'Planes recuperados correctamente.',
                     showClose: true,
@@ -32,7 +32,7 @@ export class SuscriptionsComponent implements OnInit {
                     timeout: 5000,
                     title: 'Obtencion de planes.'
                 });
-                this.plans = res.data;
+                this.plans = data;
             }
         );
     }

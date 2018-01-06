@@ -1,7 +1,6 @@
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { HttpService } from '../../@core/utils/http.service';
 import { SocketService } from '../../shared/socket.service';
 import { Contact } from './contact.model';
 
@@ -11,45 +10,41 @@ import { Contact } from './contact.model';
  */
 @Injectable()
 export class PhonebookService {
-    constructor(private httpService: HttpService
+    constructor(private http: HttpClient
     ) { }
 
     /**
      * Get contact
      */
     list() {
-        return this.httpService.get('/contact/list')
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get<Array<Contact>>('/contact/list');
     }
 
     /**
-     * Find appointments
+     * Find contact
      */
     find(search: string) {
-        return this.httpService.get('/contact/find?search=' + search)
-            .map((response: Response) => {
-                return this.httpService.response(response).data;
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get('/contact/find?search=' + search);
+    }
+
+    /**
+     * Get contact
+     */
+    get(id: string) {
+        return this.http.get<Contact>('/contact/id/' + id);
     }
 
     /**
     * Save the contact
     */
     save(contact: Contact) {
-        return this.httpService.post('/contact/', contact)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.post('/contact/', contact);
+    }
+
+    /**
+    * Update the contact
+    */
+    update(contact: Contact) {
+        return this.http.patch('/contact/', contact);
     }
 }

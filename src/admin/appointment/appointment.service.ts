@@ -1,9 +1,8 @@
-import { Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { SocketService } from '../../shared/socket.service';
 import { Appointment } from './appointment.model';
-import { HttpService } from '../../@core/utils/http.service';
 
 /**
  * Manage appointment.
@@ -11,58 +10,34 @@ import { HttpService } from '../../@core/utils/http.service';
  */
 @Injectable()
 export class AppointmentService {
-    constructor(private httpService: HttpService
+    constructor(private http: HttpClient
     ) { }
 
     /**
      * Get appointments
      */
     list() {
-        return this.httpService.get('/appointment/list')
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get<Array<Appointment>>('/appointment/list');
     }
 
     /**
     * Save the appointment
     */
     save(appointment: Appointment) {
-        return this.httpService.post('/appointment/', appointment)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.post('/appointment/', appointment);
     }
 
     /**
     * Update the appointment
     */
-    update(id: string, appointment: any) {
-        return this.httpService.patch('/appointment/' + id, appointment)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+    update(appointment: Appointment) {
+        return this.http.patch('/appointment/', appointment);
     }
 
     /**
     * Delete the appointment
     */
     delete(id: string) {
-        return this.httpService.delete('/appointment/' + id)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.delete('/appointment/' + id);
     }
 }

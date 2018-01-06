@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CacheService, CacheStoragesEnum } from 'ng2-cache/ng2-cache';
-import { HttpService } from '../@core/utils/http.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class LocationService {
     private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
-    constructor(private http: Http,
-        private _cacheService: CacheService,
-        private httpService: HttpService) {
+    constructor(private http: HttpClient,
+        private _cacheService: CacheService) {
         this._cacheService.useStorage(CacheStoragesEnum.LOCAL_STORAGE);
     }
 
@@ -22,18 +20,11 @@ export class LocationService {
             return Observable.of(this._cacheService.get('Locations'));
         }
 
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.get(this.host + '/location/', { headers: headers })
-            .map((response: Response) => {
-                const result = response.json();
-
-                this._cacheService.set('Locations', result, { expires: Date.now() + 1000 * 60 * 60 });
-
-                return result;
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get(this.host + '/location/');
+        // TODO: Agregar el manejo de cache
+        // .subscribe(data => {
+        //     this._cacheService.set('Locations', data, { expires: Date.now() + 1000 * 60 * 60 });
+        //     return data;
+        // });
     }
-
 }

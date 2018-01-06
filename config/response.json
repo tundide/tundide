@@ -1,4 +1,12 @@
 {
+    "httpstatus": {
+        "success": 200,
+        "successcreated": 201,
+        "nocontent": 204,
+        "badrequest": 400,
+        "notfound": 404,
+        "internalservererror": 500
+    },
     "authentication": {
         "code": 1000,
         "success": {

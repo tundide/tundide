@@ -40,7 +40,7 @@ export class FileUploadComponent implements OnInit {
                 this.fileUploadService
                     .upload(file)
                     .subscribe(res => {
-                        this.fileControl.value.push(res._id);
+                        this.fileControl.value.push(res); // FIXME: estaba el _id quedo medio raro
                         this.onUploadComplete.emit();
                     });
             });

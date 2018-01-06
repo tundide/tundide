@@ -1,15 +1,29 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AnalyticsService } from './utils/analytics.service';
-import { HttpService } from './utils/http.service';
+import { LoggerService } from './utils/logger.service';
+import { GrowlService } from './utils/growl.service';
+import { AuthInterceptor } from './utils/auth.interceptor';
+import { HttpRequestInterceptor } from './utils/httprequest.interceptor';
+import { ErrorHandlerInterceptor } from './utils/errorhandler.interceptor';
+import { RequestOptions } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastyModule } from 'ng2-toasty';
 
 @NgModule({
     imports: [
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        HttpClientModule,
+        ToastyModule.forRoot()
     ],
     providers: [
         AnalyticsService,
-        HttpService
+        LoggerService,
+        GrowlService,
+        // TODO: Revisar si es necesario el interceptor para agregar la primer parte de la ruta en los httprequest
+        // { provide: RequestOptions, useClass: HttpRequestInterceptor },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: ErrorHandler, useClass: ErrorHandlerInterceptor }
     ]
 })
 

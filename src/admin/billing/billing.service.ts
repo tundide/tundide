@@ -1,8 +1,11 @@
-import { Http, Response, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { HttpService } from '../../@core/utils/http.service';
 import { SocketService } from '../../shared/socket.service';
+
+interface CardInterface {
+    first_six_digits: string;
+}
 
 /**
  * Manage billing.
@@ -10,71 +13,41 @@ import { SocketService } from '../../shared/socket.service';
  */
 @Injectable()
 export class BillingService {
-    constructor(private httpService: HttpService
+    constructor(private http: HttpClient
     ) { }
 
     /**
      * Associate card to customer
      */
     associateCard(cardId: string) {
-        return this.httpService.post('/billing/card/associate/', { 'cardId': cardId })
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.post<CardInterface>('/billing/card/associate/', { 'cardId': cardId });
     }
 
     /**
      * Get customer cards
      */
     getCards() {
-        return this.httpService.get('/billing/card/list/')
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get('/billing/card/list/');
     }
 
     /**
      * Delete customer card
      */
     deleteCard(cardId) {
-        return this.httpService.delete('/billing/card/delete/' + cardId)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.delete('/billing/card/delete/' + cardId);
     }
 
     /**
      * Get plans
      */
     getPlans() {
-        return this.httpService.get('/billing/plan/')
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.get('/billing/plan/');
     }
 
     /**
      * Update plan
      */
     updatePlan(id, plan) {
-        return this.httpService.patch('/billing/plan/' + id, plan)
-            .map((response: Response) => {
-                return this.httpService.response(response);
-            })
-            .catch((error: Response) => {
-                return this.httpService.catch(error);
-            });
+        return this.http.patch('/billing/plan/' + id, plan);
     }
 }
