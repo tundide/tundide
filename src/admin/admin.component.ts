@@ -9,6 +9,7 @@ import { SocketService } from '../shared/socket.service';
 import { AnalyticsService } from '../@core/utils/analytics.service';
 declare var $: JQueryStatic;
 import * as $S from 'scriptjs';
+import * as _ from 'lodash';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -21,7 +22,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     // TODO: Agregar manejo de errores a traves del EventEmitter
     // @Output() errorOccurred = new EventEmitter();
-
+    private roles: Array<String>;
     private subscription: Subscription;
     private user: User;
 
@@ -82,9 +83,15 @@ export class AdminComponent implements OnInit, OnDestroy {
         });
     }
 
+    hasRole(role) {
+        return _.some(this.roles, function (_role) {
+            return _role === role;
+        });
+    }
+
     ngOnInit() {
         this.analytics.trackPageViews();
-// TODO: Agregar manejo de errores a traves del EventEmitter
+        // TODO: Agregar manejo de errores a traves del EventEmitter
         // this.http.errorOccurred.subscribe((error) => {
         //     let toastOptions: ToastOptions = {
         //         msg: error.message,

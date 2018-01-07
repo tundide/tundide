@@ -6,7 +6,11 @@ const routes: Routes = [
     {
         canActivate: [AuthGuard],
         component: AlertComponent,
-        path: 'alert'
+        path: 'alert',
+        data: {
+            breadcrumbs: true,
+            text: 'Alertas'
+        }
     }
 ];
 

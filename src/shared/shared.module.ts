@@ -1,3 +1,4 @@
+import { registerLocaleData } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +13,9 @@ import { CamelCase } from './camelcase.pipe';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs);
 
 @NgModule({
     declarations: [CamelCase,

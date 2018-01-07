@@ -8,17 +8,25 @@ const routes: Routes = [
     {
         canActivate: [AuthGuard],
         component: PhonebookListComponent,
-        path: 'list'
+        path: ''
     },
     {
         canActivate: [AuthGuard],
         component: ContactNewComponent,
-        path: 'new'
+        path: 'new',
+        data: {
+            breadcrumbs: true,
+            text: 'Nuevo contacto'
+        }
     },
     {
         canActivate: [AuthGuard],
         component: ContactEditComponent,
-        path: 'edit/:id'
+        path: 'edit/:id',
+        data: {
+            breadcrumbs: true,
+            text: 'Modificando contacto'
+        }
     }
 ];
 

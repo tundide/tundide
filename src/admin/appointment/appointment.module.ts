@@ -10,7 +10,6 @@ import { AppointmentService } from './appointment.service';
 import { PhonebookService } from '../phonebook/phonebook.service';
 import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { SharedModule } from '../../shared/shared.module';
-import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
@@ -25,8 +24,7 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
         RouterModule,
         NgbModule,
         MultiselectDropdownModule,
-        SharedModule.forRoot(),
-        ToastyModule.forRoot()
+        SharedModule.forRoot()
     ],
     providers: [
         AuthGuard,

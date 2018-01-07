@@ -10,7 +10,6 @@ import { PhonebookListComponent } from './phonebook.list.component';
 import { PhonebookService } from './phonebook.service';
 import { LocationService } from '../../shared/location.service';
 import { SharedModule } from '../../shared/shared.module';
-import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
@@ -24,8 +23,7 @@ import { NgxErrorsModule } from '@ultimate/ngxerrors';
         CommonModule,
         NgbModule,
         NgxErrorsModule,
-        SharedModule.forRoot(),
-        ToastyModule.forRoot()],
+        SharedModule.forRoot()],
     providers: [
         AuthGuard,
         PhonebookService,

@@ -5,7 +5,11 @@ import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
     {
-        component: HomeComponent, path: '', pathMatch: 'full'
+        component: HomeComponent, path: '', pathMatch: 'full',
+        data: {
+            breadcrumbs: true,
+            text: 'Principal'
+        }
     },
     {
         loadChildren: '../auth/auth.module#AuthModule',
@@ -19,12 +23,20 @@ export const routes: Routes = [
     {
         canActivate: [AuthGuard],
         loadChildren: './admin.module#AdminModule',
-        path: 'admin'
+        path: 'admin',
+        data: {
+            breadcrumbs: true,
+            text: 'Administracion'
+        }
     },
     {
         canActivate: [AuthGuard],
         loadChildren: './billing/billing.module#BillingModule',
-        path: 'billing'
+        path: 'billing',
+        data: {
+            breadcrumbs: true,
+            text: 'Facturacion'
+        }
     },
     {
         canActivate: [AuthGuard],
@@ -39,17 +51,29 @@ export const routes: Routes = [
     {
         canActivate: [AuthGuard],
         loadChildren: './message/message.module#MessageModule',
-        path: 'message'
+        path: 'message',
+        data: {
+            breadcrumbs: true,
+            text: 'Mensajes'
+        }
     },
     {
         canActivate: [AuthGuard],
         loadChildren: './appointment/appointment.module#AppointmentModule',
-        path: 'appointment'
+        path: 'appointment',
+        data: {
+            breadcrumbs: true,
+            text: 'Calendario'
+        }
     },
     {
         canActivate: [AuthGuard],
         loadChildren: './phonebook/phonebook.module#PhonebookModule',
-        path: 'phonebook'
+        path: 'phonebook',
+        data: {
+            breadcrumbs: true,
+            text: 'Agenda'
+        }
     },
     {
         canActivate: [AuthGuard],
@@ -59,22 +83,38 @@ export const routes: Routes = [
     {
         canActivate: [AuthGuard],
         loadChildren: './stock/stock.module#StockModule',
-        path: 'stock'
+        path: 'stock',
+        data: {
+            breadcrumbs: true,
+            text: 'Stock'
+        }
     },
     {
         canActivate: [AuthGuard],
         loadChildren: './subsidiary/subsidiary.module#SubsidiaryModule',
-        path: 'subsidiary'
+        path: 'subsidiary',
+        data: {
+            breadcrumbs: true,
+            text: 'Sucursales'
+        }
     },
     {
         canActivate: [AuthGuard],
         loadChildren: './settings/settings.module#SettingsModule',
-        path: 'settings'
+        path: 'settings',
+        data: {
+            breadcrumbs: true,
+            text: 'Configuracion'
+        }
     },
     {
         canActivate: [AuthGuard],
         loadChildren: './dashboard/dashboard.module#DashboardModule',
-        path: 'dashboard'
+        path: 'dashboard',
+        data: {
+            breadcrumbs: true,
+            text: 'Tablero'
+        }
     }
 ];
 

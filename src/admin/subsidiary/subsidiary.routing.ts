@@ -7,12 +7,18 @@ const routes: Routes = [
     {
         canActivate: [AuthGuard],
         component: SubsidiaryListComponent,
-        path: 'list'
+        path: 'list',
+        data: {
+            breadcrumb: 'Lista'
+        }
     },
     {
         canActivate: [AuthGuard],
         component: SubsidiaryNewComponent,
-        path: 'new'
+        path: 'new',
+        data: {
+            breadcrumb: 'Nueva'
+        }
     }
 ];
 

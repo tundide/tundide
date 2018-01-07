@@ -7,12 +7,16 @@ const routes: Routes = [
     {
         canActivate: [AuthGuard],
         component: AppointmentListComponent,
-        path: 'list'
+        path: ''
     },
     {
         canActivate: [AuthGuard],
         component: AppointmentNewComponent,
-        path: 'new'
+        path: 'new',
+        data: {
+            breadcrumbs: true,
+            text: 'Nueva cita'
+        }
     }
 ];
 

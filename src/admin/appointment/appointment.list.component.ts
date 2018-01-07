@@ -150,6 +150,7 @@ export class AppointmentListComponent implements OnInit {
             .subscribe(res => {
                 if (res) {
                     _.forEach(res, (appointment, key) => {
+                        console.log(appointment);
                         let startDate = moment(appointment.startDate);
                         let endDate = moment(appointment.endDate);
 

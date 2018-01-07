@@ -1,6 +1,45 @@
 <top-nav></top-nav>
-<router-outlet></router-outlet>
-<sidebar></sidebar>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-1 p-l-0 p-r-0 in" id="sidebar">
+            <div class="list-group panel">
+                <a href="#menu1" class="list-group-item collapsed" [routerLink]="['dashboard']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-dashboard"></i> <span class="d-none d-sm-inline">Dashboard</span></a>
+                <a href="#menu2" class="list-group-item collapsed" [routerLink]="['phonebook']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-book"></i> <span class="d-none d-sm-inline">Agenda</span></a>
+                <a href="#menuEnvelope" class="list-group-item collapsed" [routerLink]="['message']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-sm-inline">Correo</span></a>
+                <a href="#menu3" class="list-group-item collapsed" [routerLink]="['appointment']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-calendar"></i> <span class="d-none d-sm-inline">Calendario</span></a>
+                <a href="#menu4" class="list-group-item collapsed" [routerLink]="['stock']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-shopping-basket"></i> <span class="d-none d-sm-inline">Stock</span></a>
+                <a href="#menu5" class="list-group-item collapsed" [routerLink]="['print']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-print"></i> <span class="d-none d-sm-inline">Impresiones (Recetas)</span></a>
+                <a href="#menu6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-dollar"></i> <span class="d-none d-sm-inline">Facturaci&oacute;n</span></a>
+                <div class="collapse" id="menu6">
+                    <a [routerLink]="['billing']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu6">Historial</a>
+                    <a [routerLink]="['billing/paymentmethods']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu6">Medios de Pago</a>
+                    <a *ngIf="hasRole('administrator')" [routerLink]="['billing/plans']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu6">Planes</a>
+                    <a *ngIf="hasRole('administrator')" [routerLink]="['billing/suscriptions']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu6">Suscripciones</a>
+                </div>
+                <a href="#menu7" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-wrench"></i> <span class="d-none d-sm-inline">Configuraci&oacute;n</span></a>
+                <div class="collapse" id="menu7">
+                    <a [routerLink]="['general']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu7">General</a>
+                    <a [routerLink]="['alert']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu7">Alertas</a>
+                    <a [routerLink]="['subsidiary/list']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu7">Sucursales</a>
+                    <a [routerLink]="['terminal']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menu7">Terminales</a>
+                </div>
+                <a href="#menuChart" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-sm-inline">Estadisticas</span></a>
+                <div class="collapse" id="menuChart">
+                    <a class="list-group-item" data-parent="#menuChart">Encuestas</a>
+                    <a class="list-group-item" data-parent="#menuChart">Clientes atendidos</a>
+                </div>
+            </div>
+        </div>
+        <main class="col-md-10 col-11 p-l-2 p-t-2">
+            <!-- NO ME GUSTA COMO QUEDA <a href="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-lg"></i></a> -->
+            <hr>
+            <mc-breadcrumbs></mc-breadcrumbs>
+            <hr>
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>
 
 <div id="container-floating">
 

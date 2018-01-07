@@ -24,7 +24,11 @@ const routes: Routes = [
             {
                 canActivate: [AuthGuard],
                 component: PaymentMethodsComponent,
-                path: 'paymentmethods'
+                path: 'paymentmethods',
+                data: {
+                    breadcrumbs: true,
+                    text: 'Medios de pago'
+                }
             },
             {
                 canActivate: [AuthGuard],

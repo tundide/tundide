@@ -24,7 +24,7 @@ export class CalendarComponent {
   @Output('eventtimechange') eventTimesChanged: EventEmitter<CalendarEvent> = new EventEmitter();
   @Output('eventclick') eventClick: EventEmitter<any> = new EventEmitter();
 
-  locale = 'es';
+  locale = window.navigator.language;
 
   @Input('default')
   view = 'day';

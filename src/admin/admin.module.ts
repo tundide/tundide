@@ -10,6 +10,7 @@ import { SocketService } from '../shared/socket.service';
 import { MainModule } from './main/main.module';
 import { CoreModule } from '../@core/core.module';
 import { ToastyModule } from 'ng2-toasty';
+import { McBreadcrumbsModule } from 'ngx-breadcrumbs';
 
 @NgModule({
     bootstrap: [AdminComponent],
@@ -20,6 +21,7 @@ import { ToastyModule } from 'ng2-toasty';
         BrowserAnimationsModule,
         NgbModule.forRoot(),
         ToastyModule.forRoot(),
+        McBreadcrumbsModule.forRoot(),
         CoreModule
     ],
     providers: [

@@ -6,7 +6,7 @@ const routes: Routes = [
     {
         canActivate: [AuthGuard],
         component: StockListComponent,
-        path: 'list'
+        path: ''
     }
 ];
 
