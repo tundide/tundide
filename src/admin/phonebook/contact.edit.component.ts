@@ -106,7 +106,7 @@ export class ContactEditComponent implements OnInit {
     save() {
         this.phonebookService.update(this.contactGroup.value)
             .subscribe(response => {
-                this.router.navigate(['/phonebook/list']);
+                this.router.navigate(['/phonebook']);
                 this.growlService.success({
                     title: 'Contacto guardado con exito.',
                     msg: 'El contacto se ha guardado correctamente.'
