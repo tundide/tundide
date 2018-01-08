@@ -65,14 +65,15 @@
                 </div>
                 <div class="form-group row">
                     <label for="inputstartDate" class="col-sm-2 col-form-label col-form-label-sm">Desde</label>
-
                     <div class="col-sm-4">
                         <div class="form-group">
                             <div class="input-group">
                                 <input class="form-control" placeholder="yyyy-mm-dd" name="dpStart" formControlName="startDate" ngbDatepicker #dStart="ngbDatepicker">
-                                <button class="input-group-addon" (click)="dStart.toggle()" type="button">
-                                    <span class="fa fa-calendar"></span>
+                                <span class="input-group-append">
+                                    <button class="btn btn-secondary" (click)="dStart.toggle()" type="button">
+                                        <span class="fa fa-calendar"></span>
                                 </button>
+                                </span>
                             </div>
                             <ngb-timepicker formControlName="startTime"></ngb-timepicker>
                         </div>
@@ -84,9 +85,11 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input class="form-control" placeholder="yyyy-mm-dd" name="dpEnd" formControlName="endDate" ngbDatepicker #dEnd="ngbDatepicker">
-                                <button class="input-group-addon" (click)="dEnd.toggle()" type="button">
-                                    <span class="fa fa-calendar"></span>
+                                <span class="input-group-append">
+                                    <button class="btn btn-secondary" (click)="dEnd.toggle()" type="button">
+                                        <span class="fa fa-calendar"></span>
                                 </button>
+                                </span>
                             </div>
                             <ngb-timepicker formControlName="endTime"></ngb-timepicker>
                         </div>

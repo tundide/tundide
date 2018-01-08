@@ -43,7 +43,7 @@ export class SubsidiaryNewComponent implements OnInit {
     save() {
         this.subsidiaryService.save(this.subsidiaryGroup.value)
             .subscribe(response => {
-                this.router.navigate(['/subsidiary/list']);
+                this.router.navigate(['/subsidiary']);
             });
     }
 }

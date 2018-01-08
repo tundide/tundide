@@ -143,13 +143,13 @@ export class AppointmentNewComponent implements OnInit {
         let ngbDateStart = this.appointmentGroup.get('startDate').value;
         let ngbTimeStart = this.appointmentGroup.get('startTime').value;
 
-        app.startDate = new Date(ngbDateStart.year, ngbDateStart.month, ngbDateStart.day,
+        app.startDate = new Date(ngbDateStart.year, ngbDateStart.month - 1, ngbDateStart.day,
             ngbTimeStart.hour, ngbTimeStart.minute, ngbTimeStart.second);
 
         let ngbDateEnd = this.appointmentGroup.get('endDate').value;
         let ngbTimeEnd = this.appointmentGroup.get('endTime').value;
 
-        app.endDate = new Date(ngbDateEnd.year, ngbDateEnd.month, ngbDateEnd.day,
+        app.endDate = new Date(ngbDateEnd.year, ngbDateEnd.month - 1, ngbDateEnd.day,
             ngbTimeEnd.hour, ngbTimeEnd.minute, ngbTimeEnd.second);
 
         app.subsidiary = this.appointmentGroup.get('subsidiary').value[0];
@@ -160,7 +160,7 @@ export class AppointmentNewComponent implements OnInit {
                     title: 'Alta de turno.',
                     msg: 'Se dio de alta el turno exitosamente.'
                 });
-                this.router.navigate(['/appointment/list']);
+                this.router.navigate(['/appointment']);
             });
     }
 }

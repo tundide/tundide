@@ -44,7 +44,7 @@ export class TerminalComponent implements OnInit, OnDestroy {
     ngOnInit() {
         if (process.env.environment === 'development') {
             $S('http://localhost:35729/livereload.js', function () {
-                console.log('Debug Habilitado');
+                console.log('LiveReload Habilitado');
             });
         }
     }
