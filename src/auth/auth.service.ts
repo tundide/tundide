@@ -29,8 +29,6 @@ export class AuthService {
      */
     @Output() onUserDataLoad: EventEmitter<any> = new EventEmitter();
 
-    private host: string = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
-
     constructor(public http: HttpClient,
         private socketService: SocketService,
     ) { }
@@ -62,7 +60,7 @@ export class AuthService {
      * Confirm registered user
      */
     confirm(userid: string) {
-        return this.http.patch<User>(this.host + '/auth/confirm', { 'userid': userid });
+        return this.http.patch<User>('/auth/confirm', { 'userid': userid });
     }
 
     /**
@@ -71,7 +69,6 @@ export class AuthService {
      */
     getUserCredentials() {
         let userJson = sessionStorage.getItem('user');
-
         return JSON.parse(userJson);
     }
 
@@ -86,8 +83,7 @@ export class AuthService {
             password: Md5.hashStr(password)
         };
 
-        const body = JSON.stringify(usr);
-        return this.http.post(this.host + '/auth/signin', body);
+        return this.http.post('/auth/signin', usr);
     }
 
     /**
@@ -103,8 +99,7 @@ export class AuthService {
             token: token
         };
 
-        const body = JSON.stringify(usr);
-        return this.http.post(this.host + '/auth/signout', body);
+        return this.http.post('/auth/signout', usr);
     }
 
     /**

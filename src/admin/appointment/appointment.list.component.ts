@@ -90,12 +90,11 @@ export class AppointmentListComponent implements OnInit {
                     app.description = event.meta.appointment.description;
                     app.endDate = event.end;
                     app.startDate = event.start;
-
                     this.appointmentService.update(app)
                         .subscribe(data => {
                             this.growlService.success({
                                 title: 'Solicitud de modificaci&oacute;n de turno.',
-                                msg: 'Se modifico el turno solicitado.'
+                                msg: 'Tambien enviamos un aviso al participante para que este informado.'
                             });
                         }, (error: HttpErrorResponse) => {
                             if (error.status === 400) {
@@ -134,7 +133,7 @@ export class AppointmentListComponent implements OnInit {
             event.color = colors.yellow;
             this.growlService.success({
                 title: 'Solicitud de cambio de turno generada.',
-                msg: 'Se solicito un cambio de turno correctamente.'
+                msg: 'Tambien enviamos un aviso al participante para que este informado.'
             });
         }, (error: HttpErrorResponse) => {
             if (error.status === 400) {
@@ -150,7 +149,6 @@ export class AppointmentListComponent implements OnInit {
             .subscribe(res => {
                 if (res) {
                     _.forEach(res, (appointment, key) => {
-                        console.log(appointment);
                         let startDate = moment(appointment.startDate);
                         let endDate = moment(appointment.endDate);
 
@@ -171,8 +169,16 @@ export class AppointmentListComponent implements OnInit {
                                 + endDate.format('HH:mm') + ') ' + appointment.description
                         };
 
-                        evento.actions = [this.changeReservationButton, this.cancelButton];
-                        evento.color = colors.blue;
+                        switch (appointment.status) {
+                            case 1:
+                                evento.actions = [this.changeReservationButton, this.cancelButton];
+                                evento.color = colors.green;
+                                break;
+                            case 3:
+                                evento.actions = [this.changeReservationButton, this.cancelButton];
+                                evento.color = colors.yellow;
+                                break;
+                        }
 
                         this.calendar.addEvent(evento);
                     });

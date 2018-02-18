@@ -105,6 +105,8 @@ module.exports = function() {
                         }, (error) => {
                             return done(error);
                         });
+
+                        return done();
                     });
                 });
             });

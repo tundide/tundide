@@ -19,6 +19,9 @@
             <div class="kpx_login">
                 <div class="row kpx_row-sm-offset-3 kpx_socialButtons">
                     <div class="col-xs-12 col-sm-12">
+                        <ngb-alert *ngIf="error" dismissible="false" type="danger">
+                            {{error}}
+                        </ngb-alert>
                         <button type="submit" class="btn btn-md btn-block btn-primary">Ingresar</button>
                     </div>
                 </div>

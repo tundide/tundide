@@ -8,6 +8,7 @@ let appointmentResponse = require('../../config/response').appointment;
 let httpstatus = require('../../config/response').httpstatus;
 let Response = require('../shared/response.js');
 let Validators = require('../../lib/Validators/ObjectId.js');
+let Email = require('../../lib/Message/Email.js');
 let _ = require('lodash');
 
 let nodemailer = require("nodemailer");
@@ -65,12 +66,12 @@ router.post('/', session.authorize(), function(req, res) {
     app.populate();
     app.save().then(function(doc) {
             EnviarEmail(app);
-            res.status(appointmentResponse.successcreated.status).json(
+            res.status(httpstatus.successcreated).json(
                 new Response(appointmentResponse.successcreated.appointmentSuccessfully, doc)
             );
         },
         function(err) {
-            res.status(appointmentResponse.internalservererror.status).json(
+            res.status(httpstatus.internalservererror).json(
                 new Response(appointmentResponse.internalservererror.database, err)
             );
         });
@@ -155,17 +156,18 @@ router.patch('/', session.authorize(), function(req, res) {
         endDate: Date.parse(req.body.endDate),
         startDate: Date.parse(req.body.startDate),
         description: req.body.description,
+        status: 3 /*Approval pending*/ ,
         client: req.client._id
     };
 
     Appointment.findOneAndUpdate({ _id: req.body._id }, appointment, { upsert: true }, function(err) {
         if (err) {
-            res.status(appointmentResponse.internalservererror.status).json(
+            res.status(httpstatus.internalservererror).json(
                 new Response(appointmentResponse.internalservererror.database, err)
             );
         };
 
-        return res.status(appointmentResponse.successnocontent.status).send();
+        return res.status(httpstatus.successnocontent).send();
     });
 });
 
@@ -236,6 +238,7 @@ router.delete('/:id', session.authorize(), function(req, res) {
  * }
  */
 router.get('/list', session.authorize(), function(req, res) {
+    Email.appointmentNew();
     Appointment.find({ user: req.user._id }, function(err, appointments) {
         if (err) {
             next(new Error('An unexpected error occurred'));

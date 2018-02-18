@@ -19,7 +19,6 @@ env(__dirname + '/.env', { raise: false });
 let strategies = require("./routes/auth/strategies.js")();
 
 mongoose.connect(process.env.MONGODB_URI, {
-    "useMongoClient": true,
     "sslValidate": true
 }, function(err) {
     if (err) {

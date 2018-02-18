@@ -2,7 +2,12 @@
     "secretReCaptcha": "6LftYysUAAAAAE8eTeaeTP9fUXLrkxaJgLm1nvbD",
     "mail": {
         "templates": {
-            "confirmMailId": "0968d15e-cfd7-4a8b-ad27-d80c57e7e5b5"
+            "authentication": {
+                "confirmMailId": "0968d15e-cfd7-4a8b-ad27-d80c57e7e5b5"
+            },
+            "appointment": {
+                "appointmentNewId": "e06758e4-8c6f-4cdb-8ac8-69dbe53d296e"
+            }
         }
     }
 }

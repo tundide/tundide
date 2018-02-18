@@ -14,6 +14,7 @@ import { AuthGuard } from '../auth/auth-guard.service';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import { SocketService } from '../shared/socket.service';
 import { CoreModule } from '../@core/core.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     bootstrap: [AuthComponent],
@@ -28,7 +29,8 @@ import { CoreModule } from '../@core/core.module';
         NgxErrorsModule,
         FormsModule,
         ReactiveFormsModule,
-        CoreModule],
+        CoreModule,
+        NgbModule.forRoot()],
     providers: [
         AuthGuard,
         AuthService,

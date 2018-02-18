@@ -30,7 +30,6 @@ module.exports = function(mongoose) {
         form.parse(req, function(err, fields, files) {
             if (!err) {
                 let conn = mongoose.createConnection(process.env.MONGODB_URI, {
-                    "useMongoClient": true,
                     "sslValidate": true
                 });
                 conn.once('open', function() {
@@ -76,7 +75,6 @@ module.exports = function(mongoose) {
     router.get('/:id', function(req, res) {
 
         let conn = mongoose.createConnection(process.env.MONGODB_URI, {
-            "useMongoClient": true,
             "sslValidate": true
         });
         conn.once('open', function() {
@@ -108,7 +106,6 @@ module.exports = function(mongoose) {
      */
     router.delete('/:id', function(req, res) {
         let conn = mongoose.createConnection(process.env.MONGODB_URI, {
-            "useMongoClient": true,
             "sslValidate": true
         });
 

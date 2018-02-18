@@ -22,7 +22,8 @@ export class SignoutComponent implements OnInit {
     this.formGroupSignout = this.formBuilder.group({
       confirmpassword: this.formBuilder.control('', [Validators.required,
       Validators.pattern(regexpattern)]),
-      email: this.formBuilder.control('', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]),
+      email: this.formBuilder.control('', [Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)]),
       password: this.formBuilder.control('', [Validators.required,
       Validators.pattern(regexpattern)])
     }, {
@@ -37,7 +38,7 @@ export class SignoutComponent implements OnInit {
   submitForm(form: any): void {
     this.authService.signout(form.name, form.email, form.password, this.captchaToken).subscribe(
       data => {
-        this.router.navigate(['/auth/confirm']);
+        this.router.navigate(['/confirm']);
       }
     );
   }

@@ -5,6 +5,7 @@ let router = express.Router();
 let User = require('../../models/user');
 let session = require('./session');
 let shortid = require('shortid');
+let httpstatus = require('../../config/response').httpstatus;
 let authenticationResponse = require('../../config/response').authentication;
 let Response = require('../shared/response.js');
 let Email = require('../../lib/Message/Email.js');
@@ -80,9 +81,7 @@ module.exports = function() {
                 userObj.token = fulluser.local.token;
             }
 
-            return res.status(authenticationResponse.success.status).json(
-                new Response(authenticationResponse.success.retrievedSuccessfully, userObj)
-            );
+            return res.status(httpstatus.success).json(userObj);
         });
     });
 
@@ -167,9 +166,7 @@ module.exports = function() {
                         new Response(authenticationResponse.unauthorized.pendingConfirm)
                     );
                 case 1:
-                    return res.status(authenticationResponse.success.status).json(
-                        new Response(authenticationResponse.success.loginSuccessfully, user.local.token)
-                    );
+                    return res.status(httpstatus.success).json(user.local.token);
                 default:
                     return res.status(authenticationResponse.unauthorized.status).json(
                         new Response(authenticationResponse.unauthorized.credentialInvalid)
