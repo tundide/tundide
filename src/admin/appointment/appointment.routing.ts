@@ -12,11 +12,11 @@ const routes: Routes = [
     {
         canActivate: [AuthGuard],
         component: AppointmentNewComponent,
-        path: 'new',
         data: {
             breadcrumbs: true,
             text: 'Nueva cita'
-        }
+        },
+        path: 'new'
     }
 ];
 

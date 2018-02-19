@@ -13,20 +13,20 @@ const routes: Routes = [
     {
         canActivate: [AuthGuard],
         component: ContactNewComponent,
-        path: 'new',
         data: {
             breadcrumbs: true,
             text: 'Nuevo contacto'
-        }
+        },
+        path: 'new'
     },
     {
         canActivate: [AuthGuard],
         component: ContactEditComponent,
-        path: 'edit/:id',
         data: {
             breadcrumbs: true,
             text: 'Modificando contacto'
-        }
+        },
+        path: 'edit/:id'
     }
 ];
 

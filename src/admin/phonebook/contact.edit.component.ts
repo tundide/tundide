@@ -53,12 +53,12 @@ export class ContactEditComponent implements OnInit {
         private phonebookService: PhonebookService) {
 
         this.contactGroup = this.formBuilder.group({
+            _id: this.formBuilder.control(''),
             contact: this.formBuilder.group({
                 cellPhone: this.formBuilder.control(''),
                 email: this.formBuilder.control(''),
                 phone: this.formBuilder.control('')
             }),
-            _id: this.formBuilder.control(''),
             document: this.formBuilder.control(''),
             firstName: this.formBuilder.control('', [Validators.required]),
             lastName: this.formBuilder.control('', [Validators.required]),
@@ -108,8 +108,8 @@ export class ContactEditComponent implements OnInit {
             .subscribe(response => {
                 this.router.navigate(['/phonebook']);
                 this.growlService.success({
-                    title: 'Contacto guardado con exito.',
-                    msg: 'El contacto se ha guardado correctamente.'
+                    msg: 'El contacto se ha guardado correctamente.',
+                    title: 'Contacto guardado con exito.'
                 });
             }, (error: HttpErrorResponse) => {
                 if (error.status === 400) {

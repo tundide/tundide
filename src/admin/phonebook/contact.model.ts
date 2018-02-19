@@ -27,8 +27,8 @@ export class Contact {
         this.document = '';
         this.contact = {
             cellPhone: 0,
-            phone: 0,
-            email: ''
+            email: '',
+            phone: 0
         };
         this.location = {
             number: 0,

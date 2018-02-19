@@ -1,14 +1,11 @@
 let express = require('express');
 let passport = require('passport');
-let jwt = require("jwt-simple");
 let router = express.Router();
 let User = require('../../models/user');
 let session = require('./session');
-let shortid = require('shortid');
 let httpstatus = require('../../config/response').httpstatus;
 let authenticationResponse = require('../../config/response').authentication;
 let Response = require('../shared/response.js');
-let Email = require('../../lib/Message/Email.js');
 let config = require('../../config/app.json');
 let Recaptcha = require('recaptcha-verify');
 let recaptcha = new Recaptcha({

@@ -62,8 +62,8 @@ export class AppointmentListComponent implements OnInit {
         onClick: ({ event }: { event: CalendarEvent }): void => {
             this.appointmentService.delete(event.meta.appointment._id).subscribe(res => {
                 this.growlService.success({
-                    title: 'Solicitud de cancelaci&oacute;n de turno.',
-                    msg: 'Se cancelo el turno solicitado.'
+                    msg: 'Se cancelo el turno solicitado.',
+                    title: 'Solicitud de cancelaci&oacute;n de turno.'
                 });
 
                 _.remove(this.calendar.events, {
@@ -93,8 +93,8 @@ export class AppointmentListComponent implements OnInit {
                     this.appointmentService.update(app)
                         .subscribe(data => {
                             this.growlService.success({
-                                title: 'Solicitud de modificaci&oacute;n de turno.',
-                                msg: 'Tambien enviamos un aviso al participante para que este informado.'
+                                msg: 'Tambien enviamos un aviso al participante para que este informado.',
+                                title: 'Solicitud de modificaci&oacute;n de turno.'
                             });
                         }, (error: HttpErrorResponse) => {
                             if (error.status === 400) {
@@ -132,8 +132,8 @@ export class AppointmentListComponent implements OnInit {
             event.actions = [this.cancelButton];
             event.color = colors.yellow;
             this.growlService.success({
-                title: 'Solicitud de cambio de turno generada.',
-                msg: 'Tambien enviamos un aviso al participante para que este informado.'
+                msg: 'Tambien enviamos un aviso al participante para que este informado.',
+                title: 'Solicitud de cambio de turno generada.'
             });
         }, (error: HttpErrorResponse) => {
             if (error.status === 400) {

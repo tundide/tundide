@@ -12,6 +12,7 @@ import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { SharedModule } from '../../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { SelectModule } from 'ng-select';
 
 @NgModule({
     declarations: [AppointmentNewComponent, AppointmentListComponent],
@@ -24,6 +25,7 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
         RouterModule,
         NgbModule,
         MultiselectDropdownModule,
+        SelectModule,
         SharedModule.forRoot()
     ],
     providers: [

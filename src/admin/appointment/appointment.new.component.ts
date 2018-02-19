@@ -9,6 +9,7 @@ import { AppointmentService } from './appointment.service';
 import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { Appointment } from './appointment.model';
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
+import { IOption } from 'ng-select';
 import { ElementRef, ComponentRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -32,7 +33,7 @@ interface ISubsidiary {
 export class AppointmentNewComponent implements OnInit {
     private roles: Array<String>;
     private appointmentGroup: FormGroup;
-    private subsidiaryOptions: IMultiSelectOption[];
+    private subsidiaryOptions: Array<IOption>;
     private datepickerOpts = {
         assumeNearbyYear: true,
         autoclose: true,
@@ -88,21 +89,35 @@ export class AppointmentNewComponent implements OnInit {
         private growlService: GrowlService,
         private phonebookService: PhonebookService) {
 
+        let startDate = moment();
+        let endDate = moment().add(1, 'h');
 
-        let date = new Date();
-        let ngbDateStruct = {
-            day: date.getUTCDay(), month: date.getUTCMonth(), year: date.getUTCFullYear(),
-            hour: date.getHours(), minute: date.getMinutes(), second: date.getSeconds()
+        let ngbDateStructStartDate = {
+            day: startDate.date(),
+            hour: startDate.hour(),
+            minute: startDate.minutes(),
+            month: startDate.month() + 1,
+            second: startDate.seconds(),
+            year: startDate.year()
+        };
+
+        let ngbDateStructEndDate = {
+            day: endDate.date(),
+            hour: endDate.hour(),
+            minute: endDate.minutes(),
+            month: endDate.month() + 1,
+            second: endDate.seconds(),
+            year: endDate.year()
         };
 
         this.appointmentGroup = this.formBuilder.group({
             contact: this.formBuilder.control(''),
             description: this.formBuilder.control(''),
+            endDate: this.formBuilder.control(ngbDateStructEndDate, Validators.required),
+            endTime: this.formBuilder.control(ngbDateStructEndDate, Validators.required),
             participant: this.formBuilder.control(''),
-            endDate: this.formBuilder.control(ngbDateStruct),
-            endTime: this.formBuilder.control(''),
-            startDate: this.formBuilder.control(ngbDateStruct),
-            startTime: this.formBuilder.control(''),
+            startDate: this.formBuilder.control(ngbDateStructStartDate, Validators.required),
+            startTime: this.formBuilder.control(ngbDateStructStartDate, Validators.required),
             subsidiary: this.formBuilder.control('')
         });
     }
@@ -115,8 +130,8 @@ export class AppointmentNewComponent implements OnInit {
                 this.subsidiaryOptions = new Array();
                 _.forEach(data, (subsidiary, key) => {
                     this.subsidiaryOptions.push({
-                        id: subsidiary._id,
-                        name: subsidiary.code + ' - ' + subsidiary.description
+                        label: subsidiary.code + ' - ' + subsidiary.description,
+                        value: subsidiary._id
                     });
                 });
             }, (error: HttpErrorResponse) => {
@@ -152,13 +167,13 @@ export class AppointmentNewComponent implements OnInit {
         app.endDate = new Date(ngbDateEnd.year, ngbDateEnd.month - 1, ngbDateEnd.day,
             ngbTimeEnd.hour, ngbTimeEnd.minute, ngbTimeEnd.second);
 
-        app.subsidiary = this.appointmentGroup.get('subsidiary').value[0];
+        app.subsidiary = this.appointmentGroup.get('subsidiary').value;
 
         this.appointmentService.save(app)
             .subscribe(response => {
                 this.growlService.success({
-                    title: 'Alta de turno.',
-                    msg: 'Se dio de alta el turno exitosamente.'
+                    msg: 'Se dio de alta el turno exitosamente.',
+                    title: 'Alta de turno.'
                 });
                 this.router.navigate(['/appointment']);
             });

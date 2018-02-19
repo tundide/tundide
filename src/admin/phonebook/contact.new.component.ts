@@ -97,8 +97,8 @@ export class ContactNewComponent implements OnInit {
             .subscribe(response => {
                 this.router.navigate(['/phonebook']);
                 this.growlService.success({
-                    title: 'Contacto guardado con exito.',
-                    msg: 'El contacto se ha guardado correctamente.'
+                    msg: 'El contacto se ha guardado correctamente.',
+                    title: 'Contacto guardado con exito.'
                 });
             }, (error: HttpErrorResponse) => {
                 if (error.status === 400) {

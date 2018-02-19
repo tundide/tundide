@@ -5,11 +5,13 @@ import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
     {
-        component: HomeComponent, path: '', pathMatch: 'full',
+        component: HomeComponent,
         data: {
             breadcrumbs: true,
             text: 'Principal'
-        }
+        },
+        path: '',
+        pathMatch: 'full'
     },
     {
         loadChildren: '../auth/auth.module#AuthModule',
@@ -22,21 +24,21 @@ export const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './admin.module#AdminModule',
-        path: 'admin',
         data: {
             breadcrumbs: true,
             text: 'Administracion'
-        }
+        },
+        loadChildren: './admin.module#AdminModule',
+        path: 'admin'
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './billing/billing.module#BillingModule',
-        path: 'billing',
         data: {
             breadcrumbs: true,
             text: 'Facturacion'
-        }
+        },
+        loadChildren: './billing/billing.module#BillingModule',
+        path: 'billing'
     },
     {
         canActivate: [AuthGuard],
@@ -50,30 +52,30 @@ export const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './message/message.module#MessageModule',
-        path: 'message',
         data: {
             breadcrumbs: true,
             text: 'Mensajes'
-        }
+        },
+        loadChildren: './message/message.module#MessageModule',
+        path: 'message'
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './appointment/appointment.module#AppointmentModule',
-        path: 'appointment',
         data: {
             breadcrumbs: true,
             text: 'Calendario'
-        }
+        },
+        loadChildren: './appointment/appointment.module#AppointmentModule',
+        path: 'appointment'
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './phonebook/phonebook.module#PhonebookModule',
-        path: 'phonebook',
         data: {
             breadcrumbs: true,
             text: 'Agenda'
-        }
+        },
+        loadChildren: './phonebook/phonebook.module#PhonebookModule',
+        path: 'phonebook'
     },
     {
         canActivate: [AuthGuard],
@@ -82,39 +84,39 @@ export const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './stock/stock.module#StockModule',
-        path: 'stock',
         data: {
             breadcrumbs: true,
             text: 'Stock'
-        }
+        },
+        loadChildren: './stock/stock.module#StockModule',
+        path: 'stock'
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './subsidiary/subsidiary.module#SubsidiaryModule',
-        path: 'subsidiary',
         data: {
             breadcrumbs: true,
             text: 'Sucursales'
-        }
+        },
+        loadChildren: './subsidiary/subsidiary.module#SubsidiaryModule',
+        path: 'subsidiary'
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './settings/settings.module#SettingsModule',
-        path: 'settings',
         data: {
             breadcrumbs: true,
             text: 'Configuracion'
-        }
+        },
+        loadChildren: './settings/settings.module#SettingsModule',
+        path: 'settings'
     },
     {
         canActivate: [AuthGuard],
-        loadChildren: './dashboard/dashboard.module#DashboardModule',
-        path: 'dashboard',
         data: {
             breadcrumbs: true,
             text: 'Tablero'
-        }
+        },
+        loadChildren: './dashboard/dashboard.module#DashboardModule',
+        path: 'dashboard'
     }
 ];
 

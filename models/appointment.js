@@ -14,7 +14,7 @@ let AppointmentSchema = mongoose.Schema({
     shortId: String,
     status: { type: Number, default: 1 },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
-    client: { type: Schema.Types.ObjectId, ref: 'Client' },
+    client: { type: Schema.Types.ObjectId, ref: 'Contact' },
     subsidiary: { type: Schema.Types.ObjectId, ref: 'Subsidiary' }
 });
 // TODO: Acomodar la documentacion

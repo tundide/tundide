@@ -9,6 +9,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArchwizardModule } from 'ng2-archwizard';
+import { LocationService } from '../../shared/location.service';
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
 @NgModule({
     declarations: [DashboardComponent],
@@ -20,10 +22,12 @@ import { ArchwizardModule } from 'ng2-archwizard';
         CommonModule,
         NgbModule,
         ArchwizardModule,
+        NgxErrorsModule,
         SharedModule.forRoot(),
         ToastyModule.forRoot()],
     providers: [
-        AuthGuard
+        AuthGuard,
+        LocationService
     ]
 })
 

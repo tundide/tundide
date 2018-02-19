@@ -11,9 +11,6 @@ let Validators = require('../../lib/Validators/ObjectId.js');
 let Email = require('../../lib/Message/Email.js');
 let _ = require('lodash');
 
-let nodemailer = require("nodemailer");
-let ical = require('ical-generator');
-
 /**
  * @api {post} / Save appointment
  * @apiName saveappointment
@@ -63,9 +60,22 @@ router.post('/', session.authorize(), function(req, res) {
     app.endDate = req.body.endDate;
     app.shortId = 'AP-' + shortid.generate();
 
-    app.populate();
+
+
     app.save().then(function(doc) {
-            EnviarEmail(app);
+            Appointment.populate(doc, [{ path: "client" }, { path: "subsidiary" }], function(err, appointment) {
+                Email.appointmentNew({
+                    id: doc._id.toString(),
+                    contact: appointment.client.firstName + ' ' + appointment.client.lastName,
+                    to: appointment.client.contact.email,
+                    start: appointment.startDate,
+                    end: appointment.endDate,
+                    title: 'Usted tiene un turno asignado',
+                    description: 'Turno Asignado',
+                    location: appointment.subsidiary.description,
+                    url: 'www.tundide.com'
+                });
+            });
             res.status(httpstatus.successcreated).json(
                 new Response(appointmentResponse.successcreated.appointmentSuccessfully, doc)
             );
@@ -76,53 +86,6 @@ router.post('/', session.authorize(), function(req, res) {
             );
         });
 });
-
-function EnviarEmail(app) {
-    let transport = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, // true for 465, false for other ports
-        auth: {
-            user: 'marcos.panichella@gmail.com', // generated ethereal user
-            pass: 'Mavi34518147' // generated ethereal password
-        }
-    });
-
-
-    let cal = ical({ domain: 'tundide.com', name: 'Cita' });
-
-    cal.domain('tundide.com');
-
-    cal.createEvent({
-        start: app.startDate,
-        end: app.endDate,
-        summary: 'Usted tiene un turno asignado',
-        description: app.description,
-        location: 'Sucursal: ' + app.subsidiary,
-        url: 'http://tundide.com/'
-    });
-
-
-    transport.sendMail({
-        from: 'marcos.panichella@tundide.com',
-        to: 'mpanichella@live.com',
-        subject: 'Meeting',
-        html: app.description,
-        text: app.description,
-        alternatives: [{
-            contentType: "text/calendar; charset=\"utf-8\"; method=REQUEST",
-            content: new Buffer(cal.toString())
-        }]
-    }, function(err, responseStatus) {
-        if (err) {
-            console.log(err);
-            res.render('schedule', { errors: err.message });
-        } else {
-            console.log(responseStatus.message);
-            res.render('schedule', { success_msg: "Successfully Created!" });
-        }
-    });
-}
 
 /**
  * @api {patch} /:id Update appointment
@@ -238,7 +201,6 @@ router.delete('/:id', session.authorize(), function(req, res) {
  * }
  */
 router.get('/list', session.authorize(), function(req, res) {
-    Email.appointmentNew();
     Appointment.find({ user: req.user._id }, function(err, appointments) {
         if (err) {
             next(new Error('An unexpected error occurred'));
