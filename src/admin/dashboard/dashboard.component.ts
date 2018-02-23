@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../auth/auth.service';
 import { LocationService } from '../../shared/location.service';
 import { Observable } from 'rxjs';
+import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import * as _ from 'lodash';
 import * as companyTypesList from './companyTypes.json';
 
@@ -23,6 +24,9 @@ export class DashboardComponent implements OnInit {
 
     private firstIncomeGroup: FormGroup;
     private types = (<any>companyTypesList);
+
+    private options: GridsterConfig;
+    private dashboard: Array<GridsterItem>;
 
     searchLocation = (text$: Observable<string>) =>
         text$
@@ -73,7 +77,36 @@ export class DashboardComponent implements OnInit {
         });
     }
 
+    itemChange(item, itemComponent) {
+        console.log('itemChanged', item, itemComponent);
+    }
+
+    itemResize(item, itemComponent) {
+        console.log('itemResized', item, itemComponent);
+    }
+
+    removeItem(item) {
+        this.dashboard.splice(this.dashboard.indexOf(item), 1);
+    }
+
+    addItem() {
+        this.dashboard.push({});
+    }
+
     ngOnInit() {
+        this.options = {
+            draggable: { enabled: true },
+            itemChangeCallback: this.itemChange,
+            itemResizeCallback: this.itemResize,
+            pushResizeItems: true,
+            resizable: { enabled: true },
+        };
+
+        this.dashboard = [
+            { cols: 2, rows: 1, y: 0, x: 0 },
+            { cols: 2, rows: 2, y: 0, x: 2 }
+        ];
+
         this.locationService.list().subscribe(
             data => {
                 this.provinces = data;

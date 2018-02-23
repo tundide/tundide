@@ -38,6 +38,13 @@ let jobCalculatePublicationScore = new CronJob('5 * * * * *', function() {
 
 jobCalculatePublicationScore.start();
 
+let jobUpdateKairosDatabase = new CronJob('0 0 0 1/1 * *', function() {
+    // TODO: Agregar el proceso para bajar la informacion de la web de Kairos, y actualizarla en la base de datos
+    console.log('Actualizacion de base de web Kairos');
+}, null, true);
+
+jobUpdateKairosDatabase.start();
+
 // let jobRefreshHerokuSleepingTime = new CronJob('5 * * * * *', function() {
 //     http.request({
 //         host: 'http://www.tundide.com',

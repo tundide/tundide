@@ -7,9 +7,7 @@ let session = require('../auth/session');
 let appointmentResponse = require('../../config/response').appointment;
 let httpstatus = require('../../config/response').httpstatus;
 let Response = require('../shared/response.js');
-let Validators = require('../../lib/Validators/ObjectId.js');
 let Email = require('../../lib/Message/Email.js');
-let _ = require('lodash');
 
 /**
  * @api {post} / Save appointment
@@ -120,7 +118,8 @@ router.patch('/', session.authorize(), function(req, res) {
         startDate: Date.parse(req.body.startDate),
         description: req.body.description,
         status: 3 /*Approval pending*/ ,
-        client: req.client._id
+        client: req.client._id,
+        _id: req.body._id
     };
 
     Appointment.findOneAndUpdate({ _id: req.body._id }, appointment, { upsert: true }, function(err) {

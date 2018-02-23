@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArchwizardModule } from 'ng2-archwizard';
 import { LocationService } from '../../shared/location.service';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
+import { GridsterModule } from 'angular-gridster2';
 
 @NgModule({
     declarations: [DashboardComponent],
@@ -23,6 +24,7 @@ import { NgxErrorsModule } from '@ultimate/ngxerrors';
         NgbModule,
         ArchwizardModule,
         NgxErrorsModule,
+        GridsterModule,
         SharedModule.forRoot(),
         ToastyModule.forRoot()],
     providers: [

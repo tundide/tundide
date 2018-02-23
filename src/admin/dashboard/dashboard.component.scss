@@ -1,3 +1,8 @@
+@import "../../_custom.scss";
 .row {
     margin: 15px;
+}
+
+.fit {
+    background-color: $gray-200 !important;
 }
