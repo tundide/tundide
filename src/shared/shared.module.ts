@@ -13,6 +13,7 @@ import { CamelCase } from './camelcase.pipe';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 import { NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { CacheService, CacheStorageAbstract, CacheLocalStorage } from 'ng2-cache/ng2-cache';
+import { ContextMenuModule } from 'ngx-contextmenu';
 import localeEs from '@angular/common/locales/es';
 
 registerLocaleData(localeEs);
@@ -35,6 +36,7 @@ registerLocaleData(localeEs);
         HttpModule,
         RouterModule,
         FormsModule,
+        ContextMenuModule.forRoot(),
         NgbDatepickerModule.forRoot(),
         NgbTimepickerModule.forRoot(),
         CalendarModule.forRoot()

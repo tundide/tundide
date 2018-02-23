@@ -37,18 +37,60 @@
     </div>
     <div class="col-md-4">
         <div class="btn-group">
-            <button class="btn btn-primary" *ngIf="month" (click)="view = 'month'" [class.active]="view === 'month'" type="button">Mes</button>
-            <button class="btn btn-primary" *ngIf="week" (click)="view = 'week'" [class.active]="view === 'week'" type="button">Semana</button>
-            <button class="btn btn-primary" *ngIf="day" (click)="view = 'day'" [class.active]="view === 'day'" type="button">D&iacute;a</button>
+            <button class="btn btn-primary" (click)="view = 'month'" [class.active]="view === 'month'" type="button">Mes</button>
+            <button class="btn btn-primary" (click)="view = 'week'" [class.active]="view === 'week'" type="button">Semana</button>
+            <button class="btn btn-primary" (click)="view = 'day'" [class.active]="view === 'day'" type="button">D&iacute;a</button>
         </div>
+
     </div>
 </div>
 <br>
 <div [ngSwitch]="view">
-    <mwl-calendar-month-view *ngSwitchCase="'month'" [locale]="locale" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChangedEvent($event)">
+    <mwl-calendar-month-view *ngSwitchCase="'month'" (dayClicked)="viewDate = $event.day.date; view = 'day'" [locale]="locale" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (eventClicked)="eventClicked($event)"
+        (eventTimesChanged)="eventTimesChangedEvent($event)" [cellTemplate]="monthCellTemplate">
     </mwl-calendar-month-view>
-    <mwl-calendar-week-view *ngSwitchCase="'week'" [locale]="locale" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChangedEvent($event)">
+    <mwl-calendar-week-view *ngSwitchCase="'week'" (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'" [locale]="locale" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChangedEvent($event)"
+        [headerTemplate]="weekHeaderTemplate">
     </mwl-calendar-week-view>
-    <mwl-calendar-day-view *ngSwitchCase="'day'" [eventWidth]="500" [locale]="locale" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChangedEvent($event)">
+    <mwl-calendar-day-view *ngSwitchCase="'day'" [eventWidth]="500" [locale]="locale" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="eventClicked($event)" (eventTimesChanged)="eventTimesChangedEvent($event)" [hourSegmentTemplate]="dayHourSegmentTemplate">
     </mwl-calendar-day-view>
 </div>
+
+<context-menu #appointmentContextMenu>
+    <ng-template contextMenuItem (execute)="addEvent($event.item)">
+        Agregar Turno
+    </ng-template>
+</context-menu>
+
+<ng-template #monthCellTemplate let-day="day" let-openDay="openDay" let-locale="locale" let-tooltipPlacement="tooltipPlacement" let-highlightDay="highlightDay" let-unhighlightDay="unhighlightDay" let-eventClicked="eventClicked">
+
+    <div class="fill-height" [contextMenu]="appointmentContextMenu" [contextMenuSubject]="day.date">
+        <div class="cal-cell-top">
+            <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+            <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+        </div>
+        <div class="cal-events">
+            <div class="cal-event" *ngFor="let event of day.events" [style.backgroundColor]="event.color.primary" [ngClass]="event?.cssClass" (mouseenter)="highlightDay.emit({event: event})" (mouseleave)="unhighlightDay.emit({event: event})" [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
+                [tooltipPlacement]="tooltipPlacement" (click)="$event.stopPropagation(); eventClicked.emit({event: event})">
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #weekHeaderTemplate let-days="days" let-locale="locale" let-dayHeaderClicked="dayHeaderClicked">
+    <div class="cal-day-headers">
+        <div class="cal-header" *ngFor="let day of days" [class.cal-past]="day.isPast" [class.cal-today]="day.isToday" [class.cal-future]="day.isFuture" [class.cal-weekend]="day.isWeekend" [class.cal-drag-over]="day.dragOver" (click)="dayHeaderClicked.emit({day: day})"
+            [contextMenu]="appointmentContextMenu" [contextMenuSubject]="day.date">
+            <b>{{ day.date | calendarDate:'weekViewColumnHeader':locale }}</b><br>
+            <span>{{ day.date | calendarDate:'weekViewColumnSubHeader':locale }}</span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #dayHourSegmentTemplate let-segment="segment" let-locale="locale">
+    <div class="cal-hour-segment" [ngClass]="segment.cssClass" [contextMenu]="appointmentContextMenu" [contextMenuSubject]="segment.date">
+        <div [hidden]="!segment.isStart" class="cal-time">
+            {{ segment.date | calendarDate:'dayViewHour':locale }}
+        </div>
+    </div>
+</ng-template>

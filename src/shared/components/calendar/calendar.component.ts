@@ -17,9 +17,9 @@ import {
 export class CalendarComponent {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
-  @Input('month') month: boolean;
-  @Input('week') week: boolean;
-  @Input('day') day: boolean;
+  // @Input('month') month: boolean;
+  // @Input('week') week: boolean;
+  // @Input('day') day: boolean;
   @Input('events') events: CalendarEvent[] = [];
   @Output('eventtimechange') eventTimesChanged: EventEmitter<CalendarEvent> = new EventEmitter();
   @Output('eventclick') eventClick: EventEmitter<any> = new EventEmitter();
@@ -27,7 +27,7 @@ export class CalendarComponent {
   locale = window.navigator.language;
 
   @Input('default')
-  view = 'day';
+  view = 'month';
 
   viewDate: Date = new Date();
 
@@ -50,20 +50,6 @@ export class CalendarComponent {
       event.end = newEnd;
       this.refresh.next();
       this.eventTimesChanged.emit(event);
-    }
-  }
-
-  dayClicked({ date, events }: { date: Date, events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-        this.viewDate = date;
-      }
     }
   }
 
