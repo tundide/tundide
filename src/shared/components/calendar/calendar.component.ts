@@ -23,6 +23,7 @@ export class CalendarComponent {
   @Input('events') events: CalendarEvent[] = [];
   @Output('eventtimechange') eventTimesChanged: EventEmitter<CalendarEvent> = new EventEmitter();
   @Output('eventclick') eventClick: EventEmitter<any> = new EventEmitter();
+  @Output('appoinmentAdd') appoinmentAdd: EventEmitter<any> = new EventEmitter();
 
   locale = window.navigator.language;
 
@@ -56,6 +57,10 @@ export class CalendarComponent {
   addEvent(event: CalendarEvent): void {
     this.events.push(event);
     this.refresh.next();
+  }
+
+  contextMenuAddEvent(date: Date): void {
+    this.appoinmentAdd.emit(date);
   }
 
 }

@@ -1,6 +1,7 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { GrowlService } from '../../@core/utils/growl.service';
 import { AuthService } from '../../auth/auth.service';
@@ -30,7 +31,7 @@ interface ISubsidiary {
     templateUrl: 'appointment.new.component.html'
 })
 
-export class AppointmentNewComponent implements OnInit {
+export class AppointmentNewComponent implements OnInit, OnDestroy {
     private roles: Array<String>;
     private appointmentGroup: FormGroup;
     private subsidiaryOptions: Array<IOption>;
@@ -83,6 +84,7 @@ export class AppointmentNewComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private router: Router,
+        private route: ActivatedRoute,
         private authService: AuthService,
         private appointmentService: AppointmentService,
         private subsidiaryService: SubsidiaryService,
@@ -91,6 +93,13 @@ export class AppointmentNewComponent implements OnInit {
 
         let startDate = moment();
         let endDate = moment().add(1, 'h');
+
+        let startDateSessionStorage = sessionStorage.getItem('appointment.startDate');
+
+        if (startDateSessionStorage) {
+            startDate = moment(JSON.parse(startDateSessionStorage));
+            endDate = moment(JSON.parse(startDateSessionStorage)).add(1, 'h');
+        }
 
         let ngbDateStructStartDate = {
             day: startDate.date(),
@@ -178,4 +187,9 @@ export class AppointmentNewComponent implements OnInit {
                 this.router.navigate(['/appointment']);
             });
     }
+
+    ngOnDestroy() {
+        sessionStorage.removeItem('appointment.startDate');
+    }
+
 }

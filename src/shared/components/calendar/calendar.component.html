@@ -57,7 +57,7 @@
 </div>
 
 <context-menu #appointmentContextMenu>
-    <ng-template contextMenuItem (execute)="addEvent($event.item)">
+    <ng-template contextMenuItem (execute)="contextMenuAddEvent($event.item)">
         Agregar Turno
     </ng-template>
 </context-menu>

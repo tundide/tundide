@@ -186,6 +186,11 @@ export class AppointmentListComponent implements OnInit {
             });
     }
 
+    addAppointment(date) {
+        sessionStorage.setItem('appointment.startDate', JSON.stringify(date));
+        this.router.navigate(['/appointment/new']);
+    }
+
     changeAppointment(appointment: Appointment) {
         this.appointment = appointment;
     }

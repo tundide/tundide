@@ -3,10 +3,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../auth/auth.service';
 import { LocationService } from '../../shared/location.service';
-import { Observable } from 'rxjs';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import * as _ from 'lodash';
-import * as companyTypesList from './companyTypes.json';
 
 @Component({
     selector: 'dashboard',
@@ -15,124 +13,74 @@ import * as companyTypesList from './companyTypes.json';
 })
 
 export class DashboardComponent implements OnInit {
-    @ViewChild('firstincome') firstincomeModal: NgbModal;
-    isActive = false;
-    showMenu = '';
-    public selectedProvince;
-    public provinces = [];
-    public locations = [];
 
-    private firstIncomeGroup: FormGroup;
-    private types = (<any>companyTypesList);
-
+    static dashboard: Array<GridsterItem>;
     private options: GridsterConfig;
-    private dashboard: Array<GridsterItem>;
 
-    searchLocation = (text$: Observable<string>) =>
-        text$
-            .debounceTime(200)
-            .distinctUntilChanged()
-            .map(term => term.length < 2 ? []
-                : _.find(this.provinces, (o: any) => {
-                    return o.code === this.selectedProvince;
-                }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
+    static itemChange(item, itemComponent) {
+        let dashboardItems = _.find(DashboardComponent.dashboard, function (obj) {
+            return obj.id === item.id;
+        });
 
-    formatter = (x: { description: string }) => x.description;
+        dashboardItems.cols = item.cols;
+        dashboardItems.rows = item.rows;
+        dashboardItems.y = item.y;
+        dashboardItems.x = item.x;
 
-    provinceChange(event) {
-        const ctrl = this.firstIncomeGroup.get('subsidiary.location.place');
-
-        if (event.value !== 0) {
-            ctrl.enable();
-        } else {
-            ctrl.disable();
-        }
+        localStorage.setItem('dashboard.components', JSON.stringify(DashboardComponent.dashboard));
     }
+
+    static itemResize(item, itemComponent) {
+        let dashboardItems = _.find(DashboardComponent.dashboard, function (obj) {
+            return obj.id === item.id;
+        });
+
+        dashboardItems.cols = item.cols;
+        dashboardItems.rows = item.rows;
+        dashboardItems.y = item.y;
+        dashboardItems.x = item.x;
+
+        localStorage.setItem('dashboard.components', JSON.stringify(DashboardComponent.dashboard));
+    }
+
 
     constructor(
         private authService: AuthService,
         private formBuilder: FormBuilder,
         private modalService: NgbModal,
-        private locationService: LocationService) {
-
-        this.firstIncomeGroup = this.formBuilder.group({
-            company: this.formBuilder.group({
-                description: this.formBuilder.control('', [Validators.required]),
-                name: this.formBuilder.control('', [Validators.required]),
-                type: this.formBuilder.control('', [Validators.required])
-            }),
-            document: this.formBuilder.control(''),
-            firstName: this.formBuilder.control('', [Validators.required]),
-            lastName: this.formBuilder.control('', [Validators.required]),
-            subsidiary: this.formBuilder.group({
-                code: this.formBuilder.control('', [Validators.required]),
-                description: this.formBuilder.control('', [Validators.required]),
-                location: this.formBuilder.group({
-                    number: this.formBuilder.control(''),
-                    place: this.formBuilder.control({ value: '', disabled: true }),
-                    province: this.formBuilder.control(''),
-                    street: this.formBuilder.control('')
-                })
-            })
-        });
-    }
-
-    itemChange(item, itemComponent) {
-        console.log('itemChanged', item, itemComponent);
-    }
-
-    itemResize(item, itemComponent) {
-        console.log('itemResized', item, itemComponent);
-    }
+        private locationService: LocationService) { }
 
     removeItem(item) {
-        this.dashboard.splice(this.dashboard.indexOf(item), 1);
+        DashboardComponent.dashboard.splice(DashboardComponent.dashboard.indexOf(item), 1);
     }
 
     addItem() {
-        this.dashboard.push({});
+        DashboardComponent.dashboard.push({});
     }
 
+    selectItem(card) {
+        return _.find(DashboardComponent.dashboard, function (obj) {
+            return obj.id === card;
+        });
+    }
     ngOnInit() {
         this.options = {
             draggable: { enabled: true },
-            itemChangeCallback: this.itemChange,
-            itemResizeCallback: this.itemResize,
+            itemChangeCallback: DashboardComponent.itemChange,
+            itemResizeCallback: DashboardComponent.itemResize,
             pushResizeItems: true,
             resizable: { enabled: true },
         };
 
-        this.dashboard = [
-            { cols: 2, rows: 1, y: 0, x: 0 },
-            { cols: 2, rows: 2, y: 0, x: 2 }
-        ];
-
-        this.locationService.list().subscribe(
-            data => {
-                this.provinces = data;
-            });
-
-        if (this.authService.getUserCredentials().firstIncome) {
-            setTimeout(() => {
-                this.modalService.open(this.firstincomeModal, { size: 'lg' }).result.then((result) => {
-                    if (result) {
-                        // TODO: Terminar proceso de firstIncome this.authService.complete('1');
-                    }
-                }, (reason) => {
-                    alert(reason);
-                });
-            });
-        }
-    }
-
-    eventCalled() {
-        this.isActive = !this.isActive;
-    }
-    addExpandClass(element: any) {
-        if (element === this.showMenu) {
-            this.showMenu = '0';
+        let dashaboardCompoents = localStorage.getItem('dashboard.components');
+        if (dashaboardCompoents === null) {
+            DashboardComponent.dashboard = [
+                { id: 'appointments', cols: 2, rows: 1, y: 0, x: 0 },
+                { id: 'terminals', cols: 2, rows: 2, y: 0, x: 2 },
+                { id: 'stock', cols: 2, rows: 2, y: 1, x: 2 }
+            ];
         } else {
-            this.showMenu = element;
+            DashboardComponent.dashboard = JSON.parse(dashaboardCompoents);
         }
     }
 }
