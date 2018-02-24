@@ -8,7 +8,6 @@ import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ArchwizardModule } from 'ng2-archwizard';
 import { LocationService } from '../../shared/location.service';
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
 import { GridsterModule } from 'angular-gridster2';
@@ -22,14 +21,12 @@ import { GridsterModule } from 'angular-gridster2';
         RouterModule,
         CommonModule,
         NgbModule,
-        ArchwizardModule,
         NgxErrorsModule,
         GridsterModule,
         SharedModule.forRoot(),
         ToastyModule.forRoot()],
     providers: [
-        AuthGuard,
-        LocationService
+        AuthGuard
     ]
 })
 

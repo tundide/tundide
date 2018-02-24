@@ -4,9 +4,13 @@ import { routing } from './configuration.routing';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { SocketService } from '../../shared/socket.service';
+import { SharedModule } from '../../shared/shared.module';
 import { AuthService } from '../../auth/auth.service';
-import { StartComponent } from '../configuration/start.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StartComponent } from './start.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ArchwizardModule } from 'ng2-archwizard';
+import { LocationService } from '../../shared/location.service';
 
 @NgModule({
     declarations: [StartComponent],
@@ -17,12 +21,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     imports: [
         routing,
         CommonModule,
+        NgbModule,
+        ArchwizardModule,
         HttpModule,
         RouterModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule.forRoot()
     ],
     providers: [SocketService,
+        LocationService,
         AuthService]
 })
 

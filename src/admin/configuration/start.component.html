@@ -7,7 +7,7 @@
                 Hola! Vemos que este es tu primer ingreso, configuremos algunas cosas para que puedas usar todas nuestras funcionalidades.
             </div>
 
-            <div class="modal-footer">
+            <div class="center-button">
                 <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
             </div>
         </div>
@@ -18,9 +18,10 @@
                 Contanos sobre tu empresa
             </div>
             <div class="card-block" formGroupName="company">
-                <div class="form-group row">
-                    <label for="inputname" class="col-sm-4 col-form-label col-form-label-sm">Nombre</label>
-                    <div class="col-sm-8">
+                <div class="row">
+                    <label for="inputname" class="col-2 col-form-label col-form-label-sm">Nombre</label>
+
+                    <div class="col-4">
                         <input type="text" formControlName="name" class="form-control form-control-sm" id="inputname" aria-describedby="nameHelp" place-holder="Nombre" required>
                         <div ngxErrors="company.name">
                             <div class="error" ngxError="required">
@@ -28,10 +29,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputdescription" class="col-sm-4 col-form-label col-form-label-sm">Descripci&oacute;n</label>
-                    <div class="col-sm-8">
+
+                    <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
+                    <div class="col-4">
                         <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
                         <div ngxErrors="company.description">
                             <div class="error" ngxError="required">
@@ -40,10 +40,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="inputType" class="col-sm-4 col-form-label col-form-label-sm">Tipo de empresa</label>
-                    <div class="col-sm-8">
-                        <select id="inputType" formControlName="type" name="type" class="form-control">
+                <div class="row">
+                    <label for="inputType" class="col-2 col-form-label col-form-label-sm">Tipo de empresa</label>
+                    <div class="col-4">
+                        <select id="inputType" formControlName="type" name="type" class="form-control form-control-sm">
                                             <option *ngFor="let t of types" [ngValue]="t.value">{{t.description}}</option>
                                     </select>
                         <div ngxErrors="company.type">
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="center-button">
                 <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
                 <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
             </div>
@@ -66,9 +66,9 @@
                 Completa la inforamci&oacute;n de la casa matriz.
             </div>
             <div class="card-block" formGroupName="subsidiary">
-                <div class="form-group row">
-                    <label for="inputcode" class="col-sm-4 col-form-label col-form-label-sm">Codigo</label>
-                    <div class="col-sm-8">
+                <div class=" row">
+                    <label for="inputcode" class="col-2 col-form-label col-form-label-sm">Codigo</label>
+                    <div class="col-4">
                         <input type="text" formControlName="code" class="form-control form-control-sm" id="inputcode" aria-describedby="nameHelp" place-holder="Codigo" required>
                         <div ngxErrors="subsidiary.code">
                             <div class="error" ngxError="required">
@@ -76,10 +76,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputdescription" class="col-sm-4 col-form-label col-form-label-sm">Descripci&oacute;n</label>
-                    <div class="col-sm-8">
+                    <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
+                    <div class="col-4">
                         <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="nameHelp" place-holder="Descripcion" required>
                         <div ngxErrors="subsidiary.description">
                             <div class="error" ngxError="required">
@@ -88,9 +86,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row" formGroupName="location">
-                    <label for="inputProvince" class="col-sm-4 col-form-label col-form-label-sm">Provincia</label>
-                    <div class="col-sm-8">
+                <div class="row" formGroupName="location">
+                    <label for="inputProvince" class="col-2 col-form-label col-form-label-sm">Provincia</label>
+                    <div class="col-4">
                         <select id="inputProvince" formControlName="province" (change)="provinceChange($event)" [(ngModel)]="selectedProvince" name="province" class="form-control">
                                         <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
                                     </select>
@@ -100,10 +98,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row" formGroupName="location">
-                    <label for="inputPlace" class="col-sm-4 col-form-label col-form-label-sm">Localidad</label>
-                    <div class="col-sm-8">
+                    <label for="inputPlace" class="col-2 col-form-label col-form-label-sm">Localidad</label>
+                    <div class="col-4">
                         <ng-template #rt let-r="result" let-t="term">
                             {{ r.description}} - ({{ r.zip}})
                         </ng-template>
@@ -145,7 +141,7 @@
                                 </label>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="center-button">
                 <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
                 <button type="button" class="btn btn-secondary" endWizard (click)="close('Close click')">Finalizar</button>
             </div>

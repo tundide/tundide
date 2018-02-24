@@ -117,6 +117,11 @@ export const routes: Routes = [
         },
         loadChildren: './dashboard/dashboard.module#DashboardModule',
         path: 'dashboard'
+    },
+    {
+        canActivate: [AuthGuard],
+        loadChildren: './configuration/configuration.module#StartModule',
+        path: 'start'
     }
 ];
 
