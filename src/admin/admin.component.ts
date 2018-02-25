@@ -52,7 +52,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
                 if (queryParam['t']) {
                     token = queryParam['t'];
-                    window.location.href = '/#/';
+                    window.location.href = '/#/dashboard';
                     this.storageService.set('token', queryParam['t'], true);
                 } else {
                     token = this.storageService.get('token', true);
