@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 let webpackMerge = require('webpack-merge');
 let commonConfig = require('./webpack.config.common.js');
+let blocks = ['development'];
 
 module.exports = webpackMerge(commonConfig, {
     output: {
@@ -8,6 +9,38 @@ module.exports = webpackMerge(commonConfig, {
         publicPath: "/js/app/",
         filename: '[name].bundle.js',
         chunkFilename: '[id].chunk.js'
+    },
+    module: {
+        rules: [{
+                enforce: 'pre',
+                test: /\.ts$/,
+                exclude: /(node_modules)/,
+                use: [{
+                        loader: 'tslint-loader',
+                    },
+                    {
+                        loader: 'webpack-strip-blocks',
+                        options: {
+                            blocks: blocks,
+                            start: '/*',
+                            end: '*/'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                enforce: 'pre',
+                use: [{
+                    loader: 'webpack-strip-blocks',
+                    options: {
+                        blocks: blocks,
+                        start: '<!--',
+                        end: '-->'
+                    }
+                }]
+            }
+        ]
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({

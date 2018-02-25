@@ -2,10 +2,42 @@ const webpack = require('webpack');
 let webpackMerge = require('webpack-merge');
 let commonConfig = require('./webpack.config.common.js');
 let LiveReloadPlugin = require('webpack-livereload-plugin');
+let blocks = ['production'];
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'source-map',
-
+    module: {
+        rules: [{
+                enforce: 'pre',
+                test: /\.ts$/,
+                exclude: /(node_modules)/,
+                use: [{
+                        loader: 'tslint-loader',
+                    },
+                    {
+                        loader: 'webpack-strip-blocks',
+                        options: {
+                            blocks: blocks,
+                            start: '/*',
+                            end: '*/'
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                enforce: 'pre',
+                use: [{
+                    loader: 'webpack-strip-blocks',
+                    options: {
+                        blocks: blocks,
+                        start: '<!--',
+                        end: '-->'
+                    }
+                }]
+            }
+        ]
+    },
     output: {
         path: __dirname + "/public/js/app",
         publicPath: "/js/app/",

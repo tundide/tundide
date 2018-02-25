@@ -2,8 +2,11 @@ import { Component, OnInit, OnDestroy, ElementRef, ViewEncapsulation, ViewChild 
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs/Rx';
-declare var $: JQueryStatic;
+
+/* development:start */
 import * as $S from 'scriptjs';
+/* development:end */
+
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -42,11 +45,11 @@ export class TerminalComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (process.env.environment === 'development') {
-            $S('http://localhost:35729/livereload.js', function () {
-                console.log('LiveReload Habilitado');
-            });
-        }
+        /* development:start */
+        $S('http://localhost:35729/livereload.js', function () {
+            console.log('LiveReload Habilitado');
+        });
+        /* development:end */
     }
 
     ngOnDestroy() {

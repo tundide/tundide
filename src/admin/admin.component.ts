@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,8 +9,9 @@ import { SocketService } from '../shared/socket.service';
 import { AnalyticsService } from '../@core/utils/analytics.service';
 import { StorageService } from '../@core/utils/storage.service';
 
-declare var $: JQueryStatic;
+/* development:start */
 import * as $S from 'scriptjs';
+/* development:end */
 import * as _ from 'lodash';
 
 @Component({
@@ -28,7 +29,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     private user: User;
 
-    constructor(elm: ElementRef,
+    constructor(
         public router: Router,
         public route: ActivatedRoute,
         private analytics: AnalyticsService,
@@ -45,31 +46,6 @@ export class AdminComponent implements OnInit, OnDestroy {
                 ga('send', 'pageview');
             }
         });
-
-        this.subscription = this.route.queryParams.subscribe(
-            (queryParam: any) => {
-                let token: string;
-
-                if (queryParam['t']) {
-                    token = queryParam['t'];
-                    window.location.href = '/#/dashboard';
-                    this.storageService.set('token', queryParam['t'], true);
-                } else {
-                    token = this.storageService.get('token', true);
-                }
-
-                if (token) {
-                    this.authService.loadUserData(token).subscribe(
-                        (user) => {
-                            let u = new User(user.name, user.username, user.shortId, user.id,
-                                user.roles, user.firstIncome);
-                            storageService.set('user', user);
-                            this.user = user;
-                            this.socketService.connectSocket(user.shortId);
-                            this.authService.onUserDataLoad.emit(user);
-                        });
-                }
-            });
     }
 
     onContactUsClick() {
@@ -94,6 +70,32 @@ export class AdminComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.analytics.trackPageViews();
+
+        this.subscription = this.route.queryParams.subscribe(
+            (queryParam: any) => {
+                let token: string;
+
+                if (queryParam['t']) {
+                    token = queryParam['t'];
+                    window.location.href = '/#/dashboard';
+                    this.storageService.set('token', queryParam['t'], true);
+                } else {
+                    token = this.storageService.get('token', true);
+                }
+
+                if (token) {
+                    this.authService.loadUserData(token).subscribe(
+                        (user) => {
+                            let u = new User(user.name, user.username, user.shortId, user.id,
+                                user.roles, user.firstIncome);
+                            this.storageService.set('user', user);
+                            this.user = user;
+                            this.authService.onUserDataLoad.emit(user);
+                            this.socketService.connectSocket(user.shortId);
+                        });
+                }
+            });
+
         // TODO: Agregar manejo de errores a traves del EventEmitter
         // this.http.errorOccurred.subscribe((error) => {
         //     let toastOptions: ToastOptions = {
@@ -107,11 +109,12 @@ export class AdminComponent implements OnInit, OnDestroy {
         //     this.toastyService.error(toastOptions);
         // });
 
-        if (process.env.environment === 'development') {
-            $S('http://localhost:35729/livereload.js', function () {
-                console.log('LiveReload Habilitado');
-            });
-        }
+        /* development:start */
+        $S('http://localhost:35729/livereload.js', function () {
+            console.log('LiveReload Habilitado');
+        });
+        /* development:end */
+
     }
 
     ngOnDestroy() {

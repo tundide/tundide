@@ -177,6 +177,7 @@
         "url-loader": "^0.6.2",
         "webpack": "^3.11.0",
         "webpack-livereload-plugin": "^1.0.0",
-        "webpack-merge": "^4.1.2"
+        "webpack-merge": "^4.1.2",
+        "webpack-strip-blocks": "^1.0.0"
     }
 }

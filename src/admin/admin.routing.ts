@@ -1,18 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './main/home/home.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
-    {
-        component: HomeComponent,
-        data: {
-            breadcrumbs: true,
-            text: 'Principal'
-        },
-        path: '',
-        pathMatch: 'full'
-    },
     {
         loadChildren: '../auth/auth.module#AuthModule',
         path: 'auth'
