@@ -47,7 +47,7 @@
                             <button [routerLink]="['/phonebook/edit', con._id]" class="dropdown-item">Modificar</button>
                             <button class="dropdown-item">Borrar</button>
                             <hr />
-                            <button class="dropdown-item"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Crear cita</button>
+                            <button class="dropdown-item" (click)="addAppointment(con)"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Crear cita</button>
                         </div>
                     </div>
                 </td>

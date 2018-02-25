@@ -3,6 +3,7 @@ import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { User } from './user.model';
 import { SocketService } from '../shared/socket.service';
+import { StorageService } from '../@core/utils/storage.service';
 import { Md5 } from 'ts-md5/dist/md5';
 
 /**
@@ -31,6 +32,7 @@ export class AuthService {
 
     constructor(public http: HttpClient,
         private socketService: SocketService,
+        private storageService: StorageService
     ) { }
 
     /**
@@ -39,7 +41,7 @@ export class AuthService {
      */
     loggedIn() {
         // TODO: Validar que el token no se haya vencido
-        let token = localStorage.getItem('token');
+        let token = this.storageService.get('token', true);
 
         if (token) {
             return true;
@@ -68,8 +70,7 @@ export class AuthService {
      * @returns       Object "User" with UserId - Name - Email - Token.
      */
     getUserCredentials() {
-        let userJson = sessionStorage.getItem('user');
-        return JSON.parse(userJson);
+        return this.storageService.get('user');
     }
 
     /**
@@ -108,8 +109,8 @@ export class AuthService {
     logout() {
         let user = this.getUserCredentials();
         this.socketService.logout(user.shortId);
-        localStorage.removeItem('token');
-        sessionStorage.removeItem('user');
+        this.storageService.remove('token', true);
+        this.storageService.remove('user');
         this.onLogout.emit();
     }
 }

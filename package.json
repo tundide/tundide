@@ -117,6 +117,7 @@
         "scriptjs": "^2.5.8",
         "serve-favicon": "^2.4.5",
         "shortid": "^2.2.8",
+        "simple-crypto-js": "^1.1.1",
         "socket.io": "^2.0.4",
         "ts-md5": "^1.2.4",
         "tslint-loader": "^3.5.2",

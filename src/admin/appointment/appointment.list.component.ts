@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { GrowlService } from '../../@core/utils/growl.service';
+import { StorageService } from '../../@core/utils/storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from '../../shared/components/calendar/calendar.component';
 import { AppointmentService } from './appointment.service';
@@ -33,17 +34,6 @@ const colors: any = {
         secondary: '#FDF1BA'
     }
 };
-// FIXME: No se usa mas creo
-// interface IAppointment {
-//     _id: string;
-//     startDate: Date;
-//     endDate: Date;
-//     appointmentId: string;
-//     shortId: string;
-//     description: string;
-//     contact: string;
-//     status: number;
-// }
 
 @Component({
     selector: 'appointments',
@@ -113,7 +103,8 @@ export class AppointmentListComponent implements OnInit {
     constructor(private router: Router,
         private appointmentService: AppointmentService,
         private modalService: NgbModal,
-        private growlService: GrowlService) {
+        private growlService: GrowlService,
+        private storageService: StorageService) {
 
     }
 
@@ -187,7 +178,7 @@ export class AppointmentListComponent implements OnInit {
     }
 
     addAppointment(date) {
-        sessionStorage.setItem('appointment.startDate', JSON.stringify(date));
+        this.storageService.set('appointment.startDate', date);
         this.router.navigate(['/appointment/new']);
     }
 

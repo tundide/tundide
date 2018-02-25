@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertConfig } from '@ng-bootstrap/ng-bootstrap';
+import { StorageService } from '../@core/utils/storage.service';
 
 @Component({
   selector: 'signin',
@@ -10,8 +11,9 @@ import {NgbAlertConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SigninComponent {
   public error: string;
-  constructor(private authService: AuthService) {
-    let token = localStorage.getItem('token');
+  constructor(private authService: AuthService,
+    private storageService: StorageService) {
+    let token = this.storageService.get('token', true);
 
     if (token != null) {
       window.location.href = '/admin/#/dashboard';
@@ -21,7 +23,7 @@ export class SigninComponent {
   submitForm(form: any): void {
     this.authService.signin(form.email, form.password).subscribe(
       (data) => {
-        localStorage.setItem('token', data.toString());
+        this.storageService.set('token', data.toString(), true);
         window.location.href = '/admin/#/dashboard';
       }, (error: HttpErrorResponse) => {
         if (error.status === 401) {

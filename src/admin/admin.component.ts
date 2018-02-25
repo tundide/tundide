@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs/Rx';
 import { User } from '../auth/user.model';
 import { SocketService } from '../shared/socket.service';
 import { AnalyticsService } from '../@core/utils/analytics.service';
+import { StorageService } from '../@core/utils/storage.service';
+
 declare var $: JQueryStatic;
 import * as $S from 'scriptjs';
 import * as _ from 'lodash';
@@ -34,6 +36,7 @@ export class AdminComponent implements OnInit, OnDestroy {
         private toastyService: ToastyService,
         private toastyConfig: ToastyConfig,
         private authService: AuthService,
+        private storageService: StorageService,
         private socketService: SocketService) {
         this.toastyConfig.theme = 'bootstrap';
         this.router.events.subscribe(event => {
@@ -50,9 +53,9 @@ export class AdminComponent implements OnInit, OnDestroy {
                 if (queryParam['t']) {
                     token = queryParam['t'];
                     window.location.href = '/#/';
-                    localStorage.setItem('token', queryParam['t']);
+                    this.storageService.set('token', queryParam['t'], true);
                 } else {
-                    token = localStorage.getItem('token');
+                    token = this.storageService.get('token', true);
                 }
 
                 if (token) {
@@ -60,7 +63,7 @@ export class AdminComponent implements OnInit, OnDestroy {
                         (user) => {
                             let u = new User(user.name, user.username, user.shortId, user.id,
                                 user.roles, user.firstIncome);
-                            sessionStorage.setItem('user', JSON.stringify(user));
+                            storageService.set('user', user);
                             this.user = user;
                             this.socketService.connectSocket(user.shortId);
                             this.authService.onUserDataLoad.emit(user);

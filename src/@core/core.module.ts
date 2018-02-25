@@ -3,6 +3,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AnalyticsService } from './utils/analytics.service';
 import { LoggerService } from './utils/logger.service';
 import { GrowlService } from './utils/growl.service';
+import { StorageService } from './utils/storage.service';
+import { CryptService } from './utils/crypt.service';
 import { AuthInterceptor } from './utils/auth.interceptor';
 import { HttpRequestInterceptor } from './utils/httprequest.interceptor';
 import { ErrorHandlerInterceptor } from './utils/errorhandler.interceptor';
@@ -20,6 +22,8 @@ import { ToastyModule } from 'ng2-toasty';
         AnalyticsService,
         LoggerService,
         GrowlService,
+        StorageService,
+        CryptService,
         // TODO: Revisar si es necesario el interceptor para agregar la primer parte de la ruta en los httprequest
         // { provide: RequestOptions, useClass: HttpRequestInterceptor },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

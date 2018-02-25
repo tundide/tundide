@@ -1,9 +1,10 @@
-import { Component, Input, Output, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { GrowlService } from '../../@core/utils/growl.service';
+import { StorageService } from '../../@core/utils/storage.service';
 import { AuthService } from '../../auth/auth.service';
 import { PhonebookService } from '../phonebook/phonebook.service';
 import { AppointmentService } from './appointment.service';
@@ -31,7 +32,7 @@ interface ISubsidiary {
     templateUrl: 'appointment.new.component.html'
 })
 
-export class AppointmentNewComponent implements OnInit, OnDestroy {
+export class AppointmentNewComponent implements OnInit {
     private roles: Array<String>;
     private appointmentGroup: FormGroup;
     private subsidiaryOptions: Array<IOption>;
@@ -89,16 +90,23 @@ export class AppointmentNewComponent implements OnInit, OnDestroy {
         private appointmentService: AppointmentService,
         private subsidiaryService: SubsidiaryService,
         private growlService: GrowlService,
+        private storageService: StorageService,
         private phonebookService: PhonebookService) {
 
         let startDate = moment();
         let endDate = moment().add(1, 'h');
+        let contact = '';
 
-        let startDateSessionStorage = sessionStorage.getItem('appointment.startDate');
+        let startDateSession = storageService.getAndRemove('appointment.startDate');
+        let contactSession = storageService.getAndRemove('appointment.contact');
 
-        if (startDateSessionStorage) {
-            startDate = moment(JSON.parse(startDateSessionStorage));
-            endDate = moment(JSON.parse(startDateSessionStorage)).add(1, 'h');
+        if (startDateSession) {
+            startDate = moment(startDateSession);
+            endDate = moment(startDateSession).add(1, 'h');
+        }
+
+        if (contactSession) {
+            contact = contactSession;
         }
 
         let ngbDateStructStartDate = {
@@ -120,7 +128,7 @@ export class AppointmentNewComponent implements OnInit, OnDestroy {
         };
 
         this.appointmentGroup = this.formBuilder.group({
-            contact: this.formBuilder.control(''),
+            contact: this.formBuilder.control(contact),
             description: this.formBuilder.control(''),
             endDate: this.formBuilder.control(ngbDateStructEndDate, Validators.required),
             endTime: this.formBuilder.control(ngbDateStructEndDate, Validators.required),
@@ -187,9 +195,4 @@ export class AppointmentNewComponent implements OnInit, OnDestroy {
                 this.router.navigate(['/appointment']);
             });
     }
-
-    ngOnDestroy() {
-        sessionStorage.removeItem('appointment.startDate');
-    }
-
 }

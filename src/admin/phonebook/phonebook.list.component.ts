@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GrowlService } from '../../@core/utils/growl.service';
+import { StorageService } from '../../@core/utils/storage.service';
 import { PhonebookService } from './phonebook.service';
 import { Contact } from './contact.model';
 import * as moment from 'moment';
@@ -16,6 +17,7 @@ export class PhonebookListComponent implements OnInit {
 
     constructor(private router: Router,
         private growlService: GrowlService,
+        private storageService: StorageService,
         private phonebookService: PhonebookService) {
     }
 
@@ -28,5 +30,10 @@ export class PhonebookListComponent implements OnInit {
                     this.growlService.noContent();
                 }
             });
+    }
+
+    addAppointment(contact) {
+        this.storageService.set('appointment.contact', contact);
+        this.router.navigate(['/appointment/new']);
     }
 }
