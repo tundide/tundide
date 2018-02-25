@@ -469,7 +469,13 @@
         contactAnimate();
 
         document.getElementById("login").onclick = function() {
-            location.href = "/auth/#/signin";
+            let token = localStorage.getItem('token');
+
+            if (token != null) {
+                location.href = '/admin/#/dashboard';
+            } else {
+                location.href = "/auth/#/signin";
+            }
         };
     });
 
