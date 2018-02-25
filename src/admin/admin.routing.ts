@@ -122,6 +122,15 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: './configuration/configuration.module#StartModule',
         path: 'start'
+    },
+    {
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: true,
+            text: 'Medicamentos'
+        },
+        loadChildren: './database/database.module#DatabaseModule',
+        path: 'medicine'
     }
 ];
 
