@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../auth/auth.service';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import * as _ from 'lodash';
@@ -44,9 +42,7 @@ export class DashboardComponent implements OnInit {
 
 
     constructor(
-        private authService: AuthService,
-        private formBuilder: FormBuilder,
-        private modalService: NgbModal) { }
+        private authService: AuthService) { }
 
     removeItem(item) {
         DashboardComponent.dashboard.splice(DashboardComponent.dashboard.indexOf(item), 1);
