@@ -22,7 +22,6 @@ import * as _ from 'lodash';
 export class ContactNewComponent implements OnInit {
     public provinces = [];
     public locations = [];
-    public selectedPlace: any;
 
     private roles: Array<String>;
     private contact: Contact;

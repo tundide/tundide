@@ -24,7 +24,6 @@ import { setTimeout } from 'core-js/library/web/timers';
 export class ContactEditComponent implements OnInit {
     public provinces = [];
     public locations = [];
-    public selectedPlace: any;
 
     private roles: Array<String>;
     private contactGroup: FormGroup;

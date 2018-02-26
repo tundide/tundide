@@ -20,7 +20,6 @@ import * as _ from 'lodash';
 export class RecordNewComponent implements OnInit {
     public provinces = [];
     public locations = [];
-    public selectedPlace: any;
 
     private roles: Array<String>;
     private contact: Record;

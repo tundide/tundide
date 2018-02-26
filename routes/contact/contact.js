@@ -36,7 +36,7 @@ router.post('/', session.authorize(), function(req, res, next) {
     cli.contact.cellPhone = req.body.contact.cellPhone;
     cli.contact.phone = req.body.contact.phone;
     cli.location.province = req.body.location.province;
-    cli.location.place = req.body.location.place.code;
+    cli.location.place = req.body.location.place;
     cli.location.street = req.body.location.street;
     cli.location.number = req.body.location.number;
 
