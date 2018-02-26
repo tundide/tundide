@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ChangeDetectionStrategy, ViewChild, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, Input, Output, TemplateRef } from '@angular/core';
 import {
   isSameDay,
   isSameMonth
@@ -11,7 +11,9 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   selector: 'calendar',
+  styleUrls: ['calendar.component.scss'],
   templateUrl: 'calendar.component.html'
 })
 export class CalendarComponent {

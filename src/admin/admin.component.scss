@@ -1,7 +1,6 @@
 @import "../_custom.scss";
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
-@import "../../node_modules/angular-calendar/scss/angular-calendar.scss";
 @import "/node_modules/ng2-toasty/style.css";
 @import "/node_modules/ng2-toasty/style-bootstrap.css";
 @import "/node_modules/angular2-busy/build/style/busy.css";
@@ -29,10 +28,6 @@ a:not([href]) {
 
 .errors {
     border: 1px solid #B52D30;
-}
-
-body {
-    font-family: 'Roboto';
 }
 
 h3 {
