@@ -1,6 +1,8 @@
 const webpack = require('webpack');
-let webpackMerge = require('webpack-merge');
-let commonConfig = require('./webpack.config.common.js');
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.config.common.js');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 let blocks = ['development'];
 
 module.exports = webpackMerge(commonConfig, {
@@ -43,21 +45,49 @@ module.exports = webpackMerge(commonConfig, {
         ]
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true
-            },
-            output: {
-                comments: false
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                minimize: true,
+                runtimeChunk: true,
+                splitChunks: {
+                    chunks: "async",
+                    minSize: 1000,
+                    minChunks: 2,
+                    maxAsyncRequests: 5,
+                    maxInitialRequests: 3,
+                    name: true,
+                    cacheGroups: {
+                        default: {
+                            minChunks: 1,
+                            priority: -20,
+                            reuseExistingChunk: true,
+                        },
+                        commons: {
+                            test: /[\\/]node_modules[\\/]/,
+                            name: "vendors",
+                            chunks: "all"
+                        }
+                    }
+                },
+            }
+        }),
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                compress: {
+                    warnings: false,
+                    conditionals: true,
+                    unused: true,
+                    comparisons: true,
+                    sequences: true,
+                    dead_code: true,
+                    evaluate: true,
+                    if_return: true,
+                    join_vars: true
+                },
+                output: {
+                    comments: false
+                },
+                ie8: false
             }
         }),
         new webpack.DefinePlugin({

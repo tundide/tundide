@@ -9,11 +9,9 @@ module.exports = {
         'auth': './src/auth.ts',
         'terminal': './src/terminal.ts'
     },
-
     resolve: {
         extensions: ['.js', '.ts']
     },
-
     module: {
         rules: [{
                 test: /\.ts$/,
@@ -88,8 +86,36 @@ module.exports = {
             /angular(\\|\/)core(\\|\/)/,
             path.resolve(__dirname, './src')
         ),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['vendor', 'polyfills']
+        new webpack.LoaderOptionsPlugin({
+            // test: /\.xxx$/, // may apply this only for some modules
+            options: {
+                minimize: true,
+                runtimeChunk: true,
+                splitChunks: {
+                    chunks: "async",
+                    minSize: 1000,
+                    minChunks: 2,
+                    maxAsyncRequests: 5,
+                    maxInitialRequests: 3,
+                    name: true,
+                    cacheGroups: {
+                        default: {
+                            minChunks: 1,
+                            priority: -20,
+                            reuseExistingChunk: true,
+                        },
+                        commons: {
+                            test: /[\\/]node_modules[\\/]/,
+                            name: "vendors",
+                            chunks: "all"
+                        }
+                    }
+                },
+            }
         })
+        // ,
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: ['vendor', 'polyfills']
+        // })
     ]
 };

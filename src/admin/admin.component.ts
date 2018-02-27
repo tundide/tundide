@@ -77,7 +77,6 @@ export class AdminComponent implements OnInit, OnDestroy {
 
                 if (queryParam['t']) {
                     token = queryParam['t'];
-                    window.location.href = '/#/dashboard';
                     this.storageService.set('token', queryParam['t'], true);
                 } else {
                     token = this.storageService.get('token', true);
@@ -92,6 +91,11 @@ export class AdminComponent implements OnInit, OnDestroy {
                             this.user = user;
                             this.authService.onUserDataLoad.emit(user);
                             this.socketService.connectSocket(user.shortId);
+
+                            if (user.firstIncome) {
+                                this.router.navigate(['/start']);
+                            }
+
                         });
                 }
             });
