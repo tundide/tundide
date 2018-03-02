@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -16,10 +17,30 @@ module.exports = {
         rules: [{
                 test: /\.ts$/,
                 loaders: [
-                    'awesome-typescript-loader',
-                    'angular-router-loader',
+                    // 'angular-router-loader',
                     'angular2-template-loader',
-                    'angular2-router-loader'
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            // disable type checker - we will use it in fork plugin
+                            transpileOnly: true,
+                            happyPackMode: true
+                        }
+                    },
+                    {
+                        loader: 'thread-loader',
+                        options: {
+                            // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+                            // workers: require('os').cpus().length - 1,
+                            workers: require('os').cpus().length - 1 // fastest build time for devServer: 3 threads; for production: 7 threads (os cpus minus 1)
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(ts|js)$/,
+                loaders: [
+                    'angular-router-loader'
                 ]
             },
             {
@@ -82,6 +103,7 @@ module.exports = {
             Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
             Util: "exports-loader?Util!bootstrap/js/dist/util"
         }),
+        new ForkTsCheckerWebpackPlugin(),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)/,
             path.resolve(__dirname, './src')

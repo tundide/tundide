@@ -1,7 +1,13 @@
 <gridster [options]="options">
     <gridster-item [item]="selectItem('appointments')">
         <div class="card">
-            <h3 class="card-header"><i class="fa fa-calendar" aria-hidden="true"></i> Pr&oacute;xima cita</h3>
+            <h3 class="card-header" (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()"><i class="fa fa-calendar" aria-hidden="true"></i> Pr&oacute;xima cita
+                <div class="float-right">
+                    <button [routerLink]="['/appointment/new']" type="button" class="btn btn-outline-primary">Nuevo Turno</button>
+                    <button [routerLink]="['/phonebook/new']" type="button" class="btn btn-outline-success">Nuevo Paciente</button>
+                </div>
+            </h3>
+
             <div class="card-block">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">

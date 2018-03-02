@@ -44,7 +44,7 @@
                     <label for="inputProvince" class="col-sm-2 col-form-label col-form-label-sm">Provincia</label>
                     <div class="col-sm-4">
                         <select id="inputProvince" formControlName="province" name="province" class="form-control">
-                                <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
+                                <option *ngFor="let p of provinces | async" [ngValue]="p.code">{{p.description}}</option>
                         </select>
                         <div ngxErrors="location.province">
                             <div class="error" ngxError="required">

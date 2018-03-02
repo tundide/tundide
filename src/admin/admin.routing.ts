@@ -1,8 +1,22 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
+import { SidebarComponent } from './main/sidebar/sidebar.component';
+import { SidebarSettingsComponent } from './main/sidebar/settings.component';
+import { NotFoundComponent } from './main/notfound/notfound.component';
 
 export const routes: Routes = [
+    {
+        component: SidebarSettingsComponent,
+        outlet: 'sidemenu',
+        path: 'settings',
+        pathMatch: 'prefix'
+    },
+    {
+        component: SidebarComponent,
+        outlet: 'sidemenu',
+        path: ''
+    },
     {
         loadChildren: '../auth/auth.module#AuthModule',
         path: 'auth'
@@ -11,15 +25,6 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         component: ProfileComponent, // TODO: Sacar esto y llevarlo al modulo de Profile
         path: 'profile'
-    },
-    {
-        canActivate: [AuthGuard],
-        data: {
-            breadcrumbs: true,
-            text: 'Administracion'
-        },
-        loadChildren: './admin.module#AdminModule',
-        path: 'admin'
     },
     {
         canActivate: [AuthGuard],
@@ -121,7 +126,8 @@ export const routes: Routes = [
         },
         loadChildren: './database/database.module#DatabaseModule',
         path: 'medicine'
-    }
+    },
+    { path: '**', component: NotFoundComponent },
 ];
 
 export const routing = RouterModule.forRoot(routes, { useHash: true });
