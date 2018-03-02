@@ -80,8 +80,8 @@ export class ContactNewComponent implements OnInit {
 
         this.locationService.list()
             .subscribe(
-            res => {
-                this.provinces = res;
+                (data: any[]) => {
+                this.provinces = data;
             });
     }
 

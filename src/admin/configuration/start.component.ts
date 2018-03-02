@@ -80,7 +80,7 @@ export class StartComponent implements OnInit {
         });
 
         this.locationService.list().subscribe(
-            data => {
+            (data: any[]) => {
                 this.provinces = data;
             });
     }

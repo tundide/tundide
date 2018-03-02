@@ -89,7 +89,7 @@ export class ContactEditComponent implements OnInit {
                 this.locationService.list(),
                 this.phonebookService.get(params['id'])
             ).subscribe(
-                data => {
+                (data: any[]) => {
                     this.provinces = data[0];
                     this.contactGroup.patchValue(data[1]);
                 });

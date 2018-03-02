@@ -96,8 +96,8 @@ export class RecordNewComponent implements OnInit {
         this.roles = this.authService.getUserCredentials().roles;
 
         this.locationService.list().subscribe(
-            res => {
-                this.provinces = res.data;
+            (data: any[]) => {
+                this.provinces = data;
             }
         );
     }
