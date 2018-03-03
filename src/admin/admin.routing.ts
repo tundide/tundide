@@ -9,8 +9,7 @@ export const routes: Routes = [
     {
         component: SidebarSettingsComponent,
         outlet: 'sidemenu',
-        path: 'settings',
-        pathMatch: 'prefix'
+        path: ''
     },
     {
         component: SidebarComponent,

@@ -4,12 +4,13 @@ import { RouterModule } from '@angular/router';
 import { routing } from './dashboard.routing';
 import { AuthGuard } from '../../auth/auth-guard.service';
 import { DashboardComponent } from './dashboard.component';
+import { AppointmentComponent } from './appointment.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GridsterModule } from 'angular-gridster2';
 
 @NgModule({
-    declarations: [DashboardComponent],
-    exports: [DashboardComponent],
+    declarations: [AppointmentComponent, DashboardComponent],
+    exports: [AppointmentComponent, DashboardComponent],
     imports: [routing,
         RouterModule,
         CommonModule,

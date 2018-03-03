@@ -43,7 +43,7 @@
                 <div class="form-group row" formGroupName="location">
                     <label for="inputProvince" class="col-sm-2 col-form-label col-form-label-sm">Provincia</label>
                     <div class="col-sm-4">
-                        <select id="inputProvince" formControlName="province" name="province" class="form-control">
+                        <select id="inputProvince" formControlName="province" name="province" class="form-control-sm">
                                 <option *ngFor="let p of provinces | async" [ngValue]="p.code">{{p.description}}</option>
                         </select>
                         <div ngxErrors="location.province">
@@ -57,7 +57,7 @@
                         <ng-template #rt let-r="result" let-t="term">
                             {{ r.description}} - ({{ r.zip}})
                         </ng-template>
-                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="placeChange($event)" [ngbTypeahead]="searchLocation" />
+                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control-sm" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" (selectItem)="placeChange($event)" [ngbTypeahead]="searchLocation" />
                         <div ngxErrors="location.place">
                             <div class="error" ngxError="required">
                                 La Localidad es requerida
