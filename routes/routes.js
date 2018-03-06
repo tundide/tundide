@@ -8,6 +8,7 @@
       let message = require('./user/message.js');
       let notifications = require('./billing/notifications.js');
       let billing = require('./billing/billing.js');
+      let configuration = require('./configuration/configuration.js');
       let files = require('./files/files.js')(mongoose);
       let index = require('./index');
 
@@ -20,6 +21,7 @@
       app.use('/billing', billing);
       app.use('/files', files);
       app.use('/location', location);
+      app.use('/configuration', configuration);
       app.use('/auth', auth);
       app.use('/', index);
   };

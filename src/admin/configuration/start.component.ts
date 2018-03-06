@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { LocationService } from '../../shared/location.service';
 import { SocketService } from '../../shared/socket.service';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { GrowlService } from '../../@core/utils/growl.service';
+import { ConfigurationService } from './configuration.service';
 import * as companyTypesList from './companyTypes.json';
 import * as _ from 'lodash';
 
@@ -49,6 +52,8 @@ export class StartComponent implements OnInit {
         private formBuilder: FormBuilder,
         private authService: AuthService,
         private locationService: LocationService,
+        private growlService: GrowlService,
+        private configurationService: ConfigurationService,
         private socketService: SocketService) {
         this.firstIncomeGroup = this.formBuilder.group({
             company: this.formBuilder.group({
@@ -82,6 +87,20 @@ export class StartComponent implements OnInit {
         this.locationService.list().subscribe(
             (data: any[]) => {
                 this.provinces = data;
+            });
+    }
+
+    configureLater() {
+
+        this.configurationService.skip(this.user.id)
+            .subscribe(response => {
+                this.router.navigate(['../dashboard']);
+            }, (error: HttpErrorResponse) => {
+                if (error.status === 400) {
+                    this.growlService.badRequest();
+                } else if (error.status === 500) {
+                    this.growlService.internalServerError();
+                }
             });
     }
 }

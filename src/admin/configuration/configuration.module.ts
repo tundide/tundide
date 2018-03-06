@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AuthService } from '../../auth/auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StartComponent } from './start.component';
+import { ConfigurationService } from './configuration.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArchwizardModule } from 'ng2-archwizard';
 import { LocationService } from '../../shared/location.service';
@@ -30,6 +31,7 @@ import { LocationService } from '../../shared/location.service';
         SharedModule.forRoot()
     ],
     providers: [SocketService,
+        ConfigurationService,
         LocationService,
         AuthService]
 })
