@@ -38,3 +38,28 @@ $modal-content-bg: $white !default;
 .breadcrumb span {
     color: $white;
 }
+
+// Remover spinner de input number
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select,
+input.ng-touched.ng-invalid {
+    box-shadow: 0 0 10px red;
+}
+
+select,
+input.ng-touched.ng-valid {
+    box-shadow: 0 0 5px green;
+}
+
+[required] {
+    box-shadow: 0 0 15px $gray-500;
+}
+
+[disabled] {
+    background-color: #cccccc;
+}

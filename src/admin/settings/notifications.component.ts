@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'alert',
-    templateUrl: 'alert.component.html'
+    selector: 'notifications',
+    styleUrls: ['notifications.component.scss'],
+    templateUrl: 'notifications.component.html'
 })
 
-export class AlertComponent {
+export class NotificationsComponent {
     isActive = false;
     showMenu = '';
     eventCalled() {

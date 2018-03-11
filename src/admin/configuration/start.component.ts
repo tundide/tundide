@@ -61,13 +61,23 @@ export class StartComponent implements OnInit {
                 name: this.formBuilder.control('', [Validators.required]),
                 type: this.formBuilder.control('', [Validators.required])
             }),
-            document: this.formBuilder.control(''),
-            firstName: this.formBuilder.control('', [Validators.required]),
-            lastName: this.formBuilder.control('', [Validators.required]),
             subsidiary: this.formBuilder.group({
                 code: this.formBuilder.control('', [Validators.required]),
                 description: this.formBuilder.control('', [Validators.required]),
                 location: this.formBuilder.group({
+                    number: this.formBuilder.control(''),
+                    place: this.formBuilder.control({ value: '', disabled: true }),
+                    province: this.formBuilder.control(''),
+                    street: this.formBuilder.control('')
+                })
+            }),
+            user: this.formBuilder.group({
+                document: this.formBuilder.control(''),
+                firstName: this.formBuilder.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+                lastName: this.formBuilder.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+                location: this.formBuilder.group({
+                    department: this.formBuilder.control(''),
+                    floor: this.formBuilder.control(''),
                     number: this.formBuilder.control(''),
                     place: this.formBuilder.control({ value: '', disabled: true }),
                     province: this.formBuilder.control(''),

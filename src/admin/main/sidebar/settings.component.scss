@@ -3,13 +3,13 @@
 // SIDEBAR
 #sidebar {
     height: 100vh;
-    background-color: #0ea0cc;
+    background-color: $white;
 }
 
 #sidebar .list-group-item {
     border-radius: 0;
-    background-color: $gray-200;
-    color: #ffffff;
+    background-color: $white;
+    color: $gray-200;
     border-left: 0;
     border-right: 0;
     border-color: #555555;
@@ -21,7 +21,7 @@
 /* highlight active menu */
 
 #sidebar .list-group-item:not(.collapsed) {
-    background-color: #5BC7A7;
+    background-color: $white;
 }
 
 

@@ -8,12 +8,12 @@ import { NotFoundComponent } from './main/notfound/notfound.component';
 export const routes: Routes = [
     {
         component: SidebarSettingsComponent,
-        outlet: 'sidemenu',
+        outlet: 'sidebarSettings',
         path: ''
     },
     {
         component: SidebarComponent,
-        outlet: 'sidemenu',
+        outlet: 'sidebar',
         path: ''
     },
     {

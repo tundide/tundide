@@ -6,7 +6,6 @@ let shortid = require('shortid');
 let session = require('../auth/session');
 let httpstatus = require('../../config/response').httpstatus;
 let Validators = require('../../lib/Validators/ObjectId.js');
-let _ = require('lodash');
 
 /**
  * @api {post} / Skip configuration in first Income
@@ -25,8 +24,8 @@ let _ = require('lodash');
  * }
  * 
  */
-router.post('/skip/', session.authorize(), function(req, res, next) {
-    User.findOneAndUpdate({ _id: req.body.user }, { firstIncome: false }, { runValidators: true, context: 'query' }, function(err, doc) {
+router.post('/skip/', session.authorize(), function(req, res) {
+    User.findOneAndUpdate({ _id: req.body.user }, { firstIncome: false }, function(err) {
         if (err) {
             return res.status(httpstatus.badrequest).json({
                 message: 'Error ocurred.',

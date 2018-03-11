@@ -1,9 +1,9 @@
 <top-nav></top-nav>
-
 <div class="container-fluid no-gutter">
     <div class="row no-gutter">
         <div class="col-md-2 col-1 p-l-0 p-r-0 in">
-            <router-outlet name="sidemenu"></router-outlet>
+            <router-outlet *ngIf="!router.url.includes('/settings')" name="sidebar"></router-outlet>
+            <router-outlet *ngIf="router.url.includes('/settings')" name="sidebarSettings"></router-outlet>
         </div>
         <main class="col-md-10 col-11 p-l-2 p-t-2 main">
             <router-outlet></router-outlet>

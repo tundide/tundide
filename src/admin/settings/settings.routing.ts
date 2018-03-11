@@ -1,17 +1,17 @@
 import { Routes, RouterModule } from '@angular/router';
-import { AlertComponent } from './alert.component';
+import { NotificationsComponent } from './notifications.component';
 import { GeneralComponent } from './general.component';
 import { AuthGuard } from '../../auth/auth-guard.service';
 
 const routes: Routes = [
     {
         canActivate: [AuthGuard],
-        component: AlertComponent,
+        component: NotificationsComponent,
         data: {
             breadcrumbs: true,
             text: 'Alertas'
         },
-        path: 'alert'
+        path: 'notifications'
     },
     {
         canActivate: [AuthGuard],

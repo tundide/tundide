@@ -24,6 +24,97 @@
                             </div>
                         </div>
                     </wizard-step>
+                    <wizard-step stepTitle="Informacion general" formGroupName="user">
+                        <div>
+
+                            <div *ngIf="firstIncomeGroup.get('user.firstName').invalid && firstIncomeGroup.get('user.firstName').touched" class="alert alert-danger" role="alert">
+                                El campo <strong>Nombre</strong>
+                                <p *ngIf="firstIncomeGroup.get('user.firstName').errors?.required">
+                                    &bull; Es obligatorio
+                                </p>
+                                <p *ngIf="firstIncomeGroup.get('user.firstName').errors?.maxlength">
+                                    &bull; No puede superar los 20 digitos
+                                </p>
+                                <p *ngIf="firstIncomeGroup.get('user.firstName').errors?.minlength">
+                                    &bull; Debe contener al menos 3 caracteres
+                                </p>
+                            </div>
+                            <div *ngIf="firstIncomeGroup.get('user.lastName').invalid && firstIncomeGroup.get('user.lastName').touched" class="alert alert-danger" role="alert">
+                                El campo <strong>Apellido</strong>
+                                <p *ngIf="firstIncomeGroup.get('user.lastName').errors?.required">
+                                    &bull; Es obligatorio
+                                </p>
+                                <p *ngIf="firstIncomeGroup.get('user.lastName').errors?.maxlength">
+                                    &bull; No puede superar los 20 digitos
+                                </p>
+                                <p *ngIf="firstIncomeGroup.get('user.lastName').errors?.minlength">
+                                    &bull; Debe contener al menos 3 caracteres
+                                </p>
+                            </div>
+                            <fieldset class="form-group">
+                                <legend>Datos Personales</legend>
+                                <div class="row">
+
+                                    <label for="inputfirstName" class="col-2 col-form-label col-form-label-sm">Nombre</label>
+
+                                    <div class="col-4">
+                                        <input type="text" formControlName="firstName" class="form-control form-control-sm" id="inputfirstName" aria-describedby="firstNameHelp" place-holder="Nombre" required>
+                                    </div>
+
+                                    <label for="inputlastName" class="col-2 col-form-label col-form-label-sm">Apellido</label>
+
+                                    <div class="col-4">
+                                        <input type="text" formControlName="lastName" class="form-control form-control-sm" id="inputlastName" aria-describedby="lastNameHelp" place-holder="Apellido" required>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            <fieldset class="form-group" formGroupName="location">
+                                <legend>Datos Laborales</legend>
+                                <div class="row">
+                                    <label for="inputProvince" class="col-1 col-form-label col-form-label-sm">Provincia</label>
+                                    <div class="col">
+                                        <select id="inputProvince" formControlName="province" (change)="provinceChange($event)" [(ngModel)]="selectedProvince" name="province" class="form-control" required>
+                                        <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
+                                    </select>
+                                    </div>
+                                    <label for="inputPlace" class="col-1 col-form-label col-form-label-sm">Localidad</label>
+                                    <div class="col">
+                                        <ng-template #rt let-r="result" let-t="term">
+                                            {{ r.description}} - ({{ r.zip}})
+                                        </ng-template>
+                                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchLocation" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="inputStreet" class="col-1 col-form-label col-form-label-sm">Calle</label>
+                                    <div class="col">
+                                        <input id="inputStreet" type="text" formControlName="street" class="form-control form-control-sm" aria-describedby="streetHelp" place-holder="Calle" required>
+                                    </div>
+
+                                    <label for="inputNumber" class="col-1 col-form-label col-form-label-sm">Numero</label>
+                                    <div class="col">
+                                        <input id="inputNumber" type="number" formControlName="number" class="form-control form-control-sm" aria-describedby="numberHelp" place-holder="Numero" required>
+                                    </div>
+
+                                    <label for="inputFloor" class="col-1 col-form-label col-form-label-sm">Piso</label>
+                                    <div class="col">
+                                        <input id="inputFloor" type="text" formControlName="floor" class="form-control form-control-sm" aria-describedby="floorHelp" place-holder="Piso">
+                                    </div>
+
+                                    <label for="inputDepartment" class="col-1 col-form-label col-form-label-sm">Dpto</label>
+                                    <div class="col">
+                                        <input id="inputDepartment" type="text" formControlName="department" class="form-control form-control-sm" aria-describedby="departmentHelp" place-holder="Departmento">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="center-button">
+                            <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
+                            <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
+                        </div>
+                    </wizard-step>
                     <wizard-step stepTitle="Informacion de la empresa">
                         <div class="centered-content">
                             <div>
@@ -35,34 +126,19 @@
 
                                     <div class="col-4">
                                         <input type="text" formControlName="name" class="form-control form-control-sm" id="inputname" aria-describedby="nameHelp" place-holder="Nombre" required>
-                                        <div ngxErrors="company.name">
-                                            <div class="error" ngxError="required">
-                                                El nombre es requerido
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
                                     <div class="col-4">
                                         <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
-                                        <div ngxErrors="company.description">
-                                            <div class="error" ngxError="required">
-                                                La descripcion es requerida
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="inputType" class="col-2 col-form-label col-form-label-sm">Tipo de empresa</label>
                                     <div class="col-4">
-                                        <select id="inputType" formControlName="type" name="type" class="form-control form-control-sm">
-                                            <option *ngFor="let t of types" [ngValue]="t.value">{{t.description}}</option>
-                                    </select>
-                                        <div ngxErrors="company.type">
-                                            <div class="error" ngxError="required">
-                                                El tipo de empresa es requerido
-                                            </div>
-                                        </div>
+                                        <select id="inputType" formControlName="type" name="type" class="form-control form-control-sm" required>
+                                                <option *ngFor="let t of types" [ngValue]="t.value">{{t.description}}</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -78,73 +154,83 @@
                                 Completa la inforamci&oacute;n de la casa matriz.
                             </div>
                             <div class="card-block" formGroupName="subsidiary">
-                                <div class=" row">
+                                <div class="row">
                                     <label for="inputcode" class="col-2 col-form-label col-form-label-sm">Codigo</label>
                                     <div class="col-4">
                                         <input type="text" formControlName="code" class="form-control form-control-sm" id="inputcode" aria-describedby="nameHelp" place-holder="Codigo" required>
-                                        <div ngxErrors="subsidiary.code">
-                                            <div class="error" ngxError="required">
-                                                El codigo es requerido
-                                            </div>
-                                        </div>
                                     </div>
                                     <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
                                     <div class="col-4">
                                         <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="nameHelp" place-holder="Descripcion" required>
-                                        <div ngxErrors="subsidiary.description">
-                                            <div class="error" ngxError="required">
-                                                La descripcion es requerida
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row" formGroupName="location">
                                     <label for="inputProvince" class="col-2 col-form-label col-form-label-sm">Provincia</label>
                                     <div class="col-4">
-                                        <select id="inputProvince" formControlName="province" (change)="provinceChange($event)" [(ngModel)]="selectedProvince" name="province" class="form-control">
+                                        <select id="inputProvince" formControlName="province" (change)="provinceChange($event)" [(ngModel)]="selectedProvince" name="province" class="form-control" required>
                                         <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
                                     </select>
-                                        <div ngxErrors="subsidiary.location.province">
-                                            <div class="error" ngxError="required">
-                                                La provincia es requerida
-                                            </div>
-                                        </div>
                                     </div>
                                     <label for="inputPlace" class="col-2 col-form-label col-form-label-sm">Localidad</label>
                                     <div class="col-4">
                                         <ng-template #rt let-r="result" let-t="term">
                                             {{ r.description}} - ({{ r.zip}})
                                         </ng-template>
-                                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchLocation" />
-                                        <div ngxErrors="subsidiary.location.place">
-                                            <div class="error" ngxError="required">
-                                                La Localidad es requerida
-                                            </div>
-                                        </div>
+                                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchLocation" required />
                                     </div>
                                 </div>
                                 <div class="form-group row" formGroupName="location">
                                     <label for="inputStreet" class="col-sm-2 col-form-label col-form-label-sm">Calle</label>
                                     <div class="col-sm-4">
                                         <input id="inputStreet" type="text" formControlName="street" class="form-control form-control-sm" aria-describedby="streetHelp" place-holder="Calle" required>
-                                        <div ngxErrors="subsidiary.location.street">
-                                            <div class="error" ngxError="required">
-                                                La calle es requerida
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <label for="inputNumber" class="col-sm-2 col-form-label col-form-label-sm">Numero</label>
                                     <div class="col-sm-4">
                                         <input id="inputNumber" type="number" formControlName="number" class="form-control form-control-sm" aria-describedby="numberHelp" place-holder="Numero" required>
-                                        <div ngxErrors="subsidiary.location.number">
-                                            <div class="error" ngxError="required">
-                                                El numero es requerido
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <div class="btn-toolbar" role="toolbar" aria-label="Barra de acciones">
+                                    <div class="btn-group mr-2" role="group" aria-label="Acciones principales sobre las citas">
+                                        <button type="button" ngbTooltip="Agregar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                                        <button type="button" ngbTooltip="Guardar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-save" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </nav>
+                            <hr/>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Codigo</th>
+                                        <th>Direccion</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>MAT-01</td>
+                                        <td>Casa matriz</td>
+                                        <td><button type="button" ngbTooltip="Editar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>SUC-01</td>
+                                        <td>Sucursal 1</td>
+                                        <td><button type="button" ngbTooltip="Editar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>SUC-02</td>
+                                        <td>Sucursal 2</td>
+                                        <td><button type="button" ngbTooltip="Editar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                             <div class="card-block">
                                 <div class="form-check">
                                     <label class="form-check-label">
