@@ -75,7 +75,7 @@
                                 <div class="row">
                                     <label for="inputProvince" class="col-1 col-form-label col-form-label-sm">Provincia</label>
                                     <div class="col">
-                                        <select id="inputProvince" formControlName="province" (change)="provinceChange($event)" [(ngModel)]="selectedProvince" name="province" class="form-control" required>
+                                        <select id="inputProvince" formControlName="province" (change)="provinceUserChange($event)" [(ngModel)]="selectedUserProvince" name="province" class="form-control" required>
                                         <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
                                     </select>
                                     </div>
@@ -84,7 +84,7 @@
                                         <ng-template #rt let-r="result" let-t="term">
                                             {{ r.description}} - ({{ r.zip}})
                                         </ng-template>
-                                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchLocation" required />
+                                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchUserLocation" required />
                                     </div>
                                 </div>
                                 <div class="row">

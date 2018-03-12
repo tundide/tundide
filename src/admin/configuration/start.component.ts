@@ -20,6 +20,7 @@ import * as _ from 'lodash';
 export class StartComponent implements OnInit {
 
     public user;
+    public selectedUserProvince;
     public selectedProvince;
     public provinces = [];
     public locations = [];
@@ -36,10 +37,29 @@ export class StartComponent implements OnInit {
                     return o.code === this.selectedProvince;
                 }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
 
+    searchUserLocation = (text$: Observable<string>) =>
+        text$
+            .debounceTime(200)
+            .distinctUntilChanged()
+            .map(term => term.length < 2 ? []
+                : _.find(this.provinces, (o: any) => {
+                    return o.code === this.selectedUserProvince;
+                }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
+
     formatter = (x: { description: string }) => x.description;
 
     provinceChange(event) {
         const ctrl = this.firstIncomeGroup.get('subsidiary.location.place');
+
+        if (event.value !== 0) {
+            ctrl.enable();
+        } else {
+            ctrl.disable();
+        }
+    }
+
+    provinceUserChange(event) {
+        const ctrl = this.firstIncomeGroup.get('user.location.place');
 
         if (event.value !== 0) {
             ctrl.enable();
