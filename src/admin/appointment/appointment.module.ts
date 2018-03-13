@@ -11,7 +11,6 @@ import { PhonebookService } from '../phonebook/phonebook.service';
 import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { SharedModule } from '../../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { SelectModule } from 'ng-select';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { SelectModule } from 'ng-select';
         ReactiveFormsModule,
         RouterModule,
         NgbModule,
-        MultiselectDropdownModule,
         SelectModule,
         SharedModule.forRoot()
     ],

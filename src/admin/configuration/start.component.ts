@@ -5,7 +5,7 @@ import { AuthService } from '../../auth/auth.service';
 import { LocationService } from '../../shared/location.service';
 import { SocketService } from '../../shared/socket.service';
 import { Observable } from 'rxjs';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GrowlService } from '../../@core/utils/growl.service';
 import { ConfigurationService } from './configuration.service';
 import * as companyTypesList from './companyTypes.json';
@@ -20,22 +20,30 @@ import * as _ from 'lodash';
 export class StartComponent implements OnInit {
 
     public user;
-    public selectedUserProvince;
-    public selectedProvince;
     public provinces = [];
     public locations = [];
 
     private firstIncomeGroup: FormGroup;
     private types = (<any>companyTypesList);
 
-    searchLocation = (text$: Observable<string>) =>
-        text$
-            .debounceTime(200)
-            .distinctUntilChanged()
-            .map(term => term.length < 2 ? []
-                : _.find(this.provinces, (o: any) => {
-                    return o.code === this.selectedProvince;
-                }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
+
+    searchLocation($index: any): (text: Observable<string>) => Observable<any[]> {
+        let getLocations = (text$: Observable<string>) =>
+            text$
+                .debounceTime(200)
+                .distinctUntilChanged()
+                .map(term => {
+                    let province = this.firstIncomeGroup.get(['subsidiaries', $index, 'location', 'province']).value;
+
+                    let locations = _.find(this.provinces, (o: any) => {
+                        return o.code === province;
+                    }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10);
+
+                    return term.length < 2 ? [] : locations;
+                });
+
+        return getLocations;
+    }
 
     searchUserLocation = (text$: Observable<string>) =>
         text$
@@ -43,13 +51,13 @@ export class StartComponent implements OnInit {
             .distinctUntilChanged()
             .map(term => term.length < 2 ? []
                 : _.find(this.provinces, (o: any) => {
-                    return o.code === this.selectedUserProvince;
+                    return o.code === this.firstIncomeGroup.get(['user', 'location', 'province']).value;
                 }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
 
     formatter = (x: { description: string }) => x.description;
 
-    provinceChange(event) {
-        const ctrl = this.firstIncomeGroup.get('subsidiary.location.place');
+    provinceChange(event, index) {
+        const ctrl = this.firstIncomeGroup.get(['subsidiaries', index, 'location', 'place']);
 
         if (event.value !== 0) {
             ctrl.enable();
@@ -81,16 +89,7 @@ export class StartComponent implements OnInit {
                 name: this.formBuilder.control('', [Validators.required]),
                 type: this.formBuilder.control('', [Validators.required])
             }),
-            subsidiary: this.formBuilder.group({
-                code: this.formBuilder.control('', [Validators.required]),
-                description: this.formBuilder.control('', [Validators.required]),
-                location: this.formBuilder.group({
-                    number: this.formBuilder.control(''),
-                    place: this.formBuilder.control({ value: '', disabled: true }),
-                    province: this.formBuilder.control(''),
-                    street: this.formBuilder.control('')
-                })
-            }),
+            subsidiaries: this.formBuilder.array([]),
             user: this.formBuilder.group({
                 document: this.formBuilder.control(''),
                 firstName: this.formBuilder.control('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -105,6 +104,24 @@ export class StartComponent implements OnInit {
                 })
             })
         });
+    }
+
+    removeSubsidiary(index) {
+        (<FormArray>this.firstIncomeGroup.get('subsidiaries')).removeAt(index);
+    }
+
+    addSubsidiary(subsidiary: any) {
+        let group = this.formBuilder.group({
+            code: this.formBuilder.control('', [Validators.required]),
+            description: this.formBuilder.control('', [Validators.required]),
+            location: this.formBuilder.group({
+                number: this.formBuilder.control(''),
+                place: this.formBuilder.control({ value: '', disabled: true }),
+                province: this.formBuilder.control(''),
+                street: this.formBuilder.control('')
+            })
+        });
+        subsidiary.push(group);
     }
 
     ngOnInit() {

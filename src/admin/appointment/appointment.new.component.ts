@@ -10,7 +10,6 @@ import { PhonebookService } from '../phonebook/phonebook.service';
 import { AppointmentService } from './appointment.service';
 import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { Appointment } from './appointment.model';
-import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 import { IOption } from 'ng-select';
 import { ElementRef, ComponentRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -43,28 +42,6 @@ export class AppointmentNewComponent implements OnInit {
         startDate: new Date(2016, 5, 10),
         todayBtn: 'linked',
         todayHighlight: true,
-    };
-
-    private selectSettings: IMultiSelectSettings = {
-        autoUnselect: true,
-        buttonClasses: 'form-control form-control-sm',
-        checkedStyle: 'fontawesome',
-        displayAllSelectedText: true,
-        dynamicTitleMaxItems: 3,
-        enableSearch: true,
-        selectionLimit: 1
-    };
-
-    private selectTexts: IMultiSelectTexts = {
-        allSelected: 'Todo seleccionado',
-        checkAll: 'Seleccionar todo',
-        checked: 'item seleccionado',
-        checkedPlural: 'items seleccionados',
-        defaultTitle: 'Seleccionar',
-        searchEmptyResult: 'No se encontraron resultados...',
-        searchNoRenderText: 'Escriba para realizar una busqueda...',
-        searchPlaceholder: 'Buscar',
-        uncheckAll: 'Deseleccionar todo'
     };
 
     searchContact = (text$: Observable<string>) =>

@@ -75,7 +75,7 @@
                                 <div class="row">
                                     <label for="inputProvince" class="col-1 col-form-label col-form-label-sm">Provincia</label>
                                     <div class="col">
-                                        <select id="inputProvince" formControlName="province" (change)="provinceUserChange($event)" [(ngModel)]="selectedUserProvince" name="province" class="form-control" required>
+                                        <select id="inputProvince" formControlName="province" (change)="provinceUserChange($event)" name="province" class="form-control" required>
                                         <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
                                     </select>
                                     </div>
@@ -111,138 +111,101 @@
                             </fieldset>
                         </div>
                         <div class="center-button">
-                            <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
+                            <button type="button" class="btn btn-primary" previousStep>Anterior</button>
                             <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
                         </div>
                     </wizard-step>
                     <wizard-step stepTitle="Informacion de la empresa">
-                        <div class="centered-content">
-                            <div>
-                                Contanos sobre tu empresa
-                            </div>
-                            <div class="card-block" formGroupName="company">
-                                <div class="row">
-                                    <label for="inputname" class="col-2 col-form-label col-form-label-sm">Nombre</label>
 
-                                    <div class="col-4">
-                                        <input type="text" formControlName="name" class="form-control form-control-sm" id="inputname" aria-describedby="nameHelp" place-holder="Nombre" required>
-                                    </div>
+                        <fieldset class="form-group" formGroupName="company">
+                            <legend>Contanos sobre tu empresa</legend>
+                            <div class="row">
+                                <label for="inputname" class="col-2 col-form-label col-form-label-sm">Nombre</label>
 
-                                    <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
-                                    <div class="col-4">
-                                        <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
-                                    </div>
+                                <div class="col-4">
+                                    <input type="text" formControlName="name" class="form-control form-control-sm" id="inputname" aria-describedby="nameHelp" place-holder="Nombre" required>
                                 </div>
-                                <div class="row">
-                                    <label for="inputType" class="col-2 col-form-label col-form-label-sm">Tipo de empresa</label>
-                                    <div class="col-4">
-                                        <select id="inputType" formControlName="type" name="type" class="form-control form-control-sm" required>
-                                                <option *ngFor="let t of types" [ngValue]="t.value">{{t.description}}</option>
-                                        </select>
-                                    </div>
+
+                                <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
+                                <div class="col-4">
+                                    <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
                                 </div>
                             </div>
-                            <div class="center-button">
-                                <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
-                                <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
+                            <div class="row">
+                                <label for="inputType" class="col-2 col-form-label col-form-label-sm">Tipo de empresa</label>
+                                <div class="col-4">
+                                    <select id="inputType" formControlName="type" name="type" class="form-control form-control-sm" required>
+                                                        <option *ngFor="let t of types" [ngValue]="t.value">{{t.description}}</option>
+                                                </select>
+                                </div>
                             </div>
+                        </fieldset>
+                        <div class="center-button">
+                            <button type="button" class="btn btn-primary" previousStep>Anterior</button>
+                            <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
                         </div>
                     </wizard-step>
                     <wizard-step stepTitle="Ya casi terminamos">
-                        <div class="centered-content">
-                            <div>
-                                Completa la inforamci&oacute;n de la casa matriz.
+                        <fieldset class="form-group">
+                            <legend>Tenes sucursales? Agregalas aca para mejorar la gesti&oacute;n de turnos!</legend>
+                            <div class="card-block" formArrayName="subsidiaries">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="d-flex">
+                                            <th class="col-1">#</th>
+                                            <th class="col-1">Codigo</th>
+                                            <th class="col-2">Descripcion</th>
+                                            <th class="col-2">Provincia</th>
+                                            <th class="col-2">Localidad</th>
+                                            <th class="col-2">Calle</th>
+                                            <th class="col-1">Numero</th>
+                                            <th class="col-1">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="d-flex" *ngFor="let subsidiary of firstIncomeGroup.controls.subsidiaries.controls; let i = index" [formGroupName]="i">
+                                            <th class="col-1" scope="row">{{i+1}}</th>
+                                            <td class="col-1">
+                                                <input type="text" formControlName="code" class="form-control form-control-sm" id="inputcode" aria-describedby="nameHelp" place-holder="Codigo" required>
+                                            </td>
+                                            <td class="col-2">
+                                                <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="nameHelp" place-holder="Descripcion" required>
+                                            </td>
+                                            <td class="col-2" formGroupName="location">
+                                                <select id="inputProvince" formControlName="province" (change)="provinceChange($event, i)" name="province" class="form-control form-control-sm" required>
+                                                                <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
+                                                            </select>
+                                            </td>
+                                            <td class="col-2" formGroupName="location">
+                                                <ng-template #rt let-r="result" let-t="term">
+                                                    {{ r.description}} - ({{ r.zip}})
+                                                </ng-template>
+                                                <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control form-control-sm" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchLocation(i)" required />
+                                            </td>
+                                            <td class="col-2" formGroupName="location">
+                                                <input id="inputStreet" type="text" formControlName="street" class="form-control form-control-sm" aria-describedby="streetHelp" place-holder="Calle" required>
+                                            </td>
+                                            <td class="col-1" formGroupName="location">
+                                                <input id="inputNumber" type="number" formControlName="number" class="form-control form-control-sm" aria-describedby="numberHelp" place-holder="Numero" required>
+                                            </td>
+                                            <td class="col-1"><button type="button" ngbTooltip="Eliminar sucursal" (click)="removeSubsidiary(i)" class="btn btn-secondary"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="8">
+                                                <span>
+                                                                <button type="button" ngbTooltip="Agregar sucursal" (click)="addSubsidiary(firstIncomeGroup.get('subsidiaries').controls)" class="btn btn-secondary"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nueva Sucursal</button>
+                                                            </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                            <div class="card-block" formGroupName="subsidiary">
-                                <div class="row">
-                                    <label for="inputcode" class="col-2 col-form-label col-form-label-sm">Codigo</label>
-                                    <div class="col-4">
-                                        <input type="text" formControlName="code" class="form-control form-control-sm" id="inputcode" aria-describedby="nameHelp" place-holder="Codigo" required>
-                                    </div>
-                                    <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
-                                    <div class="col-4">
-                                        <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="nameHelp" place-holder="Descripcion" required>
-                                    </div>
-                                </div>
-                                <div class="row" formGroupName="location">
-                                    <label for="inputProvince" class="col-2 col-form-label col-form-label-sm">Provincia</label>
-                                    <div class="col-4">
-                                        <select id="inputProvince" formControlName="province" (change)="provinceChange($event)" [(ngModel)]="selectedProvince" name="province" class="form-control" required>
-                                        <option *ngFor="let p of provinces" [ngValue]="p.code">{{p.description}}</option>
-                                    </select>
-                                    </div>
-                                    <label for="inputPlace" class="col-2 col-form-label col-form-label-sm">Localidad</label>
-                                    <div class="col-4">
-                                        <ng-template #rt let-r="result" let-t="term">
-                                            {{ r.description}} - ({{ r.zip}})
-                                        </ng-template>
-                                        <input id="inputPlace" formControlName="place" name="place" type="text" class="form-control" [editable]="false" [inputFormatter]="formatter" [resultTemplate]="rt" [ngbTypeahead]="searchLocation" required />
-                                    </div>
-                                </div>
-                                <div class="form-group row" formGroupName="location">
-                                    <label for="inputStreet" class="col-sm-2 col-form-label col-form-label-sm">Calle</label>
-                                    <div class="col-sm-4">
-                                        <input id="inputStreet" type="text" formControlName="street" class="form-control form-control-sm" aria-describedby="streetHelp" place-holder="Calle" required>
-                                    </div>
-
-                                    <label for="inputNumber" class="col-sm-2 col-form-label col-form-label-sm">Numero</label>
-                                    <div class="col-sm-4">
-                                        <input id="inputNumber" type="number" formControlName="number" class="form-control form-control-sm" aria-describedby="numberHelp" place-holder="Numero" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                <div class="btn-toolbar" role="toolbar" aria-label="Barra de acciones">
-                                    <div class="btn-group mr-2" role="group" aria-label="Acciones principales sobre las citas">
-                                        <button type="button" ngbTooltip="Agregar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
-                                        <button type="button" ngbTooltip="Guardar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-save" aria-hidden="true"></i></button>
-                                    </div>
-                                </div>
-                            </nav>
-                            <hr/>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Codigo</th>
-                                        <th>Direccion</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>MAT-01</td>
-                                        <td>Casa matriz</td>
-                                        <td><button type="button" ngbTooltip="Editar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>SUC-01</td>
-                                        <td>Sucursal 1</td>
-                                        <td><button type="button" ngbTooltip="Editar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>SUC-02</td>
-                                        <td>Sucursal 2</td>
-                                        <td><button type="button" ngbTooltip="Editar sucursal" [routerLink]="['/appointment/new']" class="btn btn-secondary"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div class="card-block">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                    Importar contactos de la cuenta?
-                                </label>
-                                </div>
-                            </div>
-                            <div class="center-button">
-                                <button type="button" class="btn btn-secondary" previousStep>Anterior</button>
-                                <button type="button" class="btn btn-secondary" endWizard (click)="close('Close click')">Finalizar</button>
-                            </div>
+                        </fieldset>
+                        <div class="center-button">
+                            <button type="button" class="btn btn-primary" previousStep>Anterior</button>
+                            <button type="button" class="btn btn-secondary" endWizard (click)="close('Close click')">Finalizar</button>
                         </div>
                     </wizard-step>
                 </wizard>

@@ -33,7 +33,6 @@
         "@types/scriptjs": "0.0.2",
         "@types/socket.io": "^1.4.31",
         "@ultimate/ngxerrors": "^1.4.0",
-        "angular-2-dropdown-multiselect": "^1.6.3",
         "angular-calendar": "^0.23.6",
         "angular-confirmation-popover": "^4.1.0",
         "angular-gridster2": "^4.7.2",
