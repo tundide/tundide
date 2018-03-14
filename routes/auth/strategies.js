@@ -64,7 +64,7 @@ module.exports = function() {
             if (!password) {
                 return done(authenticationResponse.badrequest.passwordEmpty);
             }
-            // User.findOne wont fire unless data is sent back
+
             process.nextTick(function() {
                 User.findOne({ 'local.username': email }, function(err, user) {
                     if (err) {
@@ -126,7 +126,7 @@ module.exports = function() {
                         return done(err);
 
                     if (user) {
-                        return done(null, user);
+                        return done(err, user);
                     } else {
                         let newUser = new User();
 

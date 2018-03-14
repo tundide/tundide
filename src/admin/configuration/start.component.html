@@ -115,39 +115,38 @@
                             <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
                         </div>
                     </wizard-step>
-                    <wizard-step stepTitle="Informacion de la empresa">
+                    <wizard-step stepTitle="Informacion del negocio">
 
                         <fieldset class="form-group" formGroupName="company">
-                            <legend>Contanos sobre tu empresa</legend>
+                            <legend>Contanos de que se trata.</legend>
+
+                            <div class="row">
+                                <label for="inputType" class="col-2 col-form-label col-form-label-sm">Tipo de negocio</label>
+                                <div class="col-4">
+                                    <select id="inputType" formControlName="type" name="type" class="form-control form-control-sm" required>
+                                                            <option *ngFor="let t of types" [ngValue]="t.value">{{t.description}}</option>
+                                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <label for="inputname" class="col-2 col-form-label col-form-label-sm">Nombre</label>
 
                                 <div class="col-4">
                                     <input type="text" formControlName="name" class="form-control form-control-sm" id="inputname" aria-describedby="nameHelp" place-holder="Nombre" required>
                                 </div>
-
-                                <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
-                                <div class="col-4">
-                                    <input type="text" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
-                                </div>
                             </div>
+
                             <div class="row">
-                                <label for="inputType" class="col-2 col-form-label col-form-label-sm">Tipo de empresa</label>
-                                <div class="col-4">
-                                    <select id="inputType" formControlName="type" name="type" class="form-control form-control-sm" required>
-                                                        <option *ngFor="let t of types" [ngValue]="t.value">{{t.description}}</option>
-                                                </select>
+                                <label for="inputdescription" class="col-2 col-form-label col-form-label-sm">Descripci&oacute;n</label>
+                                <div class="col-10">
+                                    <textarea rows="5" formControlName="description" class="form-control form-control-sm" id="inputdescription" aria-describedby="descriptionHelp" place-holder="Descripcion" required>
+                                    </textarea>
                                 </div>
                             </div>
                         </fieldset>
-                        <div class="center-button">
-                            <button type="button" class="btn btn-primary" previousStep>Anterior</button>
-                            <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
-                        </div>
-                    </wizard-step>
-                    <wizard-step stepTitle="Ya casi terminamos">
                         <fieldset class="form-group">
-                            <legend>Tenes sucursales? Agregalas aca para mejorar la gesti&oacute;n de turnos!</legend>
+                            <legend>Tenes sucursales? Agregalas aca para mejorar la gesti&oacute;n de los turnos!</legend>
                             <div class="card-block" formArrayName="subsidiaries">
                                 <table class="table">
                                     <thead>
@@ -203,6 +202,13 @@
                                 </table>
                             </div>
                         </fieldset>
+                        <div class="center-button">
+                            <button type="button" class="btn btn-primary" previousStep>Anterior</button>
+                            <button type="button" class="btn btn-secondary" nextStep>Siguiente</button>
+                        </div>
+                    </wizard-step>
+                    <wizard-step stepTitle="Ya casi terminamos">
+
                         <div class="center-button">
                             <button type="button" class="btn btn-primary" previousStep>Anterior</button>
                             <button type="button" class="btn btn-secondary" endWizard (click)="close('Close click')">Finalizar</button>

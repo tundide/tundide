@@ -10,7 +10,7 @@ import { PhonebookService } from '../phonebook/phonebook.service';
 import { AppointmentService } from './appointment.service';
 import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { Appointment } from './appointment.model';
-import { IOption } from 'ng-select';
+import { NgOption } from '@ng-select/ng-select';
 import { ElementRef, ComponentRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -32,9 +32,10 @@ interface ISubsidiary {
 })
 
 export class AppointmentNewComponent implements OnInit {
+
     private roles: Array<String>;
     private appointmentGroup: FormGroup;
-    private subsidiaryOptions: Array<IOption>;
+    private subsidiaryOptions: Array<NgOption>;
     private datepickerOpts = {
         assumeNearbyYear: true,
         autoclose: true,
@@ -43,6 +44,8 @@ export class AppointmentNewComponent implements OnInit {
         todayBtn: 'linked',
         todayHighlight: true,
     };
+
+
 
     searchContact = (text$: Observable<string>) =>
         text$
@@ -121,13 +124,16 @@ export class AppointmentNewComponent implements OnInit {
 
         this.subsidiaryService.list().subscribe(
             data => {
-                this.subsidiaryOptions = new Array();
+                this.subsidiaryOptions = new Array<NgOption>();
+                console.log(data);
+
                 _.forEach(data, (subsidiary, key) => {
                     this.subsidiaryOptions.push({
                         label: subsidiary.code + ' - ' + subsidiary.description,
                         value: subsidiary._id
                     });
                 });
+
             }, (error: HttpErrorResponse) => {
                 if (error.status === 400) {
                     this.growlService.badRequest();

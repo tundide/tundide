@@ -13,6 +13,6 @@ export class AppointmentComponent implements OnInit {
         private authService: AuthService) { }
 
     ngOnInit() {
-        console.log('asdasd');
+        console.log('Cargo componente Appointment de Dashboard');
     }
 }

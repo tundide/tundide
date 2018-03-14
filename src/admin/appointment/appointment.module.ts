@@ -11,7 +11,7 @@ import { PhonebookService } from '../phonebook/phonebook.service';
 import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { SharedModule } from '../../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SelectModule } from 'ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
     declarations: [AppointmentNewComponent, AppointmentListComponent],
@@ -23,7 +23,7 @@ import { SelectModule } from 'ng-select';
         ReactiveFormsModule,
         RouterModule,
         NgbModule,
-        SelectModule,
+        NgSelectModule,
         SharedModule.forRoot()
     ],
     providers: [

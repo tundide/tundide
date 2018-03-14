@@ -1,7 +1,12 @@
 [{
-    "description": "Consultorio Medico",
-    "value": "1"
-}, {
-    "description": "Estudio Juridico",
-    "value": "2"
-}]
+        "description": "Particular",
+        "value": "1"
+    },
+    {
+        "description": "Consultorio Medico",
+        "value": "2"
+    }, {
+        "description": "Clinica",
+        "value": "3"
+    }
+]

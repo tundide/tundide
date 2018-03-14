@@ -1,3 +1,4 @@
+<link href="https://unpkg.com/@ng-select/ng-select/themes/default.theme.css" rel="stylesheet">
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="btn-toolbar" role="toolbar" aria-label="Base Bar">
@@ -60,7 +61,7 @@
                 <div class="form-group row">
                     <label for="inputSubsidiary" class="col-sm-2 col-form-label col-form-label-sm">Sucursal</label>
                     <div class="col-sm-10">
-                        <ng-select [options]="subsidiaryOptions" [allowClear]="true" formControlName="subsidiary">
+                        <ng-select [items]="subsidiaryOptions" formControlName="subsidiary" bindLabel="label" bindValue="value" placeholder="Select city">
                         </ng-select>
                     </div>
                 </div>

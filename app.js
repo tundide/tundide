@@ -2,10 +2,10 @@ require('./jobs.js');
 require('./mercadopago.js');
 let express = require('express');
 let session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 let path = require('path');
 let favicon = require('serve-favicon');
 let logger = require('morgan');
-let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 const compression = require('compression');
 let passport = require('passport');
@@ -39,11 +39,12 @@ app.use(bodyParser.json({ limit: '5mb' }));
 app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    cookie: { secure: true },
+    store: new MongoStore({
+        url: process.env.MONGODB_URI
+    }),
     resave: true,
     saveUninitialized: true
 }));
-app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(strategies.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
