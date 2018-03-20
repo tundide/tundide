@@ -32,6 +32,30 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+exports.start = (config, readyCallback) => {
+
+    server.listen(port);
+    //if (!server) {
+    // algo = app.listen(config.port, function() {
+
+    //     console.log('Server running on port %d in %s mode', config.port, app.settings.env);
+
+    //     // callback to call when the server is ready
+    //     if (readyCallback) {
+    //         readyCallback();
+    //     }
+    // });
+    //}
+};
+
+server.on("close", function() { console.log("closed"); });
+
+exports.close = () => {
+    console.log('close start');
+    server.close();
+    console.log('close stop');
+};
+
 /**
  * Normalize a port into a number, string, or false.
  */

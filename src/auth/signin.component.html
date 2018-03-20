@@ -2,12 +2,12 @@
     <div class="card-block">
         <form (ngSubmit)="submitForm(form.value)" #form="ngForm">
             <div class="form-group">
-                <label for="exampleInputEmail1">E-mail</label>
-                <input type="email" required ngModel name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="email">E-mail</label>
+                <input type="email" required ngModel name="email" class="form-control" id="email" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Clave</label>
-                <input type="password" ngModel name="password" class="form-control" id="exampleInputPassword1"> <a href="#">No la recuerdo</a>
+                <label for="password">Clave</label>
+                <input type="password" ngModel name="password" class="form-control" id="password"> <a href="#">No la recuerdo</a>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
@@ -22,7 +22,7 @@
                         <ngb-alert *ngIf="error" dismissible="false" type="danger">
                             {{error}}
                         </ngb-alert>
-                        <button type="submit" class="btn btn-md btn-block btn-primary">Ingresar</button>
+                        <button type="submit" id="signin" class="btn btn-md btn-block btn-primary">Ingresar</button>
                     </div>
                 </div>
                 <div class="row kpx_row-sm-offset-3 kpx_socialButtons">

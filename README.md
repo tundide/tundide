@@ -1,6 +1,6 @@
 # Tundide
 
-Proyecto para la administracion y gestion de alquileres por hora. 
+Proyecto para la administracion y gestion de turnos.
 
 ## Getting Started
 
@@ -28,6 +28,9 @@ npm i -g jsdoc
 npm i -g docco
 npm i -g @compodoc/compodoc
 npm i -g npm-check-updates
+npm i -g karma-cli
+npm i -g protractor
+npm i -g jasmine-node
 ```
 
 # Development
@@ -41,11 +44,15 @@ npm run build
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+para realizar la ejecucion de pruebas unitarias/e2e debe ejecutar el comando 
+
+```
+npm run test
+```
 
 ## Deployment
 
-Al hacer un push en el branch *Staging* del repositorio de GitHub, Se disparala integracion en el entorno *Staging* de Heroku.
+Al hacer un push en el branch *Testing* del repositorio de GitHub, se realizara el deploy en el entorno *Testing* de Heroku de manera automatica.
 
 La subida a produccion se realiza Provisionando el entorno de *Produccion* desde *Staging*
 

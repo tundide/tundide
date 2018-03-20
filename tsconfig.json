@@ -20,5 +20,6 @@
     ],
     "filesGlob": [
         "src/**/*.ts"
-    ]
+    ],
+    "types": ["jasmine"]
 }
