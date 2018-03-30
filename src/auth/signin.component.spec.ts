@@ -1,45 +1,28 @@
-// import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-// import { SigninComponent } from './signin.component';
-// import { AuthService } from './auth.service';
-// import { MochAuthService } from './auth.service.stub';
-// // Straight Jasmine testing without Angular's testing support
-// describe('ValueService', () => {
-//   let fixture: ComponentFixture<SigninComponent>;
-//   let testAuthService: AuthService;
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { SigninComponent } from './signin.component';
+import { AuthService } from './auth.service';
+import { MochAuthService } from './auth.service.stub';
 
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [
-//         SigninComponent
-//       ],
-//       providers: [{ provide: AuthService, useClass: MochAuthService }] // --> new code
-//     });
-//     TestBed.compileComponents();
+describe('ValueService', () => {
+    let fixture: ComponentFixture<SigninComponent>;
+    let testAuthService: AuthService;
 
-//     testAuthService = TestBed.get(AuthService);
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                SigninComponent
+            ],
+            providers: [{ provide: AuthService, useClass: MochAuthService }] // --> new code
+        });
+        TestBed.compileComponents();
 
-//     componentService = fixture.debugElement.injector.get(AuthService);
-//   });
+        testAuthService = TestBed.get(AuthService);
 
-//   beforeEach(() => { service = new AuthService(); });
+        // componentService = fixture.debugElement.injector.get(AuthService);
+    });
 
-//   it('#getValue should return real value', () => {
-//     expect(service.getValue()).toBe('real value');
-//   });
-
-//   it('#getObservableValue should return value from observable',
-//     (done: DoneFn) => {
-//       service.getObservableValue().subscribe(value => {
-//         expect(value).toBe('observable value');
-//         done();
-//       });
-//     });
-
-//   it('#getPromiseValue should return value from a promise',
-//     (done: DoneFn) => {
-//       service.getPromiseValue().then(value => {
-//         expect(value).toBe('promise value');
-//         done();
-//       });
-//     });
-// });
+    it('#getValue should return real value', () => {
+        testAuthService.signout('', '', '', '').subscribe(result =>
+            expect(result).toBeGreaterThan(13));
+    });
+});

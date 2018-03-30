@@ -92,7 +92,7 @@ export class MochAuthService {
             token: token
         };
 
-        return this.http.post('/auth/signout', usr);
+        return Observable.of(['car1', 'car2']);
     }
 
     /**

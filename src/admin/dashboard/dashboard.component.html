@@ -1,56 +1,65 @@
 <gridster [options]="options">
-    <gridster-item [item]="selectItem('appointments')">
+    <gridster-item class="card-block" [item]="selectItem('appointments')">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand"><i class="fa fa-calendar" aria-hidden="true"></i> Pr&oacute;xima cita</a>
+            <div (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()" class="float-right">
+                <i class="fa fa-times" aria-hidden="false"></i>
+            </div>
+        </nav>
         <router-outlet name="appointment"></router-outlet>
     </gridster-item>
-
     <gridster-item [item]="selectItem('terminals')">
-        <div class="card">
-            <h3 class="card-header"><i class="fa fa-clock-o" aria-hidden="true"></i> Turnos</h3>
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <h4>Categoria X <span class="badge badge-secondary">45</span></h4>
-                    <button class="btn btn-primary" type="button"><i class="fa fa-bullhorn" aria-hidden="true"></i> Llamar al siguiente</button>
-                </div>
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand"><i class="fa fa-clock-o" aria-hidden="true"></i> Turnos</a>
+            <div (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()" class="float-right">
+                <i class="fa fa-times" aria-hidden="false"></i>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h4>Categoria X <span class="badge badge-secondary">45</span></h4>
+                <button class="btn btn-primary" type="button"><i class="fa fa-bullhorn" aria-hidden="true"></i> Llamar al siguiente</button>
             </div>
         </div>
     </gridster-item>
 
     <gridster-item [item]="selectItem('stock')">
-        <div class="card">
-            <h3 class="card-header"><i class="fa fa-opencart" aria-hidden="true"></i> Venta rapida</h3>
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Escriba el producto o su codigo de barra">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
-                            </span>
-                        </div>
-                    </div>
+        <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand"><i class="fa fa-opencart" aria-hidden="true"></i> Venta rapida</a>
+            <div (mousedown)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()" class="float-right">
+                <i class="fa fa-times" aria-hidden="false"></i>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Escriba el producto o su codigo de barra">
+                    <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                                </span>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Accion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>ART1</td>
-                            <td>45</td>
-                            <td>
-                                <button class="btn btn-secondary btn-sm" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <label>TOTAL: $200</label>
-                </table>
             </div>
         </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>ART1</td>
+                    <td>45</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <label>TOTAL: $200</label>
+        </table>
     </gridster-item>
 </gridster>

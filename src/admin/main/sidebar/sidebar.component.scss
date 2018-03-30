@@ -27,12 +27,15 @@
 
 /* closed state icon */
 
-#sidebar .list-group .list-group-item[aria-expanded="false"]::after {
-    content: " \f0d7";
-    font-family: FontAwesome;
-    display: inline;
-    text-align: right;
-    padding-left: 5px;
+[data-toggle="collapse"] span i:before {
+    content: "\f104";
+}
+
+
+/* open state icon */
+
+[data-toggle="collapse"].collapsed span i:before {
+    content: "\f107";
 }
 
 
@@ -40,17 +43,6 @@
 
 #sidebar .list-group .list-group-item[aria-expanded="true"] {
     background-color: $gray-300;
-}
-
-
-/* open state icon */
-
-#sidebar .list-group .list-group-item[aria-expanded="true"]::after {
-    content: " \f0da";
-    font-family: FontAwesome;
-    display: inline;
-    text-align: right;
-    padding-left: 5px;
 }
 
 

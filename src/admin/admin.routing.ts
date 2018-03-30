@@ -126,6 +126,11 @@ export const routes: Routes = [
         loadChildren: './database/database.module#DatabaseModule',
         path: 'medicine'
     },
+    {
+        canActivate: [AuthGuard],
+        loadChildren: './statistics/statistics.module#StatisticsModule',
+        path: 'statistics'
+    },
     { path: '**', component: NotFoundComponent },
 ];
 

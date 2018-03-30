@@ -3,7 +3,6 @@ const del = require('del');
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')({ lazy: true });
 const runSequence = require('run-sequence');
-const install = require("gulp-install");
 const jsdoc = require('gulp-jsdoc3');
 const docco = require("gulp-docco");
 const apidoc = require('gulp-apidoc');
@@ -20,7 +19,7 @@ gulp.task('doc', function(done) {
 
 // Generate backend documentation
 gulp.task('jsdoc', function(cb) {
-    let config = require('./config/jsdoc.json');
+    let config = require('./jsdoc.json');
     gulp.src(['./**/*.js', '!**/node_modules/**/*.*', '!**/public/**/*.*'], { read: true })
         .pipe(jsdoc(config, cb));
 });

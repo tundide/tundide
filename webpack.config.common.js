@@ -135,9 +135,5 @@ module.exports = {
                 },
             }
         })
-        // ,
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: ['vendor', 'polyfills']
-        // })
     ]
 };
