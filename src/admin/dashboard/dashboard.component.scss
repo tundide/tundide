@@ -5,8 +5,13 @@
 
 .fit {
     background-color: $gray-800 !important;
+    height: 100vh;
 }
 
 .nav {
+    cursor: move;
+}
+
+.nav:hover {
     cursor: move;
 }
