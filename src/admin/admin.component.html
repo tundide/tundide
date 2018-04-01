@@ -1,15 +1,24 @@
-<top-nav></top-nav>
-<div class="container-fluid no-gutter">
-    <div class="row no-gutter">
-        <div class="col-md-2 col-1 p-l-0 p-r-0 in">
+<!-- <div class="col-md-3 col-xs-1 p-l-0 p-r-0 collapse in">
             <router-outlet *ngIf="!router.url.includes('/settings')" name="sidebar"></router-outlet>
-            <router-outlet *ngIf="router.url.includes('/settings')" name="sidebarSettings"></router-outlet>
-        </div>
-        <main class="col-md-10 col-11 p-l-2 p-t-2 main">
-            <router-outlet></router-outlet>
-        </main>
+            <router-outlet *ngIf="router.url.includes('/settings')" name="settings"></router-outlet>
+        </div> -->
+<div class="wrapper">
+
+
+    <header class="main-header">
+        <top-nav></top-nav>
+    </header>
+    <aside class="main-sidebar" *ngIf="user">
+        <router-outlet name="sidebar"></router-outlet>
+    </aside>
+    <div class="content-wrapper" style="min-height: 960px;">
+        <router-outlet></router-outlet>
     </div>
 </div>
+
+<!-- <div class="col-md-3 col-xs-1 p-l-0 p-r-0 collapse in" id="sidebarConfiguration">
+            <router-outlet name="configuration"></router-outlet>
+        </div> -->
 
 <div id="container-floating">
 

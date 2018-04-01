@@ -1,110 +1,152 @@
 @import "../../../_custom.scss";
 @import "../../../../node_modules/bootstrap/scss/bootstrap.scss";
-// SIDEBAR
-#sidebar {
+.sidebar {
     height: 100vh;
-    background-color: #0ea0cc;
-}
-
-#sidebar .list-group-item {
-    border-radius: 0;
+    width: 230px;
     background-color: $gray-200;
-    color: #ffffff;
-    border-left: 0;
-    border-right: 0;
-    border-color: #555555;
-    white-space: nowrap;
-    text-decoration: none;
+    transition: all 0.5s ease-in-out;
 }
 
-
-/* highlight active menu */
-
-#sidebar .list-group-item:not(.collapsed) {
-    background-color: #5BC7A7;
-}
-
-
-/* closed state icon */
-
-[data-toggle="collapse"] span i:before {
-    content: "\f104";
-}
-
-
-/* open state icon */
-
-[data-toggle="collapse"].collapsed span i:before {
-    content: "\f107";
-}
-
-
-/* open state */
-
-#sidebar .list-group .list-group-item[aria-expanded="true"] {
+.bg-defoult {
     background-color: $gray-300;
 }
 
+.sidebar ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
 
-/* level 1*/
+.sidebar li a,
+.sidebar li a.collapsed.active {
+    display: block;
+    padding: 8px 12px;
+    color: #fff;
+    border-left: 0px solid #dedede;
+    text-decoration: none
+}
 
-#sidebar .list-group .collapse .list-group-item {
+.sidebar li a.active {
+    background-color: $gray-300;
+    border-left: 5px solid #dedede;
+    transition: all 0.5s ease-in-out
+}
+
+.sidebar li a:hover {
+    background-color: $gray-400 !important;
+}
+
+.sidebar li a i {
+    padding-right: 5px;
+}
+
+.sidebar ul li .sub-menu li a {
+    position: relative
+}
+
+.sidebar ul li .sub-menu li a:before {
+    font-family: FontAwesome;
+    content: "\f105";
+    display: inline-block;
+    padding-left: 0px;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.sidebar ul li .sub-menu li a:hover:after {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: 0;
+    width: 5px;
+    background-color: #111;
+    height: 100%;
+}
+
+.sidebar ul li .sub-menu li a:hover {
+    background-color: #222;
     padding-left: 20px;
+    transition: all 0.5s ease-in-out
 }
 
-
-/* level 2*/
-
-#sidebar .list-group .collapse>.collapse .list-group-item {
-    padding-left: 30px;
+.sub-menu {
+    border-left: 5px solid #dedede;
 }
 
-
-/* level 3*/
-
-#sidebar .list-group .collapse>.collapse>.collapse .list-group-item {
-    padding-left: 40px;
+.sidebar li a .nav-label,
+.sidebar li a .nav-label+span {
+    transition: all 0.5s ease-in-out
 }
 
-@media (max-width:48em) {
-    /* overlay sub levels on small screens */
-    #sidebar .list-group .collapse.in,
-    #sidebar .list-group .collapsing {
-        position: absolute;
-        z-index: 1;
-        width: 190px;
-    }
-    #sidebar .list-group>.list-group-item {
-        text-align: center;
-        padding: .75rem .5rem;
-        min-width: 39px;
-    }
-    /* hide caret icons of top level when collapsed */
-    #sidebar .list-group>.list-group-item[aria-expanded="true"]::after,
-    #sidebar .list-group>.list-group-item[aria-expanded="false"]::after {
-        display: none;
-    }
+.sidebar.fliph li a .nav-label,
+.sidebar.fliph li a .nav-label+span {
+    display: none;
+    transition: all 0.5s ease-in-out
 }
 
-
-/* change transition animation to width when entire sidebar is toggled */
-
-#sidebar.collapse {
-    -webkit-transition-timing-function: ease;
-    -o-transition-timing-function: ease;
-    transition-timing-function: ease;
-    -webkit-transition-duration: .2s;
-    -o-transition-duration: .2s;
-    transition-duration: .2s;
+.sidebar.fliph {
+    width: 42px;
+    transition: all 0.5s ease-in-out;
 }
 
-#sidebar.collapsing {
-    opacity: 0.8;
-    width: 0;
-    -webkit-transition-timing-function: ease-in;
-    -o-transition-timing-function: ease-in;
-    transition-timing-function: ease-in;
-    -webkit-transition-property: width;
-    -o-transition-property: width;
-    transition-property: width;
+.sidebar.fliph li {
+    position: relative
+}
+
+.sidebar.fliph .sub-menu {
+    position: absolute;
+    left: 39px;
+    top: 0;
+    background-color: #222;
+    width: 150px;
+    z-index: 100;
+}
+
+.user-panel {
+    clear: left;
+    display: block;
+    float: left;
+}
+
+.user-panel>.image>img {
+    width: 100%;
+    max-width: 45px;
+    height: auto;
+}
+
+.user-panel>.info,
+.user-panel>.info>a {
+    color: #fff;
+}
+
+.user-panel>.info>p {
+    font-weight: 600;
+    margin-bottom: 9px;
+}
+
+.user-panel {
+    clear: left;
+    display: block;
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 25px 15px;
+    border-bottom: 1px solid;
+}
+
+.user-panel>.info {
+    padding: 5px 5px 5px 15px;
+    line-height: 1;
+    position: absolute;
+    left: 55px;
+}
+
+.fliph .user-panel {
+    display: none;
+}
+
+li.header {
+    background-color: $gray-100;
+    padding: 10px 25px 10px 15px;
+    font-size: 12px
 }

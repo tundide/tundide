@@ -1,75 +1,79 @@
-<div id="sidebar">
-    <div class="list-group panel">
-        <a href="#menuDashboard" class="list-group-item collapsed" [routerLink]="['dashboard']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-dashboard"></i> <span class="d-none d-sm-inline">Dashboard</span></a>
-        <a href="#menuPhonebook" class="list-group-item collapsed" [routerLink]="['phonebook']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-book"></i> <span class="d-none d-sm-inline">Agenda</span></a>
-        <a href="#menuEnvelope" style="display:none" class="list-group-item collapsed" [routerLink]="['message']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-sm-inline">Correo</span></a>
-        <a href="#menuAppointment" class="list-group-item collapsed" [routerLink]="['appointment']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-calendar"></i> <span class="d-none d-sm-inline">Calendario</span></a>
-        <a href="#menuMedicalRecord" class="list-group-item collapsed" [routerLink]="['medicalrecord']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-heartbeat"></i> <span class="d-none d-sm-inline">Historias Clinicas</span></a>
-        <a href="#menuStock" class="list-group-item collapsed" [routerLink]="['stock']" [routerLinkActive]="['router-link-active']" data-parent="#sidebar"><i class="fa fa-shopping-basket"></i> <span class="d-none d-sm-inline">Stock</span></a>
-        <a class="list-group-item collapsed" role="button" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false" data-target="#menuPrint" aria-controls="menuPrint"><i class="fa fa-print"></i> 
-            <span class="d-none d-sm-inline">Impresiones</span>
-            <span class="pull-right-container">
-                <i class="fa pull-right"></i>
-            </span>
-        </a>
-        <div class="collapse" id="menuPrint">
-            <a [routerLink]="['print']" [routerLinkActive]="['router-link-active']" class="list-group-item" aria-expanded="false" data-parent="#menuPrint">
-                <i class="fa fa-circle-o"></i> Recetas
-            </a>
+<div class="sidebar left ">
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img src="http://via.placeholder.com/160x160" class="rounded-circle" alt="User Image">
         </div>
-        <a class="list-group-item collapsed" role="button" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false" data-target="#menuDatabase" aria-controls="menuDatabase"><i class="fa fa-database"></i> 
-            <span class="d-none d-sm-inline">Bases de datos</span>
-            <span class="pull-right-container">
-                <i class="fa pull-right"></i>
-            </span>
-        </a>
-        <div class="collapse" id="menuDatabase">
-            <a [routerLink]="['medicine']" role="button" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuDatabase">
-                <i class="fa fa-circle-o"></i> Medicamentos</a>
-        </div>
-        <a class="list-group-item collapsed" role="button" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false" data-target="#menuFacturacion" aria-controls="menuFacturacion"><i class="fa fa-dollar"></i> 
-            <span class="d-none d-sm-inline">Facturaci&oacute;n</span>
-            <span class="pull-right-container">
-                <i class="fa pull-right"></i>
-            </span>
-        </a>
-        <div class="collapse" id="menuFacturacion">
-            <a [routerLink]="['billing']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuFacturacion">
-                <i class="fa fa-circle-o"></i> Historial</a>
-            <a [routerLink]="['billing/paymentmethods']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuFacturacion">
-                <i class="fa fa-circle-o"></i> Medios de Pago</a>
-            <a *ngIf="hasRole('administrator')" [routerLink]="['billing/plans']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuFacturacion">
-                <i class="fa fa-circle-o"></i> Planes</a>
-            <a *ngIf="hasRole('administrator')" [routerLink]="['billing/suscriptions']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuFacturacion">
-                <i class="fa fa-circle-o"></i> Suscripciones</a>
-        </div>
-        <a class="list-group-item collapsed" role="button" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false" data-target="#menuConfiguration" aria-controls="menuConfiguration"><i class="fa fa-wrench"></i> 
-        <span class="d-none d-sm-inline">Configuraci&oacute;n</span>
-        <span class="pull-right-container">
-            <i class="fa pull-right"></i>
-        </span>
-    </a>
-        <div class="collapse" id="menuConfiguration">
-            <a [routerLink]="['general']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuConfiguration">
-                <i class="fa fa-circle-o"></i> General</a>
-            <a [routerLink]="['alert']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuConfiguration">
-                <i class="fa fa-circle-o"></i> Alertas</a>
-            <a [routerLink]="['subsidiary']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuConfiguration">
-                <i class="fa fa-circle-o"></i> Sucursales</a>
-            <a [routerLink]="['terminal']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuConfiguration">
-                <i class="fa fa-circle-o"></i> Terminales</a>
-        </div>
-        <a class="list-group-item collapsed" role="button" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false" data-target="#menuStatistics" aria-controls="menuStatistics"><i class="fa fa-bar-chart-o"></i> 
-        <span class="d-none d-sm-inline">Estadisticas</span>
-        <span class="pull-right-container">
-            <i class="fa pull-right"></i>
-        </span>
-    </a>
-        <div class="collapse" id="menuStatistics">
-            <a [routerLink]="['statistics/polls']" class="list-group-item" data-parent="#menuStatistics">
-                <i class="fa fa-circle-o"></i> Encuestas</a>
-            <a [routerLink]="['statistics/customersserved']" class="list-group-item" data-parent="#menuStatistics">
-                <i class="fa fa-circle-o"></i> Clientes atendidos</a>
+        <div class="pull-left info">
+            <p>{{user.name}}</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
     </div>
+    <ul class="list-sidebar bg-defoult">
+        <li class="header">
+            Navegacion
+        </li>
+        <li>
+            <a [routerLink]="['dashboard']" [routerLinkActive]="['router-link-active']"> <i class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span> </a>
+        </li>
+        <li>
+            <a [routerLink]="['phonebook']" [routerLinkActive]="['router-link-active']"><i class="fa fa-book"></i> <span class="nav-label">Agenda</span></a>
+        </li>
+        <li>
+            <a [routerLink]="['appointment']" [routerLinkActive]="['router-link-active']"> <i class="fa fa-calendar"></i> <span class="nav-label">Calendario</span></a>
+        </li>
+        <li>
+            <a [routerLink]="['medicalrecord']" [routerLinkActive]="['router-link-active']"><i class="fa fa-heartbeat"></i> <span class="nav-label">Historias Clinicas</span></a>
+        </li>
+        <li>
+            <a [routerLink]="['stock']" [routerLinkActive]="['router-link-active']"><i class="fa fa-shopping-basket"></i> <span class="nav-label">Stock</span></a>
+        </li>
+        <li>
+            <a href="#" data-toggle="collapse" data-target="#print" class="collapsed active"><i class="fa fa-print"></i> <span class="nav-label">Impresiones</span><span class="fa fa-chevron-left pull-right"></span></a>
+            <ul class="sub-menu collapse" id="print">
+                <li><a [routerLink]="['print']" [routerLinkActive]="['router-link-active']"> Recetas</a></li>
+            </ul>
+        </li>
+        <li> <a href="#" data-toggle="collapse" data-target="#database" class="collapsed active"><i class="fa fa-database"></i> <span class="nav-label">Bases de datos</span><span class="fa fa-chevron-left pull-right"></span></a>
+            <ul class="sub-menu collapse" id="database">
+                <li><a [routerLink]="['medicine']" [routerLinkActive]="['router-link-active']"> Medicamentos</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" data-toggle="collapse" data-target="#billing" class="collapsed active">
+                <i class="fa fa-dollar"></i>
+                <span class="nav-label">Facturacion</span>
+                <span class="fa fa-chevron-left pull-right"></span>
+            </a>
+            <ul class="sub-menu collapse" id="billing">
+                <li><a [routerLink]="['billing']" [routerLinkActive]="['router-link-active']"> Historial</a></li>
+                <li><a [routerLink]="['billing/paymentmethods']" [routerLinkActive]="['router-link-active']"> Medios de Pago</a></li>
+                <li><a *ngIf="hasRole('administrator')" [routerLink]="['billing/plans']" [routerLinkActive]="['router-link-active']"> Planes</a></li>
+                <li><a *ngIf="hasRole('administrator')" [routerLink]="['billing/suscriptions']" [routerLinkActive]="['router-link-active']"> Suscripciones</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" data-toggle="collapse" data-target="#configuration" class="collapsed active">
+                <i class="fa fa-wrench"></i>
+                <span class="nav-label">Configuracion</span>
+                <span class="fa fa-chevron-left pull-right"></span>
+            </a>
+            <ul class="sub-menu collapse" id="configuration">
+                <li><a [routerLink]="['general']" [routerLinkActive]="['router-link-active']"> General</a></li>
+                <li><a [routerLink]="['alert']" [routerLinkActive]="['router-link-active']"> Alertas</a></li>
+                <li><a [routerLink]="['subsidiary']" [routerLinkActive]="['router-link-active']"> Sucursales</a></li>
+                <li><a [routerLink]="['terminal']" [routerLinkActive]="['router-link-active']"> Terminales</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" data-toggle="collapse" data-target="#statistics" class="collapsed active">
+                <i class="fa fa-bar-chart-o"></i>
+                <span class="nav-label">Estadisticas</span>
+                <span class="fa fa-chevron-left pull-right"></span>
+            </a>
+            <ul class="sub-menu collapse" id="statistics">
+                <li><a [routerLink]="['statistics/polls']" [routerLinkActive]="['router-link-active']"> Encuestas</a></li>
+                <li><a [routerLink]="['statistics/customersserved']" [routerLinkActive]="['router-link-active']"> Clientes atendidos</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>

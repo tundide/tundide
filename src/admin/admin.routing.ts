@@ -3,17 +3,23 @@ import { AuthGuard } from '../auth/auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
 import { SidebarComponent } from './main/sidebar/sidebar.component';
 import { SidebarSettingsComponent } from './main/sidebar/settings.component';
+import { SidebarConfigurationComponent } from './main/sidebar/configuration.component';
 import { NotFoundComponent } from './main/notfound/notfound.component';
 
 export const routes: Routes = [
     {
         component: SidebarSettingsComponent,
-        outlet: 'sidebarSettings',
+        outlet: 'settings',
         path: ''
     },
     {
         component: SidebarComponent,
         outlet: 'sidebar',
+        path: ''
+    },
+    {
+        component: SidebarConfigurationComponent,
+        outlet: 'configuration',
         path: ''
     },
     {
@@ -105,10 +111,6 @@ export const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        data: {
-            breadcrumbs: true,
-            text: 'Tablero'
-        },
         loadChildren: './dashboard/dashboard.module#DashboardModule',
         path: 'dashboard'
     },

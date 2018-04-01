@@ -1,0 +1,18 @@
+<div class="sidebar" class="list-group panel">
+    <a href="#menuMyData" class="list-group-item collapsed" [routerLink]="['data']" [routerLinkActive]="['router-link-active']" data-parent="#sidebarConfiguration"><i class="fa fa-user"></i> <span class="d-none d-sm-inline">Mis Datos</span></a>
+    <a href="#menuUsersAndRoles" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebarConfiguration" aria-expanded="false"><i class="fa fa-users"></i> <span class="d-none d-sm-inline">Usuarios y Roles</span></a>
+    <div class="collapse" id="menuUsersAndRoles">
+        <a [routerLink]="['users']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuUsersAndRoles">Usuarios</a>
+        <a [routerLink]="['roles']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuUsersAndRoles">Roles</a>
+    </div>
+    <a href="#menuAppointment" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebarConfiguration" aria-expanded="false"><i class="fa fa-calendar"></i> <span class="d-none d-sm-inline">Turnos</span></a>
+    <div class="collapse" id="menuAppointment">
+        <a [routerLink]="['doctors']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuUsersAppointment">Medicos</a>
+        <a [routerLink]="['equipment']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuUsersAppointment">Equipamiento</a>
+        <a [routerLink]="['holidays']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuUsersAppointment">Feriados</a>
+        <a [routerLink]="['absences']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuUsersAppointment">Ausencias</a>
+        <a [routerLink]="['groupofspecialists']" [routerLinkActive]="['router-link-active']" class="list-group-item" data-parent="#menuUsersAppointment">Grupo de especialistas</a>
+    </div>
+    <a href="#menuFunders" class="list-group-item collapsed" [routerLink]="['/settings/funders']" [routerLinkActive]="['router-link-active']" data-parent="#sidebarConfiguration"><i class="fa fa-h-square"></i> <span class="d-none d-sm-inline">Financiadores</span></a>
+    <a href="#menuNotifications" class="list-group-item collapsed" [routerLink]="['/settings/notifications']" [routerLinkActive]="['router-link-active']" data-parent="#sidebarConfiguration"><i class="fa fa-bell"></i> <span class="d-none d-sm-inline">Notificaciones</span></a>
+</div>

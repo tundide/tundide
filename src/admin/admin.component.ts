@@ -85,7 +85,6 @@ export class AdminComponent implements OnInit, OnDestroy {
                 if (token) {
                     this.authService.loadUserData(token).subscribe(
                         (user) => {
-                            console.log(user);
                             let u = new User(user.name, user.username, user.shortId, user.id,
                                 user.roles, user.firstIncome);
                             this.storageService.set('user', user);

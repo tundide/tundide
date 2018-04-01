@@ -4,12 +4,12 @@ import { AuthService } from '../../../auth/auth.service';
 import * as _ from 'lodash';
 
 @Component({
-    selector: 'sidebar',
-    styleUrls: ['sidebar.component.scss'],
-    templateUrl: 'sidebar.component.html',
+    selector: 'configuration',
+    styleUrls: ['configuration.component.scss'],
+    templateUrl: 'configuration.component.html',
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarConfigurationComponent implements OnInit {
     public user;
     private roles: Array<String>;
     constructor(private router: Router,
@@ -24,8 +24,14 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.authService.getUserCredentials();
+
         this.authService.onUserDataLoad.subscribe((user) => {
             this.roles = user.roles;
+            this.user = user;
+        });
+
+        this.authService.onLogout.subscribe(() => {
+            this.user = null;
         });
     }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TopNavComponent } from './topnav/topnav.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarConfigurationComponent } from './sidebar/configuration.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 import { SidebarSettingsComponent } from './sidebar/settings.component';
 
@@ -12,6 +13,7 @@ import { SidebarSettingsComponent } from './sidebar/settings.component';
 @NgModule({
     declarations: [
         TopNavComponent,
+        SidebarConfigurationComponent,
         SidebarComponent,
         SidebarSettingsComponent,
         NotFoundComponent
