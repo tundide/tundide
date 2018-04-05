@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
+declare var $: JQueryStatic;
 
 @Component({
     selector: 'top-nav',
