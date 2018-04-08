@@ -23,15 +23,24 @@
 <div id="container-floating">
 
     <div class="nd2 nds" data-toggle="tooltip" data-placement="left" data-original-title="Reminder">
-        <p (click)="onContactUsClick()" class="letter"><i class="fa fa-comments-o" aria-hidden="true"></i></p>
+        <p (click)="onContactUsClick()" class="letter">
+            <i class="fa fa-comments-o" aria-hidden="true"></i>
+        </p>
     </div>
-    <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it"><img class="reminder">
-        <p (click)="onContactUsClick()" class="letter"><i class="fa fa-question" aria-hidden="true"></i></p>
+    <div class="nd1 nds" data-toggle="tooltip" data-placement="left" data-original-title="Edoardo@live.it">
+        <img class="reminder">
+        <p (click)="onContactUsClick()" class="letter">
+            <i class="fa fa-pencil"></i>
+        </p>
     </div>
 
     <div class="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create">
-        <p class="plus"><i class="fa fa-question" aria-hidden="true"></i></p>
-        <img class="edit" src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/bt_compose2_1x.png">
+        <p class="plus">
+            <i class="fa fa-question" aria-hidden="true"></i>
+        </p>
+        <p class="edit">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </p>
     </div>
 
 </div>
@@ -40,9 +49,11 @@
 
 <ng-template ngbModalContainer #contactus let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Contactanos <small>Sentite libre de decirnos y preguntarnos lo que quieras</small></h4>
+        <h4 class="modal-title">Contactanos
+            <small>Sentite libre de decirnos y preguntarnos lo que quieras</small>
+        </h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="container">
@@ -53,16 +64,16 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">
-                                Nombre</label>
+                                    Nombre</label>
                                 <input type="text" class="form-control" id="name" placeholder="Ingrese su nombre" required="required" />
                             </div>
                             <div class="form-group">
                                 <label for="email">
-                                Email</label>
+                                    Email</label>
                                 <div class="input-group">
                                     <div class="input-group-append">
                                         <span class="input-group-text">
-                                                <i class="fa fa-envelope-open-o"></i>
+                                            <i class="fa fa-envelope-open-o"></i>
                                         </span>
                                     </div>
                                     <input type="email" class="form-control" id="email" placeholder="Ingrese su email" required="required" />
@@ -70,19 +81,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="subject">
-                                Raz&oacute;n</label>
+                                    Raz&oacute;n</label>
                                 <select id="subject" name="subject" class="form-control" required="required">
-                                <option value="na" selected="">Elija una:</option>
-                                <option value="service">Servicio al cliente</option>
-                                <option value="suggestions">Sugerencia</option>
-                                <option value="product">Soporte del producto</option>
-                            </select>
+                                    <option value="na" selected="">Elija una:</option>
+                                    <option value="service">Servicio al cliente</option>
+                                    <option value="suggestions">Sugerencia</option>
+                                    <option value="product">Soporte del producto</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">
-                                Mensaje</label>
+                                    Mensaje</label>
                                 <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required" placeholder="Mensaje"></textarea>
                             </div>
                         </div>
@@ -91,19 +102,22 @@
             </div>
             <div class="col-md-4">
                 <form>
-                    <legend><span class="fa fa-globe"></span> Nuestra Oficina</legend>
+                    <legend>
+                        <span class="fa fa-globe"></span> Nuestra Oficina</legend>
                     <address>
-                <strong>Tundide S.A.</strong><br>
-                Tucuman 2354<br>
-                General San Martin, CP 1650<br>
-                <abbr title="Phone">
-                    Tel:</abbr>
-                (011) 4753-8271
-            </address>
+                        <strong>Tundide S.A.</strong>
+                        <br> Tucuman 2354
+                        <br> General San Martin, CP 1650
+                        <br>
+                        <abbr title="Phone">
+                            Tel:</abbr>
+                        (011) 4753-8271
+                    </address>
                     <address>
-                <strong>Tundide</strong><br>
-                <a href="mailto:#">support@tundide.com</a>
-            </address>
+                        <strong>Tundide</strong>
+                        <br>
+                        <a href="mailto:#">support@tundide.com</a>
+                    </address>
                 </form>
             </div>
         </div>

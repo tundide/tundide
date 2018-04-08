@@ -48,16 +48,17 @@ app.use(session({
 app.use(strategies.initialize());
 app.use(passport.session());
 
-app.get('/*', function(req, res, next) {
-
-    if (req.url.indexOf("/js/") === 0) {
-        res.setHeader("Cache-Control", "public, max-age=2592000");
-        res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
-    }
-    next();
-});
-
 if (process.env.NODE_ENV == 'production') {
+
+    app.get('/*', function(req, res, next) {
+
+        if (req.url.indexOf("/js/") === 0) {
+            res.setHeader("Cache-Control", "public, max-age=2592000");
+            res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+        }
+        next();
+    });
+
     app.get('*.bundle.js', function(req, res, next) {
         req.url = req.url + '.gz';
         res.set('Content-Encoding', 'gzip');

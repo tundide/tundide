@@ -141,7 +141,6 @@ a:not([href]) {
     margin: 0;
     line-height: 55px;
     font-size: 38px;
-    font-family: 'Roboto';
     font-weight: 300;
     animation: plus-out 0.3s;
     transition: all 0.3s;
@@ -175,10 +174,13 @@ a:not([href]) {
     left: 0;
     display: block;
     right: 0;
+    text-align: center;
     padding: 0;
     opacity: 0;
     margin: auto;
-    line-height: 65px;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 55px;
     transform: rotateZ(-70deg);
     transition: all 0.3s;
     animation: edit-out 0.3s;
