@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { SubsidiaryService } from './subsidiary.service';
 import { AuthService } from '../../auth/auth.service';
-import * as _ from 'lodash';
+const _some = require('lodash/some');
 
 @Component({
     selector: 'subsidiary',
@@ -35,7 +35,7 @@ export class SubsidiaryNewComponent implements OnInit {
     }
 
     hasRole(role) {
-        return _.some(this.roles, function (_role) {
+        return _some(this.roles, function (_role) {
             return _role === role;
         });
     }

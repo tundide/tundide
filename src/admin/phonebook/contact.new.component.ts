@@ -11,7 +11,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import * as _ from 'lodash';
+const _some = require('lodash/some');
+const _find = require('lodash/find');
 
 @Component({
     selector: 'contact',
@@ -32,7 +33,7 @@ export class ContactNewComponent implements OnInit {
             .debounceTime(200)
             .distinctUntilChanged()
             .map(term => term.length < 2 ? []
-                : _.find(this.provinces, (o: any) => {
+                : _find(this.provinces, (o: any) => {
                     return o.code === this.contact.location.province;
                 }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
 
@@ -86,7 +87,7 @@ export class ContactNewComponent implements OnInit {
     }
 
     hasRole(role) {
-        return _.some(this.roles, function (_role) {
+        return _some(this.roles, function (_role) {
             return _role === role;
         });
     }

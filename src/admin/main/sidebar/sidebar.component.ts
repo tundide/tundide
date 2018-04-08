@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
-import * as _ from 'lodash';
+const _some = require('lodash/some');
 
 @Component({
     selector: 'sidebar',
@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
     }
 
     hasRole(role) {
-        return _.some(this.roles, function (_role) {
+        return _some(this.roles, function (_role) {
             return _role === role;
         });
     }

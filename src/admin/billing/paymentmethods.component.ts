@@ -3,7 +3,7 @@ import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { BillingService } from './billing.service';
 import { Card } from './card.model';
 import { Subscription } from 'rxjs/Subscription';
-import * as _ from 'lodash';
+const _remove = require('lodash/remove');
 declare var $: JQueryStatic;
 declare var Mercadopago;
 
@@ -48,7 +48,7 @@ export class PaymentMethodsComponent implements OnInit {
                     title: 'Desvinculacion de tarjeta.'
                 });
 
-                _.remove(this.cards, {
+                _remove(this.cards, {
                     id: cardId
                 });
             }

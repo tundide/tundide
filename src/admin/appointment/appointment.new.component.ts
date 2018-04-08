@@ -16,7 +16,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import * as _ from 'lodash';
+const _some = require('lodash/some');
+const _forEach = require('lodash/forEach');
 import * as moment from 'moment';
 
 interface ISubsidiary {
@@ -127,7 +128,7 @@ export class AppointmentNewComponent implements OnInit {
                 this.subsidiaryOptions = new Array<NgOption>();
                 console.log(data);
 
-                _.forEach(data, (subsidiary, key) => {
+                _forEach(data, (subsidiary, key) => {
                     this.subsidiaryOptions.push({
                         label: subsidiary.code + ' - ' + subsidiary.description,
                         value: subsidiary._id
@@ -145,7 +146,7 @@ export class AppointmentNewComponent implements OnInit {
     }
 
     hasRole(role) {
-        return _.some(this.roles, function (_role) {
+        return _some(this.roles, function (_role) {
             return _role === role;
         });
     }

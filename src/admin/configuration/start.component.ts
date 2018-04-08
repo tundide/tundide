@@ -9,7 +9,7 @@ import { FormBuilder, FormArray, FormControl, FormGroup, ReactiveFormsModule, Va
 import { GrowlService } from '../../@core/utils/growl.service';
 import { ConfigurationService } from './configuration.service';
 import * as companyTypesList from './companyTypes.json';
-import * as _ from 'lodash';
+const _find = require('lodash/find');
 
 @Component({
     selector: 'start',
@@ -35,7 +35,7 @@ export class StartComponent implements OnInit {
                 .map(term => {
                     let province = this.firstIncomeGroup.get(['subsidiaries', $index, 'location', 'province']).value;
 
-                    let locations = _.find(this.provinces, (o: any) => {
+                    let locations = _find(this.provinces, (o: any) => {
                         return o.code === province;
                     }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10);
 
@@ -50,7 +50,7 @@ export class StartComponent implements OnInit {
             .debounceTime(200)
             .distinctUntilChanged()
             .map(term => term.length < 2 ? []
-                : _.find(this.provinces, (o: any) => {
+                : _find(this.provinces, (o: any) => {
                     return o.code === this.firstIncomeGroup.get(['user', 'location', 'province']).value;
                 }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
 

@@ -130,8 +130,8 @@ module.exports = webpackMerge(commonConfig, {
             asset: "[path].gz[query]",
             algorithm: "gzip",
             test: /\.js$|\.css$|\.html$/,
-            threshold: 10240,
-            minRatio: 0
+            threshold: 200,
+            minRatio: 0.8
         })
     ]
 });

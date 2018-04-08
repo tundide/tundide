@@ -50,6 +50,12 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/node_modules", express.static(path.join(__dirname, 'node_modules')));
 
+app.get('*.bundle.js', function(req, res, next) {
+    req.url = req.url + '.gz';
+    res.set('Content-Encoding', 'gzip');
+    next();
+});
+
 
 app.use(function(req, res, next) {
     if (req.headers.authorization) {

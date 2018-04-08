@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'appointment',

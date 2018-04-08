@@ -4,7 +4,6 @@ import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { RecordService } from './record.service';
 import { Record } from './record.model';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'record',

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { StockService } from './stock.service';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'stock',

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
-import * as _ from 'lodash';
+const _find = require('lodash/find');
 
 @Component({
     selector: 'dashboard',
@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
     private options: GridsterConfig;
 
     static itemChange(item, itemComponent) {
-        let dashboardItems = _.find(DashboardComponent.dashboard, function (obj) {
+        let dashboardItems = _find(DashboardComponent.dashboard, function (obj) {
             return obj.id === item.id;
         });
 
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     }
 
     static itemResize(item, itemComponent) {
-        let dashboardItems = _.find(DashboardComponent.dashboard, function (obj) {
+        let dashboardItems = _find(DashboardComponent.dashboard, function (obj) {
             return obj.id === item.id;
         });
 
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     }
 
     selectItem(card) {
-        return _.find(DashboardComponent.dashboard, function (obj) {
+        return _find(DashboardComponent.dashboard, function (obj) {
             return obj.id === card;
         });
     }

@@ -4,7 +4,7 @@ import { AuthService } from '../../auth/auth.service';
 import { SocketService } from '../../shared/socket.service';
 import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import * as _ from 'lodash';
+const _find = require('lodash/find');
 
 @Component({
     selector: 'medicine',
@@ -27,7 +27,7 @@ export class MedicineComponent implements OnInit {
             .debounceTime(200)
             .distinctUntilChanged()
             .map(term => term.length < 2 ? []
-                : _.find(this.provinces, (o: any) => {
+                : _find(this.provinces, (o: any) => {
                     return o.code === this.selectedProvince;
                 }).locations.filter(v => new RegExp(term, 'gi').test(v.description)).splice(0, 10))
 

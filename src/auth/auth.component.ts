@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from './auth.service';
-import * as _ from 'lodash';
+const _delay = require('lodash/delay');
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -26,7 +26,7 @@ export class AuthComponent {
 
           this.authService.confirm(this.uid).subscribe(
             data => {
-              _.delay(() => {
+              _delay(() => {
                 this.router.navigate(['/auth/signin']);
               }, 5000);
             }

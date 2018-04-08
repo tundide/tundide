@@ -8,7 +8,8 @@ import { CalendarComponent } from '../../shared/components/calendar/calendar.com
 import { AppointmentService } from './appointment.service';
 import { Appointment } from './appointment.model';
 import * as moment from 'moment';
-import * as _ from 'lodash';
+const _remove = require('lodash/remove');
+const _forEach = require('lodash/forEach');
 
 import {
     CalendarEvent,
@@ -56,7 +57,7 @@ export class AppointmentListComponent implements OnInit {
                     title: 'Solicitud de cancelaci&oacute;n de turno.'
                 });
 
-                _.remove(this.calendar.events, {
+                _remove(this.calendar.events, {
                     meta: {
                         appointment: {
                             _id: event.meta.appointment._id
@@ -139,7 +140,7 @@ export class AppointmentListComponent implements OnInit {
         this.appointmentService.list()
             .subscribe(res => {
                 if (res) {
-                    _.forEach(res, (appointment, key) => {
+                    _forEach(res, (appointment, key) => {
                         let startDate = moment(appointment.startDate);
                         let endDate = moment(appointment.endDate);
 

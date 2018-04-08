@@ -1,7 +1,8 @@
-import * as _ from 'lodash';
 import { Component, ElementRef, Input, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FileUploadService } from './fileupload.service';
+const _remove = require('lodash/remove');
+const _forEach = require('lodash/forEach');
 
 @Component({
     selector: 'file-upload',
@@ -36,7 +37,7 @@ export class FileUploadComponent implements OnInit {
         let fi = this.fileInput.nativeElement;
 
         if (fi.files) {
-            _.forEach(fi.files, (file, key) => {
+            _forEach(fi.files, (file, key) => {
                 this.fileUploadService
                     .upload(file)
                     .subscribe(res => {
@@ -52,7 +53,7 @@ export class FileUploadComponent implements OnInit {
         this.fileUploadService
             .delete(id)
             .subscribe(res => {
-                _.remove(this.fileControl.value, (fileId) => {
+                _remove(this.fileControl.value, (fileId) => {
                     return fileId === id;
                 });
                 this.onDeleteComplete.emit();

@@ -3,7 +3,8 @@ import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { BillingService } from './billing.service';
 import { Card } from './card.model';
 import { Subscription } from 'rxjs/Subscription';
-import * as _ from 'lodash';
+const _set = require('lodash/set');
+const _find = require('lodash/find');
 declare var $: JQueryStatic;
 declare var Mercadopago;
 
@@ -50,8 +51,8 @@ export class SuscriptionsComponent implements OnInit {
                     title: 'Plan'
                 });
 
-                let obj = _.find(this.plans, { id: id });
-                _.set(obj, 'status', 'cancelled');
+                let obj = _find(this.plans, { id: id });
+                _set(obj, 'status', 'cancelled');
             });
     }
 
@@ -68,8 +69,8 @@ export class SuscriptionsComponent implements OnInit {
                     title: 'Plan'
                 });
 
-                let obj = _.find(this.plans, { id: id });
-                _.set(obj, 'status', 'active');
+                let obj = _find(this.plans, { id: id });
+                _set(obj, 'status', 'active');
             });
     }
 
@@ -86,8 +87,8 @@ export class SuscriptionsComponent implements OnInit {
                     title: 'Plan'
                 });
 
-                let obj = _.find(this.plans, { id: id });
-                _.set(obj, 'status', 'inactive');
+                let obj = _find(this.plans, { id: id });
+                _set(obj, 'status', 'inactive');
             });
     }
 }

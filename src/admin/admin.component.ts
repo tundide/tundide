@@ -8,11 +8,15 @@ import { User } from '../auth/user.model';
 import { SocketService } from '../shared/socket.service';
 import { AnalyticsService } from '../@core/utils/analytics.service';
 import { StorageService } from '../@core/utils/storage.service';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 /* development:start */
 import * as $S from 'scriptjs';
 /* development:end */
-import * as _ from 'lodash';
+
+const _some = require('lodash/some');
 
 @Component({
     encapsulation: ViewEncapsulation.None,
@@ -63,7 +67,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
 
     hasRole(role) {
-        return _.some(this.roles, function (_role) {
+        return _some(this.roles, function (_role) {
             return _role === role;
         });
     }

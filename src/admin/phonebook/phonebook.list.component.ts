@@ -5,7 +5,6 @@ import { StorageService } from '../../@core/utils/storage.service';
 import { PhonebookService } from './phonebook.service';
 import { Contact } from './contact.model';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'phonebook',

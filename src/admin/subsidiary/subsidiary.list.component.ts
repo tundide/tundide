@@ -4,7 +4,6 @@ import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 import { SubsidiaryService } from './subsidiary.service';
 import { Subsidiary } from './subsidiary.model';
 import * as moment from 'moment';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'subsidiary',

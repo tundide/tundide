@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import * as _ from 'lodash';
+const _some = require('lodash/some');
 
 @Component({
     selector: 'stock',
@@ -18,7 +18,7 @@ export class StockNewComponent implements OnInit {
     }
 
     hasRole(role) {
-        return _.some(this.roles, function (_role) {
+        return _some(this.roles, function (_role) {
             return _role === role;
         });
     }

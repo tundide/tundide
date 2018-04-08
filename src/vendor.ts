@@ -5,7 +5,6 @@
 // import '@angular/router';
 
 import 'bootstrap/dist/js/bootstrap.js';
-
 // RxJS
 // import 'rxjs';
 
