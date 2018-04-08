@@ -53,7 +53,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loaders: ['raw-loader']
+                loaders: ['raw-loader', 'css-loader']
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,

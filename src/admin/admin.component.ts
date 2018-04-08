@@ -21,7 +21,11 @@ const _some = require('lodash/some');
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'admin',
-    styleUrls: ['admin.component.scss'],
+    styleUrls: ['admin.component.scss',
+        '../../node_modules/ng2-toasty/style.css',
+        '../../node_modules/ng2-toasty/style-bootstrap.css',
+        '../../node_modules/angular2-busy/build/style/busy.css',
+        '../../node_modules/@ng-select/ng-select/themes/default.theme.css'],
     templateUrl: 'admin.component.html'
 })
 export class AdminComponent implements OnInit, OnDestroy {
