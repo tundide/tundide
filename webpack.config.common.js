@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -85,7 +84,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new BundleAnalyzerPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
             rxjs: "rxjs",

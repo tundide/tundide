@@ -3,8 +3,7 @@ const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.config.common.js');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
-
-let blocks = ['development'];
+const blocks = ['development'];
 
 module.exports = webpackMerge(commonConfig, {
     output: {

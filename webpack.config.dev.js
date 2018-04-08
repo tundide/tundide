@@ -1,8 +1,9 @@
 const webpack = require('webpack');
-let webpackMerge = require('webpack-merge');
-let commonConfig = require('./webpack.config.common.js');
-let LiveReloadPlugin = require('webpack-livereload-plugin');
-let blocks = ['production'];
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.config.common.js');
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const blocks = ['production'];
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'source-map',
@@ -61,6 +62,7 @@ module.exports = webpackMerge(commonConfig, {
                 'mercadopago': JSON.stringify('TEST-fdf46f46-0af3-41dc-9807-f31ed3738185'),
                 'maps': JSON.stringify('AIzaSyAFht5eU4BjOis_oHitK7TF01Dh1VgTWJw')
             }
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ]
 });
