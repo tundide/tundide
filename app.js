@@ -47,14 +47,26 @@ app.use(session({
 }));
 app.use(strategies.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use("/node_modules", express.static(path.join(__dirname, 'node_modules')));
 
-app.get('*.bundle.js', function(req, res, next) {
-    req.url = req.url + '.gz';
-    res.set('Content-Encoding', 'gzip');
+app.get('/*', function(req, res, next) {
+
+    if (req.url.indexOf("/js/") === 0) {
+        res.setHeader("Cache-Control", "public, max-age=2592000");
+        res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+    }
     next();
 });
+
+if (process.env.NODE_ENV == 'production') {
+    app.get('*.bundle.js', function(req, res, next) {
+        req.url = req.url + '.gz';
+        res.set('Content-Encoding', 'gzip');
+        next();
+    });
+}
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use("/node_modules", express.static(path.join(__dirname, 'node_modules')));
 
 
 app.use(function(req, res, next) {
