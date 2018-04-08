@@ -5,7 +5,7 @@ import { AuthService } from '../../auth/auth.service';
 import { RecordService } from './record.service';
 import { LocationService } from '../../shared/location.service';
 import { Record } from './record.model';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { BillingService } from './billing.service';
 import { Card } from './card.model';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 declare var $: JQueryStatic;
 declare var Mercadopago;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { User } from './user.model';
 import { SocketService } from '../shared/socket.service';
 import { StorageService } from '../@core/utils/storage.service';

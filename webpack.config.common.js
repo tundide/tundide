@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -84,8 +85,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new BundleAnalyzerPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
+            rxjs: "rxjs",
+            lodash: "lodash",
             jQuery: "jquery",
             "window.jQuery": "jquery",
             Tether: "tether",
@@ -104,6 +108,7 @@ module.exports = {
             Util: "exports-loader?Util!bootstrap/js/dist/util"
         }),
         new ForkTsCheckerWebpackPlugin(),
+        new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)/,
             path.resolve(__dirname, './src')

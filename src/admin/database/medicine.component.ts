@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { SocketService } from '../../shared/socket.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 

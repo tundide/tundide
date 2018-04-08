@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { BillingService } from './billing.service';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import * as $S from 'scriptjs';
 declare var $: JQueryStatic;
 declare var Mercadopago;

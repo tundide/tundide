@@ -3,7 +3,10 @@
         "outDir": "dist/app",
         "module": "commonjs",
         "target": "es5",
-        "lib": ["es2015", "dom"],
+        "typeRoots": [
+            "node_modules/@types"
+          ],
+        "lib": ["es2017", "dom"],
         "removeComments": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
@@ -21,5 +24,5 @@
     "filesGlob": [
         "src/**/*.ts"
     ],
-    "types": ["jasmine"]
+    "types": ["jasmine", "webpack-env"]
 }

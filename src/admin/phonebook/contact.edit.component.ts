@@ -8,7 +8,7 @@ import { PhonebookService } from './phonebook.service';
 import { LocationService } from '../../shared/location.service';
 import { GrowlService } from '../../@core/utils/growl.service';
 import { Contact } from './contact.model';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';

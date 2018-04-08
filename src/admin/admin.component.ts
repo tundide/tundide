@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 import { User } from '../auth/user.model';
 import { SocketService } from '../shared/socket.service';
 import { AnalyticsService } from '../@core/utils/analytics.service';

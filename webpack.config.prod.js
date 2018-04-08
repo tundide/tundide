@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.config.common.js');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 let blocks = ['development'];
 
@@ -11,6 +12,12 @@ module.exports = webpackMerge(commonConfig, {
         publicPath: "/js/app/",
         filename: '[name].bundle.js',
         chunkFilename: '[id].chunk.js'
+    },
+    optimization: {
+        minimize: true
+            // splitChunks: {
+            //     chunks: 'all',
+            // }
     },
     module: {
         rules: [{
@@ -71,8 +78,27 @@ module.exports = webpackMerge(commonConfig, {
                 },
             }
         }),
+
+        // uglifyOptions: {
+        //     compress: {
+        //         warnings: false,
+        //         conditionals: true,
+        //         unused: true,
+        //         comparisons: true,
+        //         sequences: true,
+        //         dead_code: true,
+        //         evaluate: true,
+        //         if_return: true,
+        //         join_vars: true
+        //     },
+        //     output: {
+        //         comments: false
+        //     },
+        //     ie8: false
+        // }
         new UglifyJsPlugin({
             uglifyOptions: {
+                mangle: true,
                 compress: {
                     warnings: false,
                     conditionals: true,
@@ -87,7 +113,8 @@ module.exports = webpackMerge(commonConfig, {
                 output: {
                     comments: false
                 },
-                ie8: false
+                ie8: false,
+                exclude: [/\.min\.js$/gi]
             }
         }),
         new webpack.DefinePlugin({
@@ -98,6 +125,13 @@ module.exports = webpackMerge(commonConfig, {
                     'mercadopago': JSON.stringify('APP_USR-80dd6f34-5880-4ae7-904d-a9d748d77108')
                 }
             }
+        }),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0
         })
     ]
 });

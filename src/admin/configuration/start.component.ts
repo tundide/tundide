@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { LocationService } from '../../shared/location.service';
 import { SocketService } from '../../shared/socket.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GrowlService } from '../../@core/utils/growl.service';
 import { ConfigurationService } from './configuration.service';

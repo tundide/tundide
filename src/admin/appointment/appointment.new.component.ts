@@ -12,7 +12,7 @@ import { SubsidiaryService } from '../subsidiary/subsidiary.service';
 import { Appointment } from './appointment.model';
 import { NgOption } from '@ng-select/ng-select';
 import { ElementRef, ComponentRef, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';

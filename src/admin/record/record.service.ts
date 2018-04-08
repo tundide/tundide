@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { SocketService } from '../../shared/socket.service';
 import { Record } from './record.model';
