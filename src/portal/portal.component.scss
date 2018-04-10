@@ -1,3 +1,15 @@
+.plan {
+    background-image: url(../assets/images/img_7.jpg);
+}
+
+.development {
+    background-image: url(../assets/images/img_8.jpg);
+}
+
+.start {
+    background-image: url(../assets/images/img_10.jpg);
+}
+
 .pricePanel {
     margin-top: 20px;
 }
@@ -541,14 +553,17 @@ h6 {
 }
 
 #fh5co-home {
+    background-image: url(../assets/images/full_image_2.jpg);
+    background: #52d3aa;
+    overflow: hidden;
     background-color: transparent;
     background-size: cover;
     background-attachment: fixed;
     position: relative;
     width: 100%;
+    padding: 9em 0 10em 0;
     background-color: #52d3aa;
     color: #fff;
-    overflow: hidden;
 }
 
 #fh5co-home .gradient {
@@ -929,6 +944,7 @@ h6 {
 }
 
 #fh5co-counters {
+    background-image: url(../assets/images/full_image_1.jpg);
     background: #52d3aa;
     overflow: hidden;
     background-color: transparent;

@@ -13,6 +13,7 @@ let mongoose = require('mongoose');
 let cors = require('cors');
 let User = require('./models/user');
 let env = require('node-env-file');
+let moment = require('moment');
 
 env(__dirname + '/.env', { raise: false });
 
@@ -49,12 +50,18 @@ app.use(strategies.initialize());
 app.use(passport.session());
 
 if (process.env.NODE_ENV == 'production') {
+    let weekDayToFind = moment().day('Saturday').weekday(); //change to searched day name
+
+    let searchDate = moment(); //now or change to any date
+    while (searchDate.weekday() !== weekDayToFind) {
+        searchDate.add(1, 'day');
+    }
 
     app.get('/*', function(req, res, next) {
 
         if (req.url.indexOf("/js/") === 0) {
             res.setHeader("Cache-Control", "public, max-age=2592000");
-            res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+            res.setHeader("Expires", moment.utc(searchDate).valueOf());
         }
         next();
     });
