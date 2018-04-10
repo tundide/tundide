@@ -1,937 +1,142 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
+<!--[if lt IE 7]>
+    <html lang="es" class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+    <html lang="es" class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+    <html lang="es" class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html lang="es" class="no-js">
 <!--<![endif]-->
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tundide &mdash; Gestion integral</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Todo lo que necesita para manejar su negocio" />
-    <meta name="keywords" content="gestion, turno, cita, stock, medico" />
-    <meta name="author" content="Tundide" />
-
-    <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:description" content="" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
-
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico">
-
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="css/icomoon.css">
-    <!-- Simple Line Icons -->
-    <link rel="stylesheet" href="css/simple-line-icons.css">
-    <!-- Magnific Popup -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-
-    <!-- 
-	Default Theme Style 
-	You can change the style.css (default color purple) to one of these styles
-	
-	1. pink.css
-	2. blue.css
-	3. turquoise.css
-	4. orange.css
-	5. lightblue.css
-	6. brown.css
-	7. green.css
-
-	-->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Styleswitcher ( This style is for demo purposes only, you may delete this anytime. ) -->
-    <link rel="stylesheet" id="theme-switch" href="css/style.css">
-    <!-- End demo purposes only -->
-
-
+    <base href="/">
+    <title>Tundide</title>
     <style>
-        /* For demo purpose only */
-
-        /* For Demo Purposes Only ( You can delete this anytime :-) */
-
-        #colour-variations {
-            padding: 10px;
-            -webkit-transition: 0.5s;
-            -o-transition: 0.5s;
-            transition: 0.5s;
-            width: 140px;
-            position: fixed;
-            left: 0;
-            top: 100px;
-            z-index: 999999;
-            background: #fff;
-            /*border-radius: 4px;*/
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-            -webkit-box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
-            -moz-box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
-            -ms-box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
-            box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
-        }
-
-        #colour-variations.sleep {
-            margin-left: -140px;
-        }
-
-        #colour-variations h3 {
+        .spinner {
+            position: fixed !important;
+            top: 50%;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -55px;
             text-align: center;
-            ;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #777;
-            margin: 0 0 10px 0;
-            padding: 0;
-            ;
         }
 
-        #colour-variations ul,
-        #colour-variations ul li {
-            padding: 0;
-            margin: 0;
-        }
+        .spinner>div {
+            width: 18px;
+            height: 18px;
+            background-color: #1EACC4;
 
-        #colour-variations li {
-            list-style: none;
-            display: block;
-            margin-bottom: 5px!important;
-            float: left;
-            width: 100%;
-        }
-
-        #colour-variations li a {
-            width: 100%;
-            position: relative;
-            display: block;
-            overflow: hidden;
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            -ms-border-radius: 4px;
-            border-radius: 4px;
-            -webkit-transition: 0.4s;
-            -o-transition: 0.4s;
-            transition: 0.4s;
-        }
-
-        #colour-variations li a:hover {
-            opacity: .9;
-        }
-
-        #colour-variations li a>span {
-            width: 33.33%;
-            height: 20px;
-            float: left;
-            display: -moz-inline-stack;
+            border-radius: 0;
             display: inline-block;
-            zoom: 1;
-            *display: inline;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
         }
 
-
-        .option-toggle {
-            position: absolute;
-            right: 0;
-            top: 0;
-            margin-top: 5px;
-            margin-right: -30px;
-            width: 30px;
-            height: 30px;
-            background: #f64662;
-            text-align: center;
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-            color: #fff;
-            cursor: pointer;
-            -webkit-box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
-            -moz-box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
-            -ms-box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
-            box-shadow: 0 0 9px 0 rgba(0, 0, 0, .1);
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
         }
 
-        .option-toggle i {
-            top: 2px;
-            position: relative;
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
         }
 
-        .option-toggle:hover,
-        .option-toggle:focus,
-        .option-toggle:active {
-            color: #fff;
-            text-decoration: none;
-            outline: none;
+        @-webkit-keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0)
+            }
+            40% {
+                -webkit-transform: scale(1.0)
+            }
+        }
+
+        @keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            40% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
         }
     </style>
-    <!-- End demo purposes only -->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tundide &#x2014; Gestion integral</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Todo lo que necesita para manejar su negocio">
+    <meta name="keywords" content="gestion, turno, cita, stock, medico">
+    <meta name="author" content="Tundide">
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:image" content="">
+    <meta name="twitter:url" content="">
+    <meta name="twitter:card" content="">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory
+                    -->
 </head>
 
 <body>
-    <header role="banner" id="fh5co-header">
-        <div class="container">
-            <!-- <div class="row"> -->
-            <nav class="navbar navbar-default">
-                <div class="navbar-header">
-                    <!-- Mobile Toggle Menu Button -->
-                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                        aria-controls="navbar">
-                        <i></i>
-                    </a>
-                    <a class="navbar-brand" href="index.html">Tundide</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="active">
-                            <a href="#" data-nav-section="home">
-                                <span>Principal</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-nav-section="work">
-                                <span>Demostraci&oacute;n</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-nav-section="testimonials">
-                                <span>Testimonios</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-nav-section="services">
-                                <span>Servicios</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-nav-section="about">
-                                <span>Nosotros</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-nav-section="contact">
-                                <span>Contactanos</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="login" class="login" href="#">
-                                <span>Ingresar</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- </div> -->
+    <app-admin>
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
         </div>
-    </header>
+    </app-admin>
 
-    <section id="fh5co-home" data-section="home" style="background-image: url(images/full_image_2.jpg);" data-stellar-background-ratio="0.5">
-        <div class="gradient"></div>
-        <div class="container">
-            <div class="text-wrap">
-                <div class="text-inner">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <h1 class="to-animate">Gestione su negocio.</h1>
-                            <h2 class="to-animate">Todo lo que necesita para manejar su negocio en un solo lugar
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slant"></div>
-    </section>
-
-    <section id="fh5co-intro">
-        <div class="container">
-            <div class="row row-bottom-padded-lg">
-                <div class="fh5co-block to-animate" style="background-image: url(images/img_7.jpg);">
-                    <div class="overlay-darker"></div>
-                    <div class="overlay"></div>
-                    <div class="fh5co-text">
-                        <i class="fh5co-intro-icon icon-bulb"></i>
-                        <h2>Plan</h2>
-                        <p>Tenemos una gran variedad de planes. Comparalos y elegi el que mejor se adapta a tu negocio!</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Compararlos</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="fh5co-block to-animate" style="background-image: url(images/img_8.jpg);">
-                    <div class="overlay-darker"></div>
-                    <div class="overlay"></div>
-                    <div class="fh5co-text">
-                        <i class="fh5co-intro-icon icon-wrench"></i>
-                        <h2>Desarrollo</h2>
-                        <p>Trabajamos con las ultimas tecnologias del mercado para brindar una herramienta agil y flexible</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Conocer m&aacute;s</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="fh5co-block to-animate" style="background-image: url(images/img_10.jpg);">
-                    <div class="overlay-darker"></div>
-                    <div class="overlay"></div>
-                    <div class="fh5co-text">
-                        <i class="fh5co-intro-icon icon-rocket"></i>
-                        <h2>Iniciar</h2>
-                        <p>Te brindamos la posibilidad de comenzar a utilizarla ya mismo para que descubras una nueva forma
-                            de gestionar tu negocio.</p>
-                        <p>
-                            <a href="/auth/#/signin" id="startnow" class="btn btn-primary">Comenzar ya mismo!</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row watch-video text-center to-animate">
-                <span>Mira el video</span>
-
-                <a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo btn-video">
-                    <i class="icon-play2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="fh5co-work" data-section="work">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 section-heading text-center">
-                    <h2 class="to-animate">Demostraci&oacute;n</h2>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Te presentamos un breve resumen de lo que podr&aacute; realizar a traves de nuestros sistemas.</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row row-bottom-padded-sm">
-                <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="images/work_1.jpg" class="fh5co-project-item image-popup to-animate">
-                        <img src="images/work_1.jpg" alt="Image" class="img-responsive">
-                        <div class="fh5co-text">
-                            <h2>Autenticaci&oacute;n</h2>
-                            <span>Puede elegir la red social de su preferencia o cree un usuario Tundide.</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="images/work_2.jpg" class="fh5co-project-item image-popup to-animate">
-                        <img src="images/work_2.jpg" alt="Image" class="img-responsive">
-                        <div class="fh5co-text">
-                            <h2>Citas</h2>
-                            <span>Gestione sus citas, y recuerdele a sus clientes que tiene una cita con usted.</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="clearfix visible-sm-block"></div>
-
-                <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="images/work_3.jpg" class="fh5co-project-item image-popup to-animate">
-                        <img src="images/work_3.jpg" alt="Image" class="img-responsive">
-                        <div class="fh5co-text">
-                            <h2>Turnos</h2>
-                            <span>Ordene las filas y mantenga informado a sus clientes sobre los tiempos de espera.</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="images/work_4.jpg" class="fh5co-project-item image-popup to-animate">
-                        <img src="images/work_4.jpg" alt="Image" class="img-responsive">
-                        <div class="fh5co-text">
-                            <h2>Inventario</h2>
-                            <span>Controle su inventario, registre los movimientos de ingreso y egreso de productos.</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="clearfix visible-sm-block"></div>
-
-                <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="images/work_5.jpg" class="fh5co-project-item image-popup to-animate">
-                        <img src="images/work_5.jpg" alt="Image" class="img-responsive">
-                        <div class="fh5co-text">
-                            <h2>Agenda</h2>
-                            <span>Guarde los datos de sus clientes para mantener una comunicacion fluida con ellos.</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xxs-12">
-                    <a href="images/work_6.jpg" class="fh5co-project-item image-popup to-animate">
-                        <img src="images/work_6.jpg" alt="Image" class="img-responsive">
-                        <div class="fh5co-text">
-                            <h2>Alertas</h2>
-                            <span>Genere alertas para avisar a sus clientes lo que usted necesite.</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="fh5co-testimonials" data-section="testimonials">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 section-heading text-center">
-                    <h2 class="to-animate">Testimonios</h2>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Te mostramos lo que opinan los clientes luego de utilizar nuestras herramientas para gestionar
-                                su negocio.</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="box-testimony">
-                        <blockquote class="to-animate-2">
-                            <p>&ldquo;Una herramienta muy agil que cumple con todo lo que necesito para poder manejar mi negocio&rdquo;</p>
-                        </blockquote>
-                        <div class="author to-animate">
-                            <figure>
-                                <img src="images/person1.jpg" alt="Person">
-                            </figure>
-                            <p>
-                                Marcos Panichella, CEO
-                                <a href="http://freehtml5.co/" target="_blank">www.segurossura.com.ar</a>
-                                <span class="subtext">Director de Desarrollo</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box-testimony">
-                        <blockquote class="to-animate-2">
-                            <p>&ldquo;Al iniciar a utilizarla descubri que me permitia gestionar a mis clientes de una forma
-                                muy agil, que no solo me permitia administrar los turnos, sino que le brindaba una informacion
-                                muy sustancial a mis clientes. Permitiendoles trasmitir tranquilidad sobre los tiempos de
-                                espera de los turnos.&rdquo;</p>
-                        </blockquote>
-                        <div class="author to-animate">
-                            <figure>
-                                <img src="images/person2.jpg" alt="Person">
-                            </figure>
-                            <p>
-                                Leonardo Ruggieri, Director RSA
-                                <a href="http://freehtml5.co/" target="_blank">www.rsagroup.com.ar</a>
-                                <span class="subtext">Director de Marketing</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="box-testimony">
-                        <blockquote class="to-animate-2">
-                            <p>&ldquo;Me permitio lograr transmitir tranquilidad a mis clientes, manteniendolos 100% informados
-                                sobre los tiempos de espera entre turno y turno.&rdquo;</p>
-                        </blockquote>
-                        <div class="author to-animate">
-                            <figure>
-                                <img src="images/person3.jpg" alt="Person">
-                            </figure>
-                            <p>
-                                Jorge Ross, Director
-                                <a href="http://freehtml5.co/" target="_blank">www.zurich.com.ar</a>
-                                <span class="subtext">Director Creativo</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-
-
-    <section id="fh5co-services" data-section="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 section-heading text-left">
-                    <h2 class=" left-border to-animate">Servicios</h2>
-                    <div class="row">
-                        <div class="col-md-8 subtext to-animate">
-                            <h3>Nuestra prioridad es la calidad del servicio, por eso brindamos:</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                    <i class="icon to-animate-2 icon-layers2"></i>
-                    <h3>Web &amp; Servicios</h3>
-                    <p>Nuestras aplicaci&oacute;n son desarrolladas con la ultima tecnolog&iacute;a, Las mismas disponen APIs
-                        que te permitiran integrar nuestras herramientas con tus aplicaci&oacute;n, generando una interaccion
-                        total entre las mismas.</p>
-                </div>
-                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                    <i class="icon to-animate-2 icon-cloud"></i>
-                    <h3>Cloud</h3>
-                    <p>Nuestras herramientas estan alojadas en la nube, esto significa que no necesitas hacer inversiones de
-                        infraestructura para poder utilizar nuestras herramientas, permitiendo reducir los elevados costos
-                        de mantener una herramienta.
-                    </p>
-                </div>
-
-                <div class="clearfix visible-sm-block"></div>
-
-                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                    <i class="icon to-animate-2 icon-headphones"></i>
-                    <h3>Soporte</h3>
-                    <p>Contamos con un servicio de soporte 24x7, desarrollado a traves de los metodos de comunicacion que te
-                        resulte mas comodo: chat, email, telefono. Con el objetivos de poder contestar cualquier duda que
-                        tengas o ayudarte a solucionar cualquier inconveniente de forma agil y rapida.
-                    </p>
-                </div>
-                <div class="col-md-6 col-sm-6 fh5co-service to-animate">
-                    <i class="icon to-animate-2 icon-monitor"></i>
-                    <h3>Terminales</h3>
-                    <p>Disponemos de terminales de autoservicio y generaci&oacute;n de tickets, para que puedas agilizar la
-                        atenci&oacute;n de tus clientes, las mismas te permitiran ordenar la atencion a tus clientes, y mantenerlos
-                        constantemente avisados sobre el avance y tiempos de espera para atenderlos.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="fh5co-about" data-section="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 section-heading text-center">
-                    <h2 class="to-animate">Nosotros</h2>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Somos una empresa joven e innovadora, enfocada en la gestion agil hacia el cliente.</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="fh5co-person text-center to-animate">
-                        <figure>
-                            <img src="images/person1.jpg" alt="Image">
-                        </figure>
-                        <h3>Marcos Panichella</h3>
-                        <span class="fh5co-position">Software Architect</span>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                            the blind texts</p>
-                        <ul class="social social-circle">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-github"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="fh5co-person text-center to-animate">
-                        <figure>
-                            <img src="images/person2.jpg" alt="Image">
-                        </figure>
-                        <h3>Jorge Ross</h3>
-                        <span class="fh5co-position">Web Developer</span>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                            the blind texts</p>
-                        <ul class="social social-circle">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-github"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="fh5co-person text-center to-animate">
-                        <figure>
-                            <img src="images/person3.jpg" alt="Image">
-                        </figure>
-                        <h3>Arnaldo Corzo Ferrer</h3>
-                        <span class="fh5co-position">Software Developer</span>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                            the blind texts</p>
-                        <ul class="social social-circle">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-dribbble"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="fh5co-counters" style="background-image: url(images/full_image_1.jpg);" data-stellar-background-ratio="0.5">
-        <div class="fh5co-overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 section-heading text-center to-animate">
-                    <h2>Hechos Graciosos</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="fh5co-counter to-animate">
-                        <i class="fh5co-counter-icon icon-briefcase to-animate-2"></i>
-                        <span class="fh5co-counter-number js-counter" data-from="0" data-to="10" data-speed="100" data-refresh-interval="2">10</span>
-                        <span class="fh5co-counter-label">Modulos finalizados</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="fh5co-counter to-animate">
-                        <i class="fh5co-counter-icon icon-code to-animate-2"></i>
-                        <span class="fh5co-counter-number js-counter" data-from="0" data-to="2343409" data-speed="5000" data-refresh-interval="50">2343409</span>
-                        <span class="fh5co-counter-label">Lineas de codigo</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="fh5co-counter to-animate">
-                        <i class="fh5co-counter-icon icon-cup to-animate-2"></i>
-                        <span class="fh5co-counter-number js-counter" data-from="0" data-to="1302" data-speed="5000" data-refresh-interval="50">1302</span>
-                        <span class="fh5co-counter-label">Tazas de cafe</span>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="fh5co-counter to-animate">
-                        <i class="fh5co-counter-icon icon-people to-animate-2"></i>
-                        <span class="fh5co-counter-number js-counter" data-from="0" data-to="52" data-speed="5000" data-refresh-interval="50">52</span>
-                        <span class="fh5co-counter-label">Clientes felices</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="fh5co-contact" data-section="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 section-heading text-center">
-                    <h2 class="to-animate">Contactanos</h2>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2 subtext to-animate">
-                            <h3>Estamos para servirte, escribinos!</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row row-bottom-padded-md">
-                <div class="col-md-6 to-animate">
-                    <h3>Info</h3>
-                    <ul class="fh5co-contact-info">
-                        <li class="fh5co-contact-address ">
-                            <i class="icon-home"></i>
-                            Tucuman 2354
-                            <br>General San Mart&iacute;n
-                        </li>
-                        <li>
-                            <i class="icon-phone"></i> (+54 11) 5900-9183</li>
-                        <li>
-                            <i class="icon-envelope"></i>info@tundide.com</li>
-                        <li>
-                            <i class="icon-globe"></i>
-                            <a href="http://tundide.com/" target="_blank">tundide.com</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-md-6 to-animate">
-                    <h3>Contactanos</h3>
-                    <div class="form-group ">
-                        <label for="name" class="sr-only">Nombre</label>
-                        <input id="name" class="form-control" placeholder="Nombre" type="text">
-                    </div>
-                    <div class="form-group ">
-                        <label for="email" class="sr-only">Email</label>
-                        <input id="email" class="form-control" placeholder="Email" type="email">
-                    </div>
-                    <div class="form-group ">
-                        <label for="phone" class="sr-only">Telefono</label>
-                        <input id="phone" class="form-control" placeholder="Telefono" type="text">
-                    </div>
-                    <div class="form-group ">
-                        <label for="message" class="sr-only">Mensaje</label>
-                        <textarea name="" id="message" cols="30" rows="5" class="form-control" placeholder="Mensaje"></textarea>
-                    </div>
-                    <div class="form-group ">
-                        <input class="btn btn-primary btn-lg" value="Enviar Mensaje" type="submit">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        </div>
-        <div id="map" class="to-animate"></div>
-    </section>
-
-
-    <footer id="footer" role="contentinfo">
-        <a href="#" class="gotop js-gotop">
-            <i class="icon-arrow-up2"></i>
-        </a>
-        <div class="container">
-            <div class="">
-                <div class="col-md-12 text-center">
-                    <p>&copy; Tundide. Todos los derechos reservados.
-                        <br>Creado por
-                        <a href="http://tundide.com/" target="_blank">Tundide</a>
-                    </p>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <ul class="social social-circle">
-                        <li>
-                            <a href="#">
-                                <i class="icon-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-youtube"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modernizr JS -->
-    <script src="js/modernizr-2.6.2.min.js"></script>
-    <!-- FOR IE9 below -->
-    <!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-    <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
-    <!-- jQuery Easing -->
-    <script src="js/jquery.easing.1.3.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Waypoints -->
-    <script src="js/jquery.waypoints.min.js"></script>
-    <!-- Stellar Parallax -->
-    <script src="js/jquery.stellar.min.js"></script>
-    <!-- Counter -->
-    <script src="js/jquery.countTo.js"></script>
-    <!-- Magnific Popup -->
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/magnific-popup-options.js"></script>
-    <!-- Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-    <script src="js/google_map.js"></script>
-
-    <!-- Main JS (Do not remove) -->
-    <script src="js/main.js"></script>
-
-    <!-- production:start -->
     <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        if (navigator.userAgent.indexOf("Speed Insights") == -1) {
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-103060045-1', 'auto');
+            ga('create', 'UA-103060045-1', 'auto');
+        }
     </script>
-    <!-- production:end -->
-
-    {{!-- TODO: Se agrega el siguiente script para realizar testeo de seguridad del sitio, sacar cuando se ponga en produccion
-    --}}
-    <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/www.tundide.com">
-        <img src="https://seal.beyondsecurity.com/verification-images/www.tundide.com/vulnerability-scanner-2.gif" alt="Website Security Test"
-            border="0" />
-    </a>
-    {{!-- Se agrega el siguiente script para realizar testeo de seguridad del sitio, sacar cuando se ponga en produccion --}}
-
+    <script async src="js/app/polyfills.bundle.js"></script>
+    <script async src="js/app/vendor.bundle.js"></script>
+    <script async src="js/app/app.bundle.js"></script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{!--
-
-<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-<link rel="manifest" href="/favicon/manifest.json">
-
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="La comunidad de alquiler por hora mas grande america latina.">
-<meta name="keywords" content="alquiler,hora">
-<meta name="author" content=""> --}}

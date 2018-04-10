@@ -6,9 +6,7 @@ module.exports = {
     entry: {
         'polyfills': './src/polyfills.ts',
         'vendor': './src/vendor.ts',
-        'admin': './src/admin.ts',
-        'auth': './src/auth.ts',
-        'terminal': './src/terminal.ts'
+        'app': './src/app.ts'
     },
     resolve: {
         extensions: ['.js', '.ts']

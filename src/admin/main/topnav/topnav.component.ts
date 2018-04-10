@@ -11,7 +11,6 @@ declare var $: JQueryStatic;
 
 export class TopNavComponent implements OnInit {
     public searchWord: string;
-    public connection;
     public isCollapsed = true;
     public user;
     public messages: Array<any>;
@@ -23,7 +22,7 @@ export class TopNavComponent implements OnInit {
 
     logout() {
         this.authService.logout();
-        window.location.href = '/';
+        this.router.navigate(['/']);
     }
 
     ngOnInit() {
@@ -36,9 +35,5 @@ export class TopNavComponent implements OnInit {
         this.authService.onLogout.subscribe(() => {
             this.user = null;
         });
-    }
-
-    ngOnDestroy() {
-        this.connection.unsubscribe();
     }
 }

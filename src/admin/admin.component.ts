@@ -101,7 +101,7 @@ export class AdminComponent implements OnInit, OnDestroy {
                             this.socketService.connectSocket(user.shortId);
 
                             if (user.firstIncome) {
-                                this.router.navigate(['/start']);
+                                this.router.navigate(['/admin/start']);
                             }
 
                         });

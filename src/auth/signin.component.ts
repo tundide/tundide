@@ -16,7 +16,7 @@ export class SigninComponent {
     let token = this.storageService.get('token', true);
 
     if (token != null) {
-      window.location.href = '/admin/#/dashboard';
+      window.location.href = '/#/admin/dashboard';
     }
   }
 
@@ -24,7 +24,7 @@ export class SigninComponent {
     this.authService.signin(form.email, form.password).subscribe(
       (data) => {
         this.storageService.set('token', data.toString(), true);
-        window.location.href = '/admin/#/dashboard';
+        window.location.href = '/#/admin/dashboard';
       }, (error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.error = error.error.message;

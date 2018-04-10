@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { SigninComponent } from './signin.component';
 import { SignoutComponent } from './signout.component';
@@ -24,7 +24,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         routing,
         RouterModule,
         CommonModule,
-        BrowserModule,
+        // FIXME: Borrar cunado este seguro
+     //   BrowserModule,
         ReCaptchaModule,
         NgxErrorsModule,
         FormsModule,

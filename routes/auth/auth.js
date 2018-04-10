@@ -245,7 +245,7 @@ module.exports = function() {
                 );
             }
 
-            return res.redirect(process.env.SITE_URL + '/admin/#/?t=' + user.google.token);
+            return res.redirect(process.env.SITE_URL + '/#/admin?t=' + user.google.token);
         })(req, res, next);
     });
 
@@ -271,7 +271,7 @@ module.exports = function() {
                 );
             }
 
-            return res.redirect(process.env.SITE_URL + '/admin/#/?t=' + user.outlook.token);
+            return res.redirect(process.env.SITE_URL + '/#/admin?t=' + user.outlook.token);
         })(req, res, next);
     });
 
@@ -297,7 +297,7 @@ module.exports = function() {
                 );
             }
 
-            return res.redirect(process.env.SITE_URL + '/admin/#/?t=' + user.linkedin.token);
+            return res.redirect(process.env.SITE_URL + '/#/admin?t=' + user.linkedin.token);
         })(req, res, next);
     });
 
@@ -324,7 +324,7 @@ module.exports = function() {
                 );
             }
 
-            return res.redirect(process.env.SITE_URL + '/admin/#/?t=' + user.facebook.token);
+            return res.redirect(process.env.SITE_URL + '/#/admin?t=' + user.facebook.token);
         })(req, res, next);
     });
 
@@ -351,7 +351,7 @@ module.exports = function() {
                 );
             }
 
-            return res.redirect(process.env.SITE_URL + '/admin/#/?t=' + user.twitter.token);
+            return res.redirect(process.env.SITE_URL + '/#/admin?t=' + user.twitter.token);
         })(req, res, next);
     });
 

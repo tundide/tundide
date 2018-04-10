@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminComponent } from './admin.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -18,7 +18,8 @@ import { McBreadcrumbsModule } from 'ngx-breadcrumbs';
     imports: [
         routing,
         MainModule,
-        BrowserAnimationsModule,
+        // FIXME: Borrar esto cuando este seguro que no va mas
+    //    BrowserAnimationsModule,
         NgbModule.forRoot(),
         ToastyModule.forRoot(),
         McBreadcrumbsModule.forRoot(),
