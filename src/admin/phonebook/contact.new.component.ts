@@ -72,7 +72,8 @@ export class ContactNewComponent implements OnInit {
                 place: this.formBuilder.control({ value: '', disabled: true }),
                 province: this.formBuilder.control(''),
                 street: this.formBuilder.control('')
-            })
+            }),
+            comments: this.formBuilder.control("")
         });
     }
 

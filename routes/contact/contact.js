@@ -39,6 +39,7 @@ router.post('/', session.authorize(), function(req, res, next) {
     cli.location.place = req.body.location.place;
     cli.location.street = req.body.location.street;
     cli.location.number = req.body.location.number;
+    cli.comments = req.body.comments;
 
     cli.validate(function(err) {
         if (err) {

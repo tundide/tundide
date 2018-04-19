@@ -20,6 +20,7 @@ export class Contact {
     };
     company: string;
     user: string;
+    comments:string;
 
     constructor() {
         this.firstName = '';
@@ -42,5 +43,6 @@ export class Contact {
         };
         this.company = '';
         this.user = '';
+        this.comments = '';
     }
 }

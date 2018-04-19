@@ -10,6 +10,7 @@ let contactSchema = mongoose.Schema({
     firstName: { type: String, maxlength: 20 },
     lastName: String,
     document: Number,
+    comments: String,
     contact: {
         cellPhone: Number,
         email: {
